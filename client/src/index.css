@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.placeholder-center::placeholder {
+    text-align: start;
+    padding-left: 25px;
+    font-size: 12px;
+  }
