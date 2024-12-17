@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const dbConfig = async () => {
+  console.log("MONGODB CONNECTING...  ");
   try {
     await mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
