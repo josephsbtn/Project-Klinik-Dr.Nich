@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
+import axios from "axios";
 
 // Logo & images
-import logo from '../assets/logodrnich.svg';
-import bag from '../assets/bag-2.svg';
-import search from '../assets/search-normal.svg';
-import hamburger from '../assets/hamburger.svg';
+import logo from "../../assets/logodrnich.svg";
+import bag from "../../assets/bag-2.svg";
+import search from "../../assets/search-normal.svg";
+import hamburger from "../../assets/hamburger.svg";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.post("/api/users/login", {
+      email: email,
+      password: password,
+    });
+    console.log(res.data);
+  };
+
   return (
     <div className="w-full h-full relative flex items-center justify-center">
       {/* Navbar */}
@@ -39,20 +53,28 @@ export default function Login() {
 
             <div className="flex">
               <p>Belum punya Akun?</p>
-              <a href="" className="font-medium text-[#2b463c]">Daftar</a>
+              <a href="" className="font-medium text-[#2b463c]">
+                Daftar
+              </a>
             </div>
           </div>
 
           <div className="pt-[20px]">
             <h2 className="text-base font-medium">Masuk</h2>
-            <p className="text-sm font-normal pt-[5px]">Masuk untuk melakukan reservasi!</p>
+            <p className="text-sm font-normal pt-[5px]">
+              Masuk untuk melakukan reservasi!
+            </p>
 
-            <form action="" className='pt-[30px]'>
+            <form onSubmit={handleSubmit} className="pt-[30px]">
               {/* Form fields go here */}
-              
+
               <div>
-                <label className='text-sm font-medium'>Email</label>
-                <input type='email' className='w-full h-[48px] border border-[#bdbdbd] rounded-full mt-[5px] text-left placeholder-center' placeholder='Masukan Email' />
+                <label className="text-sm font-medium">Email</label>
+                <input
+                  type="email"
+                  className="w-full h-[48px] border border-[#bdbdbd] rounded-full mt-[5px] text-left placeholder-center"
+                  placeholder="Masukan Email"
+                />
               </div>
             </form>
           </div>

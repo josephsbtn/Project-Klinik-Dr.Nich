@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // login
-import Login from "./components/login";
+import Login from "./screen/auth/login";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Router>
       <Routes>
