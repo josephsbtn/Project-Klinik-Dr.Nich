@@ -1,18 +1,18 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModels.js";
 
-//@desc Auth user/set token
-//route POST /api/users/auth
+//@desc get all
+//route GET /api/admin/auth
 //@access PUBLIC
-const authUser = asyncHandler(async (req, res) => {
+const GetAllReserve = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Auth User" });
 });
 
-//@desc Regist a new user
+//@desc create reseve by non user
 //route POST /api/users
 //@access PUBLIC
-const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+const CreateReserveUser = asyncHandler(async (req, res) => {
+  const { layanan, jenisTreatment, namaTreatment, tanggal, jam } = req.body;
   try {
     const userExist = await User.findOne({ email });
     if (userExist) {
@@ -37,7 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Register User" });
 });
 
-//@desc Logout user
+//@desc create reseve by user
 //route POST /api/users/logout
 //@access PUBLIC
 const logoutUser = asyncHandler(async (req, res) => {

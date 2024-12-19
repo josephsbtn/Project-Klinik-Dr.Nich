@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import Navbar from "../../assets/component/navbar";
+import { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function LayananUD() {
   const { id } = useParams();
@@ -10,11 +13,40 @@ function LayananUD() {
   const [idJenis, setIdJenis] = useState("");
   const [image, setImage] = useState(null);
 
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const [jenisLayanan, setJenisLayanan] = useState([]);
 
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchJenisLayanan = async () => {
+      try {
+        const { data } = await axios.get("/api/layanan/getAllJenisLayanan");
+        setJenisLayanan(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchJenisLayanan();
+  }, []);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.put(`/api/layanan/updateLayanan/${id}`, {
+        nama,
+        durasi,
+        harga,
+        deskripsi,
+        idJenis,
+        image,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function convertBase64(e) {
     const file = e.target.files[0];
@@ -57,7 +89,7 @@ function LayananUD() {
             className="h-screen w-full p-10 flex items-center justify-center"
             onClick={() => setOpen(false)}>
             <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-10 w-full mt-10">
-              <div className="w-full lg:w-1/2 p-5 border rounded-md shadow-md bg-white">
+              <div className="w-full lg:w-1/4 p-5 border rounded-md shadow-md bg-white">
                 <h3 className="text-xl font-semibold mb-4 font-montserrat">
                   Product Image
                 </h3>
@@ -92,21 +124,22 @@ function LayananUD() {
                 </div>
               </div>
 
-              <div className="w-full lg:w-1/2 p-5 border rounded-md bg-white shadow-md">
+              <div className="w-full lg:w-3/4 p-5 border rounded-md bg-white shadow-md">
                 <h3 className="text-xl font-montserrat font-semibold mb-4">
                   General Information
                 </h3>
+                {error && <p className="text-red-500">{error}</p>}
                 <form
                   onSubmit={submitHandler}
                   className="flex flex-col space-y-4">
                   <div>
                     <label className="block font-montserrat text-gray-700 mb-1">
-                      Product Name
+                      Nama Layanan
                     </label>
                     <input
                       type="text"
                       className="w-full p-2 border rounded-md font-montserrat"
-                      value={name}
+                      value={nama}
                       onChange={(e) => setNama(e.target.value)}
                       placeholder="Enter product name"
                       required
@@ -115,7 +148,7 @@ function LayananUD() {
                   <div className="flex space-x-4">
                     <div className="w-1/2">
                       <label className="block text-gray-700 mb-1 font-montserrat">
-                        Product Type
+                        Jenis Layanan
                       </label>
                       <select
                         className="w-full p-2 border font-montserrat rounded-md"
@@ -142,7 +175,18 @@ function LayananUD() {
                         value={harga}
                         onChange={(e) => setHarga(e.target.value)}
                         placeholder="Enter price"
-                        required
+                      />
+                    </div>
+                    <div className="w-1/2">
+                      <label className="block text-gray-700 font-montserrat mb-1">
+                        Durasi
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full p-2 border font-montserrat rounded-md"
+                        value={durasi}
+                        onChange={(e) => setDurasi(e.target.value)}
+                        placeholder="Masukan Durasi Layanan"
                       />
                     </div>
                   </div>
@@ -160,8 +204,8 @@ function LayananUD() {
                   </div>
                   <button
                     type="submit"
-                    className="bg-myBlue text-white p-1 rounded-xl font-montserrat font-medium ">
-                    Edit Item
+                    className="bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium ">
+                    Tambah Layanan
                   </button>
                 </form>
               </div>
