@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
+import layananRoutes from "./routes/admin/layananRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import dbConfig from "./config/db.js";
 
@@ -12,6 +13,7 @@ dbConfig();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/layanan", layananRoutes);
 app.use("/api/users", userRoutes);
 app.get("/", (req, res) => res.send("Server is ready"));
 app.use(notFound);

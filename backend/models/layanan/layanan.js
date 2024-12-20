@@ -18,6 +18,10 @@ const namaLayananSchema = mongoose.Schema(
     image: {
       type: String,
     },
+    cardDeskripsi: {
+      type: String,
+      required: true,
+    },
     idJenis: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

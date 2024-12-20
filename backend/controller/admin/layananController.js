@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-import JenisLayanan from "../models/layanan/jenisLayanan";
-import layananModels from "../models/layanan/layanan";
+import JenisLayanan from "../../models/layanan/jenisLayanan";
+import layananModels from "../../models/layanan/layanan";
 
 const newJenisLayanan = asyncHandler(async (req, res) => {
   const { nama, foto } = req.body;
@@ -26,17 +26,21 @@ const getJenisLayanan = asyncHandler(async (req, res) => {
 });
 
 const newLayanan = asyncHandler(async (req, res) => {
-  const { jenisLayanan, nama, harga, foto } = req.body;
+  const { jenisLayanan, nama, harga, foto, deskripsi, cardDeskripsi } =
+    req.body;
   try {
     const isExist = await layananModels.findOne({ nama });
     if (isExist) {
       throw new Error("Layanan Sudah Ada");
     }
     const layanan = await layananModels.create({
-      jenisLayanan,
       nama,
+      durasi,
       harga,
+      deskripsi,
       foto,
+      cardDeskripsi,
+      idJenis: jenisLayanan,
     });
     res.send(layanan);
   } catch (error) {
@@ -70,6 +74,9 @@ const updateLayanan = asyncHandler(async (req, res) => {
     nama: req.body.nama,
     harga: req.body.harga,
     foto: req.body.foto,
+    deskripsi: req.body.deskripsi,
+    durasi: req.body.durasi,
+    cardDeskripsi: req.body.cardDeskripsi,
   };
   try {
     const layanan = await layananModels.findByIdAndUpdate(
