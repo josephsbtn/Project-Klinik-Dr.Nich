@@ -39,7 +39,7 @@ function Navbar() {
       {/* Menu */}
       <div
         className={`flex flex-col lg:flex-row gap-4 lg:gap-4 lg:static lg:w-auto lg:bg-transparent lg:shadow-none lg:items-center transition-all duration-500 ease-in-out bg-white shadow-md absolute top-20 left-0 w-full p-4 lg:p-0 items-start lg:items-center z-50 ${
-          menuOpen ? "top-32" : "-top-96"
+          menuOpen ? "top-[85%]" : "top-[-100rem]"
         }`}>
         <button
           onClick={() => handleNavigate("/layanan")}

@@ -20,11 +20,9 @@ const namaLayananSchema = mongoose.Schema(
     },
     cardDeskripsi: {
       type: String,
-      required: true,
     },
     idJenis: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: "layanan",
     },
   },

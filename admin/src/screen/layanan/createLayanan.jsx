@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Navbar from "../../assets/component/navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -47,7 +48,7 @@ function CreateLayanan() {
     }
 
     try {
-      const { data } = await axios.post(`/api/layanan/createLayanan`, {
+      const { data } = await axios.post(`/api/layanan/tambahLayanan`, {
         nama,
         durasi,
         harga,

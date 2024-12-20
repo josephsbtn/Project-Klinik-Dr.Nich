@@ -1,9 +1,9 @@
 import asyncHandler from "express-async-handler";
-import JenisLayanan from "../../models/layanan/jenisLayanan";
-import layananModels from "../../models/layanan/layanan";
+import JenisLayanan from "../../models/layanan/jenisLayanan.js";
+import layananModels from "../../models/layanan/layanan.js";
 
 const newJenisLayanan = asyncHandler(async (req, res) => {
-  const { nama, foto } = req.body;
+  const { nama, foto } = req.body; // Destructure the request body
   try {
     const isExist = await JenisLayanan.findOne({ nama });
     if (isExist) {
@@ -15,7 +15,6 @@ const newJenisLayanan = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
 const getJenisLayanan = asyncHandler(async (req, res) => {
   try {
     const jenisLayanan = await JenisLayanan.find();
@@ -25,23 +24,32 @@ const getJenisLayanan = asyncHandler(async (req, res) => {
   }
 });
 
-const newLayanan = asyncHandler(async (req, res) => {
-  const { jenisLayanan, nama, harga, foto, deskripsi, cardDeskripsi } =
-    req.body;
+const deleteJenisLayanan = asyncHandler(async (req, res) => {
+  const { id } = req.params;
   try {
-    const isExist = await layananModels.findOne({ nama });
+    const jenisLayanan = await JenisLayanan.findByIdAndDelete(id);
+    res.send(jenisLayanan);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const newLayanan = asyncHandler(async (req, res) => {
+  const newLayanan = {
+    nama: req.body.nama,
+    durasi: req.body.durasi,
+    harga: req.body.harga,
+    deskripsi: req.body.deskripsi,
+    image: req.body.image,
+    cardDeskripsi: req.body.cardDeskripsi,
+    idJenis: req.body.idJenis,
+  };
+  try {
+    const isExist = await layananModels.findOne({ nama: newLayanan.nama });
     if (isExist) {
       throw new Error("Layanan Sudah Ada");
     }
-    const layanan = await layananModels.create({
-      nama,
-      durasi,
-      harga,
-      deskripsi,
-      foto,
-      cardDeskripsi,
-      idJenis: jenisLayanan,
-    });
+    const layanan = await layananModels.create(newLayanan);
     res.send(layanan);
   } catch (error) {
     res.status(400).json({ message: error.message });
