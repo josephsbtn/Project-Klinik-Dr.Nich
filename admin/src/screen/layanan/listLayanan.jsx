@@ -4,6 +4,7 @@ import Navbar from "../../assets/component/navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ConfirmPopUp from "../../assets/component/confirmPopUp";
+import CardJenisLayanan from "../../assets/component/cardJenisLayanan";
 
 function ListLayanan() {
   const navigate = useNavigate();
@@ -157,22 +158,13 @@ function ListLayanan() {
             )}
           </div>
 
-          <section className="mt-8 container w-[90%]">
+          <section className="mt-8 container flex flex-col items-center w-[90%]">
             <h1 className="text-3xl font-bold text-center">Jenis Layanan</h1>
-            <div className="grid w-[90%] grid-cols-4 space-y-2">
+            <div className="grid w-[90%] xl:grid-cols-5 sm:grid-cols-2 mt-4">
               {Array.isArray(jenisLayanan) ? (
-                jenisLayanan.map((jenisLayananItem, index) => (
-                  <div
-                    key={index}
-                    className="flex w-fit h-fit flex-col p-4 items-center justify-center rounded-2xl bg-gray-100 space-x-2">
-                    {jenisLayananItem.foto && (
-                      <img
-                        src={jenisLayananItem.foto}
-                        alt={jenisLayananItem.nama}
-                        className="w-32 h-32 object-cover"
-                      />
-                    )}
-                    <p className="font-semibold">{jenisLayananItem.nama}</p>
+                jenisLayanan.map((item) => (
+                  <div key={item._id}>
+                    <CardJenisLayanan item={item} />
                   </div>
                 ))
               ) : (

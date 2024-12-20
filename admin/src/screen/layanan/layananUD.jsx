@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import Navbar from "../../assets/component/navbar";
 import { useState } from "react";
@@ -77,8 +78,6 @@ function LayananUD() {
       console.log("Error: ", error);
     }
   }
-
-  useEffect(() => {}, []);
 
   return (
     <>
