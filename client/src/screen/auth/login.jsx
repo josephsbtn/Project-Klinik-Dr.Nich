@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
+import Footer from "../auth/footer";
+import Navbar from "../auth/navbar";
 
-// Logo & images
-import logo from "../../assets/logodrnich.svg";
-import bag from "../../assets/bag-2.svg";
-import search from "../../assets/search-normal.svg";
-import hamburger from "../../assets/hamburger.svg";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,72 +11,101 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/users/login", {
-      email: email,
-      password: password,
-    });
-    console.log(res.data);
+    try {
+      const res = await axios.post("/api/users/login", { email, password });
+      console.log(res.data);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (
-    <div className="w-full h-full relative flex items-center justify-center">
+    <div className="min-h-screen flex flex-col">
       {/* Navbar */}
-      <div className="w-full h-[159px] shadow-sm bg-white">
-        <div className="container pt-[79px] pb-[20.29px] pl-8 flex items-center justify-between h-full">
-          <img src={logo} className="w-20 h-[59.71px]" alt="Logo" />
+      <Navbar />
+      
 
-          {/* Navigation */}
-          <div className="w-[95px] h-[27px] flex items-center gap-3.5 mr-[33px]">
-            <a href="#">
-              <img src={bag} alt="Bag" />
+      {/* Main Content */}
+      <div className="container mx-auto flex-grow px-6 py-8">
+        {/* Breadcrumb */}
+        <div className="flex justify-between items-center text-xs text-gray-400">
+          <p>
+            Beranda / <span className="text-gray-600">Masuk</span>
+          </p>
+          <p>
+            Belum punya Akun?{" "}
+            <a href="#" className="text-[#2b463c] font-medium">
+              Daftar
             </a>
-            <a href="#">
-              <img src={search} alt="Search" />
-            </a>
-            <a href="#">
-              <img src={hamburger} alt="Menu" />
-            </a>
-          </div>
+          </p>
         </div>
 
-        {/* Breadcrumb */}
-        <div className="flex-col items-center justify-between w-full h-[32px] pl-[32px] pr-[33px] pt-[16px]">
-          <div className="flex justify-between items-center w-full text-xs text-[#bdbdbd] font-normal">
-            <div className="flex">
-              <p>Beranda</p>
-              <div> / </div>
-              <p>Masuk</p>
+        {/* Form Section */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-semibold text-gray-800">Masuk</h2>
+          <p className="text-sm text-gray-600 mt-1">
+            Masuk untuk melakukan reservasi!
+          </p>
+
+          <form
+            onSubmit={handleSubmit}
+            className="mt-6 space-y-6"
+          >
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#2b463c] focus:outline-none"
+                placeholder="Masukan Email"
+                required
+              />
             </div>
 
-            <div className="flex">
-              <p>Belum punya Akun?</p>
-              <a href="" className="font-medium text-[#2b463c]">
-                Daftar
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Kata Sandi
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#2b463c] focus:outline-none"
+                placeholder="Masukan Kata Sandi"
+                required
+              />
+            </div>
+
+            <p className="text-right text-xs text-gray-400">
+              <a href="#" className="hover:text-[#2b463c]">
+                Lupa Kata Sandi?
               </a>
-            </div>
-          </div>
-
-          <div className="pt-[20px]">
-            <h2 className="text-base font-medium">Masuk</h2>
-            <p className="text-sm font-normal pt-[5px]">
-              Masuk untuk melakukan reservasi!
             </p>
 
-            <form onSubmit={handleSubmit} className="pt-[30px]">
-              {/* Form fields go here */}
-
-              <div>
-                <label className="text-sm font-medium">Email</label>
-                <input
-                  type="email"
-                  className="w-full h-[48px] border border-[#bdbdbd] rounded-full mt-[5px] text-left placeholder-center"
-                  placeholder="Masukan Email"
-                />
-              </div>
-            </form>
-          </div>
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#dcdcdc] text-white rounded-full font-medium shadow focus:ring-2 focus:ring-[#2b463c] focus:outline-none"
+            >
+              Masuk
+            </button>
+          </form>
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
+
     </div>
   );
 }
