@@ -1,21 +1,21 @@
-import React from "react";
-import { button, Carousel } from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
+import { Carousel } from "@material-tailwind/react";
 
-// IMAGE n Icon
+// IMAGES & ICONS
 import img1 from "../../assets/img-carousel/img1.png";
 import img2 from "../../assets/img-carousel/img2.png";
 import waBtn from "../../assets/whatsappBtn.svg";
 
-// img-about
+// ABOUT IMAGES
 import bgAbout from "../../assets/img-about/4.png";
 import acneFace from "../../assets/img-about/A Lifetime In 60 Seconds-Photoroom 1.png";
 import muka2 from "../../assets/img-about/gambar2.png";
 
-// Navbar n Footer
+// COMPONENTS
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
 
-// Navigation Component
+// Carousel Navigation Component
 function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
   return (
     <div className="absolute bottom-4 left-2/4 z-0 flex -translate-x-2/4 gap-2">
@@ -34,32 +34,54 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
   );
 }
 
-const about = [
-  {
-    id: 1,
-    title: "About Us",
-    Image: bgAbout,
-    object: acneFace,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget ultricies libero.",
-    button: "Read More",
-  },
-  {
-    id: 2,
-    title: "About Us",
-    Image: bgAbout,
-    object: muka2,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget ultricies libero.",
-    button: "Read More",
-  },
-]
-
 // MAIN FUNCTION
-export default function beranda() {
+export default function Beranda() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const slides = [
+    {
+      id: 1,
+      image: bgAbout,
+      overlayImage: acneFace,
+      title: "Kurang percaya diri dengan masalah kulit wajah?",
+      description:
+        "Jangan biarkan masalah kulit mengganggu Kamu. Jadwalkan konsultasi sekarang dan dapatkan analisis menyeluruh dari spesialis kami!",
+      buttonText: "Konsultasi Sekarang",
+      buttonLink: "/consult",
+      textPosition: "text-left px-[20px] pt-[33px]",
+      titleColor: "text-white",
+      descriptionColor: "text-gray-800",
+      italicColor: "text-gray-700",
+    },
+    {
+      id: 2,
+      image: bgAbout,
+      overlayImage: muka2,
+      imgPosition: "right-0 w-[400px]",
+      title: "Percayakan perawatan kulitmu pada kami!",
+      description:
+        "Kami menyediakan berbagai perawatan kulit yang sesuai dengan kebutuhanmu. Jadwalkan konsultasi sekarang dan rasakan perbedaannya!",
+      buttonText: "Pelajari Lebih Lanjut",
+      buttonLink: "/learn-more",
+      textPosition: "text-center px-[30px] pt-[40px]",
+      titleColor: "text-red-900",
+      descriptionColor: "text-gray-900",
+      italicColor: "text-gray-800",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
   return (
     <div>
       <Navbar />
+
+      {/* Carousel Component */}
       <Carousel
         className="pb-10"
         autoplay={true}
@@ -71,52 +93,66 @@ export default function beranda() {
           <div key={index} className="relative">
             <img
               src={src}
-              alt={`image ${index + 1}`}
+              alt={`Slide ${index + 1}`}
               className="h-full w-full object-cover"
             />
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40 "></div>
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40"></div>
           </div>
         ))}
       </Carousel>
 
-      {/* tombol WhatsApp */}
+      {/* WhatsApp Button */}
       <div>
         <img
           src={waBtn}
           className="fixed z-50 right-0 px-[18px] bottom-[21.71px]"
-          alt=""
+          alt="WhatsApp Button"
         />
       </div>
 
-      {/* ABOUT ----------- ABOUT ----------- ABOUT */}
-      <div className="w-[375px] h-[409px] bg-[#f5f5f5] flex justify-center items-center">
-        {about.map((item) => (
+      {/* ABOUT Section */}
+      <div className="carousel w-full h-[409px] mx-auto overflow-y-auto">
+        {slides.map((slide, index) => (
           <div
-          key={about.id}
-          alt={about.title}
-          className="inset-0 w-full h-full flex justify-center items-center"
+            key={slide.id}
+            className={`carousel-item relative w-full ${
+              index === activeIndex ? "block" : "hidden"
+            }`}
           >
-            {/*gambar slide  */}
-            <img
-            src={item.Image}
-            alt={item.title}
-            className="w-[100%] h-[100%] object-cover"
-            />
-            {/*gambar objek */}
-            <img
-            src={item.object}
-            alt={item.title}
-            className="w-[100%] h-[100%] object-cover"
-            />
-            
-            <a href="">
-              <button className="bg-[#c2a353] text-white px-4 py-2 rounded-lg">
-                {item.button}
-              </button>
-            </a>
+            <div className="flex items-center justify-between w-full h-full">
+              <img
+                src={slide.image}
+                className="absolute w-full h-full z-0"
+                alt="Background"
+              />
+              <img
+                src={slide.overlayImage}
+                className="absolute right-0 bottom-0 h-full"
+                alt="Overlay"
+              />
+              {/* Text Section */}
+              <div className={`max-w-md z-10 ${slide.textPosition}`}>
+                <h2 className={`w-[257px] text-2xl font-bold mb-4 ${slide.titleColor}`}>
+                  {slide.title}
+                </h2>
+                <p className={`w-56 text-xs mb-6 ${slide.descriptionColor}`}>
+                  {slide.description}
+                </p>
+                <p className={`w-[218px] text-xs italic mb-6 ${slide.italicColor}`}>
+                  Biar Wajahmu Bercerita, Kamu Bahagia Bersama Ahlinya.
+                </p>
+                <a
+                  href={slide.buttonLink}
+                  className="btn bg-yellow-500 text-white hover:bg-yellow-600 px-6 py-2 rounded-md transition duration-300"
+                >
+                  {slide.buttonText}
+                </a>
+              </div>
+            </div>
           </div>
         ))}
       </div>
+
       <Footer />
     </div>
   );

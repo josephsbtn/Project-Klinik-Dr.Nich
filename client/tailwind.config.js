@@ -1,4 +1,6 @@
+import theme from "@material-tailwind/react/theme";
 import withMT from "@material-tailwind/react/utils/withMT";
+import daisyui from "daisyui";
  
 export default withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -12,4 +14,8 @@ export default withMT({
   plugins: [
     require('daisyui'),
   ],
+  daisyui: {
+    themes: false,
+    darkTheme: false,
+  },
 });
