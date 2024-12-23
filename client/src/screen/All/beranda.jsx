@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Carousel } from "@material-tailwind/react";
+import axios from "axios";
 
 // IMAGES & ICONS
 import img1 from "../../assets/img-carousel/img1.png";
@@ -9,13 +12,13 @@ import logo from "../../assets/logodrnich-white.svg";
 
 // ABOUT IMAGES
 import bgAbout from "../../assets/img-about/4.png";
-import bgAbout2 from "../../assets/img-about/5.png";
 import acneFace from "../../assets/img-about/A Lifetime In 60 Seconds-Photoroom 1.png";
 import muka2 from "../../assets/img-about/gambar2.png";
 
 // COMPONENTS
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
+import CardJenisLayanan from "../../components/cardJenisLayanan.jsx";
 
 // SWIPER
 import Swiper from "swiper";
@@ -24,6 +27,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import ArrowRight from "../../../../admin/src/assets/icon/ArrowRight";
 
 // Carousel Navigation Component
 function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
@@ -46,12 +50,54 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
 
 // MAIN FUNCTION
 export default function Beranda() {
-  const cards = [
-    { id: 1, title: "Card 1", description: "This is the first card." },
-    { id: 2, title: "Card 2", description: "This is the second card." },
-    { id: 3, title: "Card 3", description: "This is the third card." },
-    { id: 4, title: "Card 4", description: "This is the fourth card." },
-  ];
+  const [jenisLayanan, setJenisLayanan] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/layanan/getAllJenisLayanan");
+      console.log("API response:", response.data);
+      const sortedJenisLayanan = response.data.sort(
+        (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+
+      const dataWithTimestamp = {
+        data: sortedJenisLayanan,
+        timestamp: new Date().getTime(),
+      };
+      localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
+
+      setJenisLayanan(sortedJenisLayanan);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError("Failed to fetch jenis layanan. Please try again later.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const cachedData = localStorage.getItem("jenisLayanan");
+
+    if (!cachedData) {
+      const parsedData = JSON.parse(cachedData);
+      const currentTime = new Date().getTime();
+
+      if (currentTime - parsedData.timestamp < 3600000) {
+        console.log("Using cached data...");
+        setJenisLayanan(parsedData.data);
+      } else {
+        console.log("Cache expired. Fetching new data...");
+        fetchData();
+      }
+    } else {
+      console.log("Fetching data...");
+      fetchData();
+    }
+  }, []);
 
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
@@ -79,7 +125,8 @@ export default function Beranda() {
         autoplayDelay={3000}
         loop={true} // Enable looping
         navigation={CarouselNavigation} // Use the CarouselNavigation component
-      >
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}>
         {[img1, img2, img1].map((src, index) => (
           <div key={index} className="relative">
             <img
@@ -105,13 +152,19 @@ export default function Beranda() {
       <div className="swiper">
         <div className="swiper-wrapper">
           <div className="swiper-slide">
-            {/* slide pertama */}
             <div className="relative w-full h-[409px] mx-auto overflow-y-auto">
-              <img src={bgAbout} className="absolute w-full h-full z-0" alt="" />
-              <img src={acneFace} className="absolute right-0 z-10" alt="" />
-
+              <img
+                src={bgAbout}
+                className="absolute w-full h-full z-0"
+                alt="Background"
+              />
+              <img
+                src={acneFace}
+                className="absolute right-0 z-10"
+                alt="Face"
+              />
               <div className="relative mx-[21px] mt-[25px]">
-                <img src={logo} alt="" />
+                <img src={logo} alt="Logo" />
               </div>
               <div className="relative mx-[20px] mt-[20.41px] z-20">
                 <h2 className="w-[257px] text-white text-xl font-semibold leading-[25px] tracking-tight">
@@ -119,22 +172,64 @@ export default function Beranda() {
                 </h2>
               </div>
               <div className="relative mx-[20px] mt-[16px] z-20">
-                <p className="w-[250px] text-white text-sm font-normal leading-normal tracking-tight">Jadwalkan konsultasi sekarang dan dapatkan analisis menyeluruh dari spesialis kami!</p>
+                <p className="w-[250px] text-white text-sm font-normal leading-normal tracking-tight">
+                  Jadwalkan konsultasi sekarang dan dapatkan analisis menyeluruh
+                  dari spesialis kami!
+                </p>
               </div>
               <div className="relative mx-[20px] mt-[15px] z-20">
-                <p className="w-[232px] italic text-white text-xs font-semibold leading-[15px] tracking-wide">Biar Wajahmu Bercerita, Kamu Bahagia Bersama Ahlinya.</p>
+                <p className="w-[232px] italic text-white text-xs font-semibold leading-[15px] tracking-wide">
+                  Biar Wajahmu Bercerita, Kamu Bahagia Bersama Ahlinya.
+                </p>
               </div>
               <div className="relative w-[147px] h-10 px-5 py-2.5 bg-white rounded-[10px] border border-white justify-center items-center gap-2.5 inline-flex mx-[20px] mt-[22px] z-20">
-                <button className="text-[#c2a353] text-xs font-normal leading-tight tracking-tight">Konsultasi Sekarang</button>
+                <button className="text-[#c2a353] text-xs font-normal leading-tight tracking-tight">
+                  Konsultasi Sekarang
+                </button>
               </div>
             </div>
           </div>
-
           {/* slide kedua */}
           <div className="swiper-slide">Slide 2</div>
         </div>
         <div className="swiper-pagination mx-auto mt-4 flex justify-center"></div>
       </div>
+
+      {/* Why Dr.Nich Section */}
+      <section className="flex flex-col my-8 w-full items-center">
+        <main className="w-[90%]">
+          <h1>Mengapa memilih Dr.Nich ?</h1>
+        </main>
+      </section>
+
+      {/* Jenis Layanan Section */}
+      <section className="flex flex-col my-8 w-full items-center">
+        <main className="w-[90%] flex flex-col items-center">
+          <div className="flex w-full justify-between items-center">
+            <h1 className="font-SFPro font-medium text-base">Layanan</h1>
+            <button className="font-SFPro text-xs text-secondary font-medium">
+              Lihat semua
+            </button>
+          </div>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="grid w-fit grid-cols-2 gap-4 items-center justify-center xl:grid-cols-5 sm:grid-cols-2 mt-4">
+              {jenisLayanan && jenisLayanan.length > 0 ? (
+                jenisLayanan.slice(0, 12).map((item) => (
+                  <div key={item._id}>
+                    <CardJenisLayanan item={item} />
+                  </div>
+                ))
+              ) : (
+                <p className="text-center col-span-2">No data available</p>
+              )}
+              {loading && <p className="text-center col-span-2">Loading...</p>}
+            </div>
+          )}
+        </main>
+      </section>
+
       <Footer />
     </div>
   );

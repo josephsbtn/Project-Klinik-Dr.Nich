@@ -47,7 +47,7 @@
 
 @font-face {
   font-family: "SF Pro Display";
-  src: url("./assets/fonts/SFPRODISPLAYBLACK.OTF") format("truetype");
+  src: url("./assets/fonts/SFPRODISPLAYBLACKITALIC.OTF") format("truetype");
   font-weight: 900; /* Black */
   font-style: normal;
 }
