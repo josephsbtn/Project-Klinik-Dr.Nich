@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../assets/component/navbar";
-import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import ConfirmPopUp from "../../assets/component/confirmPopUp";
 
 function LayananUD() {
   const { id } = useParams();
@@ -15,25 +15,52 @@ function LayananUD() {
   const [image, setImage] = useState(null);
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [jenisLayanan, setJenisLayanan] = useState([]);
-
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const fetchJenisLayanan = async () => {
       try {
-        const { data } = await axios.get("/api/layanan/getAllJenisLayanan");
-        setJenisLayanan(data);
+        setLoading(true);
+        const response = await axios.get("/api/layanan/getAllJenisLayanan");
+        const sortedJenisLayanan = response.data.sort(
+          (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+        );
+        setJenisLayanan(sortedJenisLayanan);
       } catch (error) {
-        console.log(error);
+        setError(error.response?.data?.message || "An error occurred");
+      } finally {
+        setLoading(false);
       }
     };
+
+    const fetchDataLayanan = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`/api/layanan/getLayananById/${id}`);
+        setNama(response.data.nama);
+        setDurasi(response.data.durasi);
+        setHarga(response.data.harga);
+        setDeskripsi(response.data.deskripsi);
+        setIdJenis(response.data.idJenis);
+        setImage(response.data.image);
+      } catch (error) {
+        setError(error.response?.data?.message || "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDataLayanan();
     fetchJenisLayanan();
-  }, []);
+  }, [id]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.put(`/api/layanan/updateLayanan/${id}`, {
         nama,
@@ -43,18 +70,38 @@ function LayananUD() {
         idJenis,
         image,
       });
-      console.log(data);
+      setSuccess(data.message);
     } catch (error) {
-      console.log(error);
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
     }
   };
 
-  function convertBase64(e) {
+  const handleDelete = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.delete(`/api/layanan/deleteLayanan/${id}`);
+      setNama("");
+      setDurasi("");
+      setHarga("");
+      setDeskripsi("");
+      setIdJenis("");
+      setImage(null);
+      setSuccess(res.data.message);
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+      setOpen(false); // Close the confirmation pop-up after delete
+    }
+  };
+
+  const convertBase64 = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      setError(true);
-      console.log("No image selected");
-      return false;
+      setError("No image selected");
+      return;
     }
     const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!validImageTypes.includes(file.type)) {
@@ -62,31 +109,39 @@ function LayananUD() {
       return;
     }
 
-    const maxSize = 2 * 1024 * 1024;
+    const maxSize = 5 * 1024 * 1024; // 5MB size limit
     if (file.size > maxSize) {
       setError("File is too large. Maximum file size is 5MB.");
       return;
     }
-    try {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        console.log(reader.result);
-        setImage(reader.result);
-      };
-    } catch (error) {
-      console.log("Error: ", error);
-    }
-  }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+  };
 
   return (
     <>
       <main className="container h-screen flex flex-col items-center">
+        <ConfirmPopUp open={open} onClose={() => setOpen(false)}>
+          Apakah Anda yakin ingin menghapus layanan ini?
+          <div className="flex justify-between mt-4">
+            <button
+              className="px-4 py-2 bg-gray-400 text-white rounded-md"
+              onClick={() => setOpen(false)}>
+              Cancel
+            </button>
+            <button
+              className="px-4 py-2 bg-red-600 text-white rounded-md"
+              onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+        </ConfirmPopUp>
         <Navbar />
-        <section className="w-full">
-          <div
-            className="h-screen w-full p-10 flex items-center justify-center"
-            onClick={() => setOpen(false)}>
+        <section className="w-full mt-20">
+          <div className="h-auto w-full p-10 flex items-center justify-center">
             <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-10 w-full mt-10">
               <div className="w-full lg:w-1/4 p-5 border rounded-md shadow-md bg-white">
                 <h3 className="text-xl font-semibold mb-4 font-montserrat">
@@ -107,7 +162,7 @@ function LayananUD() {
                   <div className="flex space-x-4">
                     <button
                       onClick={() => setImage("")}
-                      className="px-4 py-2 bg-red-600 font-montserrat  text-white rounded-md">
+                      className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
                       Remove
                     </button>
                     <label className="px-4 py-2 font-montserrat bg-blue-600 text-white rounded-md cursor-pointer">
@@ -128,6 +183,8 @@ function LayananUD() {
                   General Information
                 </h3>
                 {error && <p className="text-red-500">{error}</p>}
+                {success && <p className="text-green-500">{success}</p>}
+
                 <form
                   onSubmit={submitHandler}
                   className="flex flex-col space-y-4">
@@ -203,10 +260,16 @@ function LayananUD() {
                   </div>
                   <button
                     type="submit"
-                    className="bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium ">
-                    Tambah Layanan
+                    className="bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium"
+                    disabled={loading}>
+                    {loading ? "Updating..." : "Update Layanan"}
                   </button>
                 </form>
+                <button
+                  className="bg-red-600 w-full mt-4 text-white p-1 rounded-xl font-montserrat font-medium"
+                  onClick={() => setOpen(true)}>
+                  Delete Layanan
+                </button>
               </div>
             </div>
           </div>

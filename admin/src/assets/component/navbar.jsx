@@ -50,7 +50,7 @@ function Navbar() {
           Layanan
         </button>
         <button
-          onClick={() => handleNavigate("/promo")}
+          onClick={() => handleNavigate("/listpromo")}
           className={`text-gray-700 text-lg transition-colors duration-300 ease-in-out ${
             selected === "/promo" ? "text-green-500" : "hover:text-green-500"
           }`}>

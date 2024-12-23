@@ -3,6 +3,7 @@ import Dasboard from "./screen/dashboard.jsx";
 import ListLayanan from "./screen/layanan/listLayanan.jsx";
 import LayananUD from "./screen/layanan/layananUD.jsx";
 import CreateLayanan from "./screen/layanan/createLayanan.jsx";
+import ListPromo from "./screen/promo/listPromo.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/layanan" element={<ListLayanan />} />
           <Route path="/layanan/updateLayanan/:id" element={<LayananUD />} />
           <Route path="/layanan/tambahLayanan" element={<CreateLayanan />} />
+          <Route path="/listpromo" element={<ListPromo />} />
         </Routes>
       </Router>
     </>

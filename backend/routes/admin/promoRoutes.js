@@ -1,15 +1,15 @@
 import express from "express";
 import {
-  newpromo,
-  getpromo,
-  updatepromo,
-  deletepromo,
+  newPromo,
+  getPromo,
+  updatePromo,
+  deletePromo,
 } from "../../controller/admin/promoController.js";
 
 const router = express.Router();
-router.post("/tambahpromo", newpromo);
-router.get("/getAllpromo", getpromo);
-router.put("/updatepromo/:id", updatepromo);
-router.delete("/deletepromo/:id", deletepromo);
+router.post("/tambahpromo", newPromo);
+router.get("/getAllpromo", getPromo);
+router.put("/updatepromo/:id", updatePromo);
+router.delete("/deletepromo/:id", deletePromo);
 
 export default router;

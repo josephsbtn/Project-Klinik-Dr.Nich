@@ -21,6 +21,10 @@ const namaLayananSchema = mongoose.Schema(
     cardDeskripsi: {
       type: String,
     },
+    reservedCount: {
+      type: Number,
+      default: 0,
+    },
     idJenis: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "layanan",
