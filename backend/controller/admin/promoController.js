@@ -57,9 +57,4 @@ const deletePromo = asyncHandler(async (req, res) => {
   }
 });
 
-export {
-  newpromo,
-  getpromo,
-  updatepromo,
-  deletepromo,
-};
+export { newPromo, getPromo, updatePromo, deletePromo };

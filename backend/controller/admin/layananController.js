@@ -116,4 +116,5 @@ export {
   getLayananById,
   updateLayanan,
   deleteLayanan,
+  deleteJenisLayanan,
 };

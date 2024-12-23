@@ -4,6 +4,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 
 import layananRoutes from "./routes/admin/layananRoutes.js";
+import promoRoutes from "./routes/admin/promoRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import dbConfig from "./config/db.js";
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ limit: "20mb", extended: true }));
 
 app.use("/api/layanan", layananRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/promo", promoRoutes);
 app.get("/", (req, res) => res.send("Server is ready"));
 app.use(notFound);
 app.use(errorHandler);

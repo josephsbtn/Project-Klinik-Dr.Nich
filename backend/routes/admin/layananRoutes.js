@@ -7,6 +7,7 @@ import {
   getLayananById,
   updateLayanan,
   deleteLayanan,
+  deleteJenisLayanan,
 } from "../../controller/admin/layananController.js";
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.get("/getAllLayanan", getLayanan);
 router.get("/getLayananById/:id", getLayananById);
 router.put("/updateLayanan/:id", updateLayanan);
 router.delete("/deleteLayanan/:id", deleteLayanan);
+router.delete("/deleteJenisLayanan/:id", deleteJenisLayanan);
 
 export default router;
