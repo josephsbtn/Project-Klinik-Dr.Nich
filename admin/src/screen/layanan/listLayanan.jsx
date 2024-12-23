@@ -9,7 +9,7 @@ import CardLayanan from "../../assets/component/CardLayanan";
 
 function ListLayanan() {
   const navigate = useNavigate();
-  const [layanan, setLayanan] = useState([]);
+  const [layanan, setLayanan] = useState();
   const [jenisLayanan, setJenisLayanan] = useState([]);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
@@ -17,6 +17,7 @@ function ListLayanan() {
   const [image, setImage] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -94,6 +95,54 @@ function ListLayanan() {
         <Navbar />
         <section className="w-full pt-32 pb-20 flex flex-col items-center">
           <ConfirmPopUp open={open} onClose={() => setOpen(false)}>
+            <h1 className="w-full text-center text-xl mb-4 font-bold">
+              Jenis Layanan
+            </h1>
+            <form onSubmit={handleSubmit}>
+              <div className="flex flex-col space-y-4">
+                {image ? (
+                  <img
+                    src={image}
+                    alt="Uploaded Preview"
+                    className="w-full h-80 object-cover rounded-md border"
+                  />
+                ) : (
+                  <div className="w-full h-48 bg-gray-200 rounded-md font-montserrat flex items-center justify-center text-gray-600">
+                    + Add Image
+                  </div>
+                )}
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => setImage(null)}
+                    className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
+                    Remove
+                  </button>
+                  <label className="px-4 py-2 font-montserrat bg-blue-600 text-white rounded-md cursor-pointer">
+                    Add
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={convertBase64}
+                    />
+                  </label>
+                </div>
+              </div>
+              <input
+                type="text"
+                placeholder="Jenis Layanan"
+                className="w-full p-2 border rounded-md mt-4"
+                onChange={(e) => setJenis(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mt-4">
+                Submit
+              </button>
+            </form>
+          </ConfirmPopUp>
+
+          <ConfirmPopUp open={isEdit} onClose={() => setIsEdit(false)}>
             <h1 className="w-full text-center text-xl mb-4 font-bold">
               Jenis Layanan
             </h1>
