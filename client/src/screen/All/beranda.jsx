@@ -1,25 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { button, Carousel } from "@material-tailwind/react";
+import React, { useState,useRef, useEffect } from "react";
+import { Carousel } from "@material-tailwind/react";
+import { useSwipeable } from "react-swipeable";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import axios from "axios";
 
-// IMAGES & ICONS
+// COMPONENTS
+import Navbar from "../auth/navbar";
+import Footer from "../auth/footer";
+import AboutCard from "../../components/AboutCard";
+import CardJenisLayanan from "../../components/cardJenisLayanan.jsx";
+
+import ArrowRight from "../../../../admin/src/assets/icon/ArrowRight";
+
+// IMAGES & ICONS ABOUT
 import img1 from "../../assets/img-carousel/img1.png";
 import img2 from "../../assets/img-carousel/img2.png";
 import waBtn from "../../assets/whatsappBtn.svg";
 import logo from "../../assets/logodrnich-white.svg";
-
-// ABOUT IMAGES
 import bgAbout from "../../assets/img-about/4.png";
 import bgAbout2 from "../../assets/img-about/5.png";
 import acneFace from "../../assets/img-about/A Lifetime In 60 Seconds-Photoroom 1.png";
 import muka2 from "../../assets/img-about/gambar2.png";
 import masker from "../../assets/img-about/masker.svg";
+import pori from "../../assets/img-about/pori.svg";
+import air from "../../assets/img-about/air.svg";
 
-// COMPONENTS
-import Navbar from "../auth/navbar";
-import Footer from "../auth/footer";
+//  IMAGE & ICONS SERTIFKAT
+import sertifikat1 from "../../assets/img-about/sertifikat1.png"
 
-// SWIPER
-import { useSwipeable } from "react-swipeable";
+// import required modules
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 // Carousel Navigation Component
 function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
@@ -28,11 +44,10 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-            activeIndex === i
-              ? "w-[19px] h-2.5 bg-[#c2a353]"
-              : "w-2.5 h-2.5 bg-[#dcdcdc]"
-          }`}
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
+            ? "w-[19px] h-2.5 bg-[#c2a353]"
+            : "w-2.5 h-2.5 bg-[#dcdcdc]"
+            }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
@@ -40,9 +55,57 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
   );
 }
 
-// MAIN FUNCTION
+// MAIN COMPONENT
 export default function Beranda() {
+  // layanan bero
+  const [jenisLayanan, setJenisLayanan] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/layanan/getAllJenisLayanan");
+      console.log("API response:", response.data);
+      const sortedJenisLayanan = response.data.sort(
+        (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+
+      const dataWithTimestamp = {
+        data: sortedJenisLayanan,
+        timestamp: new Date().getTime(),
+      };
+      localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
+
+      setJenisLayanan(sortedJenisLayanan);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError("Failed to fetch jenis layanan. Please try again later.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const cachedData = localStorage.getItem("jenisLayanan");
+
+    if (!cachedData) {
+      const parsedData = JSON.parse(cachedData);
+      const currentTime = new Date().getTime();
+
+      if (currentTime - parsedData.timestamp < 3600000) {
+        console.log("Using cached data...");
+        setJenisLayanan(parsedData.data);
+      } else {
+        console.log("Cache expired. Fetching new data...");
+        fetchData();
+      }
+    } else {
+      console.log("Fetching data...");
+      fetchData();
+    }
+  }, []);
 
   // Data for About Cards
   const aboutCards = [
@@ -60,9 +123,14 @@ export default function Beranda() {
       bg: bgAbout2,
       img: muka2,
       logo: logo,
-      title: "Our Vision",
-      description:
-        "Becoming the leading skincare provider for natural and effective products.",
+      title: "Mau punya kulit sehat dan terawat?",
+      bene1: "Kulit lebih cerah dan merata",
+      iconBene1: masker,
+      bene2: "Menyamarkan noda hitam",
+      iconBene2: pori,
+      bene3: "Menutrisi kulit agar lebih sehat",
+      iconBene3: air,
+      button2: "Konsultasi Sekarang",
     },
   ];
 
@@ -81,8 +149,16 @@ export default function Beranda() {
     onSwipedRight: prevSlide,
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
+    trackTouch: true,
   });
 
+  // SWIPER LAGI SWIPER LAGI
+  const progressCircle = useRef(null);
+  const progressContent = useRef(null);
+  const onAutoplayTimeLeft = (s, time, progress) => {
+    progressCircle.current.style.setProperty('--progress', 1 - progress);
+    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+  };
   return (
     <div>
       <Navbar />
@@ -118,62 +194,97 @@ export default function Beranda() {
       {/* ABOUT Section */}
       <div className="relative w-full mx-auto" {...handlers}>
         <div className="relative max-w-3xl mx-auto">
-          {/* Card Content */}
-          <div className="flex justify-center h-[409px]">
-            <div className="relative text-center h-[409px] w-full">
-              <img
-                src={aboutCards[activeIndex].bg}
-                alt={`Card ${activeIndex + 1}`}
-                className="absolute object-cover z-0 w-full h-full"
-              />
-              <img
-                src={aboutCards[activeIndex].img}
-                alt={`Card ${activeIndex + 1}`}
-                className="absolute right-0 bottom-0 object-cover z-10"
-              />
-              {aboutCards[activeIndex].logo && (
-                <img
-                  src={aboutCards[activeIndex].logo}
-                  alt="Logo"
-                  className="absolute top-[25px] left-[21px] z-20"
-                />
-              )}
-              <div className="relative z-20 p-4">
-                <h3 className="w-[218px] pt-[84px] text-xl text-white text-xl font-semibold text-left leading-[25px] tracking-tight font-semibold mb-2">
-                  {aboutCards[activeIndex].title}
-                </h3>
-                <p className="text-left w-[250px] h-[72px] pt-[16px] text-white text-sm font-normal leading-normal tracking-tight">
-                  {aboutCards[activeIndex].description}
-                </p>
-                {aboutCards[activeIndex].text && (
-                  <p className="text-left w-[250px] h-[72px] pt-[16px] text-white text-sm font-normal leading-normal tracking-tight">
-                    {aboutCards[activeIndex].text}
-                  </p>
-                )}
-                {aboutCards[activeIndex].button && (
-                  <button className="mt-4 bg-white text-[#c2a353] py-2.5 px-5 rounded-[10px]">
-                    {aboutCards[activeIndex].button}
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
+          {/* Active Card */}
+          <AboutCard card={aboutCards[activeIndex]} />
 
           {/* Pagination Indicators */}
           <div className="flex justify-center mt-4 gap-2">
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
-                  activeIndex === index
-                    ? "w-[19px] h-2.5 bg-[#c2a353]"
-                    : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                }`}
+                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
+                  ? "w-[19px] h-2.5 bg-[#c2a353]"
+                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
+                  }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
           </div>
         </div>
+
+        {/* SERTIF JOJO*/}
+         {/* Why Dr.Nich Section */}
+      <section className="flex flex-col my-8 w-full items-center">
+        <main className="w-[90%]">
+          <h1>Mengapa memilih Dr.Nich ?</h1>
+        </main>
+      </section>
+
+      {/* Jenis Layanan Section */}
+      <section className="flex flex-col my-8 w-full items-center">
+        <main className="w-[90%] flex flex-col items-center">
+          <div className="flex w-full justify-between items-center">
+            <h1 className="font-SFPro font-medium text-base">Layanan</h1>
+            <button className="font-SFPro text-xs text-secondary font-medium">
+              Lihat semua
+            </button>
+          </div>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="grid w-fit grid-cols-2 gap-4 items-center justify-center xl:grid-cols-5 sm:grid-cols-2 mt-4">
+              {jenisLayanan && jenisLayanan.length > 0 ? (
+                jenisLayanan.slice(0, 12).map((item) => (
+                  <div key={item._id}>
+                    <CardJenisLayanan item={item} />
+                  </div>
+                ))
+              ) : (
+                <p className="text-center col-span-2">No data available</p>
+              )}
+              {loading && <p className="text-center col-span-2">Loading...</p>}
+            </div>
+          )}
+        </main>
+      </section>
+
+        {/* SERTIFIKASI */}
+        <div className="flex flex-col pt-[73px]">
+          <div className="w-[196px] mx-[20px] text-center text-[#464646] text-base font-medium font-['SF Pro Display'] leading-tight tracking-tight">
+            Mengapa memilih Dr. Nich?
+          </div>
+
+          <div className="flex justify-center items-center pt-[15px]">
+            <div className="w-[325px] h-[283px] bg-white rounded-[10px] border border-[#efefef] flex flex-col justify-center items-center">
+              <Swiper
+                spaceBetween={0}
+                centeredSlides={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: false,
+                }}
+                navigation={false}
+                modules={[Autoplay, Pagination, Navigation]}
+                onAutoplayTimeLeft={onAutoplayTimeLeft}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  <img src={sertifikat1} alt="Sertifikat 1" />
+                </SwiperSlide>
+              </Swiper>
+              <div className="autoplay-progress" slot="container-end">
+                <svg viewBox="0 0 48 48" ref={progressCircle}>
+                  <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span ref={progressContent}></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <Footer />
     </div>
