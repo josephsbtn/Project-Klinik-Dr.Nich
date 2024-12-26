@@ -75,6 +75,34 @@ const getLayananById = asyncHandler(async (req, res) => {
   }
 });
 
+const getJenisLayananById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const jenisLayanan = await JenisLayanan.findById(id);
+    res.send(jenisLayanan);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const updateJenisLayanan = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const newData = {
+    nama: req.body.nama,
+    foto: req.body.foto,
+  };
+  try {
+    const jenisLayanan = await JenisLayanan.findByIdAndUpdate(
+      id,
+      { $set: newData },
+      { new: true }
+    );
+    res.send(jenisLayanan);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 const updateLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
@@ -101,7 +129,8 @@ const updateLayanan = asyncHandler(async (req, res) => {
 const deleteLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const layanan = await layananModels.findByIdAndDelete(id);
+    const deleteJenis = await layananModels.findByIdAndDelete(id)
+    const deleteLayanan = await JenisLayanan.findByIdAndDelete(deleteJenis.idJenis);
     res.send(layanan);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -114,7 +143,9 @@ export {
   newLayanan,
   getLayanan,
   getLayananById,
+  getJenisLayananById,
   updateLayanan,
+  updateJenisLayanan,
   deleteLayanan,
   deleteJenisLayanan,
 };

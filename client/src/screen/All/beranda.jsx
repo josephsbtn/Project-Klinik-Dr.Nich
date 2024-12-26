@@ -1,8 +1,8 @@
-import React, { useState,useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Carousel } from "@material-tailwind/react";
 import { useSwipeable } from "react-swipeable";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 
 // COMPONENTS
@@ -27,15 +27,15 @@ import pori from "../../assets/img-about/pori.svg";
 import air from "../../assets/img-about/air.svg";
 
 //  IMAGE & ICONS SERTIFKAT
-import sertifikat1 from "../../assets/img-about/sertifikat1.png"
+import sertifikat1 from "../../assets/img-about/sertifikat1.png";
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // Carousel Navigation Component
 function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
@@ -44,10 +44,11 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
-            ? "w-[19px] h-2.5 bg-[#c2a353]"
-            : "w-2.5 h-2.5 bg-[#dcdcdc]"
-            }`}
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+            activeIndex === i
+              ? "w-[19px] h-2.5 bg-[#c2a353]"
+              : "w-2.5 h-2.5 bg-[#dcdcdc]"
+          }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
@@ -55,9 +56,7 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
   );
 }
 
-// MAIN COMPONENT
 export default function Beranda() {
-  // layanan bero
   const [jenisLayanan, setJenisLayanan] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -67,7 +66,6 @@ export default function Beranda() {
     try {
       setLoading(true);
       const response = await axios.get("/api/layanan/getAllJenisLayanan");
-      console.log("API response:", response.data);
       const sortedJenisLayanan = response.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );
@@ -79,10 +77,9 @@ export default function Beranda() {
       localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
 
       setJenisLayanan(sortedJenisLayanan);
-      setLoading(false);
     } catch (error) {
-      console.error("Error fetching data:", error);
       setError("Failed to fetch jenis layanan. Please try again later.");
+    } finally {
       setLoading(false);
     }
   };
@@ -90,24 +87,20 @@ export default function Beranda() {
   useEffect(() => {
     const cachedData = localStorage.getItem("jenisLayanan");
 
-    if (!cachedData) {
+    if (cachedData) {
       const parsedData = JSON.parse(cachedData);
       const currentTime = new Date().getTime();
 
       if (currentTime - parsedData.timestamp < 3600000) {
-        console.log("Using cached data...");
         setJenisLayanan(parsedData.data);
       } else {
-        console.log("Cache expired. Fetching new data...");
         fetchData();
       }
     } else {
-      console.log("Fetching data...");
       fetchData();
     }
   }, []);
 
-  // Data for About Cards
   const aboutCards = [
     {
       bg: bgAbout,
@@ -134,15 +127,12 @@ export default function Beranda() {
     },
   ];
 
-  const nextSlide = () => {
+  const nextSlide = () =>
     setActiveIndex((prevIndex) => (prevIndex + 1) % aboutCards.length);
-  };
-
-  const prevSlide = () => {
+  const prevSlide = () =>
     setActiveIndex(
       (prevIndex) => (prevIndex - 1 + aboutCards.length) % aboutCards.length
     );
-  };
 
   const handlers = useSwipeable({
     onSwipedLeft: nextSlide,
@@ -152,13 +142,18 @@ export default function Beranda() {
     trackTouch: true,
   });
 
-  // SWIPER LAGI SWIPER LAGI
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
+
   const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+    if (progressCircle.current) {
+      progressCircle.current.style.setProperty("--progress", 1 - progress);
+    }
+    if (progressContent.current) {
+      progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+    }
   };
+
   return (
     <div>
       <Navbar />
@@ -202,10 +197,11 @@ export default function Beranda() {
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
-                  ? "w-[19px] h-2.5 bg-[#c2a353]"
-                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                  }`}
+                className={` rounded-full transition-all duration-300 cursor-pointer ${
+                  activeIndex === index
+                    ? "w-[19px] h-2.5 bg-[#c2a353]"
+                    : "w-2.5 h-2.5 bg-[#dcdcdc]"
+                }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
@@ -213,40 +209,42 @@ export default function Beranda() {
         </div>
 
         {/* SERTIF JOJO*/}
-         {/* Why Dr.Nich Section */}
-      <section className="flex flex-col my-8 w-full items-center">
-        <main className="w-[90%]">
-          <h1>Mengapa memilih Dr.Nich ?</h1>
-        </main>
-      </section>
+        {/* Why Dr.Nich Section */}
+        <section className="flex flex-col my-8 w-full items-center">
+          <main className="w-[90%]">
+            <h1>Mengapa memilih Dr.Nich ?</h1>
+          </main>
+        </section>
 
-      {/* Jenis Layanan Section */}
-      <section className="flex flex-col my-8 w-full items-center">
-        <main className="w-[90%] flex flex-col items-center">
-          <div className="flex w-full justify-between items-center">
-            <h1 className="font-SFPro font-medium text-base">Layanan</h1>
-            <button className="font-SFPro text-xs text-secondary font-medium">
-              Lihat semua
-            </button>
-          </div>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <div className="grid w-fit grid-cols-2 gap-4 items-center justify-center xl:grid-cols-5 sm:grid-cols-2 mt-4">
-              {jenisLayanan && jenisLayanan.length > 0 ? (
-                jenisLayanan.slice(0, 12).map((item) => (
-                  <div key={item._id}>
-                    <CardJenisLayanan item={item} />
-                  </div>
-                ))
-              ) : (
-                <p className="text-center col-span-2">No data available</p>
-              )}
-              {loading && <p className="text-center col-span-2">Loading...</p>}
+        {/* Jenis Layanan Section */}
+        <section className="flex flex-col my-8 w-full items-center">
+          <main className="w-[90%] flex flex-col items-center">
+            <div className="flex w-full justify-between items-center">
+              <h1 className="font-SFPro font-medium text-base">Layanan</h1>
+              <button className="font-SFPro text-xs text-secondary font-medium">
+                Lihat semua
+              </button>
             </div>
-          )}
-        </main>
-      </section>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <div className="grid w-fit grid-cols-2 gap-4 items-center justify-center xl:grid-cols-5 sm:grid-cols-2 mt-4">
+                {jenisLayanan && jenisLayanan.length > 0 ? (
+                  jenisLayanan.slice(0, 12).map((item) => (
+                    <div key={item._id}>
+                      <CardJenisLayanan item={item} />
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-center col-span-2">No data available</p>
+                )}
+                {loading && (
+                  <p className="text-center col-span-2">Loading...</p>
+                )}
+              </div>
+            )}
+          </main>
+        </section>
 
         {/* SERTIFIKASI */}
         <div className="flex flex-col pt-[73px]">
@@ -269,8 +267,7 @@ export default function Beranda() {
                 navigation={false}
                 modules={[Autoplay, Pagination, Navigation]}
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
-                className="mySwiper"
-              >
+                className="mySwiper">
                 <SwiperSlide>
                   <img src={sertifikat1} alt="Sertifikat 1" />
                 </SwiperSlide>
@@ -284,7 +281,6 @@ export default function Beranda() {
             </div>
           </div>
         </div>
-
       </div>
       <Footer />
     </div>
