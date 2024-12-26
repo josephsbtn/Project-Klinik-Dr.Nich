@@ -3,7 +3,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowRight from "../icon/ArrowRight.jsx";
-import "./extend.css"; // Ensure this import
 
 function CardLayanan({ item }) {
   const navigate = useNavigate();

@@ -34,37 +34,6 @@ const deleteJenisLayanan = asyncHandler(async (req, res) => {
   }
 });
 
-const newLayanan = asyncHandler(async (req, res) => {
-  const newLayanan = {
-    nama: req.body.nama,
-    durasi: req.body.durasi,
-    harga: req.body.harga,
-    deskripsi: req.body.deskripsi,
-    image: req.body.image,
-    cardDeskripsi: req.body.cardDeskripsi,
-    idJenis: req.body.idJenis,
-  };
-  try {
-    const isExist = await layananModels.findOne({ nama: newLayanan.nama });
-    if (isExist) {
-      throw new Error("Layanan Sudah Ada");
-    }
-    const layanan = await layananModels.create(newLayanan);
-    res.send(layanan);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-const getLayanan = asyncHandler(async (req, res) => {
-  try {
-    const layanan = await layananModels.find();
-    res.send(layanan);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
 const getLayananById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
@@ -103,6 +72,37 @@ const updateJenisLayanan = asyncHandler(async (req, res) => {
   }
 });
 
+const newLayanan = asyncHandler(async (req, res) => {
+  const newLayanan = {
+    nama: req.body.nama,
+    durasi: req.body.durasi,
+    harga: req.body.harga,
+    deskripsi: req.body.deskripsi,
+    image: req.body.image,
+    cardDeskripsi: req.body.cardDeskripsi,
+    idJenis: req.body.idJenis,
+  };
+  try {
+    const isExist = await layananModels.findOne({ nama: newLayanan.nama });
+    if (isExist) {
+      throw new Error("Layanan Sudah Ada");
+    }
+    const layanan = await layananModels.create(newLayanan);
+    res.send(layanan);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const getLayanan = asyncHandler(async (req, res) => {
+  try {
+    const layanan = await layananModels.find();
+    res.send(layanan);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 const updateLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
@@ -129,8 +129,23 @@ const updateLayanan = asyncHandler(async (req, res) => {
 const deleteLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const deleteJenis = await layananModels.findByIdAndDelete(id)
-    const deleteLayanan = await JenisLayanan.findByIdAndDelete(deleteJenis.idJenis);
+    const deleteJenis = await layananModels.findByIdAndDelete(id);
+    const deleteLayanan = await JenisLayanan.findByIdAndDelete(
+      deleteJenis.idJenis
+    );
+    res.send(layanan);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const getLayananByJenisLayanan = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const layanan = await layananModels.find({ idJenis: id });
+    if (!layanan) {
+      throw new Error("Layanan Tidak Ditemukan");
+    }
     res.send(layanan);
   } catch (error) {
     res.status(400).json({ message: error.message });

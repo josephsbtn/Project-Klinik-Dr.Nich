@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Logo & images
 import logo from "../../assets/logodrnich.svg";
@@ -25,11 +26,12 @@ import ig from "../../assets/Instagram.png";
 // logo search
 import searchWhite from "../../assets/search-normal-white.svg";
 
-export default function Navbar() {
+export default function Navbar({ selected }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navRef = useRef(null);
   const searchRef = useRef(null);
+  const navigate = useNavigate();
 
   // Close nav menu when clicking outside
   useEffect(() => {
@@ -48,6 +50,10 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const handleNavigation = (path, text) => {
+    navigate(path);
+    setIsNavOpen(false);
+  };
 
   return (
     <div className="w-full h-[70px] shadow-sm bg-white flex items-center relative">
@@ -57,8 +63,7 @@ export default function Navbar() {
           <button
             aria-label={isNavOpen ? "Close menu" : "Open menu"}
             className="focus:outline-none"
-            onClick={() => setIsNavOpen((prev) => !prev)}
-          >
+            onClick={() => setIsNavOpen((prev) => !prev)}>
             <img src={hamburger} alt="Menu Icon" />
           </button>
         </div>
@@ -76,8 +81,7 @@ export default function Navbar() {
         {isNavOpen && (
           <div
             ref={navRef}
-            className="bg-[#c2a353] w-[253px] h-full fixed top-0 left-0 z-50"
-          >
+            className="bg-[#c2a353] w-[253px] h-full fixed top-0 left-0 z-50">
             <img
               src={bgHamburger}
               className="absolute bottom-0 w-full h-auto object-cover"
@@ -91,47 +95,63 @@ export default function Navbar() {
               {/* Menu Links */}
               <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight">
                 {[
-                  "Beranda",
-                  "Profil",
-                  "Konsultasi",
-                  "Produk",
-                  "Layanan",
-                  "Reservasi",
-                  "Promo",
-                  "Galeri",
-                ].map((text, index) => (
-                  <div key={index} className="flex items-center justify-between w-full">
-                    <a href="javascript:void(0)" className={index === 0 ? "text-[#00674f]" : "text-white"}>
-                      {text}
-                    </a>
-                    <img src={arrow} className="w-[15px] h-[15px]" alt="Arrow Icon" />
+                  { text: "Beranda", path: "/" },
+                  { text: "Profil", path: "/profil" },
+                  { text: "Konsultasi", path: "/konsultasi" },
+                  { text: "Produk", path: "/produk" },
+                  { text: "Layanan", path: "/layanan" },
+                  { text: "Reservasi", path: "/reservasi" },
+                  { text: "Promo", path: "/promo" },
+                  { text: "Galeri", path: "/galeri" },
+                ].map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between w-full cursor-pointer"
+                    onClick={() => handleNavigation(item.path, item.text)}>
+                    <span
+                      className={`font-SFPro font-medium text-sm ${
+                        selected === item.text ? "text-primary" : "text-white"
+                      }`}>
+                      {item.text}
+                    </span>
+                    <img
+                      src={arrow}
+                      className={`w-[15px] h-[15px] ${
+                        selected === item.text ? "hidden" : "opacity-100"
+                      }`}
+                      alt="Arrow Icon"
+                    />
                   </div>
                 ))}
               </div>
 
               {/* Contact Information */}
               <div className="flex flex-col pt-[40.41px]">
-                <h1 className="text-white text-base font-medium tracking-tight">Kontak Kami</h1>
+                <h1 className="text-white text-base font-medium tracking-tight">
+                  Kontak Kami
+                </h1>
                 <div className="flex flex-col w-[173px] space-y-4 pt-[26.59px]">
                   <div className="flex items-center space-x-2">
-                  <img
+                    <img
                       src={alamat}
                       className="w-[15px] h-[15px] relative -top-4"
                       alt="Location"
                     />
                     <a
                       href="javascript:void(0)"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight"
-                    >
+                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
                       Jl. Diponegoro No. 12, Salatiga, Jawa Tengah, 51552
                     </a>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <img src={kontak} className="w-[15px] h-[15px]" alt="Icon" />
+                    <img
+                      src={kontak}
+                      className="w-[15px] h-[15px]"
+                      alt="Icon"
+                    />
                     <a
                       href="#"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight"
-                    >
+                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
                       +6289632517280
                     </a>
                   </div>
@@ -139,8 +159,7 @@ export default function Navbar() {
                     <img src={email} className="w-[15px] h-[15px]" alt="Icon" />
                     <a
                       href="#"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight"
-                    >
+                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
                       drnich@email.com
                     </a>
                   </div>
@@ -148,8 +167,7 @@ export default function Navbar() {
                     <img src={clock} className="w-[15px] h-[15px]" alt="Icon" />
                     <a
                       href="#"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight"
-                    >
+                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
                       10.00 - 19.00
                     </a>
                   </div>
@@ -160,10 +178,17 @@ export default function Navbar() {
               <div className="flex flex-col items-center w-full pt-[40px]">
                 <div className="w-[126px] flex items-center space-x-4">
                   {[yt, linkedIn, tt, fb, ig].map((icon, index) => (
-                    <img key={index} src={icon} className="w-[15px] h-[15px]" alt="Social Icon" />
+                    <img
+                      key={index}
+                      src={icon}
+                      className="w-[15px] h-[15px]"
+                      alt="Social Icon"
+                    />
                   ))}
                 </div>
-                <p className="text-white text-xs mt-[19px]">©2024 | Dr. Nich Beauty Aesthetic</p>
+                <p className="text-white text-xs mt-[19px]">
+                  ©2024 | Dr. Nich Beauty Aesthetic
+                </p>
               </div>
             </div>
           </div>
@@ -182,8 +207,7 @@ export default function Navbar() {
         {isSearchOpen && (
           <div
             ref={searchRef}
-            className="bg-white w-full h-[90px] fixed top-0 left-0 z-50 flex items-center justify-center"
-          >
+            className="bg-white w-full h-[90px] fixed top-0 left-0 z-50 flex items-center justify-center">
             <div className="flex items-center border-b border-[#c2a353] w-[326px] h-[45px]">
               <img src={searchWhite} alt="Search Icon" className="px-[10px]" />
               <input
@@ -205,8 +229,7 @@ export default function Navbar() {
           <button
             aria-label="Search"
             className="focus:outline-none"
-            onClick={() => setIsSearchOpen((prev) => !prev)}
-          >
+            onClick={() => setIsSearchOpen((prev) => !prev)}>
             <img src={search} alt="Search Icon" />
           </button>
           <a href="javascript:void(0)" aria-label="Bag">

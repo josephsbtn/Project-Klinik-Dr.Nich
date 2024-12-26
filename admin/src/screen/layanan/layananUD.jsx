@@ -126,7 +126,7 @@ function LayananUD() {
       <main className="container h-screen flex flex-col items-center">
         <ConfirmPopUp open={open} onClose={() => setOpen(false)}>
           Apakah Anda yakin ingin menghapus layanan ini?
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-between bg-white mt-4">
             <button
               className="px-4 py-2 bg-gray-400 text-white rounded-md"
               onClick={() => setOpen(false)}>

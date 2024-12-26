@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./screen/auth/login";
 // Beranda
 import Beranda from "./screen/All/beranda.jsx";
-
+import ListLayanan from "./screen/Layanan/listLayanan.jsx";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         {/* <Route path="/" element={<Login />} /> */}
         <Route path="/" element={<Beranda />} />
         <Route path="/" element={<carouselAbout />} />
+        <Route path="/layanan" element={<ListLayanan />} />
       </Routes>
     </Router>
   );

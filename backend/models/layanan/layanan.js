@@ -27,7 +27,7 @@ const namaLayananSchema = mongoose.Schema(
     },
     idJenis: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "layanan",
+      ref: "jenisLayanan",
     },
   },
   {

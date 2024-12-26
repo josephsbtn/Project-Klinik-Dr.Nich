@@ -10,6 +10,10 @@ const layananSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    deskripsi: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

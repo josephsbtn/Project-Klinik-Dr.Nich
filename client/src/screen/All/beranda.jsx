@@ -78,7 +78,11 @@ export default function Beranda() {
 
       setJenisLayanan(sortedJenisLayanan);
     } catch (error) {
-      setError("Failed to fetch jenis layanan. Please try again later.");
+      setError(
+        "Failed to fetch jenis layanan. Please try again later (" +
+          error.message +
+          ")"
+      );
     } finally {
       setLoading(false);
     }
@@ -156,7 +160,7 @@ export default function Beranda() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar selected={"Beranda"} />
       {/* Carousel Component */}
       <Carousel
         className="pb-10"

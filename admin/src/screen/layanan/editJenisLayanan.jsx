@@ -101,12 +101,17 @@ function EditJenisLayanan() {
     <section className="container flex flex-col items-center">
       <Navbar />
       <ConfirmPopUp open={open} onClose={() => setOpen(false)}>
-        <p className="bg-red-400 w-36 text-center">
-          Semua data layanan yang terkait dengan jenis layanan ini akan ikut
-          terhapus. <br />
-          <br />
+        <p className=" w-96 text-center">
           Yakin ingin menghapus jenis layanan ini?
+          <br />
+          <br />
+          Semua data layanan yang terkait dengan jenis layanan ini akan ikut
+          terhapus.
         </p>
+
+        <div>
+          <button onClick={handleDelete}>DELETE</button>
+        </div>
       </ConfirmPopUp>
       {isLoading ? (
         <section className="h-screen w-full flex justify-center items-center">
