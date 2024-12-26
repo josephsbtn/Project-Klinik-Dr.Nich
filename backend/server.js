@@ -5,6 +5,7 @@ import cors from "cors";
 
 import layananRoutes from "./routes/admin/layananRoutes.js";
 import promoRoutes from "./routes/admin/promoRoutes.js";
+import produkRoutes from "./routes/admin/produkRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import dbConfig from "./config/db.js";
 

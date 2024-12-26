@@ -1,17 +1,23 @@
 import mongoose from "mongoose";
 
-const promoSchema = mongoose.Schema(
+const produkSchema = mongoose.Schema(
   {
     nama: {
       type: String,
       required: true,
     },
-    detail: {
+    deskripsi: {
       type: String,
     },
     foto: {
       type: String,
       required: true,
+    },
+    manfaat: {
+      type: String,
+    },
+    cara_pakai: {
+      type: String,
     },
   },
   {
@@ -19,4 +25,4 @@ const promoSchema = mongoose.Schema(
   }
 );
 
-export default mongoose.model("promo", promoSchema);
+export default mongoose.model("produk", produkSchema);
