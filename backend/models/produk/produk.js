@@ -19,6 +19,9 @@ const produkSchema = mongoose.Schema(
     cara_pakai: {
       type: String,
     },
+    harga: {
+      type: Number,
+    },
   },
   {
     timestamps: true,

@@ -7,6 +7,7 @@ import layananRoutes from "./routes/admin/layananRoutes.js";
 import promoRoutes from "./routes/admin/promoRoutes.js";
 import produkRoutes from "./routes/admin/produkRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import cartRoutes from "./routes/admin/cartRoutes.js";
 import dbConfig from "./config/db.js";
 
 const app = express();
@@ -20,6 +21,8 @@ app.use(express.urlencoded({ limit: "20mb", extended: true }));
 app.use("/api/layanan", layananRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/promo", promoRoutes);
+app.use("/api/produk", produkRoutes);
+app.use("/api/cart", cartRoutes);
 app.get("/", (req, res) => res.send("Server is ready"));
 app.use(notFound);
 app.use(errorHandler);
