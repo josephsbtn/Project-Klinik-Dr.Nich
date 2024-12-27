@@ -218,7 +218,39 @@ export default function Beranda() {
           <main className="w-[90%]">
             <h1>Mengapa memilih Dr.Nich ?</h1>
           </main>
+          {/* SERTIFIKASI */}
+        <div className="flex flex-col pt-[15px]">
+          <div className="flex justify-center items-center pt-[15px]">
+            <div className="w-[325px] h-[283px] bg-white rounded-[10px] border border-[#efefef] flex flex-col justify-center items-center">
+              <Swiper
+                spaceBetween={0}
+                centeredSlides={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: false,
+                }}
+                navigation={false}
+                modules={[Autoplay, Pagination, Navigation]}
+                onAutoplayTimeLeft={onAutoplayTimeLeft}
+                className="mySwiper">
+                <SwiperSlide>
+                  <img src={sertifikat1} alt="Sertifikat 1" />
+                </SwiperSlide>
+              </Swiper>
+              <div className="autoplay-progress" slot="container-end">
+                <svg viewBox="0 0 48 48" ref={progressCircle}>
+                  <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span ref={progressContent}></span>
+              </div>
+            </div>
+          </div>
+        </div>
         </section>
+        
 
         {/* Jenis Layanan Section */}
         <section className="flex flex-col my-8 w-full items-center">
@@ -249,42 +281,6 @@ export default function Beranda() {
             )}
           </main>
         </section>
-
-        {/* SERTIFIKASI */}
-        <div className="flex flex-col pt-[73px]">
-          <div className="w-[196px] mx-[20px] text-center text-[#464646] text-base font-medium font-['SF Pro Display'] leading-tight tracking-tight">
-            Mengapa memilih Dr. Nich?
-          </div>
-
-          <div className="flex justify-center items-center pt-[15px]">
-            <div className="w-[325px] h-[283px] bg-white rounded-[10px] border border-[#efefef] flex flex-col justify-center items-center">
-              <Swiper
-                spaceBetween={0}
-                centeredSlides={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                }}
-                pagination={{
-                  clickable: false,
-                }}
-                navigation={false}
-                modules={[Autoplay, Pagination, Navigation]}
-                onAutoplayTimeLeft={onAutoplayTimeLeft}
-                className="mySwiper">
-                <SwiperSlide>
-                  <img src={sertifikat1} alt="Sertifikat 1" />
-                </SwiperSlide>
-              </Swiper>
-              <div className="autoplay-progress" slot="container-end">
-                <svg viewBox="0 0 48 48" ref={progressCircle}>
-                  <circle cx="24" cy="24" r="20"></circle>
-                </svg>
-                <span ref={progressContent}></span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <Footer />
     </div>

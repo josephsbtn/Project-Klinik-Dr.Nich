@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from "react";
 
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
@@ -9,7 +9,37 @@ import bgVM from "../../assets/img-profil/bgVisiMisi.png"
 import bunga from "../../assets/img-profil/bungaIcon.svg"
 import misiIcon from "../../assets/img-profil/misiIcon.svg"
 
+//  IMAGE & ICONS SERTIFKAT
+import sertifikat1 from "../../assets/img-about/sertifikat1.png";
+
+import { useSwipeable } from "react-swipeable";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import axios from "axios";
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+
 function profile() {
+
+    const progressCircle = useRef(null);
+    const progressContent = useRef(null);
+
+    const onAutoplayTimeLeft = (s, time, progress) => {
+        if (progressCircle.current) {
+            progressCircle.current.style.setProperty("--progress", 1 - progress);
+        }
+        if (progressContent.current) {
+            progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+        }
+    };
+
     return (
         <>
             <Navbar />
@@ -46,6 +76,41 @@ function profile() {
                     </div>
                 </div>
 
+                {/* SERTIFIKASI */}
+                <div className="flex flex-col pt-[73px]">
+                    <div className="w-[196px] mx-[20px] text-center text-[#464646] text-base font-medium font-['SF Pro Display'] leading-tight tracking-tight">
+                        Mengapa memilih Dr. Nich?
+                    </div>
+
+                    <div className="flex justify-center items-center pt-[15px]">
+                        <div className="w-[325px] h-[283px] bg-white rounded-[10px] border border-[#efefef] flex flex-col justify-center items-center">
+                            <Swiper
+                                spaceBetween={0}
+                                centeredSlides={true}
+                                autoplay={{
+                                    delay: 2500,
+                                    disableOnInteraction: false,
+                                }}
+                                pagination={{
+                                    clickable: false,
+                                }}
+                                navigation={false}
+                                modules={[Autoplay, Pagination, Navigation]}
+                                onAutoplayTimeLeft={onAutoplayTimeLeft}
+                                className="mySwiper">
+                                <SwiperSlide>
+                                    <img src={sertifikat1} alt="Sertifikat 1" />
+                                </SwiperSlide>
+                            </Swiper>
+                            <div className="autoplay-progress" slot="container-end">
+                                <svg viewBox="0 0 48 48" ref={progressCircle}>
+                                    <circle cx="24" cy="24" r="20"></circle>
+                                </svg>
+                                <span ref={progressContent}></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
