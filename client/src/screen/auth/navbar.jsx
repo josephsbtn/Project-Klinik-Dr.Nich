@@ -96,7 +96,7 @@ export default function Navbar({ selected }) {
               <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight">
                 {[
                   { text: "Beranda", path: "/" },
-                  { text: "Profil", path: "/profil" },
+                  { text: "Profile", path: "/profil" },
                   { text: "Konsultasi", path: "/konsultasi" },
                   { text: "Produk", path: "/produk" },
                   { text: "Layanan", path: "/layanan" },

@@ -9,7 +9,7 @@ function CardLayanan({ item }) {
   return (
     <div
       className="w-[184px] h-[274px] lg:w-[355px] lg:h-[276px]  flex flex-col justify-start cursor-pointer items-center border border-disable-line rounded-lg p-3 shadow-sm bg-white"
-      onClick={() => navigate(`/layanan/updateLayanan/${item._id}`)}>
+      onClick={() => navigate(`/layanan/detailTreatment/${item._id}`)}>
       <img
         src={item.image}
         alt={item.nama}

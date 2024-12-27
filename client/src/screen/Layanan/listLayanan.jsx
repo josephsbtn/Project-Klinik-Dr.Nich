@@ -41,11 +41,11 @@ function ListLayanan() {
         <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
           <a
             onClick={() => navigate("/")}
-            className="cursor-pointer text-xs text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
             Beranda
           </a>
           <ArrowRightDisable />
-          <a className="cursor-pointer text-xs text-disable-text font-normal">
+          <a className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
             Layanan
           </a>
         </div>

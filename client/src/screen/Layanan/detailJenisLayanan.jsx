@@ -8,7 +8,7 @@ import SecondCardLayanan from "../../components/SecondCardLayanan";
 import LayananPopuler from "../../components/layananPopuler";
 function DetailJenisLayanan() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { idJenis } = useParams();
 
   const [listLayanan, setListLayanan] = useState();
   const [judul, setJudul] = useState("");
@@ -21,10 +21,10 @@ function DetailJenisLayanan() {
     try {
       setLoading(true);
       const resJenis = (
-        await axios.get(`/api/layanan/getJenisLayananById/${id}`)
+        await axios.get(`/api/layanan/getJenisLayananById/${idJenis}`)
       ).data;
       const resList = (
-        await axios.get(`/api/layanan/getLayananByJenisLayanan/${id}`)
+        await axios.get(`/api/layanan/getLayananByJenisLayanan/${idJenis}`)
       ).data;
       setListLayanan(resList);
       setJudul(resJenis.nama);
@@ -45,22 +45,22 @@ function DetailJenisLayanan() {
         <div className="fixed w-full">
           <Navbar selected={"Layanan"} />
         </div>
-        <div className="flex items-center w-[90%]  justify-start space-x-2 mt-4 pt-20 ">
+        <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
           <a
             onClick={() => navigate("/")}
-            className="cursor-pointer text-xs text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
             Beranda
           </a>
           <ArrowRightDisable />
           <a
             onClick={() => navigate("/layanan")}
-            className="cursor-pointer text-xs text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
             Layanan
           </a>
           <ArrowRightDisable />
           <a
             onClick={() => navigate("/layanan")}
-            className="cursor-pointer text-xs text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
             Treatment
           </a>
         </div>
@@ -73,21 +73,26 @@ function DetailJenisLayanan() {
             <h1>{error}</h1>
           </>
         ) : (
-          <main className="w-[90%] flex flex-col mt-6 space-y-3">
-            <h1 className="text-base font-medium font-SFPro text-secondary leading-5">
+          <main className="w-[90%] lg:w-[80%] flex flex-col mt-6 space-y-3">
+            <h1 className="text-base font-medium font-SFPro text-secondary lg:text-2xl leading-5">
               {judul}
             </h1>
-            <p className="max-w-full text-start font-SFPro text-text text-xs">
+            <p className="max-w-full text-start font-SFPro text-text text-xs lg:text-base">
               {deskripsi}
             </p>
 
-            <h1 className="font-SFPro font-medium pt-4 text-text text-sm">
+            <h1 className="font-SFPro font-medium pt-4 lg:text-xl text-text text-sm">
               Daftar Treatment
             </h1>
 
             <div className="flex flex-col items-center space-y-3 w-full">
               {listLayanan?.map((item) => (
-                <div key={item._id} className="">
+                <div
+                  key={item._id}
+                  className=""
+                  onClick={() =>
+                    navigate(`/layanan/detail/${idJenis}/${item._id}`)
+                  }>
                   <SecondCardLayanan item={item} />
                 </div>
               ))}

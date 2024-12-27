@@ -30,7 +30,7 @@ function LayananPopuler() {
           <h1 className="font-SFPro lg:text-xl text-start text-text font-medium text-base">
             Layanan Populer
           </h1>
-          <h1 className="font-SFPro lg:text-xl text-start text-secondary font-normal text-sm">
+          <h1 className="font-SFPro lg:text-base text-start text-secondary font-normal text-sm">
             lihat semua
           </h1>
         </div>

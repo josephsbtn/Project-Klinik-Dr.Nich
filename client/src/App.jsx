@@ -7,6 +7,7 @@ import Beranda from "./screen/All/beranda.jsx";
 //layanan
 import ListLayanan from "./screen/Layanan/listLayanan.jsx";
 import DetailJenisLayanan from "./screen/Layanan/detailJenisLayanan.jsx";
+import DetailTreatment from "./screen/Layanan/DetailTreatment.jsx";
 // profil
 import Profil from "./screen/All/profile.jsx";
 // galeri
@@ -20,10 +21,17 @@ function App() {
         <Route path="/" element={<Beranda />} />
         <Route path="/" element={<carouselAbout />} />
         <Route path="/layanan" element={<ListLayanan />} />
-        <Route path="/layanan/detail/:id" element={<DetailJenisLayanan />} />
         <Route
-          path="/layanan/detailTreatment/:id"
+          path="/layanan/detail/:idJenis"
           element={<DetailJenisLayanan />}
+        />
+        <Route
+          path="/layanan/detail/:idJenis/:idTreatment"
+          element={<DetailTreatment />}
+        />
+        <Route
+          path="/layanan/detail/:idTreatment"
+          element={<DetailTreatment />}
         />
         <Route path="profil" element={<Profil />} />
         <Route path="galeri" element={<Galeri />} />
