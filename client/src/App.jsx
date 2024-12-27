@@ -6,10 +6,11 @@ import Login from "./screen/auth/login";
 import Beranda from "./screen/All/beranda.jsx";
 //layanan
 import ListLayanan from "./screen/Layanan/listLayanan.jsx";
+import DetailJenisLayanan from "./screen/Layanan/detailJenisLayanan.jsx";
 // profil
-import Profil from "./screen/All/profile.jsx"
+import Profil from "./screen/All/profile.jsx";
 // galeri
-import Galeri from "./screen/All/galeri.jsx"
+import Galeri from "./screen/All/galeri.jsx";
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
         <Route path="/" element={<Beranda />} />
         <Route path="/" element={<carouselAbout />} />
         <Route path="/layanan" element={<ListLayanan />} />
+        <Route path="/layanan/detail/:id" element={<DetailJenisLayanan />} />
+        <Route
+          path="/layanan/detailTreatment/:id"
+          element={<DetailJenisLayanan />}
+        />
         <Route path="profil" element={<Profil />} />
         <Route path="galeri" element={<Galeri />} />
       </Routes>

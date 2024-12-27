@@ -13,6 +13,7 @@ function EditJenisLayanan() {
 
   const [nama, setNama] = useState("");
   const [image, setImage] = useState("");
+  const [deskripsi, setDeskripsi] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -26,6 +27,7 @@ function EditJenisLayanan() {
         );
         setNama(response.data.nama);
         setImage(response.data.foto);
+        setDeskripsi(response.data.deskripsi);
       } catch (error) {
         setError(error.response?.data?.message || "An error occurred");
       } finally {
@@ -53,6 +55,7 @@ function EditJenisLayanan() {
     const Djenis = {
       nama: nama,
       foto: image,
+      deskripsi: deskripsi,
     };
 
     try {
@@ -158,6 +161,12 @@ function EditJenisLayanan() {
                     value={nama}
                     onChange={(e) => setNama(e.target.value)}
                     placeholder="Nama Jenis Layanan"
+                    className="px-4 py-2 border rounded-md"
+                  />
+                  <textarea
+                    value={deskripsi}
+                    onChange={(e) => setDeskripsi(e.target.value)}
+                    placeholder="Deskripsi"
                     className="px-4 py-2 border rounded-md"
                   />
                   <div className="flex space-x-4">

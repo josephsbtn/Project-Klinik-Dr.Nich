@@ -8,6 +8,7 @@ function CreateLayanan() {
   const [durasi, setDurasi] = useState("");
   const [harga, setHarga] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
+  const [cardDeskripsi, setCardDeskripsi] = useState("");
   const [idJenis, setIdJenis] = useState("");
   const [image, setImage] = useState(null);
 
@@ -39,11 +40,15 @@ function CreateLayanan() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous errors
-    setSuccessMessage(""); // Clear any previous success messages
+    setError(""); // Clear previous errors
+    setSuccessMessage(""); // Clear success messages
 
     if (!image) {
       setError("Please upload an image.");
+      return;
+    }
+    if (!idJenis) {
+      setError("Please select a Jenis Layanan.");
       return;
     }
 
@@ -53,12 +58,12 @@ function CreateLayanan() {
         durasi,
         harga,
         deskripsi,
-        idJenis,
         image,
+        cardDeskripsi,
+        idJenis,
       });
 
       console.log(data);
-
       setSuccessMessage("Layanan successfully created!");
       // Reset form
       setNama("");
@@ -69,7 +74,11 @@ function CreateLayanan() {
       setImage(null);
     } catch (err) {
       console.error("Error creating layanan:", err);
-      setError("Failed to create layanan. Please try again.");
+      setError(
+        "Failed to create layanan (" +
+          (err.response?.data.message || "Unknown error") +
+          "). Please try again later."
+      );
     }
   };
 
@@ -106,7 +115,7 @@ function CreateLayanan() {
     <>
       <main className="container h-screen flex flex-col items-center">
         <Navbar />
-        <section className="w-full">
+        <section className="w-full lg:pt-14">
           <div
             className="h-screen w-full p-10 flex items-center justify-center"
             onClick={() => setOpen(false)}>
@@ -178,13 +187,11 @@ function CreateLayanan() {
                       <select
                         className="w-full p-2 border font-montserrat rounded-md"
                         value={idJenis}
-                        onChange={(e) => setIdJenis(e.target.value)}>
+                        onChange={(e) => setIdJenis(e.target.value)}
+                        required>
                         <option value="">Pilih Jenis Layanan</option>
-                        {(jenisLayanan || []).map((jenis) => (
-                          <option
-                            className="font-montserrat text-sm"
-                            value={jenis._id}
-                            key={jenis._id}>
+                        {jenisLayanan.map((jenis) => (
+                          <option key={jenis._id} value={jenis._id}>
                             {jenis.nama}
                           </option>
                         ))}
@@ -215,18 +222,34 @@ function CreateLayanan() {
                       />
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-gray-700 font-montserrat mb-1">
-                      Product Description
-                    </label>
-                    <textarea
-                      className="w-full p-2 border rounded-md font-montserrat"
-                      value={deskripsi}
-                      onChange={(e) => setDeskripsi(e.target.value)}
-                      placeholder="Enter product description"
-                      rows="4"
-                    />
+
+                  <div className="flex items-center justify-around w-full  space-x-2">
+                    <div className="w-3/5">
+                      <label className="block text-gray-700 font-montserrat mb-1">
+                        Product Description
+                      </label>
+                      <textarea
+                        className="w-full p-2 border rounded-md font-montserrat"
+                        value={deskripsi}
+                        onChange={(e) => setDeskripsi(e.target.value)}
+                        placeholder="Enter product description"
+                        rows="4"
+                      />
+                    </div>
+                    <div className="w-2/5">
+                      <label className="block text-gray-700 font-montserrat mb-1">
+                        Card Description
+                      </label>
+                      <textarea
+                        className="w-full p-2 border rounded-md font-montserrat"
+                        value={cardDeskripsi}
+                        onChange={(e) => setCardDeskripsi(e.target.value)}
+                        placeholder="Enter product description"
+                        rows="4"
+                      />
+                    </div>
                   </div>
+
                   <button
                     type="submit"
                     className="bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium">

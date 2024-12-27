@@ -3,13 +3,13 @@ import JenisLayanan from "../../models/layanan/jenisLayanan.js";
 import layananModels from "../../models/layanan/layanan.js";
 
 const newJenisLayanan = asyncHandler(async (req, res) => {
-  const { nama, foto } = req.body; // Destructure the request body
+  const { nama, foto, deskripsi } = req.body; // Destructure the request body
   try {
     const isExist = await JenisLayanan.findOne({ nama });
     if (isExist) {
       throw new Error("Jenis Layanan Sudah Ada");
     }
-    const jenisLayanan = await JenisLayanan.create({ nama, foto });
+    const jenisLayanan = await JenisLayanan.create({ nama, foto, deskripsi });
     res.send(jenisLayanan);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -59,6 +59,7 @@ const updateJenisLayanan = asyncHandler(async (req, res) => {
   const newData = {
     nama: req.body.nama,
     foto: req.body.foto,
+    deskripsi: req.body.deskripsi,
   };
   try {
     const jenisLayanan = await JenisLayanan.findByIdAndUpdate(
@@ -159,6 +160,7 @@ export {
   getLayanan,
   getLayananById,
   getJenisLayananById,
+  getLayananByJenisLayanan,
   updateLayanan,
   updateJenisLayanan,
   deleteLayanan,

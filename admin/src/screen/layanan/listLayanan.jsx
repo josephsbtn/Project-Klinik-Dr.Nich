@@ -15,12 +15,14 @@ function ListLayanan() {
   const [error, setError] = useState("");
   const [jenis, setJenis] = useState("");
   const [image, setImage] = useState(null);
+  const [deskripsi, setDeskripsi] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
   const fetchData = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get("/api/layanan/getAllLayanan");
       const jenisLayanan = await axios.get("/api/layanan/getAllJenisLayanan");
       console.log("Fetched data before sorting:", jenisLayanan.data);
@@ -48,6 +50,7 @@ function ListLayanan() {
     const Djenis = {
       nama: jenis,
       foto: image,
+      deskripsi: deskripsi,
     };
     try {
       const res = (await axios.post("/api/layanan/tambahJenisLayanan", Djenis))
@@ -181,6 +184,18 @@ function ListLayanan() {
                 placeholder="Jenis Layanan"
                 className="w-full p-2 border rounded-md mt-4"
                 onChange={(e) => setJenis(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Jenis Layanan"
+                className="w-full p-2 border rounded-md mt-4"
+                onChange={(e) => setJenis(e.target.value)}
+              />
+              <textarea
+                type="text"
+                placeholder="Deskripsi"
+                className="w-full p-2 border rounded-md mt-4"
+                onChange={(e) => setDeskripsi(e.target.value)}
               />
               <button
                 type="submit"

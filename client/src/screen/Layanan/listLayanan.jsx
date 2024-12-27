@@ -5,32 +5,40 @@ import ArrowRightDisable from "../../components/ArrowRight-Disable";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CardJenisLayanan from "../../components/cardJenisLayanan";
-
+import LayananPopuler from "../../components/layananPopuler";
 function ListLayanan() {
-  const [layanan, setLayanan] = useState();
+  const [jenisLayanan, setJenisLayanan] = useState();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const fetchLayanan = async () => {
     try {
-      const res = (await axios.get("/api/layanan/getAllJenisLayanan")).data;
-      setLayanan(res);
+      setLoading(true);
+      const resJenis = (await axios.get("/api/layanan/getAllJenisLayanan"))
+        .data;
+      setJenisLayanan(resJenis);
+      setLoading(false);
     } catch (error) {
-      setError(error);
+      setLoading(false);
+      setError(error.response?.data?.message || "An error occurred");
+      console.log(error.response?.data?.message || "An error occurred");
     }
   };
 
   useEffect(() => {
     fetchLayanan();
-  });
+  }, []);
 
   const navigate = useNavigate();
   return (
     <>
       <section className="flex flex-col items-center space-y-4">
-        <Navbar selected={"Layanan"} />
-        <div className="flex items-center w-[80%]  justify-start space-x-2 mt-4 ">
+        <div className="fixed w-full">
+          <Navbar selected={"Layanan"} />
+        </div>
+
+        <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
           <a
             onClick={() => navigate("/")}
             className="cursor-pointer text-xs text-disable-text font-normal">
@@ -41,24 +49,37 @@ function ListLayanan() {
             Layanan
           </a>
         </div>
-        <main className="w-[80%] flex flex-col items-center space-y-4">
-          <h1 className="font-SFPro w-full text-start text-secondary font-medium text-base">
-            Layanan
-          </h1>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-fit justify-center mt-4">
-            {layanan && layanan.length > 0 ? (
-              layanan.map((item) => (
-                <div
-                  key={item._id}
-                  onClick={() => navigate(`/layanan/${item._id}`)}>
-                  <CardJenisLayanan item={item} />
-                </div>
-              ))
-            ) : (
-              <p>No data available</p>
-            )}
+        {loading ? (
+          <div className="h- h-screen w-full flex justify-center items-center">
+            <p>Loading...</p>
           </div>
-        </main>
+        ) : error ? (
+          <div className="h-fit w-fit bg-white border border-disable-line ">
+            <h1 className="font-SFPro text-red-700 font-medium text-base w-full text-center">
+              Something Wrong
+            </h1>
+            <p className="text-text text-sm font-SFPro text-center">{error}</p>
+          </div>
+        ) : (
+          <main className="w-[90%] lg:w-4/5 flex flex-col items-center lg:items-start space-y-4">
+            <h1 className="font-SFPro w-full text-start lg:text-2xl text-secondary font-medium text-base">
+              Layanan
+            </h1>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-fit justify-center mt-4">
+              {jenisLayanan && jenisLayanan.length > 0 ? (
+                jenisLayanan.map((item) => (
+                  <div key={item._id}>
+                    <CardJenisLayanan item={item} />
+                  </div>
+                ))
+              ) : (
+                <p>No data available</p>
+              )}
+            </div>
+            <LayananPopuler />
+          </main>
+        )}
+        <Footer />
       </section>
     </>
   );

@@ -11,15 +11,16 @@ function LayananUD() {
   const [durasi, setDurasi] = useState("");
   const [harga, setHarga] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
+  const [cardDeskripsi, setCardDeskripsi] = useState("");
   const [idJenis, setIdJenis] = useState("");
   const [image, setImage] = useState(null);
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
-
+  const [successMessage, setSuccessMessage] = useState("");
   const [jenisLayanan, setJenisLayanan] = useState([]);
   const [open, setOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchJenisLayanan = async () => {
@@ -140,8 +141,10 @@ function LayananUD() {
           </div>
         </ConfirmPopUp>
         <Navbar />
-        <section className="w-full mt-20">
-          <div className="h-auto w-full p-10 flex items-center justify-center">
+        <section className="w-full lg:pt-14">
+          <div
+            className="h-screen w-full p-10 flex items-center justify-center"
+            onClick={() => setOpen(false)}>
             <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-10 w-full mt-10">
               <div className="w-full lg:w-1/4 p-5 border rounded-md shadow-md bg-white">
                 <h3 className="text-xl font-semibold mb-4 font-montserrat">
@@ -155,13 +158,13 @@ function LayananUD() {
                       className="w-full h-80 object-cover rounded-md border"
                     />
                   ) : (
-                    <div className="w-full h-48 bg-gray-200 rounded-md font-montserrat  flex items-center justify-center text-gray-600">
+                    <div className="w-full h-48 bg-gray-200 rounded-md font-montserrat flex items-center justify-center text-gray-600">
                       + Add Image
                     </div>
                   )}
                   <div className="flex space-x-4">
                     <button
-                      onClick={() => setImage("")}
+                      onClick={() => setImage(null)}
                       className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
                       Remove
                     </button>
@@ -183,8 +186,9 @@ function LayananUD() {
                   General Information
                 </h3>
                 {error && <p className="text-red-500">{error}</p>}
-                {success && <p className="text-green-500">{success}</p>}
-
+                {successMessage && (
+                  <p className="text-green-500">{successMessage}</p>
+                )}
                 <form
                   onSubmit={submitHandler}
                   className="flex flex-col space-y-4">
@@ -209,13 +213,11 @@ function LayananUD() {
                       <select
                         className="w-full p-2 border font-montserrat rounded-md"
                         value={idJenis}
-                        onChange={(e) => setIdJenis(e.target.value)}>
+                        onChange={(e) => setIdJenis(e.target.value)}
+                        required>
                         <option value="">Pilih Jenis Layanan</option>
                         {jenisLayanan.map((jenis) => (
-                          <option
-                            className="font-montserrat text-sm"
-                            value={jenis._id}
-                            key={jenis._id}>
+                          <option key={jenis._id} value={jenis._id}>
                             {jenis.nama}
                           </option>
                         ))}
@@ -246,30 +248,40 @@ function LayananUD() {
                       />
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-gray-700 font-montserrat mb-1">
-                      Product Description
-                    </label>
-                    <textarea
-                      className="w-full p-2 border rounded-md font-montserrat"
-                      value={deskripsi}
-                      onChange={(e) => setDeskripsi(e.target.value)}
-                      placeholder="Enter product description"
-                      rows="4"
-                    />
+
+                  <div className="flex items-center justify-around w-full  space-x-2">
+                    <div className="w-3/5">
+                      <label className="block text-gray-700 font-montserrat mb-1">
+                        Product Description
+                      </label>
+                      <textarea
+                        className="w-full p-2 border rounded-md font-montserrat"
+                        value={deskripsi}
+                        onChange={(e) => setDeskripsi(e.target.value)}
+                        placeholder="Enter product description"
+                        rows="4"
+                      />
+                    </div>
+                    <div className="w-2/5">
+                      <label className="block text-gray-700 font-montserrat mb-1">
+                        Card Description
+                      </label>
+                      <textarea
+                        className="w-full p-2 border rounded-md font-montserrat"
+                        value={cardDeskripsi}
+                        onChange={(e) => setCardDeskripsi(e.target.value)}
+                        placeholder="Enter product description"
+                        rows="4"
+                      />
+                    </div>
                   </div>
+
                   <button
                     type="submit"
-                    className="bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium"
-                    disabled={loading}>
-                    {loading ? "Updating..." : "Update Layanan"}
+                    className="bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium">
+                    Tambah Layanan
                   </button>
                 </form>
-                <button
-                  className="bg-red-600 w-full mt-4 text-white p-1 rounded-xl font-montserrat font-medium"
-                  onClick={() => setOpen(true)}>
-                  Delete Layanan
-                </button>
               </div>
             </div>
           </div>
