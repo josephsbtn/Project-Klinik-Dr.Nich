@@ -118,10 +118,10 @@ function profile() {
                                                         alt="Shoes" />
                                                 </figure>
                                                 <div className="card-body">
-                                                    <h2 className="card-title">Shoes!</h2>
-                                                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                                                    <div className="card-actions justify-end">
-                                                        <button className="">Rp 110.000</button>
+                                                    <h2 className="card-title w-[166px] text-[#464646] text-sm font-normal font-SFPro leading-tight tracking-tight">Facial Glow Acne</h2>
+                                                    <p className="w-[166px] text-[#bdbdbd] text-xs font-normal font-SFPro leading-[17px] tracking-tight">Untuk kulit berminyak dan rentang berjerawat</p>
+                                                    <div className="card-actions justify-start">
+                                                        <button className="text-[#c2a353] text-base font-bold font-SFPro leading-tight tracking-tight">Rp 110.000</button>
                                                     </div>
                                                 </div>
                                             </div>
