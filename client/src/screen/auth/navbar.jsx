@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 // Logo & images
 import logo from "../../assets/logodrnich.svg";
 import logo2 from "../../assets/logodrnich-white.svg";
-import bag from "../../assets/bag-2.svg";
+import bag from "../../assets/bag-2-md.svg";
+import bagLg from "../../assets/bag-2.svg";
 import search from "../../assets/search-normal.svg";
 import hamburger from "../../assets/hamburger.svg";
 import bgHamburger from "../../assets/bgHamburger.png";
@@ -57,7 +58,7 @@ export default function Navbar({ selected }) {
 
   return (
     <div className="w-full h-[70px] shadow-sm bg-white flex items-center relative">
-      <div className="container mx-auto flex items-center justify-between px-6">
+      <div className="container mx-auto flex items-center justify-between px-6 lg:[120px]">
         {/* Left Navigation */}
         <div className="flex items-center gap-4">
           <button
@@ -109,16 +110,14 @@ export default function Navbar({ selected }) {
                     className="flex items-center justify-between w-full cursor-pointer"
                     onClick={() => handleNavigation(item.path, item.text)}>
                     <span
-                      className={`font-SFPro font-medium text-sm ${
-                        selected === item.text ? "text-primary" : "text-white"
-                      }`}>
+                      className={`font-SFPro font-medium text-sm ${selected === item.text ? "text-primary" : "text-white"
+                        }`}>
                       {item.text}
                     </span>
                     <img
                       src={arrow}
-                      className={`w-[15px] h-[15px] ${
-                        selected === item.text ? "hidden" : "opacity-100"
-                      }`}
+                      className={`w-[15px] h-[15px] ${selected === item.text ? "hidden" : "opacity-100"
+                        }`}
                       alt="Arrow Icon"
                     />
                   </div>
@@ -199,7 +198,7 @@ export default function Navbar({ selected }) {
           <div
             onClick={() => setIsSearchOpen(false)}
             aria-hidden="true"
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-25 z-10"
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-25 z-10 lg:hidden"
           />
         )}
 
@@ -207,7 +206,8 @@ export default function Navbar({ selected }) {
         {isSearchOpen && (
           <div
             ref={searchRef}
-            className="bg-white w-full h-[90px] fixed top-0 left-0 z-50 flex items-center justify-center">
+            className={`bg-white w-full h-[90px] fixed top-0 left-0 z-50 flex items-center justify-center ${isSearchOpen ? "block" : "hidden"
+              } lg:flex`}>
             <div className="flex items-center border-b border-[#c2a353] w-[326px] h-[45px]">
               <img src={searchWhite} alt="Search Icon" className="px-[10px]" />
               <input
@@ -226,16 +226,38 @@ export default function Navbar({ selected }) {
 
         {/* Right Navigation */}
         <div className="flex items-center gap-4">
+          {/* Search Icon for Mobile */}
           <button
             aria-label="Search"
-            className="focus:outline-none"
+            className="focus:outline-none lg:hidden"
             onClick={() => setIsSearchOpen((prev) => !prev)}>
-            <img src={search} alt="Search Icon" />
+            <img src={search} alt="Search Icon" className="w-[20px] h-[20px]" />
           </button>
-          <a href="javascript:void(0)" aria-label="Bag">
-            <img src={bag} alt="Bag Icon" />
+
+          {/* Search Bar */}
+          <div
+            ref={searchRef}
+            className={`flex items-center border-b border-[#c2a353] ${isSearchOpen ? "block" : "hidden"
+              } lg:flex`}>
+            <img src={searchWhite} alt="Search Icon" className="w-[20px] h-[20px] mx-2" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full h-[38px] px-2 focus:outline-none"
+            />
+          </div>
+
+          {/* Bag Icon */}
+          <a href="javascript:void(0)" aria-label="Bag" className="flex items-center">
+            {/* Icon untuk Mobile */}
+            <img src={bag} alt="Bag Icon Mobile" className="w-[20px] h-[20px] lg:hidden" />
+
+            {/* Icon untuk Desktop */}
+            <img src={bagLg} alt="Bag Icon Desktop" className="w-[20px] h-[20px] hidden lg:block" />
           </a>
+
         </div>
+
       </div>
     </div>
   );

@@ -41,38 +41,38 @@ function profile() {
   return (
     <>
       <Navbar selected={"Profile"} />
-      <div className="mx-[25px] mt-[18px]">
-        <div className="flex-col">
+      <div className="mx-[25px] mt-[18px] lg:mx-[120px]">
+        <div className="flex-col lg:items-center lg:justify-center">
           <p className="text-[#bdbdbd] text-xs font-normal font-SFPro tracking-tight">
             Profil
           </p>
-          <img src={klinik} className="mt-[30px]" alt="" />
-          <p className="w-[326px] mt-[23.63px] text-xs font-normal font-SFPro leading-tight tracking-tight">
+          <img src={klinik} className="mt-[30px] lg:w-[1040px] lg:h-[718.97px] lg:mx-auto" alt="" />
+          <p className="w-[326px] mt-[23.63px] text-xs font-normal font-S FPro leading-tight tracking-tight lg:w-full lg:mx-auto lg:text-base">
             Dr. Nick Aesthetic Clinic merupakan klinik kecantikan yg didirikan
             pada tahun 2024. Dengan dedikasi penuh terhadap keunggulan dan
             inovasi, kami membawa teknologi terbaru dan metode perawatan yang
             terbukti efektif untuk membantu Anda mencapai hasil yang diinginkan.
           </p>
         </div>
-        <div className="w-full h-full flex flex-col mt-[30px]">
+        <div className="w-full h-full flex flex-col mt-[30px] lg:mx-auto lg:items-center lg:text-center lg:flex-row lg:mx-auto lg:items-center lg:justify-center">
           {/* Visi */}
-          <div className="w-[326px] h-[244px] flex justify-center items-center relative">
+          <div className="w-[326px] h-[244px] flex justify-center items-center relative lg:w-[504px] lg:h-[340px]">
             <img
               src={bgVM}
-              className="absolute rounded-[10px] z-0"
+              className="absolute rounded-[10px] lg:w-[504px] lg:h-[340px] z-0"
               alt="Background VM"
             />
             <div className="flex flex-col justify-center items-center z-10">
               <img
                 src={bunga}
-                className="w-[29.20px] h-[21.60px] bottom-[10px] relative"
+                className="w-[29.20px] h-[21.60px] bottom-[10px] relative lg:w-16 lg:h-16"
                 alt="Bunga"
               />
               <div className="w-[326px] flex flex-col justify-center items-center">
-                <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px]">
+                <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-base">
                   Visi Dr. Nich Beauty Aesthetic
                 </h1>
-                <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight">
+                <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
                   Visi kami adalah untuk memimpin industri estetika dengan
                   menjadi klinik terdepan yang dikenal karena inovasi, kualitas,
                   dan layanan pelanggan yang luar biasa. Kami berupaya untuk
@@ -84,23 +84,23 @@ function profile() {
           </div>
 
           {/* Misi */}
-          <div className="w-[326px] h-[244px] flex justify-center items-center relative">
+          <div className="w-[326px] h-[244px] flex justify-center items-center relative lg:w-[504px] lg:h-[340px]">
             <img
               src={bgVM}
-              className="absolute rounded-[10px] z-0"
+              className="absolute rounded-[10px] lg:w-[504px] lg:h-[340px] z-0"
               alt="Background VM"
             />
             <div className="flex flex-col justify-center items-center z-10">
               <img
                 src={misiIcon}
-                className="w-[55px] h-[55px] relative"
+                className="w-[55px] h-[55px] relative lg:w-16 lg:h-16"
                 alt="Bunga"
               />
               <div className="w-[326px] flex flex-col pb-5 justify-center items-center">
                 <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px]">
                   Misi Dr. Nich Beauty Aesthetic
                 </h1>
-                <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight">
+                <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
                   Misi kami adalah membantu setiap pasien mencapai kepercayaan
                   diri dan kecantikan alami mereka melalui perawatan yang
                   inovatif dan aman. Kami berkomitmen untuk menjadi klinik
