@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
@@ -9,30 +9,31 @@ import bgVM from "../../assets/img-profil/bgVisiMisi.png";
 import bunga from "../../assets/img-profil/bungaIcon.svg";
 import misiIcon from "../../assets/img-profil/misiIcon.svg";
 
-//  IMAGE & ICONS SERTIFKAT
+// IMAGE & ICONS SERTIFIKAT
 import sertifikat1 from "../../assets/img-about/sertifikat1.png";
 
-import { useSwipeable } from "react-swipeable";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import axios from "axios";
-
-// import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
 
-function profile() {
+function Profile() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
   const onAutoplayTimeLeft = (s, time, progress) => {
+    const radius = 20;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference * (1 - progress);
+
     if (progressCircle.current) {
-      progressCircle.current.style.setProperty("--progress", 1 - progress);
+      progressCircle.current.style.strokeDasharray = `${circumference}`;
+      progressCircle.current.style.strokeDashoffset = `${offset}`;
     }
+
     if (progressContent.current) {
       progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     }
@@ -46,111 +47,128 @@ function profile() {
           <p className="text-[#bdbdbd] text-xs font-normal font-SFPro tracking-tight">
             Profil
           </p>
-          <img src={klinik} className="mt-[30px] lg:w-[1040px] lg:h-[718.97px] lg:mx-auto" alt="" />
-          <p className="w-[326px] mt-[23.63px] text-xs font-normal font-S FPro leading-tight tracking-tight lg:w-full lg:mx-auto lg:text-base">
+          <img
+            src={klinik}
+            className="mt-[30px] lg:w-[1040px] lg:h-[719px] lg:mx-auto"
+            alt="Klinik"
+          />
+          <p className="w-[326px] mt-[24px] text-xs font-normal font-SFPro leading-tight tracking-tight lg:w-full lg:mx-auto lg:text-base">
             Dr. Nick Aesthetic Clinic merupakan klinik kecantikan yg didirikan
             pada tahun 2024. Dengan dedikasi penuh terhadap keunggulan dan
             inovasi, kami membawa teknologi terbaru dan metode perawatan yang
             terbukti efektif untuk membantu Anda mencapai hasil yang diinginkan.
           </p>
         </div>
-        <div className="w-full h-full flex flex-col mt-[30px] lg:mx-auto lg:items-center lg:text-center lg:flex-row lg:mx-auto lg:items-center lg:justify-center">
+
+        {/* Visi & Misi Section */}
+        <div className="w-full flex flex-col mt-[30px] lg:flex-row lg:justify-center lg:gap-8">
           {/* Visi */}
-          <div className="w-[326px] h-[244px] flex justify-center items-center relative lg:w-[504px] lg:h-[340px]">
+          <div className="relative w-full h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
             <img
               src={bgVM}
-              className="absolute rounded-[10px] lg:w-[504px] lg:h-[340px] z-0"
+              className="absolute w-full h-full rounded-[10px] z-0"
               alt="Background VM"
             />
             <div className="flex flex-col justify-center items-center z-10">
               <img
                 src={bunga}
-                className="w-[29.20px] h-[21.60px] bottom-[10px] relative lg:w-16 lg:h-16"
+                className="w-[30px] h-full -translate-y-3 lg:w-16 lg:h-16"
                 alt="Bunga"
               />
-              <div className="w-[326px] flex flex-col justify-center items-center">
-                <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-base">
-                  Visi Dr. Nich Beauty Aesthetic
-                </h1>
-                <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
-                  Visi kami adalah untuk memimpin industri estetika dengan
-                  menjadi klinik terdepan yang dikenal karena inovasi, kualitas,
-                  dan layanan pelanggan yang luar biasa. Kami berupaya untuk
-                  terus berkembang dan beradaptasi dengan kemajuan teknologi
-                  untuk memberikan perawatan terbaik bagi setiap pasien.
-                </p>
-              </div>
+              <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-lg">
+                Visi Dr. Nich Beauty Aesthetic
+              </h1>
+              <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
+                Visi kami adalah untuk memimpin industri estetika dengan menjadi klinik terdepan yang dikenal karena inovasi, kualitas, dan layanan pelanggan yang luar biasa. Kami berupaya untuk terus berkembang dan beradaptasi dengan kemajuan teknologi untuk memberikan perawatan terbaik bagi setiap pasien.
+              </p>
             </div>
           </div>
 
           {/* Misi */}
-          <div className="w-[326px] h-[244px] flex justify-center items-center relative lg:w-[504px] lg:h-[340px]">
+          <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
             <img
               src={bgVM}
-              className="absolute rounded-[10px] lg:w-[504px] lg:h-[340px] z-0"
+              className="absolute w-full h-full rounded-[10px] z-0"
               alt="Background VM"
             />
             <div className="flex flex-col justify-center items-center z-10">
               <img
                 src={misiIcon}
-                className="w-[55px] h-[55px] relative lg:w-16 lg:h-16"
-                alt="Bunga"
+                className="w-[30px] h-auto -translate-y-3 lg:w-16 lg:h-16"
+                alt="Misi Icon"
               />
-              <div className="w-[326px] flex flex-col pb-5 justify-center items-center">
-                <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px]">
-                  Misi Dr. Nich Beauty Aesthetic
-                </h1>
-                <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
-                  Misi kami adalah membantu setiap pasien mencapai kepercayaan
-                  diri dan kecantikan alami mereka melalui perawatan yang
-                  inovatif dan aman. Kami berkomitmen untuk menjadi klinik
-                  kecantikan pilihan utama dengan menyediakan layanan yang
-                  unggul dan hasil yang nyata.
-                </p>
-              </div>
+              <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-lg">
+                Misi Dr. Nich Beauty Aesthetic
+              </h1>
+              <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
+                Misi kami adalah membantu setiap pasien mencapai kepercayaan diri dan kecantikan alami mereka melalui perawatan yang inovatif dan aman. Kami berkomitmen untuk menjadi klinik kecantikan pilihan utama dengan menyediakan layanan yang unggul dan hasil yang nyata.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* SERTIFIKASI */}
-        <div className="flex flex-col pt-[73px]">
-          <div className="w-[196px] mx-[20px] text-center text-[#464646] text-base font-medium font-['SF Pro Display'] leading-tight tracking-tight">
+        {/* Sertifikasi Section */}
+        <div className="flex flex-col pt-10">
+          {/* Section Title */}
+          <div className="w-full mx-auto text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight">
             Mengapa memilih Dr. Nich?
           </div>
 
-          <div className="flex justify-center items-center pt-[15px]">
-            <div className="w-[325px] h-[283px] bg-white rounded-[10px] border border-[#efefef] flex flex-col justify-center items-center">
+          {/* Carousel Container */}
+          <div className="flex flex-col gap-[15px] justify-center items-center pt-4 pb-4">
+            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Berpengalaman dan Bersertifikat</h1>
               <Swiper
-                spaceBetween={0}
-                centeredSlides={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                }}
-                pagination={{
-                  clickable: false,
-                }}
-                navigation={false}
-                modules={[Autoplay, Pagination, Navigation]}
-                onAutoplayTimeLeft={onAutoplayTimeLeft}
-                className="mySwiper">
+                modules={[Autoplay]}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop={true}
+                spaceBetween={20}
+                slidesPerView={1}
+                className="w-full h-full rounded-lg"
+              >
                 <SwiperSlide>
-                  <img src={sertifikat1} alt="Sertifikat 1" />
+                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                    Slide 1: Sertifikasi A
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                    Slide 2: Sertifikasi B
+                  </div>
                 </SwiperSlide>
               </Swiper>
-              <div className="autoplay-progress" slot="container-end">
-                <svg viewBox="0 0 48 48" ref={progressCircle}>
-                  <circle cx="24" cy="24" r="20"></circle>
-                </svg>
-                <span ref={progressContent}></span>
-              </div>
+            </div>
+
+            {/* Teknologi */}
+            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Teknologi Terkini & Produk Berkualitas</h1>
+              <Swiper
+                modules={[Autoplay]}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop={true}
+                spaceBetween={20}
+                slidesPerView={1}
+                className="w-full h-full rounded-lg"
+              >
+                <SwiperSlide>
+                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                    Slide 1: Sertifikasi A
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                    Slide 2: Sertifikasi B
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </div>
+
       </div>
       <Footer />
     </>
   );
 }
 
-export default profile;
+export default Profile;

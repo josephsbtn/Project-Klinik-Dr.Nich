@@ -45,8 +45,8 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
         <span
           key={i}
           className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
-              ? "w-[19px] h-2.5 bg-[#c2a353]"
-              : "w-2.5 h-2.5 bg-[#dcdcdc]"
+            ? "w-[19px] h-2.5 bg-[#c2a353]"
+            : "w-2.5 h-2.5 bg-[#dcdcdc]"
             }`}
           onClick={() => setActiveIndex(i)}
         />
@@ -201,8 +201,8 @@ export default function Beranda() {
               <span
                 key={index}
                 className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
-                    ? "w-[19px] h-2.5 bg-[#c2a353]"
-                    : "w-2.5 h-2.5 bg-[#dcdcdc]"
+                  ? "w-[19px] h-2.5 bg-[#c2a353]"
+                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
                   }`}
                 onClick={() => setActiveIndex(index)}
               />
@@ -210,51 +210,70 @@ export default function Beranda() {
           </div>
         </div>
 
-        {/* SERTIF JOJO*/}
-        {/* Why Dr.Nich Section */}
-        <section className="flex flex-col my-8 w-full items-center">
-          <main className="w-[90%]">
-            <h1>Mengapa memilih Dr.Nich ?</h1>
-          </main>
-          {/* SERTIFIKASI */}
-          <div className="flex flex-col pt-[15px]">
-            <div className="flex justify-center items-center pt-[15px]">
-              <div className="w-[325px] h-[283px] bg-white rounded-[10px] border border-[#efefef] flex flex-col justify-center items-center">
-                <Swiper
-                  spaceBetween={0}
-                  centeredSlides={true}
-                  autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                  }}
-                  pagination={{
-                    clickable: false,
-                  }}
-                  navigation={false}
-                  modules={[Autoplay, Pagination, Navigation]}
-                  onAutoplayTimeLeft={onAutoplayTimeLeft}
-                  className="mySwiper">
-                  <SwiperSlide>
-                    <img src={sertifikat1} alt="Sertifikat 1" />
-                  </SwiperSlide>
-                </Swiper>
-                <div className="autoplay-progress" slot="container-end">
-                  <svg viewBox="0 0 48 48" ref={progressCircle}>
-                    <circle cx="24" cy="24" r="20"></circle>
-                  </svg>
-                  <span ref={progressContent}></span>
-                </div>
-              </div>
+        {/* Sertifikasi Section */}
+        <div className="flex flex-col pt-10">
+          {/* Section Title */}
+          <div className="w-full mx-auto pl-[21px] text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight">
+            Mengapa memilih Dr. Nich?
+          </div>
+
+          {/* Carousel Container */}
+          <div className="flex flex-col gap-[15px] justify-center items-center pt-4 pb-4">
+            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Berpengalaman dan Bersertifikat</h1>
+              <Swiper
+                modules={[Autoplay]}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop={true}
+                spaceBetween={20}
+                slidesPerView={1}
+                className="w-full h-full rounded-lg"
+              >
+                <SwiperSlide>
+                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                    Slide 1: Sertifikasi A
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                    Slide 2: Sertifikasi B
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
+
+            {/* Teknologi */}
+            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Teknologi Terkini & Produk Berkualitas</h1>
+              <Swiper
+                modules={[Autoplay]}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                loop={true}
+                spaceBetween={20}
+                slidesPerView={1}
+                className="w-full h-full rounded-lg"
+              >
+                <SwiperSlide>
+                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                    Slide 1: Sertifikasi A
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                    Slide 2: Sertifikasi B
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
-        </section>
+        </div>
 
 
         {/* Jenis Layanan Section */}
         <section className="flex flex-col my-8 w-full items-center">
           <main className="w-[90%] flex flex-col items-center">
             <div className="flex w-full justify-between items-center">
-              <h1 className="font-SFPro font-medium text-base">Layanan</h1>
+              <h1 className="font-SFPro font-medium text-base">Layanan Populer</h1>
               <button className="font-SFPro text-xs text-secondary font-medium">
                 Lihat semua
               </button>
