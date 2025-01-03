@@ -7,8 +7,10 @@ const newproduk = asyncHandler(async (req, res) => {
     deskripsi: req.body.deskripsi,
     foto: req.body.foto,
     manfaat: req.body.manfaat,
-    cara_pakai : req.body.cara_pakai,
-    harga : req.body.harga,
+    cara_pakai: req.body.cara_pakai,
+    harga: req.body.harga,
+    kategori: req.body.kategori,
+    tipeProduk: req.body.tipeProduk,
   };
   try {
     const isExist = await produkModels.findOne({ nama: newproduk.nama });
@@ -38,8 +40,8 @@ const updateproduk = asyncHandler(async (req, res) => {
     deskripsi: req.body.deskripsi,
     foto: req.body.foto,
     manfaat: req.body.manfaat,
-    cara_pakai : req.body.cara_pakai,
-    harga : req.body.harga,
+    cara_pakai: req.body.cara_pakai,
+    harga: req.body.harga,
   };
   try {
     const produk = await produkModels.findByIdAndUpdate(
