@@ -1,81 +1,87 @@
-import React from 'react';
+import React from "react";
 
 // Import logo dan img
-import logoPutih from '../../assets/logodrnich-white.svg';
+import logoPutih from "../../assets/logodrnich-white.svg";
 
 // Logo sosmed
-import yt from '../../assets/logo-sosmed/YouTube.svg';
-import linkedIn from '../../assets/logo-sosmed/LinkedIn.svg';
-import tt from '../../assets/logo-sosmed/TikTok.svg';
-import fb from '../../assets/logo-sosmed/Facebook.svg';
-import ig from '../../assets/logo-sosmed/Instagram.svg';
+import yt from "../../assets/logo-sosmed/YouTube.svg";
+import linkedIn from "../../assets/logo-sosmed/LinkedIn.svg";
+import tt from "../../assets/logo-sosmed/TikTok.svg";
+import fb from "../../assets/logo-sosmed/Facebook.svg";
+import ig from "../../assets/logo-sosmed/Instagram.svg";
 
 // Logo footer
-import alamat from '../../assets/logo-footer/location.svg';
-import kontak from '../../assets/logo-footer/call.svg';
-import clock from '../../assets/logo-footer/clock.svg';
+import alamat from "../../assets/logo-footer/location.svg";
+import kontak from "../../assets/logo-footer/call.svg";
+import clock from "../../assets/logo-footer/clock.svg";
+import email from "../../assets/logo-footer/email.svg";
 
 export default function Footer() {
   return (
-    <footer className="w-full h-auto text-white text-center py-6 px-[27px] bg-gradient-to-br from-[#c2a353] to-[#00674f] overflow-hidden">
-      <div className="flex flex-col justify-start items-center space-y-8">
-        {/* Header Section */}
-        <div className="flex justify-between items-center w-full max-w-md">
-          <img src={logoPutih} className="w-[120px] h-auto" alt="Logo" />
-          <div className="w-[126px] flex items-center space-x-4">
-            <img src={yt} className="w-[15px] h-[15px]" alt="YouTube" />
-            <img src={linkedIn} className="w-[15px] h-[15px]" alt="LinkedIn" />
-            <img src={tt} className="w-[15px] h-[15px]" alt="TikTok" />
-            <img src={fb} className="w-[15px] h-[15px]" alt="Facebook" />
-            <img src={ig} className="w-[15px] h-[15px]" alt="Instagram" />
+    <footer className="w-full bg-gradient-to-br from-[#c2a353] to-[#00674f] text-white py-8 px-6 lg:px-24">
+      {/* Container Utama */}
+      <div className="flex flex-col lg:justify-between lg:items-start gap-8">
+        {/* Logo dan Sosial Media */}
+        <div className="flex flex-row gap-11 lg:space-y-6 lg:w-full lg:justify-between">
+          <img src={logoPutih} alt="Logo Dr. Nich" className="w-[150px] h-auto" />
+          <div className="flex space-x-4 mt-4 lg:mt-0">
+            <img src={yt} alt="YouTube" className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]" />
+            <img src={linkedIn} alt="LinkedIn" className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]" />
+            <img src={tt} alt="TikTok" className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]" />
+            <img src={fb} alt="Facebook" className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]" />
+            <img src={ig} alt="Instagram" className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]" />
           </div>
         </div>
 
-        {/* Content Section */}
-        <div className="flex justify-between w-full max-w-lg">
-          {/* Left Column */}
-          <div className="flex flex-col space-y-4">
-            {/* Alamat */}
-            <div className="flex items-center space-x-2">
-              <img src={alamat} className="w-4 h-4 relative -top-4" alt="Location" />
-              <a href="#" className="w-[122px] text-left text-[#e8ebe0] text-xs font-normal leading-tight">
-                Jl. Diponegoro No. 12, Salatiga, Jawa Tengah, 51552
-              </a>
+        <div className="flex gap-11 lg:gap-0 lg:flex-row lg:justify-between lg:w-full">
+          {/* Informasi Kontak */}
+          <div className="w-[147px] grid gap-4 lg:gap-6 lg:w-full">
+            <div className="flex items-start space-x-3">
+              <img src={alamat} alt="Alamat" className="w-5 h-5" />
+              <p className="text-sm leading-tight text-[#e8ebe0]">
+                Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec. Argomulyo, Kota Salatiga, Jawa Tengah 50733
+              </p>
             </div>
-
-            {/* Telepon */}
-            <div className="flex items-center space-x-2">
-              <img src={kontak} className="w-4 h-4" alt="Contact" />
-              <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
-                +6289632517280
-              </a>
+            <div className="flex items-center space-x-3">
+              <img src={kontak} alt="Kontak" className="w-5 h-5" />
+              <p className="text-sm text-[#e8ebe0]">+6289632517280</p>
             </div>
-
-            {/* Jam Operasional */}
-            <div className="flex items-center space-x-2">
-              <img src={clock} className="w-4 h-4" alt="Clock" />
-              <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
-                10.00 - 19.00
-              </a>
+            <div className="flex items-center space-x-3">
+              <img src={clock} alt="Jam Operasional" className="w-5 h-5" />
+              <p className="text-sm text-[#e8ebe0]">10.00 - 19.00</p>
+            </div>
+            <div className="flex items-center space-x-3">
+              <img src={email} alt="Email" className="w-5 h-5" />
+              <p className="text-sm text-[#e8ebe0]">drnich@email.com</p>
             </div>
           </div>
 
-          {/* Right Column */}
-          <div className="grid grid-cols-2 gap-[15px]">
-            <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">Profil</a>
-            <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">Produk</a>
-            <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">Galeri</a>
-            <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">Reservasi</a>
-            <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">Promo</a>
-            <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">Konsultasi</a>
-            <a href="#" className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">Layanan</a>
+          {/* Navigasi Tautan */}
+          <div className="w-[126px] h-[101px] grid grid-cols-2 gap-[15px] lg:h-full lg:w-full"> 
+            {[
+              "Profil",
+              "Produk",
+              "Galeri",
+              "Reservasi",
+              "Promo",
+              "Konsultasi",
+              "Layanan",
+            ].map((link) => (
+              <a
+                key={link}
+                href="#"
+                className="text-sm text-[#e8ebe0] hover:underline"
+              >
+                {link}
+              </a>
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* Footer Section */}
-        <div className='w-full max-w-md justify-end'>
-          <p className='text-right text-[#e8ebe0] text-xs font-normal leading-tight'>©2024 | Dr. Nich Beauty Aesthetic</p>
-        </div>
+      {/* Footer Bottom */}
+      <div className="mt-8 text-right text-xs text-[#e8ebe0]">
+        <p>©2024 | Dr. Nich Beauty Aesthetic</p>
       </div>
     </footer>
   );

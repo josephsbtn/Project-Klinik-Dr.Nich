@@ -115,24 +115,24 @@ function Profile() {
           </div>
 
           {/* Carousel Container */}
-          <div className="flex flex-col gap-[15px] justify-center items-center pt-4 pb-4">
-            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Berpengalaman dan Bersertifikat</h1>
+          <div className="flex flex-col gap-[15px] justify-center items-center pt-4 pb-4 lg:flex-row">
+            <div className="w-[325px] bg-white rounded-lg border border-gray-200 p-6 flex flex-col justify-center items-center shadow-sm lg:w-[504px]">
+              <h1 className="pb-4 text-[#c2a353] text-sm font-medium font-SFPro leading-tight tracking-tight">Berpengalaman dan Bersertifikat</h1>
               <Swiper
                 modules={[Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={1}
-                className="w-full h-full rounded-lg"
+                className="w-full h-auto rounded-lg"
               >
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                  <div className="flex items-center justify-center bg-blue-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
                     Slide 1: Sertifikasi A
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                  <div className="flex items-center justify-center bg-blue-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
                     Slide 2: Sertifikasi B
                   </div>
                 </SwiperSlide>
@@ -140,28 +140,32 @@ function Profile() {
             </div>
 
             {/* Teknologi */}
-            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Teknologi Terkini & Produk Berkualitas</h1>
+            <div className="w-[325px] bg-white rounded-lg border border-gray-200 p-6 flex flex-col justify-center items-center shadow-sm lg:w-[504px]">
+              <h1 className="pb-4 text-[#c2a353] text-sm font-medium font-SFPro leading-tight tracking-tight text-center">
+                Teknologi Terkini & Produk Berkualitas
+              </h1>
               <Swiper
                 modules={[Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={1}
-                className="w-full h-full rounded-lg"
+                className="w-full h-auto rounded-lg"
               >
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                  <div className="flex items-center justify-center bg-blue-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
                     Slide 1: Sertifikasi A
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                  <div className="flex items-center justify-center bg-green-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
                     Slide 2: Sertifikasi B
                   </div>
                 </SwiperSlide>
               </Swiper>
             </div>
+
+
           </div>
         </div>
 
