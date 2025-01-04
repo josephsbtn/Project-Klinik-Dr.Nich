@@ -9,8 +9,15 @@ export default withMT({
       boxShadow: {
         "inner-shadow": "inset 0 0 10px 0 rgba(255, 255, 255, 0.5)",
       },
+      ShadowRoot: {
+        sm: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+        myShadow:
+          "0px 8px 12px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.30)",
+        lg: "3px 3px 6px rgba(0, 0, 0, 0.5)",
+      },
       fontFamily: {
-        SFPro: ["SF Pro Display", "sans-serif"],
+        SFPro: ["SF Pro Display", "Helvetica"],
+        Cabin: ["Cabin", "sans-serif"],
       },
       colors: {
         primary: "#00674F",

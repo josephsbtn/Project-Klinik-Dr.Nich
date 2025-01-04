@@ -10,6 +10,8 @@ import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
 import AboutCard from "../../components/AboutCard";
 import CardJenisLayanan from "../../components/cardJenisLayanan.jsx";
+import LayananPopuler from "../../components/layananPopuler.jsx";
+import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 
 import ArrowRight from "../../../../admin/src/assets/icon/ArrowRight";
 
@@ -44,10 +46,11 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
-            ? "w-[19px] h-2.5 bg-[#c2a353]"
-            : "w-2.5 h-2.5 bg-[#dcdcdc]"
-            }`}
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+            activeIndex === i
+              ? "w-[19px] h-2.5 bg-[#c2a353]"
+              : "w-2.5 h-2.5 bg-[#dcdcdc]"
+          }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
@@ -79,8 +82,8 @@ export default function Beranda() {
     } catch (error) {
       setError(
         "Failed to fetch jenis layanan. Please try again later (" +
-        error.message +
-        ")"
+          error.message +
+          ")"
       );
     } finally {
       setLoading(false);
@@ -158,7 +161,7 @@ export default function Beranda() {
   };
 
   return (
-    <div>
+    <div className="w-full flex flex-col items-center bg-white">
       <Navbar selected={"Beranda"} />
       {/* Carousel Component */}
       <Carousel
@@ -173,7 +176,7 @@ export default function Beranda() {
             <img
               src={src}
               alt={`Slide ${index + 1}`}
-              className="h-full w-full object-cover"
+              className="h-full lg:h-[80vh] w-full object-cover"
             />
             <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40"></div>
           </div>
@@ -190,8 +193,10 @@ export default function Beranda() {
       </div>
 
       {/* ABOUT Section */}
-      <div className="relative w-full mx-auto" {...handlers}>
-        <div className="relative max-w-3xl mx-auto">
+      <div
+        className="relative flex flex-col items-center  w-full  mx-auto"
+        {...handlers}>
+        <div className="relative max-w-3xl w-full lg:max-w-full lg:w-[70%] lg:h-[410px]  mx-auto ">
           {/* Active Card */}
           <AboutCard card={aboutCards[activeIndex]} />
 
@@ -200,10 +205,11 @@ export default function Beranda() {
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
-                  ? "w-[19px] h-2.5 bg-[#c2a353]"
-                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                  }`}
+                className={` rounded-full transition-all duration-300 cursor-pointer ${
+                  activeIndex === index
+                    ? "w-[19px] h-2.5 bg-[#c2a353]"
+                    : "w-2.5 h-2.5 bg-[#dcdcdc]"
+                }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
@@ -211,31 +217,32 @@ export default function Beranda() {
         </div>
 
         {/* Sertifikasi Section */}
-        <div className="flex flex-col pt-10">
+        <div className="flex flex-col w-[90%] lg:w-[70%] items-center justify-center pt-10 lg:mt-12">
           {/* Section Title */}
-          <div className="w-full mx-auto pl-[21px] text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight">
+          <div className="w-full mx-auto pl-[21px] text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight lg:text-2xl lg:pl-0 ">
             Mengapa memilih Dr. Nich?
           </div>
 
           {/* Carousel Container */}
-          <div className="flex flex-col gap-[15px] justify-center items-center pt-4 pb-4">
-            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Berpengalaman dan Bersertifikat</h1>
+          <div className="flex flex-col lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4">
+            <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
+                Berpengalaman dan Bersertifikat
+              </h1>
               <Swiper
                 modules={[Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={1}
-                className="w-full h-full rounded-lg"
-              >
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                  <div className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
                     Slide 1: Sertifikasi A
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                  <div className="h-[198px] lg:h-full  flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
                     Slide 2: Sertifikasi B
                   </div>
                 </SwiperSlide>
@@ -243,23 +250,24 @@ export default function Beranda() {
             </div>
 
             {/* Teknologi */}
-            <div className="w-[325px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight">Teknologi Terkini & Produk Berkualitas</h1>
+            <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
+                Teknologi Terkini & Produk Berkualitas
+              </h1>
               <Swiper
                 modules={[Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={1}
-                className="w-full h-full rounded-lg"
-              >
+                className="lg:w-[400px] lg:h-[283px]  w-full rounded-lg">
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
+                  <div className="h-[198px] lg:h-full  flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
                     Slide 1: Sertifikasi A
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="h-[198px] flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
+                  <div className="h-[198px] lg:h-full  flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
                     Slide 2: Sertifikasi B
                   </div>
                 </SwiperSlide>
@@ -268,20 +276,21 @@ export default function Beranda() {
           </div>
         </div>
 
-
         {/* Jenis Layanan Section */}
         <section className="flex flex-col my-8 w-full items-center">
-          <main className="w-[90%] flex flex-col items-center">
-            <div className="flex w-full justify-between items-center">
-              <h1 className="font-SFPro font-medium text-base">Layanan Populer</h1>
-              <button className="font-SFPro text-xs text-secondary font-medium">
+          <main className="w-[90%] flex flex-col items-center lg:w-[70%]  ">
+            <div className="flex w-full justify-between items-center  ">
+              <h1 className="font-SFPro font-medium text-base lg:text-xl">
+                Layanan
+              </h1>
+              <button className="font-SFPro text-xs text-secondary font-medium lg:text-base">
                 Lihat semua
               </button>
             </div>
             {loading ? (
               <p>Loading...</p>
             ) : (
-              <div className="grid w-fit grid-cols-2 gap-4 items-center justify-center xl:grid-cols-5 sm:grid-cols-2 mt-4">
+              <div className="grid w-full grid-cols-2 gap-4 items-center justify-center xl:grid-cols-4  sm:grid-cols-2 mt-4 lg:gap-10">
                 {jenisLayanan && jenisLayanan.length > 0 ? (
                   jenisLayanan.slice(0, 12).map((item) => (
                     <div key={item._id}>
@@ -297,6 +306,13 @@ export default function Beranda() {
               </div>
             )}
           </main>
+        </section>
+
+        <section className="lg:w-[70%] w-full">
+          <LayananPopuler />
+        </section>
+        <section className="lg:w-[70%] w-full">
+          <ProdukTerbaru />
         </section>
       </div>
       <Footer />

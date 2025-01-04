@@ -8,7 +8,8 @@ function CardLayanan({ item }) {
   const navigate = useNavigate();
   return (
     <div
-      className="w-[184px] h-[274px] lg:w-[355px] lg:h-[276px]  flex flex-col justify-start cursor-pointer items-center border border-disable-line rounded-lg p-3 shadow-sm bg-white"
+      className="w-[184px] h-72 lg:w-[355px] lg:h-[276px]  flex flex-col justify-start cursor-pointer items-center border border-disable-line rounded-lg p-3 shadow-sm bg-white
+       duration-300 transition-all ease-in-out"
       onClick={() => navigate(`/layanan/detailTreatment/${item._id}`)}>
       <img
         src={item.image}
@@ -16,7 +17,7 @@ function CardLayanan({ item }) {
         className="w-48 h-44 lg:w-full lg:h-[174px] object-cover rounded-md py-1"
       />
 
-      <div className="flex flex-col justify-start items-start  lg:mt-2 space-y-1  w-full h-24">
+      <div className="flex flex-col justify-start items-start  lg:mt-2 space-y-1  w-full h-24 pb-1">
         <div className="flex items-center w-full justify-between">
           <h1 className="text-sm lg:text-base font-normal text-text line  leading-5 ">
             {item.nama}
@@ -29,7 +30,7 @@ function CardLayanan({ item }) {
           {item.cardDeskripsi}
         </p>
 
-        <h1 className="text-gold mt-2 text-sm lg:text-base font-semibold text-secondary font-SFPro">
+        <h1 className="text-gold pt-2 text-sm lg:text-base font-semibold text-secondary font-SFPro">
           Rp {item.harga?.toLocaleString("id-ID")}
         </h1>
       </div>

@@ -11,7 +11,7 @@ function LayananPopuler() {
       const resLayanan = (await axios.get("/api/layanan/getAllLayanan")).data;
 
       const sorted = resLayanan.sort(
-        (a, b) => a.reservedCount - b.reservedCount
+        (a, b) => b.reservedCount - a.reservedCount
       );
       setLayanan(sorted);
     } catch (error) {
@@ -28,7 +28,7 @@ function LayananPopuler() {
       <section className="w-full flex flex-col items-center lg:items-start py-2">
         <div className="flex justify-between items-center w-full ">
           <h1 className="font-SFPro lg:text-xl text-start text-text font-medium text-base">
-            Layanan Populer
+            Treatment Populer
           </h1>
           <h1 className="font-SFPro lg:text-base text-start text-secondary font-normal text-sm">
             lihat semua
@@ -38,9 +38,9 @@ function LayananPopuler() {
         {error ? (
           <p>{error}</p>
         ) : (
-          <div className="flex max-w-full  justify-start space-x-4 mt-4 overflow-x-scroll lg:overflow-hidden ">
+          <div className="flex max-w-full justify-start space-x-4 mt-4 overflow-x-scroll overflow-y-hidden ">
             {layanan && layanan.length > 0 ? (
-              layanan.slice(0, 3).map((item) => (
+              layanan.slice(0, 4).map((item) => (
                 <div key={item._id}>
                   <CardLayanan item={item} />
                 </div>

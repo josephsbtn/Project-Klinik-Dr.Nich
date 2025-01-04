@@ -22,6 +22,16 @@ const produkSchema = mongoose.Schema(
     harga: {
       type: Number,
     },
+    kategori: {
+      type: String,
+    },
+    tipeProduk: {
+      type: String,
+    },
+    buyCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

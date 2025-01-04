@@ -8,15 +8,15 @@ function CardJenisLayanan({ item }) {
   const navigate = useNavigate();
   return (
     <div
-      className="flex flex-col w-[154px] lg:w-[230px] max-w-[230px] h-auto bg-white p-2 rounded-lg justify-center items-center border border-disable-line shadow-sm"
+      className="group hover:bg-primary flex flex-col w-[154px] lg:w-[230px] max-w-[230px] h-auto bg-white p-2 rounded-lg justify-center items-center border border-gray-300 shadow-sm duration-300 cursor-pointer ease-in-out transition-all"
       onClick={() => navigate(`/layanan/detail/${item._id}`)}>
       <img
         src={item.foto}
         alt={item.nama}
         className="w-[127px] h-[141px] lg:w-[200px] lg:h-[222px] object-cover rounded-md"
       />
-      <div className="flex w-[127px] lg:w-[200px] justify-between items-center  mt-2 lg:mt-0">
-        <h1 className="font-normal text-sm lg:text-base font-SFPro text-text  truncate">
+      <div className="flex w-[127px] lg:w-[200px] justify-between items-center mt-2 lg:mt-0">
+        <h1 className="font-normal text-sm lg:text-base font-SFPro text-gray-700 truncate group-hover:text-white">
           {item.nama}
         </h1>
         <ArrowRight />
