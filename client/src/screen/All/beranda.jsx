@@ -176,7 +176,7 @@ export default function Beranda() {
             <img
               src={src}
               alt={`Slide ${index + 1}`}
-              className="h-full lg:h-[80vh] w-full object-cover"
+              className="h-full lg:h-[80vh] w-full object-cover relative lg:object-top"
             />
             <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40"></div>
           </div>

@@ -12,6 +12,8 @@ import DetailTreatment from "./screen/Layanan/DetailTreatment.jsx";
 import Profil from "./screen/All/profile.jsx";
 // galeri
 import Galeri from "./screen/All/galeri.jsx";
+//produk
+import Produk from "./screen/All/produk.jsx";
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
         />
         <Route path="profil" element={<Profil />} />
         <Route path="galeri" element={<Galeri />} />
+        <Route path="produk" element={<Produk />} />
       </Routes>
     </Router>
   );

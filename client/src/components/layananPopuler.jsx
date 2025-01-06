@@ -27,11 +27,11 @@ function LayananPopuler() {
     <>
       <section className="w-full flex flex-col items-center lg:items-start py-2">
         <div className="flex justify-between items-center w-full ">
-          <h1 className="font-SFPro lg:text-xl text-start text-text font-medium text-base">
+          <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
             Treatment Populer
           </h1>
-          <h1 className="font-SFPro lg:text-base text-start text-secondary font-normal text-sm">
-            lihat semua
+          <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+            Lihat Semua
           </h1>
         </div>
 

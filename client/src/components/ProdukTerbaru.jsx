@@ -7,8 +7,8 @@ function ProdukTerbaru() {
         <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
           Produk Baru!
         </h1>
-        <h1 className="font-SFPro lg:text-base text-start text-secondary font-normal text-sm">
-          lihat semua
+        <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+          Lihat Semua
         </h1>
       </main>
       <div className="flex flex-col  lg:w-full pt-[15px]">
