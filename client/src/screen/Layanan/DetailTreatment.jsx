@@ -7,36 +7,41 @@ import axios from "axios";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 
 function DetailTreatment() {
-  const navigate = useNavigate();
   const { idJenis, idTreatment } = useParams();
+  const navigate = useNavigate();
   const [judul, setJudul] = useState("");
   const [image, setImage] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [durasi, setDurasi] = useState("");
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const res = (
-        await axios.get(`/api/layanan/getLayananById/${idTreatment}`)
-      ).data;
-      setJudul(res.nama);
-      setDeskripsi(res.deskripsi);
-      setImage(res.image);
-      setDurasi(res.durasi);
+      const treatmentId = idTreatment ? idTreatment : idJenis; // Prioritize idTreatment
+      console.log("Fetching data for treatment ID:", treatmentId);
+      const response = await axios.get(
+        `/api/layanan/getLayananById/${treatmentId}`
+      );
+      const data = response.data;
+      console.log("Fetched data:", data);
+      setJudul(data.nama);
+      setDeskripsi(data.deskripsi);
+      setImage(data.image);
+      setDurasi(data.durasi);
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      console.error("Error fetching data:", error);
       setError(error.response?.data?.message || "Something Wrong");
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, [idTreatment]);
+  }, [idTreatment, idJenis]);
+
   return (
     <section className="flex flex-col items-center space-y-4">
       <div className="fixed w-full">
@@ -45,25 +50,29 @@ function DetailTreatment() {
       <div className="flex items-center w-[90%] justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          className="cursor-pointer text-xs text-disable-text font-normal">
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/layanan")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          className="cursor-pointer text-xs text-disable-text font-normal">
           Layanan
         </a>
         <ArrowRightDisable />
-        <a
-          onClick={() => navigate(`/layanan/detail/${idJenis}`)}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
-          Treatment
-        </a>
-        <ArrowRightDisable />
+        {idJenis && (
+          <>
+            <a
+              onClick={() => navigate(`/layanan/detail/${idJenis}`)}
+              className="cursor-pointer text-xs text-disable-text font-normal">
+              Treatment
+            </a>
+            <ArrowRightDisable />
+          </>
+        )}
         <a
           onClick={() => navigate(`/layanan/detail/${idJenis}/${idTreatment}`)}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          className="cursor-pointer text-xs text-disable-text font-normal">
           Detail
         </a>
       </div>

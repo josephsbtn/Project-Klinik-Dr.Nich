@@ -34,9 +34,12 @@ function ListLayanan() {
       );
       setJenisLayanan(sortedJenisLayanan);
       setLayanan(sortedLayanan);
+      setIsLoading(false);
       console.log("Fetched data:", sortedJenisLayanan);
       setLayanan(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
+      setIsLoading(false);
+      setError(error.response?.data?.message || "An error occurred");
       console.error("Error fetching data:", error);
     }
   };
@@ -205,19 +208,38 @@ function ListLayanan() {
             </form>
           </ConfirmPopUp>
 
-          <section className="container flex flex-col items-center w-[90%] ">
-            <h1 className="text-3xl font-bold text-center">Jenis Layanan</h1>
-            <div className="grid w-fit grid-cols-2 gap-4 items-center justify-center xl:grid-cols-5 sm:grid-cols-2 mt-4">
-              {Array.isArray(jenisLayanan) ? (
-                jenisLayanan.map((item) => (
-                  <div key={item._id}>
-                    <CardJenisLayanan item={item} />
-                  </div>
-                ))
-              ) : (
-                <p>Data is not in the expected format.</p>
-              )}
-            </div>
+          <section className="flex flex-col items-center space-y-4">
+            {isLoading ? (
+              <div className="h- h-screen w-full flex justify-center items-center">
+                <p>Loading...</p>
+              </div>
+            ) : error ? (
+              <div className="h-fit w-fit bg-white border border-disable-line ">
+                <h1 className="font-SFPro text-red-700 font-medium text-base w-full text-center">
+                  Something Wrong
+                </h1>
+                <p className="text-text text-sm font-SFPro text-center">
+                  {error}
+                </p>
+              </div>
+            ) : (
+              <main className="w-[90%] lg:w-4/5 flex flex-col items-center lg:items-start space-y-4">
+                <h1 className="font-SFPro w-full text-start lg:text-2xl text-secondary font-medium text-base">
+                  Layanan
+                </h1>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-fit justify-center mt-4">
+                  {jenisLayanan && jenisLayanan.length > 0 ? (
+                    jenisLayanan.map((item) => (
+                      <div key={item._id}>
+                        <CardJenisLayanan item={item} />
+                      </div>
+                    ))
+                  ) : (
+                    <p>No data available</p>
+                  )}
+                </div>
+              </main>
+            )}
           </section>
 
           <h1 className="text-3xl font-bold text-center">Layanan Kami</h1>

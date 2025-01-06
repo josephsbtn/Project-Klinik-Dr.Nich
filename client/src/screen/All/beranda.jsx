@@ -60,6 +60,8 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
 
 export default function Beranda() {
   const [jenisLayanan, setJenisLayanan] = useState([]);
+  const [fotoMesin, setFotoMesin] = useState();
+  const [fotoSertif, setFotoSertif] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -68,6 +70,8 @@ export default function Beranda() {
     try {
       setLoading(true);
       const response = await axios.get("/api/layanan/getAllJenisLayanan");
+      const fotoMesin = (await axios.get("/api/foto/getAllMesin")).data;
+      const fotoSertif = (await axios.get("/api/foto/getAllSertif")).data;
       const sortedJenisLayanan = response.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );
@@ -78,6 +82,10 @@ export default function Beranda() {
       };
       localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
 
+      setFotoMesin(fotoMesin);
+      setFotoSertif(fotoSertif);
+      console.log("foto mesin : " + fotoMesin);
+      console.log("foto sertif :" + fotoSertif);
       setJenisLayanan(sortedJenisLayanan);
     } catch (error) {
       setError(
@@ -91,20 +99,22 @@ export default function Beranda() {
   };
 
   useEffect(() => {
-    const cachedData = localStorage.getItem("jenisLayanan");
+    // const cachedDataLayanan = localStorage.getItem("jenisLayanan");
 
-    if (cachedData) {
-      const parsedData = JSON.parse(cachedData);
-      const currentTime = new Date().getTime();
+    // if (!cachedDataLayanan) {
+    //   const parsedData = JSON.parse(cachedDataLayanan);
+    //   const currentTime = new Date().getTime();
 
-      if (currentTime - parsedData.timestamp < 3600000) {
-        setJenisLayanan(parsedData.data);
-      } else {
-        fetchData();
-      }
-    } else {
-      fetchData();
-    }
+    //   if (currentTime - parsedData.timestamp < 3600000) {
+    //     setJenisLayanan(parsedData.data);
+    //   } else {
+    //     fetchData();
+    //   }
+    // } else {
+    //   fetchData();
+    // }
+
+    fetchData();
   }, []);
 
   const aboutCards = [
@@ -162,10 +172,14 @@ export default function Beranda() {
 
   return (
     <div className="w-full flex flex-col items-center bg-white">
-      <Navbar selected={"Beranda"} />
+      <div className="fixed w-full z-30">
+        {" "}
+        <Navbar selected={"Beranda"} />
+      </div>
+
       {/* Carousel Component */}
       <Carousel
-        className="pb-10"
+        className="pb-10 pt-20"
         autoplay={true}
         autoplayDelay={3000}
         loop={true} // Enable looping
@@ -178,7 +192,7 @@ export default function Beranda() {
               alt={`Slide ${index + 1}`}
               className="h-full lg:h-[80vh] w-full object-cover relative lg:object-top"
             />
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-40"></div>
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100"></div>
           </div>
         ))}
       </Carousel>
@@ -219,7 +233,7 @@ export default function Beranda() {
         {/* Sertifikasi Section */}
         <div className="flex flex-col w-[90%] lg:w-[70%] items-center justify-center pt-10 lg:mt-12">
           {/* Section Title */}
-          <div className="w-full mx-auto pl-[21px] text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight lg:text-2xl lg:pl-0 ">
+          <div className="w-full mx-auto pl-[21px] text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight lg:text-2xl lg:pl-0 lg:py-6 ">
             Mengapa memilih Dr. Nich?
           </div>
 
@@ -236,16 +250,31 @@ export default function Beranda() {
                 spaceBetween={20}
                 slidesPerView={1}
                 className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
-                <SwiperSlide>
-                  <div className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
-                    Slide 1: Sertifikasi A
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="h-[198px] lg:h-full  flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
-                    Slide 2: Sertifikasi B
-                  </div>
-                </SwiperSlide>
+                {fotoSertif && fotoSertif.length > 0 ? (
+                  fotoSertif.map((item, index) => (
+                    <SwiperSlide key={item._id}>
+                      <img
+                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
+                        src={item.foto}
+                        alt={item.nama}
+                      />
+                    </SwiperSlide>
+                  ))
+                ) : loading ? (
+                  <>
+                    <SwiperSlide>
+                      <div className="w-full h-full flex items-center justify-center ">
+                        <h1>loading . . .</h1>
+                      </div>
+                    </SwiperSlide>
+                  </>
+                ) : (
+                  <SwiperSlide>
+                    <div className="w-full h-full flex items-center justify-center ">
+                      <h1> No data found</h1>
+                    </div>
+                  </SwiperSlide>
+                )}
               </Swiper>
             </div>
 
@@ -260,17 +289,32 @@ export default function Beranda() {
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={1}
-                className="lg:w-[400px] lg:h-[283px]  w-full rounded-lg">
-                <SwiperSlide>
-                  <div className="h-[198px] lg:h-full  flex items-center justify-center bg-blue-500 text-white text-lg font-semibold">
-                    Slide 1: Sertifikasi A
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="h-[198px] lg:h-full  flex items-center justify-center bg-green-500 text-white text-lg font-semibold">
-                    Slide 2: Sertifikasi B
-                  </div>
-                </SwiperSlide>
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
+                {fotoMesin && fotoMesin.length > 0 ? (
+                  fotoMesin.map((item, index) => (
+                    <SwiperSlide key={item._id}>
+                      <img
+                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
+                        src={item.foto}
+                        alt={item.nama}
+                      />
+                    </SwiperSlide>
+                  ))
+                ) : loading ? (
+                  <>
+                    <SwiperSlide>
+                      <div className="w-full h-full flex items-center justify-center ">
+                        <h1>loading . . .</h1>
+                      </div>
+                    </SwiperSlide>
+                  </>
+                ) : (
+                  <SwiperSlide>
+                    <div className="w-full h-full flex items-center justify-center ">
+                      <h1> No data found</h1>
+                    </div>
+                  </SwiperSlide>
+                )}
               </Swiper>
             </div>
           </div>
@@ -279,7 +323,7 @@ export default function Beranda() {
         {/* Jenis Layanan Section */}
         <section className="flex flex-col my-8 w-full items-center">
           <main className="w-[90%] flex flex-col items-center lg:w-[70%]  ">
-            <div className="flex w-full justify-between items-center  ">
+            <div className="flex w-full justify-between items-center lg:py-6 ">
               <h1 className="font-SFPro font-medium text-base lg:text-xl">
                 Layanan
               </h1>
@@ -292,7 +336,7 @@ export default function Beranda() {
             ) : (
               <div className="grid w-full grid-cols-2 gap-4 items-center justify-center xl:grid-cols-4  sm:grid-cols-2 mt-4 lg:gap-10">
                 {jenisLayanan && jenisLayanan.length > 0 ? (
-                  jenisLayanan.slice(0, 12).map((item) => (
+                  jenisLayanan.slice(0, 8).map((item) => (
                     <div key={item._id}>
                       <CardJenisLayanan item={item} />
                     </div>
@@ -308,7 +352,7 @@ export default function Beranda() {
           </main>
         </section>
 
-        <section className="lg:w-[70%] w-full">
+        <section className="lg:w-[70%] w-[90%]">
           <LayananPopuler />
         </section>
         <section className="lg:w-[70%] w-full">

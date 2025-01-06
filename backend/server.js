@@ -7,7 +7,9 @@ import layananRoutes from "./routes/admin/layananRoutes.js";
 import promoRoutes from "./routes/admin/promoRoutes.js";
 import produkRoutes from "./routes/admin/produkRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import fotoRoutes from "./routes/admin/sertifMesinRoutes.js";
 import cartRoutes from "./routes/admin/cartRoutes.js";
+import galleryRoutes from "./routes/admin/galleryRoutes.js";
 import dbConfig from "./config/db.js";
 
 const app = express();
@@ -23,6 +25,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/promo", promoRoutes);
 app.use("/api/produk", produkRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/foto", fotoRoutes);
+app.use("/api/gallery", galleryRoutes);
+
 app.get("/", (req, res) => res.send("Server is ready"));
 app.use(notFound);
 app.use(errorHandler);

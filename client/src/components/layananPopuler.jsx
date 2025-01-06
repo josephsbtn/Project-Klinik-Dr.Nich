@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CardLayanan from "./CardLayanan";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LayananPopuler() {
+  const navigate = useNavigate();
   const [layanan, setLayanan] = useState();
   const [error, setError] = useState("");
 
@@ -26,7 +28,7 @@ function LayananPopuler() {
   return (
     <>
       <section className="w-full flex flex-col items-center lg:items-start py-2">
-        <div className="flex justify-between items-center w-full ">
+        <div className="flex justify-between items-center w-full lg:py-6">
           <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
             Treatment Populer
           </h1>
@@ -42,7 +44,12 @@ function LayananPopuler() {
             {layanan && layanan.length > 0 ? (
               layanan.slice(0, 4).map((item) => (
                 <div key={item._id}>
-                  <CardLayanan item={item} />
+                  <CardLayanan
+                    item={item}
+                    onClick={() =>
+                      navigate(`/layanan/detailTreatment/${item._id}`)
+                    }
+                  />
                 </div>
               ))
             ) : (

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowRight from "./ArrowRight";
 function SecondCardLayanan({ item }) {
   return (
-    <div className="w-full h-32 lg:w-[504px] lg:h-[217px]  flex space-x-2 justify-start cursor-pointer items-center border border-disable-line rounded-lg p-3 shadow-sm bg-white">
+    <div className="w-full h-32 lg:w-[504px] lg:h-[217px] flex space-x-2 justify-start cursor-pointer items-center border border-disable-line rounded-lg p-3 shadow-sm bg-white">
       <img
         src={item.image}
         alt={item.nama}

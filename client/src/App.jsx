@@ -32,7 +32,7 @@ function App() {
           element={<DetailTreatment />}
         />
         <Route
-          path="/layanan/detail/:idTreatment"
+          path="/layanan/detailTreatment/:idTreatment"
           element={<DetailTreatment />}
         />
         <Route path="profil" element={<Profil />} />

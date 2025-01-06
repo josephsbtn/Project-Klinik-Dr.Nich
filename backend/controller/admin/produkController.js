@@ -42,6 +42,8 @@ const updateproduk = asyncHandler(async (req, res) => {
     manfaat: req.body.manfaat,
     cara_pakai: req.body.cara_pakai,
     harga: req.body.harga,
+    kategori: req.body.kategori,
+    tipeProduk: req.body.tipeProduk,
   };
   try {
     const produk = await produkModels.findByIdAndUpdate(

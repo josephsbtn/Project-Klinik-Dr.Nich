@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowRight from "./ArrowRight.jsx";
 
-function CardLayanan({ item }) {
+function CardLayanan({ item, path }) {
   const navigate = useNavigate();
   return (
     <div
