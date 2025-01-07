@@ -82,7 +82,7 @@ export default function Navbar({ selected }) {
         {isNavOpen && (
           <div
             ref={navRef}
-            className="bg-[#c2a353] w-[253px] h-full fixed top-0 left-0 z-50">
+            className="bg-[#c2a353] w-[253px] h-full fixed top-0 left-0 z-50 lg:w-[462px]">
             <img
               src={bgHamburger}
               className="absolute bottom-0 w-full h-auto object-cover"
@@ -94,7 +94,7 @@ export default function Navbar({ selected }) {
               </div>
 
               {/* Menu Links */}
-              <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight">
+              <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight lg:grid lg:grid-cols-2">
                 {[
                   { text: "Beranda", path: "/" },
                   { text: "Profile", path: "/profil" },
@@ -126,20 +126,28 @@ export default function Navbar({ selected }) {
 
               {/* Contact Information */}
               <div className="flex flex-col pt-[40.41px]">
-                <h1 className="text-white text-base font-medium tracking-tight">
+                <h1 className="text-white text-base font-medium tracking-tight lg:text-xl">
                   Kontak Kami
                 </h1>
-                <div className="flex flex-col w-[173px] space-y-4 pt-[26.59px]">
+                <div className="flex flex-col w-[173px] space-y-4 pt-[26.59px] lg:w-[358px] lg:text-base">
                   <div className="flex items-center space-x-2">
                     <img
                       src={alamat}
-                      className="w-[15px] h-[15px] relative -top-4"
+                      className="w-[15px] h-[15px] relative -top-4 lg:translate-y-2"
                       alt="Location"
                     />
                     <a
                       href="javascript:void(0)"
                       className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
-                      Jl. Diponegoro No. 12, Salatiga, Jawa Tengah, 51552
+                      Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec. Argomulyo, Kota Salatiga, Jawa Tengah 50733
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <img src={email} className="w-[15px] h-[15px]" alt="Icon" />
+                    <a
+                      href="#"
+                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
+                      drnich@email.com
                     </a>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -152,14 +160,6 @@ export default function Navbar({ selected }) {
                       href="#"
                       className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
                       +6289632517280
-                    </a>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <img src={email} className="w-[15px] h-[15px]" alt="Icon" />
-                    <a
-                      href="#"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
-                      drnich@email.com
                     </a>
                   </div>
                   <div className="flex items-center space-x-2">
