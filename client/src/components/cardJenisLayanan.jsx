@@ -8,7 +8,7 @@ function CardJenisLayanan({ item }) {
   const navigate = useNavigate();
   return (
     <div
-      className="group hover:bg-primary flex flex-col w-[154px] lg:w-[230px] max-w-[230px] h-auto bg-white p-2 rounded-lg justify-center items-center border border-gray-300 shadow-sm duration-300 cursor-pointer ease-in-out transition-all"
+      className="group hover:bg-primary flex flex-col w-[154px] lg:w-[230px] max-w-[230px] h-auto bg-white p-2 rounded-lg justify-center items-center duration-300 cursor-pointer ease-in-out transition-all"
       onClick={() => navigate(`/layanan/detail/${item._id}`)}>
       <img
         src={item.foto}

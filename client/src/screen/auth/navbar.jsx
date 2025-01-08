@@ -94,7 +94,7 @@ export default function Navbar({ selected }) {
               </div>
 
               {/* Menu Links */}
-              <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight lg:grid lg:grid-cols-2">
+              <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight lg:grid lg:grid-cols-2 z-50">
                 {[
                   { text: "Beranda", path: "/" },
                   { text: "Profile", path: "/profil" },

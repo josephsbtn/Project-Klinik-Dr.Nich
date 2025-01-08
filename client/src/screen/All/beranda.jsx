@@ -31,6 +31,9 @@ import air from "../../assets/img-about/air.svg";
 //  IMAGE & ICONS SERTIFKAT
 import sertifikat1 from "../../assets/img-about/sertifikat1.png";
 
+// IMAGE GALERI
+import galeri1 from "../../assets/img-about/galeri1.png";
+
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
@@ -46,11 +49,10 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-            activeIndex === i
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
               ? "w-[19px] h-2.5 bg-[#c2a353]"
               : "w-2.5 h-2.5 bg-[#dcdcdc]"
-          }`}
+            }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
@@ -90,8 +92,8 @@ export default function Beranda() {
     } catch (error) {
       setError(
         "Failed to fetch jenis layanan. Please try again later (" +
-          error.message +
-          ")"
+        error.message +
+        ")"
       );
     } finally {
       setLoading(false);
@@ -190,7 +192,7 @@ export default function Beranda() {
             <img
               src={src}
               alt={`Slide ${index + 1}`}
-              className="h-full lg:h-[80vh] w-full object-cover relative lg:object-top"
+              className="h-full lg:h-[80vh] w-full object-cover relative lg:object-center"
             />
             <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100"></div>
           </div>
@@ -219,11 +221,10 @@ export default function Beranda() {
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={` rounded-full transition-all duration-300 cursor-pointer ${
-                  activeIndex === index
+                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
                     ? "w-[19px] h-2.5 bg-[#c2a353]"
                     : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                }`}
+                  }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
@@ -358,6 +359,48 @@ export default function Beranda() {
         <section className="lg:w-[70%] w-full">
           <ProdukTerbaru />
         </section>
+
+        {/* Galeri Section */}
+        <section className="lg:w-[70%] flex flex-col my-[26px] w-full items-center">
+          {/* Header */}
+          <main className="w-full flex lg:px-0 px-6 justify-between">
+            <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
+              Produk Baru!
+            </h1>
+            <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+              Lihat Semua
+            </h1>
+          </main>
+
+          {/* Carousel */}
+          <div className="flex flex-col lg:w-full pt-[15px]">
+            <div className="flex lg:justify-start justify-center items-center pt-[15px]">
+              <div className="carousel carousel-center w-80 lg:w-full space-x-[10px]">
+                {/* Carousel Item */}
+                <div className="carousel-item">
+                  <div className="w-[326px] h-[213.28px] relative flex flex-col items-start">
+                    {/* Image */}
+                    <img src={galeri1} className="mx-auto rounded-[10px]" alt="Produk Baru" />
+
+                    {/* Product Name */}
+                    <p className="w-full text-[#464646] text-left text-sm mx-2 my-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
+                      Dr. Nich Brightening Jelly Pak 10pcs
+                    </p>
+
+                    {/* Product Type */}
+                    <div className="flex items-center gap-2 mx-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
+                      <p>Skincare</p>
+                      <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
+                      <p>Serum</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
       </div>
       <Footer />
     </div>

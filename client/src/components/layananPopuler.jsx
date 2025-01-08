@@ -40,7 +40,7 @@ function LayananPopuler() {
         {error ? (
           <p>{error}</p>
         ) : (
-          <div className="flex max-w-full justify-start space-x-4 mt-4 overflow-x-scroll overflow-y-hidden ">
+          <div className="flex max-w-full justify-start space-x-4 mt-4 overflow-x-scroll overflow-y-hidden z-0">
             {layanan && layanan.length > 0 ? (
               layanan.slice(0, 4).map((item) => (
                 <div key={item._id}>

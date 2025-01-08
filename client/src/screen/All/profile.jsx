@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
+import LayananPopuler from "../../components/layananPopuler";
+import ProdukTerbaru from "../../components/ProdukTerbaru";
 
 // IMAGE AND ICON
 import klinik from "../../assets/img-profil/klinik.png";
@@ -166,6 +168,15 @@ function Profile() {
             </div>
 
 
+          </div>
+          <div className="flex flex-col gap-4 z-0">
+            {/* Layanan */}
+            <section className="lg:w-full w-[90%]">
+              <LayananPopuler />
+            </section>
+            <section className="lg:w-full w-full">
+              <ProdukTerbaru />
+            </section>
           </div>
         </div>
 
