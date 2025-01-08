@@ -233,7 +233,7 @@ function ListPromo() {
             <div className="flex flex-col space-y-4">
               {selectedPromo ? (
                 <img
-                  src={selectedPromo.foto}
+                  src={image}
                   alt="Uploaded Preview"
                   className="w-full h-80 object-cover rounded-md border"
                 />
@@ -274,7 +274,7 @@ function ListPromo() {
                   </label>
                   <input
                     type="text"
-                    value={selectedPromo ? selectedPromo.nama : ""}
+                    value={selectedPromo ? name : ""}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Name"
                     className="border rounded-md p-2 font-montserrat"
@@ -287,7 +287,7 @@ function ListPromo() {
                   </label>
                   <textarea
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={selectedPromo ? selectedPromo.detail : ""}
+                    value={selectedPromo ? deskripsi : ""}
                     onChange={(e) => setDeskripsi(e.target.value)}
                     placeholder="Enter product description"
                     rows="7"
@@ -300,7 +300,7 @@ function ListPromo() {
                   </label>
                   <textarea
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={selectedPromo ? selectedPromo.syarat : ""}
+                    value={selectedPromo ? syarat : ""}
                     onChange={(e) => setSyarat(e.target.value)}
                     placeholder="Enter terms and conditions"
                     rows="4"
