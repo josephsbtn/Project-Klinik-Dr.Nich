@@ -14,6 +14,8 @@ import Profil from "./screen/All/profile.jsx";
 import Galeri from "./screen/All/galeri.jsx";
 //produk
 import Produk from "./screen/All/produk.jsx";
+//promo
+import Promo from "./screen/All/promo.jsx";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
         <Route path="profil" element={<Profil />} />
         <Route path="galeri" element={<Galeri />} />
         <Route path="produk" element={<Produk />} />
+        <Route path="promo" element={<Promo />} />
+
       </Routes>
     </Router>
   );
