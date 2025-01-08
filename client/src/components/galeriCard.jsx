@@ -1,5 +1,7 @@
 import React from 'react'
 
+import axios from "axios";
+
 function galeriCard() {
   return (
     <div className="w-[375px] h-[100px] flex items-center border border-[#efefef]">

@@ -58,7 +58,7 @@ export default function Navbar({ selected }) {
 
   return (
     <div className="w-full h-[70px] shadow-sm bg-white flex items-center relative">
-      <div className="container mx-auto flex items-center justify-between px-6 lg:[120px]">
+      <div className="container mx-auto flex items-center justify-between px-6">
         {/* Left Navigation */}
         <div className="flex items-center gap-4">
           <button

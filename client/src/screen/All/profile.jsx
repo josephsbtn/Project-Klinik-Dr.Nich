@@ -46,7 +46,7 @@ function Profile() {
       <Navbar selected={"Profile"} />
       <div className="mx-[25px] mt-[18px] lg:mx-[120px]">
         <div className="flex-col lg:items-center lg:justify-center">
-          <p className="text-[#bdbdbd] text-xs font-normal font-SFPro tracking-tight">
+          <p className="text-[#bdbdbd] text-xs font-normal font-SFPro tracking-tight lg:text-sm">
             Profil
           </p>
           <img
