@@ -6,6 +6,7 @@ const newPromo = asyncHandler(async (req, res) => {
     nama: req.body.nama,
     detail: req.body.detail,
     foto: req.body.foto,
+    syarat: req.body.syarat,
   };
   try {
     const isExist = await promoModels.findOne({ nama: newPromo.nama });
@@ -34,6 +35,7 @@ const updatePromo = asyncHandler(async (req, res) => {
     nama: req.body.nama,
     detail: req.body.detail,
     foto: req.body.foto,
+    syarat: req.body.syarat,
   };
   try {
     const promo = await promoModels.findByIdAndUpdate(

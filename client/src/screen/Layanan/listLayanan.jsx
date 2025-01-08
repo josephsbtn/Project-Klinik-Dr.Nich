@@ -34,7 +34,7 @@ function ListLayanan() {
   return (
     <>
       <section className="flex flex-col items-center space-y-4">
-        <div className="fixed w-full">
+        <div className="fixed w-full z-10">
           <Navbar selected={"Layanan"} />
         </div>
 

@@ -9,6 +9,9 @@ const promoSchema = mongoose.Schema(
     detail: {
       type: String,
     },
+    syarat: {
+      type: String,
+    },
     foto: {
       type: String,
       required: true,

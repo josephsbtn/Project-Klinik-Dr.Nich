@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
 import LayananPopuler from "../../components/layananPopuler.jsx";
-import galeriCard from "../../components/galeriCard.jsx";
+import GaleriCard from "../../components/galeriCard.jsx";
 
 // IMAGE AND ICON
 import klinik from "../../assets/img-profil/klinik.png";
@@ -31,10 +32,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-function profile() {
+function Profile() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
+  const [content, setContent] = useState();
+
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const onAutoplayTimeLeft = (s, time, progress) => {
     if (progressCircle.current) {
       progressCircle.current.style.setProperty("--progress", 1 - progress);
@@ -47,17 +52,22 @@ function profile() {
   // FETCH DATA
   const fetchData = async () => {
     try {
-      const resLayanan = (await axios.get("/api/layanan/getAllLayanan")).data;
+      setLoading(true);
+      const resLayanan = (await axios.get("/api/gallery/getAllGaleri")).data;
 
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
       );
-      setLayanan(sorted);
+      setContent(sorted);
+      setLoading(false);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <Navbar selected={"Galeri"} />
@@ -76,8 +86,13 @@ function profile() {
         <div className="w-full h-full flex flex-col mt-[30px]">
           {/* Galeri */}
           <div className="w-full h-[600px] flex flex-col items-center">
-          <div className="w-[90%]">
-              <galeriCard />
+            <div className="w-[90%] lg:w-[80%] h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
+              {content &&
+                content.map((item) => (
+                  <div key={item._id}>
+                    <GaleriCard item={item} />
+                  </div>
+                ))}
             </div>
 
             {/* Lihat Lainnya */}
@@ -175,4 +190,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default Profile;

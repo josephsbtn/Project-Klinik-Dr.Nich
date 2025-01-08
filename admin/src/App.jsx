@@ -5,6 +5,7 @@ import LayananUD from "./screen/layanan/layananUD.jsx";
 import CreateLayanan from "./screen/layanan/createLayanan.jsx";
 import ListPromo from "./screen/promo/listPromo.jsx";
 import EditJenisLayanan from "./screen/layanan/editJenisLayanan.jsx";
+import ListGallery from "./screen/galery/listGallery.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           />
           <Route path="/layanan/tambahLayanan" element={<CreateLayanan />} />
           <Route path="/listpromo" element={<ListPromo />} />
+          <Route path="/galeri" element={<ListGallery />} />
         </Routes>
       </Router>
     </>

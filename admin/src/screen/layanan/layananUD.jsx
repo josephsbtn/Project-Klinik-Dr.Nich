@@ -46,6 +46,7 @@ function LayananUD() {
         setDurasi(response.data.durasi);
         setHarga(response.data.harga);
         setDeskripsi(response.data.deskripsi);
+        setCardDeskripsi(response.data.cardDeskripsi);
         setIdJenis(response.data.idJenis);
         setImage(response.data.image);
       } catch (error) {

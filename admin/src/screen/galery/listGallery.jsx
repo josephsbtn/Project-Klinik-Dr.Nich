@@ -4,52 +4,58 @@ import Navbar from "../../assets/component/navbar";
 import ConfirmPopup from "../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
 
-function ListPromo() {
-  const [promo, setPromo] = useState([]);
-  const [error, setError] = useState("");
-  const [name, setName] = useState("");
-  const [syarat, setSyarat] = useState("");
-  const [deskripsi, setDeskripsi] = useState("");
+function ListGallery() {
+  const [gallery, setGallery] = useState([]);
+  const [judul, setJudul] = useState("");
+  const [link, setLink] = useState("");
+  const [sosmed, setSosmed] = useState("");
+  const [channel, setChannel] = useState("");
   const [image, setImage] = useState("");
 
-  const [selectedPromo, setSelectedPromo] = useState(null);
+  const [selectedContent, setSelectedContent] = useState(null);
 
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
 
-  const fetchPromo = async () => {
+  const fetchGallery = async () => {
     try {
-      const response = await axios.get("/api/promo/getAllPromo");
+      setLoading(true);
+      const response = await axios.get("/api/gallery/getAllGaleri");
       const data = response.data;
       if (Array.isArray(data)) {
-        setPromo(data);
+        setGallery(data);
+        setLoading(false);
         setError("");
       } else {
         throw new Error("Invalid response format");
       }
     } catch (err) {
+      setLoading(false);
       console.error("Error fetching promo:", err.message);
       setError("Failed to fetch promo. Please try again later.");
     }
   };
 
   useEffect(() => {
-    fetchPromo();
+    fetchGallery();
   }, []);
 
-  const handleAddPromo = async (e) => {
+  const handleAddContent = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/promo/tambahpromo", {
-        nama: name,
-        detail: deskripsi,
-        syarat: syarat,
-        foto: image,
+      const response = await axios.post("/api/gallery/createGaleri", {
+        judul: judul,
+        thumbnail: image,
+        link: link,
+        channel: channel,
+        sosmed: sosmed,
       });
       if (response.status === 200) {
         setOpen(false);
-        fetchPromo();
+        fetchGallery();
       } else {
         setError("Failed to add promo. Please try again later.");
       }
@@ -59,50 +65,50 @@ function ListPromo() {
     }
   };
 
-  const deletePromo = () => {
+  const deleteGaleri = () => {
     try {
       const response = axios.delete(
-        `/api/promo/deletePromo/${selectedPromo._id}`
+        `/api/gallery/deleteGaleri/${selectedContent._id}`
       );
-      fetchPromo();
+      fetchGallery();
     } catch (error) {
       console.error("Error deleting promo:", error.message);
       setError("Failed to delete promo. Please try again later.");
     }
-    console.log("Delete promo with id:", selectedPromo._id);
+    console.log("Delete promo with id:", selectedContent._id);
   };
 
-  const editPromo = () => {
+  const editGaleri = () => {
     try {
-      const response = axios.put(`/api/promo/editPromo/${selectedPromo._id}`, {
-        nama: name,
-        detail: deskripsi,
-        syarat: syarat,
-        foto: image,
-      });
-      fetchPromo();
+      const response = axios.put(
+        `/api/gallery/editGaleri/${selectedContent._id}`,
+        {
+          judul: judul,
+          thumbnail: image,
+          link: link,
+          channel: channel,
+          sosmed: sosmed,
+        }
+      );
+      fetchGallery();
     } catch (error) {
       console.error("Error editing promo:", error.message);
       setError("Failed to edit promo. Please try again later.");
     }
-    console.log("Edit promo with id:", selectedPromo._id);
+    console.log("Edit promo with id:", selectedContent._id);
   };
 
   const handleEdit = (item, e) => {
     e.preventDefault();
     setEditing(true);
-    setSelectedPromo(item);
-    setName(item.nama);
-    setDeskripsi(item.detail);
-    setSyarat(item.syarat);
-    setImage(item.foto);
+    setSelectedContent(item);
     console.log("Edit promo with id:", item._id);
   };
 
   const handleDelete = (item, e) => {
     e.preventDefault();
     setConfirmOpen(true);
-    setSelectedPromo(item);
+    setSelectedContent(item);
   };
 
   const convertBase64 = (e) => {
@@ -131,12 +137,12 @@ function ListPromo() {
 
   return (
     <main className="flex flex-col container">
-      <Navbar selected={"/listpromo"} />
+      <Navbar selected={"/galeri"} />
       <ConfirmPopup open={open} onClose={() => setOpen(false)}>
-        <div className="w-fit flex space-x-4">
-          <div className="w-full lg:w-fit p-5 border rounded-md shadow-md bg-white">
+        <div className="w-fit flex items-start space-x-4">
+          <div className="w-full lg:w-full p-5 border rounded-md shadow-md bg-white">
             <h3 className="text-xl font-semibold mb-4 font-montserrat">
-              Promo Image
+              Content Thumbnail
             </h3>
             <div className="flex flex-col space-y-4">
               {image ? (
@@ -169,49 +175,61 @@ function ListPromo() {
             </div>
           </div>
           <form
-            onSubmit={handleAddPromo}
-            className="flex flex-col w-full lg:w-3/4 items-center justify-center p-2 rounded-3xl">
+            onSubmit={handleAddContent}
+            className="flex flex-col w-full lg:w-3/4 items-center justify-center rounded-3xl">
             <div className="w-full p-5 border rounded-md shadow-md bg-white">
               <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                Promo Details
+                Content Details
               </h3>
               <div className="flex flex-col space-y-4">
                 <div>
                   <label className="block text-gray-700 font-montserrat mb-1">
-                    Promo Name
+                    Content Title
                   </label>
                   <input
                     type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={judul}
+                    onChange={(e) => setJudul(e.target.value)}
                     placeholder="Name"
-                    className="border rounded-md p-2 font-montserrat"
+                    className="border rounded-md w-full p-2 font-montserrat"
                   />
                 </div>
 
                 <div className="w-96">
                   <label className="block text-gray-700 font-montserrat mb-1">
-                    Promo Description
+                    Link Content
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={deskripsi}
-                    onChange={(e) => setDeskripsi(e.target.value)}
-                    placeholder="Enter product description"
-                    rows="7"
+                    value={link}
+                    onChange={(e) => setLink(e.target.value)}
+                    placeholder="Enter content link url"
                   />
                 </div>
 
                 <div>
                   <label className="block text-gray-700 font-montserrat mb-1">
-                    Syarat dan Ketentuan
+                    Content Creator Channel
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={syarat}
-                    onChange={(e) => setSyarat(e.target.value)}
-                    placeholder="Enter terms and conditions"
-                    rows="4"
+                    value={channel}
+                    onChange={(e) => setChannel(e.target.value)}
+                    placeholder="Enter content creator channel name "
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-montserrat mb-1">
+                    Social Media
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full p-2 border rounded-md font-montserrat"
+                    value={sosmed}
+                    onChange={(e) => setSosmed(e.target.value)}
+                    placeholder="Social Media "
                   />
                 </div>
               </div>
@@ -225,15 +243,15 @@ function ListPromo() {
         </div>
       </ConfirmPopup>
       <ConfirmPopup open={editing} onClose={() => setEditing(false)}>
-        <div className="w-fit flex space-x-4">
-          <div className="w-full lg:w-fit p-5 border rounded-md shadow-md bg-white">
+        <div className="w-fit flex items-start space-x-4">
+          <div className="w-full lg:w-full p-5 border rounded-md shadow-md bg-white">
             <h3 className="text-xl font-semibold mb-4 font-montserrat">
-              Promo Image
+              Content Thumbnail
             </h3>
             <div className="flex flex-col space-y-4">
-              {selectedPromo ? (
+              {selectedContent ? (
                 <img
-                  src={selectedPromo.foto}
+                  src={selectedContent.thumbnail}
                   alt="Uploaded Preview"
                   className="w-full h-80 object-cover rounded-md border"
                 />
@@ -261,49 +279,61 @@ function ListPromo() {
             </div>
           </div>
           <form
-            onSubmit={editPromo}
-            className="flex flex-col w-full lg:w-3/4 items-center justify-center p-2 rounded-3xl">
+            onSubmit={editGaleri}
+            className="flex flex-col w-full lg:w-3/4 items-center justify-center rounded-3xl">
             <div className="w-full p-5 border rounded-md shadow-md bg-white">
               <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                Promo Details
+                Content Details
               </h3>
               <div className="flex flex-col space-y-4">
                 <div>
                   <label className="block text-gray-700 font-montserrat mb-1">
-                    Promo Name
+                    Content Title
                   </label>
                   <input
                     type="text"
-                    value={selectedPromo ? selectedPromo.nama : ""}
-                    onChange={(e) => setName(e.target.value)}
+                    value={selectedContent ? selectedContent.judul : ""}
+                    onChange={(e) => setJudul(e.target.value)}
                     placeholder="Name"
-                    className="border rounded-md p-2 font-montserrat"
+                    className="border rounded-md w-full p-2 font-montserrat"
                   />
                 </div>
 
                 <div className="w-96">
                   <label className="block text-gray-700 font-montserrat mb-1">
-                    Promo Description
+                    Link Content
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={selectedPromo ? selectedPromo.detail : ""}
-                    onChange={(e) => setDeskripsi(e.target.value)}
-                    placeholder="Enter product description"
-                    rows="7"
+                    value={selectedContent ? selectedContent.link : ""}
+                    onChange={(e) => setLink(e.target.value)}
+                    placeholder="Enter content link url"
                   />
                 </div>
 
                 <div>
                   <label className="block text-gray-700 font-montserrat mb-1">
-                    Syarat dan Ketentuan
+                    Content Creator Channel
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={selectedPromo ? selectedPromo.syarat : ""}
-                    onChange={(e) => setSyarat(e.target.value)}
-                    placeholder="Enter terms and conditions"
-                    rows="4"
+                    value={selectedContent ? selectedContent.channel : ""}
+                    onChange={(e) => setChannel(e.target.value)}
+                    placeholder="Enter content creator channel name "
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-montserrat mb-1">
+                    Social Media
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full p-2 border rounded-md font-montserrat"
+                    value={selectedContent ? selectedContent.sosmed : ""}
+                    onChange={(e) => setSosmed(e.target.value)}
+                    placeholder="Social Media "
                   />
                 </div>
               </div>
@@ -318,7 +348,7 @@ function ListPromo() {
       </ConfirmPopup>
       <ConfirmPopup open={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <div className="flex flex-col space-y-4 p-8 bg-white rounded-md shadow-md">
-          <h1>Anda yakin ingin menghapus promo ini?</h1>
+          <h1>Anda yakin ingin menghapus ini?</h1>
           <div className="flex items-center justify-between">
             <button
               onClick={() => setConfirmOpen(false)}
@@ -326,25 +356,24 @@ function ListPromo() {
               Cancel
             </button>
             <button
-              onClick={() => (setConfirmOpen(false), deletePromo())}
+              onClick={() => (setConfirmOpen(false), deleteGaleri())}
               className="bg-red-500 text-white px-4 py-2 rounded-md">
               Delete
             </button>
           </div>
         </div>
       </ConfirmPopup>
-
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Promo</h1>
+        <h1 className="text-xl font-bold text-secondary">List Gallery</h1>
         {error && <div className="text-red-500 my-4">{error}</div>}
         <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
-          {promo.length > 0
-            ? promo.map((item) => (
+          {gallery.length > 0
+            ? gallery.map((item) => (
                 <div
-                  key={item._id}
+                  key={item.id}
                   className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
                   <span className="font-SFPro font-normal text-base text-text">
-                    {item.nama}
+                    {item.judul}
                   </span>
                   <div className="flex gap-2">
                     <button
@@ -370,8 +399,8 @@ function ListPromo() {
         <div className="absolute right-0 bottom-0 p-4 z-0">
           <button
             onClick={() => setOpen(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Add Promo
+            className="bg-primary text-white px-4 py-2 rounded-md">
+            Add Gallery
           </button>
         </div>
       </section>
@@ -379,4 +408,4 @@ function ListPromo() {
   );
 }
 
-export default ListPromo;
+export default ListGallery;

@@ -5,8 +5,8 @@ import Navbar from "../assets/component/navbar";
 function dasboard() {
   return (
     <>
-      <main className="flex flex-col container ">
-        <Navbar />
+      <main className="flex flex-col h-screen container bg-[#EFEFEF] ">
+        <Navbar selected={"/"} />
       </main>
     </>
   );

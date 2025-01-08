@@ -59,6 +59,7 @@ function ListLayanan() {
       const res = (await axios.post("/api/layanan/tambahJenisLayanan", Djenis))
         .data;
       console.log(res);
+      setOpen(false);
       fetchData();
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -98,7 +99,7 @@ function ListLayanan() {
   return (
     <>
       <main className="container h-auto flex flex-col items-center">
-        <Navbar />
+        <Navbar selected={"/layanan"} />
         <section className="w-full pt-32 pb-20 flex flex-col items-center">
           <ConfirmPopUp open={open} onClose={() => setOpen(false)}>
             <h1 className="w-full text-center text-xl mb-4 font-bold">
@@ -139,6 +140,11 @@ function ListLayanan() {
                 placeholder="Jenis Layanan"
                 className="w-full p-2 border rounded-md mt-4"
                 onChange={(e) => setJenis(e.target.value)}
+              />
+              <textarea
+                placeholder="Deskripsi"
+                className="w-full p-2 border rounded-md mt-4"
+                onChange={(e) => setDeskripsi(e.target.value)}
               />
               <button
                 type="submit"
@@ -208,7 +214,7 @@ function ListLayanan() {
             </form>
           </ConfirmPopUp>
 
-          <section className="flex flex-col items-center space-y-4">
+          <section className="flex flex-col  w-[70%] items-center space-y-4">
             {isLoading ? (
               <div className="h- h-screen w-full flex justify-center items-center">
                 <p>Loading...</p>
@@ -223,9 +229,9 @@ function ListLayanan() {
                 </p>
               </div>
             ) : (
-              <main className="w-[90%] lg:w-4/5 flex flex-col items-center lg:items-start space-y-4">
+              <main className="w-full flex flex-col font-semibold items-center lg:items-start space-y-4">
                 <h1 className="font-SFPro w-full text-start lg:text-2xl text-secondary font-medium text-base">
-                  Layanan
+                  Jenis Layanan
                 </h1>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-fit justify-center mt-4">
                   {jenisLayanan && jenisLayanan.length > 0 ? (
@@ -242,8 +248,10 @@ function ListLayanan() {
             )}
           </section>
 
-          <h1 className="text-3xl font-bold text-center">Layanan Kami</h1>
-          <div className="flex flex-col space-y-2">
+          <h1 className="text-2xl text-secondary font-semibold text-start w-[70%] mx-auto mt-10">
+            Layanan Kami
+          </h1>
+          <div className="flex flex-col space-y-2 lg:grid lg:grid-cols-4 gap-4 lg:w-[70%] mt-5">
             {Array.isArray(layanan) ? (
               layanan.map((layananItem, index) => (
                 <CardLayanan key={index} item={layananItem} />
