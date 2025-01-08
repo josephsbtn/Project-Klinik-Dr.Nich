@@ -6,15 +6,20 @@ import axios from "axios";
 
 function ListPromo() {
   const [promo, setPromo] = useState([]);
-  const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [syarat, setSyarat] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [image, setImage] = useState("");
 
+  const [editName, setEditName] = useState("");
+  const [editSyarat, setEditSyarat] = useState("");
+  const [editDeskripsi, setEditDeskripsi] = useState("");
+  const [editImage, setEditImage] = useState("");
+
   const [selectedPromo, setSelectedPromo] = useState(null);
 
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState("");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
 
@@ -72,15 +77,30 @@ function ListPromo() {
     console.log("Delete promo with id:", selectedPromo._id);
   };
 
-  const editPromo = () => {
+  const updatePromo = (e) => {
+    e.preventDefault();
     try {
-      const response = axios.put(`/api/promo/editPromo/${selectedPromo._id}`, {
-        nama: name,
-        detail: deskripsi,
-        syarat: syarat,
-        foto: image,
-      });
+      console.log("Edit promo with id:", selectedPromo._id);
+      console.log("Edit name:", editName);
+      console.log("Edit deskripsi:", editDeskripsi);
+      console.log("Edit syarat:", editSyarat);
+      console.log("Edit image:", editImage);
+      const response = axios.put(
+        `/api/promo/updatepromo/${selectedPromo._id}`,
+        {
+          nama: editName,
+          detail: editDeskripsi,
+          syarat: editSyarat,
+          foto: editImage,
+        }
+      );
+      setEditDeskripsi("");
+      setEditSyarat("");
+      setEditName("");
+      setEditImage("");
+      window.location.reload();
       fetchPromo();
+      setEditing(false);
     } catch (error) {
       console.error("Error editing promo:", error.message);
       setError("Failed to edit promo. Please try again later.");
@@ -92,10 +112,10 @@ function ListPromo() {
     e.preventDefault();
     setEditing(true);
     setSelectedPromo(item);
-    setName(item.nama);
-    setDeskripsi(item.detail);
-    setSyarat(item.syarat);
-    setImage(item.foto);
+    setEditName(item.nama);
+    setEditSyarat(item.syarat);
+    setEditDeskripsi(item.detail);
+    setEditImage(item.foto);
     console.log("Edit promo with id:", item._id);
   };
 
@@ -125,7 +145,8 @@ function ListPromo() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setImage(reader.result);
+      if (editing) setEditImage(reader.result);
+      else setImage(reader.result);
     };
   };
 
@@ -233,7 +254,7 @@ function ListPromo() {
             <div className="flex flex-col space-y-4">
               {selectedPromo ? (
                 <img
-                  src={image}
+                  src={editImage}
                   alt="Uploaded Preview"
                   className="w-full h-80 object-cover rounded-md border"
                 />
@@ -244,7 +265,7 @@ function ListPromo() {
               )}
               <div className="flex space-x-4">
                 <button
-                  onClick={() => setImage(null)}
+                  onClick={() => setEditImage(null)}
                   className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
                   Remove
                 </button>
@@ -261,8 +282,9 @@ function ListPromo() {
             </div>
           </div>
           <form
-            onSubmit={editPromo}
+            onSubmit={updatePromo}
             className="flex flex-col w-full lg:w-3/4 items-center justify-center p-2 rounded-3xl">
+            {error && <p className="text-red-500">{error}</p>}
             <div className="w-full p-5 border rounded-md shadow-md bg-white">
               <h3 className="text-xl font-semibold mb-4 font-montserrat">
                 Promo Details
@@ -274,8 +296,8 @@ function ListPromo() {
                   </label>
                   <input
                     type="text"
-                    value={selectedPromo ? name : ""}
-                    onChange={(e) => setName(e.target.value)}
+                    value={editName}
+                    onChange={(e) => setEditName(e.target.value)}
                     placeholder="Name"
                     className="border rounded-md p-2 font-montserrat"
                   />
@@ -287,8 +309,8 @@ function ListPromo() {
                   </label>
                   <textarea
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={selectedPromo ? deskripsi : ""}
-                    onChange={(e) => setDeskripsi(e.target.value)}
+                    value={editDeskripsi}
+                    onChange={(e) => setEditDeskripsi(e.target.value)}
                     placeholder="Enter product description"
                     rows="7"
                   />
@@ -300,8 +322,8 @@ function ListPromo() {
                   </label>
                   <textarea
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={selectedPromo ? syarat : ""}
-                    onChange={(e) => setSyarat(e.target.value)}
+                    value={editSyarat}
+                    onChange={(e) => setEditSyarat(e.target.value)}
                     placeholder="Enter terms and conditions"
                     rows="4"
                   />

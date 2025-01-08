@@ -279,7 +279,7 @@ function ListGallery() {
             </div>
           </div>
           <form
-            onSubmit={editGaleri}
+            onSubmit={handleAddContent}
             className="flex flex-col w-full lg:w-3/4 items-center justify-center rounded-3xl">
             <div className="w-full p-5 border rounded-md shadow-md bg-white">
               <h3 className="text-xl font-semibold mb-4 font-montserrat">
