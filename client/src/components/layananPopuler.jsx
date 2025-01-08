@@ -28,19 +28,19 @@ function LayananPopuler() {
   return (
     <>
       <section className="w-full flex flex-col items-center lg:items-start py-2">
-        <div className="flex justify-between items-center w-full lg:py-6">
-          <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
-            Treatment Populer
-          </h1>
-          <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
-            Lihat Semua
-          </h1>
-        </div>
+      <main className="w-full flex lg:px-0 px-6 justify-between">
+        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
+          Layanan Populer!
+        </h1>
+        <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+          Lihat Semua
+        </h1>
+      </main>
 
         {error ? (
           <p>{error}</p>
         ) : (
-          <div className="flex max-w-full justify-start space-x-4 mt-4 overflow-x-scroll overflow-y-hidden z-0">
+          <div className="flex max-w-full justify-start space-x-4 mt-4 overflow-x-scroll overflow-y-hidden">
             {layanan && layanan.length > 0 ? (
               layanan.slice(0, 4).map((item) => (
                 <div key={item._id}>

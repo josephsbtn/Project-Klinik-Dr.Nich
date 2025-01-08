@@ -4,6 +4,7 @@ import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import galeriCard from "../../components/galeriCard.jsx";
+import ProdukTerbaru from "../../components/ProdukTerbaru";
 import axios from "axios";
 
 // promo
@@ -73,6 +74,16 @@ function promo() {
                         </div>
                     ))}
             </div>
+
+            <div className="flex flex-col gap-4 z-0">
+            {/* Layanan */}
+            <section className="lg:w-full w-[full]">
+              <LayananPopuler />
+            </section>
+            <section className="lg:w-full w-full">
+              <ProdukTerbaru />
+            </section>
+          </div>
             <Footer />
         </>
     )
