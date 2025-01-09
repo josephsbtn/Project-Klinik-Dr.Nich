@@ -5,6 +5,9 @@ const gallerySchema = mongoose.Schema(
     judul: {
       type: String,
     },
+    deskripsi: {
+      type: String,
+    },
     thumbnail: {
       type: String,
     },

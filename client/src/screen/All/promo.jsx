@@ -67,7 +67,7 @@ function Promo() {
                 </div>
             </div> */}
 
-      <div className="flex items-center w-[90%] justify-start space-x-2 mt-4 pt-20">
+      <div className="flex items-center w-[90%] justify-start space-x-2 mt-[18px] lg:mx-[120px]">
         <a
           onClick={() => navigate("/")}
           className="cursor-pointer text-xs text-disable-text font-normal">
@@ -82,7 +82,7 @@ function Promo() {
       </div>
 
       {/* Promo */}
-      <div>
+      <div className="flex flex-col lg:mx-[120px]">
         {content &&
           content.map((item) => (
             <div key={item._id}>
@@ -91,7 +91,7 @@ function Promo() {
           ))}
       </div>
 
-      <div className="flex flex-col gap-4 z-0">
+      <div className="flex flex-col gap-4 z-0 lg:mx-[120px]">
         {/* Layanan */}
         <section className="lg:w-full w-[full]">
           <LayananPopuler />

@@ -5,6 +5,7 @@ import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import GaleriCard from "../../components/galeriCard.jsx";
+import ProdukTerbaru from "../../components/ProdukTerbaru";
 
 // IMAGE AND ICON
 import klinik from "../../assets/img-profil/klinik.png";
@@ -86,7 +87,7 @@ function Profile() {
         <div className="w-full h-full flex flex-col mt-[30px]">
           {/* Galeri */}
           <div className="w-full h-[600px] flex flex-col items-center">
-            <div className="w-[90%] lg:w-[80%] h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
+            <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
               {content &&
                 content.map((item) => (
                   <div key={item._id}>
@@ -96,93 +97,24 @@ function Profile() {
             </div>
 
             {/* Lihat Lainnya */}
-            <div className="mt-6">
+            <div className="mt-6 h-full">
               <button className="w-[109px] h-[31px] text-[#c2a353] text-xs font-normal rounded-[10px] border border-[#c2a353] text-sm font-medium">
                 Lihat Lainnya
               </button>
             </div>
           </div>
 
-          {/* Layanan Populer */}
-          <section className="flex flex-col my-2 w-full items-center">
-            <div className="w-[90%]">
+          <div className="flex flex-col gap-4 z-0 lg:mx-[120px]">
+            {/* Layanan */}
+            <section className="lg:w-full w-[full]">
               <LayananPopuler />
-            </div>
-          </section>
+            </section>
+            <section className="lg:w-full w-full">
+              <ProdukTerbaru />
+            </section>
+          </div>
 
-          {/* Produk Baru ! */}
-          <section className="flex flex-col my-[26px] w-full items-center">
-            <main className="w-full flex px-6 justify-between">
-              <h1 className="text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight">
-                Produk Baru!
-              </h1>
-              <a
-                href=""
-                className="text-right text-[#c2a353] text-xs font-medium font-['SF Pro Display'] leading-tight tracking-tight">
-                Lihat Semua
-              </a>
-            </main>
-            <div className="flex flex-col pt-[15px]">
-              <div className="flex justify-center items-center pt-[15px]">
-                <div className="carousel carousel-center rounded-box w-80 space-x-[10px]">
-                  <div className="carousel-item">
-                    <div className="w-[184px] h-[276px] relative">
-                      <div className="w-[184px] h-[276px] left-0 top-0 absolute bg-white rounded-[10px] border border-[#efefef]" />
-                      <div className="w-[166px] left-[10px] top-[197px] absolute text-[#bdbdbd] text-xs font-normal font-['SF Pro Display'] leading-[17px] tracking-tight">
-                        Untuk kulit berminyak dan rentang berjerawat
-                      </div>
-                      <div className="left-[10px] top-[242px] absolute text-[#c2a353] text-base font-bold font-['SF Pro Display'] leading-tight tracking-tight">
-                        Rp 110.000
-                      </div>
-                      <img
-                        className="w-[184px] h-[174px] left-0 top-0 absolute rounded-[10px] border-4 border-white"
-                        src="https://via.placeholder.com/184x174"
-                      />
-                      <div className="w-[166px] left-[10px] top-[177px] absolute text-[#464646] text-sm font-normal font-['SF Pro Display'] leading-tight tracking-tight">
-                        Facial Glow Acne
-                      </div>
-                    </div>
-                  </div>
-                  <div className="carousel-item">
-                    <div className="w-[184px] h-[276px] relative">
-                      <div className="w-[184px] h-[276px] left-0 top-0 absolute bg-white rounded-[10px] border border-[#efefef]" />
-                      <div className="w-[166px] left-[10px] top-[197px] absolute text-[#bdbdbd] text-xs font-normal font-['SF Pro Display'] leading-[17px] tracking-tight">
-                        Untuk kulit berminyak dan rentang berjerawat
-                      </div>
-                      <div className="left-[10px] top-[242px] absolute text-[#c2a353] text-base font-bold font-['SF Pro Display'] leading-tight tracking-tight">
-                        Rp 110.000
-                      </div>
-                      <img
-                        className="w-[184px] h-[174px] left-0 top-0 absolute rounded-[10px] border-4 border-white"
-                        src="https://via.placeholder.com/184x174"
-                      />
-                      <div className="w-[166px] left-[10px] top-[177px] absolute text-[#464646] text-sm font-normal font-['SF Pro Display'] leading-tight tracking-tight">
-                        Facial Glow Acne
-                      </div>
-                    </div>
-                  </div>
-                  <div className="carousel-item">
-                    <div className="w-[184px] h-[276px] relative">
-                      <div className="w-[184px] h-[276px] left-0 top-0 absolute bg-white rounded-[10px] border border-[#efefef]" />
-                      <div className="w-[166px] left-[10px] top-[197px] absolute text-[#bdbdbd] text-xs font-normal font-['SF Pro Display'] leading-[17px] tracking-tight">
-                        Untuk kulit berminyak dan rentang berjerawat
-                      </div>
-                      <div className="left-[10px] top-[242px] absolute text-[#c2a353] text-base font-bold font-['SF Pro Display'] leading-tight tracking-tight">
-                        Rp 110.000
-                      </div>
-                      <img
-                        className="w-[184px] h-[174px] left-0 top-0 absolute rounded-[10px] border-4 border-white"
-                        src="https://via.placeholder.com/184x174"
-                      />
-                      <div className="w-[166px] left-[10px] top-[177px] absolute text-[#464646] text-sm font-normal font-['SF Pro Display'] leading-tight tracking-tight">
-                        Facial Glow Acne
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+
         </div>
       </div>
       <Footer />
