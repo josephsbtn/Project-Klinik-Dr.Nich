@@ -9,32 +9,44 @@ import LayananPopuler from "../../components/layananPopuler.jsx";
 function DetailTreatment() {
   const { idJenis, idTreatment } = useParams();
   const navigate = useNavigate();
+
+  const [jenis, setJenis] = useState("");
   const [judul, setJudul] = useState("");
   const [image, setImage] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [durasi, setDurasi] = useState("");
+  const [resDataJenis, setResDataJenis] = useState(null); // State for jenisLayanan data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const treatmentId = idTreatment ? idTreatment : idJenis; // Prioritize idTreatment
-      console.log("Fetching data for treatment ID:", treatmentId);
-      const response = await axios.get(
-        `/api/layanan/getLayananById/${treatmentId}`
-      );
-      const data = response.data;
-      console.log("Fetched data:", data);
-      setJudul(data.nama);
-      setDeskripsi(data.deskripsi);
-      setImage(data.image);
-      setDurasi(data.durasi);
+
+      if (idJenis) {
+        const jenisResponse = await axios.get(
+          `/api/layanan/getJenisLayananById/${idJenis}`
+        );
+        setResDataJenis(jenisResponse.data);
+        setJenis(jenisResponse.data.nama);
+      }
+
+      if (idTreatment) {
+        const treatmentResponse = await axios.get(
+          `/api/layanan/getLayananById/${idTreatment}`
+        );
+        const data = treatmentResponse.data;
+        setJudul(data.nama);
+        setDeskripsi(data.deskripsi);
+        setImage(data.image);
+        setDurasi(data.durasi);
+      }
+
       setLoading(false);
-    } catch (error) {
+    } catch (err) {
       setLoading(false);
-      console.error("Error fetching data:", error);
-      setError(error.response?.data?.message || "Something Wrong");
+      setError(err.response?.data?.message || "Something went wrong");
+      console.error("Error fetching data:", err);
     }
   };
 
@@ -65,7 +77,7 @@ function DetailTreatment() {
             <a
               onClick={() => navigate(`/layanan/detail/${idJenis}`)}
               className="cursor-pointer text-xs text-disable-text font-normal">
-              Treatment
+              {resDataJenis?.nama}
             </a>
             <ArrowRightDisable />
           </>
@@ -73,7 +85,7 @@ function DetailTreatment() {
         <a
           onClick={() => navigate(`/layanan/detail/${idJenis}/${idTreatment}`)}
           className="cursor-pointer text-xs text-disable-text font-normal">
-          Detail
+          {judul}
         </a>
       </div>
       {loading ? (

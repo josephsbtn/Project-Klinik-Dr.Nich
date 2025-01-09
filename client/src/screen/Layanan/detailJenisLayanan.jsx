@@ -61,7 +61,7 @@ function DetailJenisLayanan() {
           <a
             onClick={() => navigate("/layanan")}
             className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
-            Treatment
+            {judul}
           </a>
         </div>
         {loading ? (

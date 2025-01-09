@@ -37,11 +37,10 @@ function App() {
           path="/layanan/detailTreatment/:idTreatment"
           element={<DetailTreatment />}
         />
-        <Route path="profil" element={<Profil />} />
-        <Route path="galeri" element={<Galeri />} />
-        <Route path="produk" element={<Produk />} />
-        <Route path="promo" element={<Promo />} />
-
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/galeri" element={<Galeri />} />
+        <Route path="/produk" element={<Produk />} />
+        <Route path="/promo" element={<Promo />} />
       </Routes>
     </Router>
   );
