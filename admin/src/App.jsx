@@ -6,6 +6,8 @@ import CreateLayanan from "./screen/layanan/createLayanan.jsx";
 import ListPromo from "./screen/promo/listPromo.jsx";
 import EditJenisLayanan from "./screen/layanan/editJenisLayanan.jsx";
 import ListGallery from "./screen/galery/listGallery.jsx";
+import Sertif from "./screen/foto-sertif-mesin/sertif.jsx";
+import Mesin from "./screen/foto-sertif-mesin/mesin.jsx";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/layanan/tambahLayanan" element={<CreateLayanan />} />
           <Route path="/listpromo" element={<ListPromo />} />
           <Route path="/galeri" element={<ListGallery />} />
+          <Route path="/sertifikat" element={<Sertif />} />
+          <Route path="/mesin" element={<Mesin />} />
         </Routes>
       </Router>
     </>

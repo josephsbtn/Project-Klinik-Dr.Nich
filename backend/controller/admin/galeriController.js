@@ -8,6 +8,7 @@ const newGaleri = asyncHandler(async (req, res) => {
     link: req.body.link,
     channel: req.body.channel,
     sosmed: req.body.sosmed,
+    deskripsi: req.body.deskripsi,
   };
   try {
     const isExist = await Galeri.findOne({ judul: newGaleri.judul });
@@ -48,6 +49,7 @@ const editGaleri = asyncHandler(async (req, res) => {
     link: req.body.link,
     channel: req.body.channel,
     sosmed: req.body.sosmed,
+    deskripsi: req.body.deskripsi,
   };
   try {
     const galeri = await Galeri.findByIdAndUpdate(

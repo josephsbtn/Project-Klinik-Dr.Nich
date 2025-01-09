@@ -3,23 +3,12 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../assets/component/navbar";
 import ConfirmPopup from "../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
-import { set } from "mongoose";
 
-function ListGallery() {
-  const [gallery, setGallery] = useState([]);
-  const [judul, setJudul] = useState("");
-  const [link, setLink] = useState("");
-  const [sosmed, setSosmed] = useState("");
-  const [channel, setChannel] = useState("");
+function ListMesin() {
+  const [mesin, setMesin] = useState([]);
   const [image, setImage] = useState("");
-  const [deskripsi, setDeskripsi] = useState("");
 
-  const [editJudul, setEditJudul] = useState("");
-  const [editLink, setEditLink] = useState("");
-  const [editSosmed, setEditSosmed] = useState("");
-  const [editChannel, setEditChannel] = useState("");
   const [editImage, setEditImage] = useState("");
-  const [editDeskripsi, setEditDeskripsi] = useState("");
 
   const [selectedContent, setSelectedContent] = useState(null);
 
@@ -29,13 +18,13 @@ function ListGallery() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
 
-  const fetchGallery = async () => {
+  const fetchSertif = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/gallery/getAllGaleri");
+      const response = await axios.get("/api/foto/getAllMesin");
       const data = response.data;
       if (Array.isArray(data)) {
-        setGallery(data);
+        setMesin(data);
         setLoading(false);
         setError("");
       } else {
@@ -49,22 +38,18 @@ function ListGallery() {
   };
 
   useEffect(() => {
-    fetchGallery();
+    fetchSertif();
   }, []);
 
   const handleAddContent = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/gallery/createGaleri", {
-        judul: judul,
-        thumbnail: image,
-        link: link,
-        channel: channel,
-        sosmed: sosmed,
+      const response = await axios.post("/api/foto/createMesin", {
+        foto: image,
       });
       if (response.status === 200) {
         setOpen(false);
-        fetchGallery();
+        fetchSertif();
       } else {
         setError("Failed to add promo. Please try again later.");
       }
@@ -77,10 +62,10 @@ function ListGallery() {
   const deleteGaleri = () => {
     try {
       const response = axios.delete(
-        `/api/gallery/deleteGaleri/${selectedContent._id}`
+        `/api/foto/deleteMesin/${selectedContent._id}`
       );
       window.location.reload();
-      fetchGallery();
+      fetchSertif();
     } catch (error) {
       console.error("Error deleting promo:", error.message);
       setError("Failed to delete promo. Please try again later.");
@@ -90,17 +75,10 @@ function ListGallery() {
 
   const editGaleri = () => {
     try {
-      const response = axios.put(
-        `/api/gallery/editGaleri/${selectedContent._id}`,
-        {
-          judul: editJudul,
-          thumbnail: editImage,
-          link: editLink,
-          channel: editChannel,
-          sosmed: editSosmed,
-        }
-      );
-      fetchGallery();
+      const response = axios.put(`/api/foto/editMesin/${selectedContent._id}`, {
+        foto: editImage,
+      });
+      fetchSertif();
     } catch (error) {
       console.error("Error editing promo:", error.message);
       setError("Failed to edit promo. Please try again later.");
@@ -112,11 +90,7 @@ function ListGallery() {
     e.preventDefault();
     setEditing(true);
     setSelectedContent(item);
-    setEditChannel(item.channel);
-    setEditImage(item.thumbnail);
-    setEditJudul(item.judul);
-    setEditLink(item.link);
-    setEditSosmed(item.sosmed);
+    setEditImage(item.foto);
     console.log("Edit promo with id:", item._id);
   };
 
@@ -156,12 +130,12 @@ function ListGallery() {
 
   return (
     <main className="flex flex-col container">
-      <Navbar selected={"/galeri"} />
+      <Navbar selected={"/mesin"} />
       <ConfirmPopup open={open} onClose={() => setOpen(false)}>
         <div className="w-fit flex items-start space-x-4">
           <div className="w-full lg:w-full p-5 border rounded-md shadow-md bg-white">
             <h3 className="text-xl font-semibold mb-4 font-montserrat">
-              Content Thumbnail
+              Foto Sertifikat
             </h3>
             <div className="flex flex-col space-y-4">
               {image ? (
@@ -196,75 +170,6 @@ function ListGallery() {
           <form
             onSubmit={handleAddContent}
             className="flex flex-col w-full lg:w-3/4 items-center justify-center rounded-3xl">
-            <div className="w-full p-5 border rounded-md shadow-md bg-white">
-              <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                Content Details
-              </h3>
-              <div className="flex flex-col space-y-4">
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Content Title
-                  </label>
-                  <input
-                    type="text"
-                    value={judul}
-                    onChange={(e) => setJudul(e.target.value)}
-                    placeholder="Name"
-                    className="border rounded-md w-full p-2 font-montserrat"
-                  />
-                </div>
-
-                <div className="w-96">
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Link Content
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={link}
-                    onChange={(e) => setLink(e.target.value)}
-                    placeholder="Enter content link url"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Content Creator Channel
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={channel}
-                    onChange={(e) => setChannel(e.target.value)}
-                    placeholder="Enter content creator channel name "
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Social Media
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={sosmed}
-                    onChange={(e) => setSosmed(e.target.value)}
-                    placeholder="Social Media "
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Deskripsi
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={sosmed}
-                    onChange={(e) => setDeskripsi(e.target.value)}
-                    placeholder="Social Media "
-                  />
-                </div>
-              </div>
-            </div>
             <button
               type="submit"
               className="p-2 bg-primary text-white font-SFPro mt-4 px-10 rounded-xl">
@@ -312,75 +217,6 @@ function ListGallery() {
           <form
             onSubmit={editGaleri}
             className="flex flex-col w-full lg:w-3/4 items-center justify-center rounded-3xl">
-            <div className="w-full p-5 border rounded-md shadow-md bg-white">
-              <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                Content Details
-              </h3>
-              <div className="flex flex-col space-y-4">
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Content Title
-                  </label>
-                  <input
-                    type="text"
-                    value={editJudul}
-                    onChange={(e) => setEditJudul(e.target.value)}
-                    placeholder="Name"
-                    className="border rounded-md w-full p-2 font-montserrat"
-                  />
-                </div>
-
-                <div className="w-96">
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Link Content
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={editLink}
-                    onChange={(e) => setEditLink(e.target.value)}
-                    placeholder="Enter content link url"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Content Creator Channel
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={editChannel}
-                    onChange={(e) => setEditChannel(e.target.value)}
-                    placeholder="Enter content creator channel name "
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Social Media
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={editSosmed}
-                    onChange={(e) => setEditSosmed(e.target.value)}
-                    placeholder="Social Media "
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-montserrat mb-1">
-                    Deskripsi
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full p-2 border rounded-md font-montserrat"
-                    value={editDeskripsi}
-                    onChange={(e) => setEditDeskripsi(e.target.value)}
-                    placeholder="Social Media "
-                  />
-                </div>
-              </div>
-            </div>
             <button
               type="submit"
               className="p-2 bg-primary text-white font-SFPro mt-4 px-10 rounded-xl">
@@ -407,17 +243,18 @@ function ListGallery() {
         </div>
       </ConfirmPopup>
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Gallery</h1>
+        <h1 className="text-xl font-bold text-secondary">List Mesin</h1>
         {error && <div className="text-red-500 my-4">{error}</div>}
-        <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
-          {gallery.length > 0
-            ? gallery.map((item) => (
+        <div className="grid grid-cols-2 gap-4 w-full max-w-4xl mt-5">
+          {mesin.length > 0
+            ? mesin.map((item) => (
                 <div
                   key={item.id}
-                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <span className="font-SFPro font-normal text-base text-text line-clamp-1">
-                    {item.judul}
-                  </span>
+                  className="flex flex-col justify-between w-fit h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                  <img
+                    className="h-auto max-w-96 aspect-video p-4"
+                    src={item.foto}
+                  />
                   <div className="flex gap-2">
                     <button
                       onClick={(e) => handleEdit(item, e)}
@@ -439,7 +276,7 @@ function ListGallery() {
               )}
         </div>
 
-        <div className="absolute right-0 bottom-0 p-4 z-0">
+        <div className="fixed right-0 bottom-0 p-4 z-0">
           <button
             onClick={() => setOpen(true)}
             className="bg-primary text-white px-4 py-2 rounded-md">
@@ -451,4 +288,4 @@ function ListGallery() {
   );
 }
 
-export default ListGallery;
+export default ListMesin;
