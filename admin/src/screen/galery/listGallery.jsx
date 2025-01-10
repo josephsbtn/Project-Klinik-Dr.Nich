@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../assets/component/navbar";
 import ConfirmPopup from "../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
-import { set } from "mongoose";
+// import { set } from "mongoose";
 
 function ListGallery() {
   const [gallery, setGallery] = useState([]);
@@ -61,6 +61,7 @@ function ListGallery() {
         link: link,
         channel: channel,
         sosmed: sosmed,
+        deskripsi: deskripsi,
       });
       if (response.status === 200) {
         setOpen(false);
@@ -98,6 +99,7 @@ function ListGallery() {
           link: editLink,
           channel: editChannel,
           sosmed: editSosmed,
+          deskripsi: editDeskripsi,
         }
       );
       fetchGallery();
@@ -117,6 +119,7 @@ function ListGallery() {
     setEditJudul(item.judul);
     setEditLink(item.link);
     setEditSosmed(item.sosmed);
+    setEditDeskripsi(item.deskripsi);
     console.log("Edit promo with id:", item._id);
   };
 
