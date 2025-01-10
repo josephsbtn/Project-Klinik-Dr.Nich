@@ -49,10 +49,11 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+            activeIndex === i
               ? "w-[19px] h-2.5 bg-[#c2a353]"
               : "w-2.5 h-2.5 bg-[#dcdcdc]"
-            }`}
+          }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
@@ -92,8 +93,8 @@ export default function Beranda() {
     } catch (error) {
       setError(
         "Failed to fetch jenis layanan. Please try again later (" +
-        error.message +
-        ")"
+          error.message +
+          ")"
       );
     } finally {
       setLoading(false);
@@ -221,10 +222,11 @@ export default function Beranda() {
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
+                className={` rounded-full transition-all duration-300 cursor-pointer ${
+                  activeIndex === index
                     ? "w-[19px] h-2.5 bg-[#c2a353]"
                     : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                  }`}
+                }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
@@ -252,7 +254,7 @@ export default function Beranda() {
                 slidesPerView={1}
                 className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
                 {fotoSertif && fotoSertif.length > 0 ? (
-                  fotoSertif.map((item, index) => (
+                  fotoSertif.map((item) => (
                     <SwiperSlide key={item._id}>
                       <img
                         className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
@@ -292,7 +294,7 @@ export default function Beranda() {
                 slidesPerView={1}
                 className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
                 {fotoMesin && fotoMesin.length > 0 ? (
-                  fotoMesin.map((item, index) => (
+                  fotoMesin.map((item) => (
                     <SwiperSlide key={item._id}>
                       <img
                         className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
@@ -356,7 +358,7 @@ export default function Beranda() {
         <section className="lg:w-[70%] w-[90%]">
           <LayananPopuler />
         </section>
-        <section className="lg:w-[70%] w-full">
+        <section className="lg:w-[70%] w-full ">
           <ProdukTerbaru />
         </section>
 
@@ -380,7 +382,11 @@ export default function Beranda() {
                 <div className="carousel-item">
                   <div className="w-[326px] h-[213.28px] relative flex flex-col items-start">
                     {/* Image */}
-                    <img src={galeri1} className="mx-auto rounded-[10px]" alt="Produk Baru" />
+                    <img
+                      src={galeri1}
+                      className="mx-auto rounded-[10px]"
+                      alt="Produk Baru"
+                    />
 
                     {/* Product Name */}
                     <p className="w-full text-[#464646] text-left text-sm mx-2 my-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
@@ -399,8 +405,6 @@ export default function Beranda() {
             </div>
           </div>
         </section>
-
-
       </div>
       <Footer />
     </div>

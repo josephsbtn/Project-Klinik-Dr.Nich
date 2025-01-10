@@ -67,4 +67,14 @@ const deleteproduk = asyncHandler(async (req, res) => {
   }
 });
 
-export { newproduk, getproduk, updateproduk, deleteproduk };
+const getprodukbyID = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const produk = await produkModels.findById(id);
+    res.send(produk);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+export { newproduk, getproduk, updateproduk, deleteproduk, getprodukbyID };
