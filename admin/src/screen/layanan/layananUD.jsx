@@ -72,7 +72,7 @@ function LayananUD() {
         idJenis,
         image,
       });
-      setSuccess(data.message);
+      setSuccessMessage(data.message);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     } finally {

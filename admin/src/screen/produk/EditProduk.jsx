@@ -24,7 +24,7 @@ function EditProduk() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchJenisLayanan = async () => {
+    const fetchProduct = async () => {
       try {
         setLoading(true);
         const response = await axios.get(`/api/produk/getprodukbyId/${id}`);
@@ -41,12 +41,12 @@ function EditProduk() {
         setLoading(true);
         const response = await axios.get(`/api/produk/getProdukById/${id}`);
         setNama(response.data.nama);
-        setDurasi(response.data.durasi);
-        setHarga(response.data.harga);
         setDeskripsi(response.data.deskripsi);
-        setCardDeskripsi(response.data.cardDeskripsi);
-        setIdJenis(response.data.idJenis);
-        setImage(response.data.image);
+        setManfaat(response.data.manfaat);
+        setCaraPakai(response.data.caraPakai);
+        setHarga(response.data.harga);
+        setKategori(response.data.kategori);
+        setTipeProduk(response.data.tipeProduk);
       } catch (error) {
         setError(error.response?.data?.message || "An error occurred");
       } finally {
@@ -75,25 +75,6 @@ function EditProduk() {
       setError(error.response?.data?.message || "An error occurred");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleDelete = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.delete(`/api/layanan/deleteLayanan/${id}`);
-      setNama("");
-      setDurasi("");
-      setHarga("");
-      setDeskripsi("");
-      setIdJenis("");
-      setImage(null);
-      setSuccessMessage(res.data.message);
-    } catch (error) {
-      setError(error.response?.data?.message || "An error occurred");
-    } finally {
-      setLoading(false);
-      setOpen(false); // Close the confirmation pop-up after delete
     }
   };
 
