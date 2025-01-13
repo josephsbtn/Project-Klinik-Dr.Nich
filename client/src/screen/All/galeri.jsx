@@ -23,6 +23,7 @@ import sertifikat1 from "../../assets/img-about/sertifikat1.png";
 import { useSwipeable } from "react-swipeable";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import axios from "axios";
 
 // import required modules
