@@ -26,6 +26,7 @@ import { Home } from "./screen/POS/Home.jsx";
 import { USer } from "./screen/POS/User/users.jsx";
 import { Products } from "./screen/POS/Produk/products.jsx";
 import { Laporan } from "./screen/POS/Laporan/reports.jsx";
+import { Promo } from "./screen/POS/Promo/promo.jsx";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/pos/user" element={<USer/>} />
           <Route path="/pos/produks" element={<Products/>} />
           <Route path="/pos/laporan" element={<Laporan/>} />
+          <Route path="/pos/promo" element={<Promo/>} />
         </Routes>
       </Router>
     </>
