@@ -102,9 +102,9 @@ function Produk() {
                 </div>
             </div>
 
-            <div className='flex flex-col gap-4 items-center w-[90%] justify-start space-x-2 mt-28 lg:mx-[120px]'>
+            <div className='flex flex-col gap-4 items-center w-[90%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]'>
                 {/* Layanan */}
-                <section className="lg:w-full w-[90%]">
+                <section className="lg:w-full w-full">
                     <LayananPopuler />
                 </section>
                 <section className="lg:w-full w-full">

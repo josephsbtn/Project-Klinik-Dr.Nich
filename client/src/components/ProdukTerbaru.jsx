@@ -27,7 +27,7 @@ function ProdukTerbaru() {
 
   return (
     <section className="flex flex-col my-[26px] w-full items-center">
-      <main className="w-full flex lg:px-0 px-6 justify-between">
+      <main className="w-full flex justify-between">
         <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
           Produk Baru!
         </h1>
@@ -52,9 +52,9 @@ function ProdukTerbaru() {
           </div>
         </>
       ) : (
-        <div className="flex flex-col lg:w-full pt-[15px]">
+        <div className="flex flex-col w-full lg:w-full pt-[15px]">
           <div className="flex lg:justify-start justify-center items-center pt-[15px]  ">
-            <div className="carousel carousel-center w-80 lg:w-full space-x-[10px] ">
+            <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
               <div className="carousel-item gap-9">
                 {produk ? (
                   produk.slice(0, 7).map((item) => (

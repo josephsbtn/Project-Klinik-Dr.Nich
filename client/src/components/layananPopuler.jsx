@@ -28,7 +28,7 @@ function LayananPopuler() {
   return (
     <>
       <section className="w-full flex flex-col items-center lg:items-start py-2">
-        <main className="w-full flex lg:px-0 px-6 justify-between">
+        <main className="w-full flex justify-between">
           <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
             Layanan Populer
           </h1>
