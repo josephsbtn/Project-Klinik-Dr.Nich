@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import Navbar from "../../assets/component/navbar";
+import Navbar from "../../../assets/component/navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import ConfirmPopUp from "../../assets/component/confirmPopUp";
+import ConfirmPopUp from "../../../assets/component/confirmPopUp";
 
 function EditJenisLayanan() {
   const { id } = useParams();

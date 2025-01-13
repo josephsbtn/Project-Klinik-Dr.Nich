@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dasboard from "./screen/dashboard.jsx";
-import ListLayanan from "./screen/layanan/listLayanan.jsx";
-import LayananUD from "./screen/layanan/layananUD.jsx";
-import CreateLayanan from "./screen/layanan/createLayanan.jsx";
-import ListPromo from "./screen/promo/listPromo.jsx";
-import EditJenisLayanan from "./screen/layanan/editJenisLayanan.jsx";
-import ListGallery from "./screen/galery/listGallery.jsx";
-import Sertif from "./screen/foto-sertif-mesin/sertif.jsx";
-import Mesin from "./screen/foto-sertif-mesin/mesin.jsx";
-import Produk from "./screen/produk/produk.jsx";
+import ListLayanan from "./screen/userDisplayUpdate/layanan/listLayanan.jsx";
+import LayananUD from "./screen/userDisplayUpdate/layanan/layananUD.jsx";
+import CreateLayanan from "./screen/userDisplayUpdate/layanan/createLayanan.jsx";
+import ListPromo from "./screen/userDisplayUpdate/promo/listPromo.jsx";
+import EditJenisLayanan from "./screen/userDisplayUpdate/layanan/editJenisLayanan.jsx";
+import ListGallery from "./screen/userDisplayUpdate/galery/listGallery.jsx";
+import Sertif from "./screen/userDisplayUpdate/foto-sertif-mesin/sertif.jsx";
+import Mesin from "./screen/userDisplayUpdate/foto-sertif-mesin/mesin.jsx";
+import Produk from "./screen/userDisplayUpdate/produk/produk.jsx";
 
 function App() {
   return (

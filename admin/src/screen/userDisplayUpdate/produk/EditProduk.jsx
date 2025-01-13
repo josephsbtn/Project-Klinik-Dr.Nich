@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import Navbar from "../../assets/component/navbar";
+import Navbar from "../../../assets/component/navbar";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import ConfirmPopUp from "../../assets/component/confirmPopUp";
+import ConfirmPopUp from "../../../assets/component/confirmPopUp";
 
 function EditProduk() {
   const { id } = useParams();
@@ -28,18 +28,6 @@ function EditProduk() {
       try {
         setLoading(true);
         const response = await axios.get(`/api/produk/getprodukbyId/${id}`);
-        setJenisLayanan(sortedJenisLayanan);
-      } catch (error) {
-        setError(error.response?.data?.message || "An error occurred");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchDataLayanan = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(`/api/produk/getProdukById/${id}`);
         setNama(response.data.nama);
         setDeskripsi(response.data.deskripsi);
         setManfaat(response.data.manfaat);
@@ -47,15 +35,14 @@ function EditProduk() {
         setHarga(response.data.harga);
         setKategori(response.data.kategori);
         setTipeProduk(response.data.tipeProduk);
+        setImage(response.data.image);
       } catch (error) {
         setError(error.response?.data?.message || "An error occurred");
       } finally {
         setLoading(false);
       }
     };
-
-    fetchDataLayanan();
-    fetchJenisLayanan();
+    fetchProduct();
   }, [id]);
 
   const submitHandler = async (e) => {
@@ -64,17 +51,28 @@ function EditProduk() {
     try {
       const { data } = await axios.put(`/api/layanan/updateLayanan/${id}`, {
         nama,
-        durasi,
-        harga,
         deskripsi,
-        idJenis,
         image,
+        manfaat,
+        caraPakai,
+        harga,
+        kategori,
+        tipeProduk,
       });
       setSuccessMessage(data.message);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const { data } = await axios.delete(`/api/layanan/deleteLayanan/${id}`);
+      setSuccessMessage(data.message);
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
     }
   };
 
@@ -128,9 +126,9 @@ function EditProduk() {
                 Content Thumbnail
               </h3>
               <div className="flex flex-col space-y-4">
-                {selectedContent ? (
+                {image ? (
                   <img
-                    src={editImage}
+                    src={image}
                     alt="Uploaded Preview"
                     className="w-full h-80 object-cover rounded-md border"
                   />
@@ -141,7 +139,7 @@ function EditProduk() {
                 )}
                 <div className="flex space-x-4">
                   <button
-                    onClick={() => setEditImage(null)}
+                    onClick={() => setImage(null)}
                     className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
                     Remove
                   </button>

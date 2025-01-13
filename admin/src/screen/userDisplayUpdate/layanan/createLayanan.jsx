@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import Navbar from "../../assets/component/navbar";
+import Navbar from "../../../assets/component/navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 

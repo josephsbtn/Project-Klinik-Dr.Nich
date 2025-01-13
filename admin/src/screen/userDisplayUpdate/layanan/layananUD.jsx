@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import Navbar from "../../assets/component/navbar";
+import Navbar from "../../../assets/component/navbar.jsx";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import ConfirmPopUp from "../../assets/component/confirmPopUp";
+import ConfirmPopUp from "../../../assets/component/confirmPopUp";
 
 function LayananUD() {
   const { id } = useParams();

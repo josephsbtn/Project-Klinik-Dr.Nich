@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import Navbar from "../../assets/component/navbar";
+import Navbar from "../../../assets/component/navbar.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ConfirmPopUp from "../../assets/component/confirmPopUp";
-import CardJenisLayanan from "../../assets/component/cardJenisLayanan";
-import CardLayanan from "../../assets/component/CardLayanan";
+import ConfirmPopUp from "../../../assets/component/confirmPopUp";
+import CardJenisLayanan from "../../../assets/component/cardJenisLayanan";
+import CardLayanan from "../../../assets/component/CardLayanan";
 
 function ListLayanan() {
   const navigate = useNavigate();

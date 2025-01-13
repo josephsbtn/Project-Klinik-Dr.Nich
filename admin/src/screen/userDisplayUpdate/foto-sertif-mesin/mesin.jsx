@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import Navbar from "../../assets/component/navbar";
-import ConfirmPopup from "../../assets/component/confirmPopUp.jsx";
+import Navbar from "../../../assets/component/navbar";
+import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
 
 function ListMesin() {
