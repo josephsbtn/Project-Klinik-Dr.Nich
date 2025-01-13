@@ -7,6 +7,7 @@ import productType from "../../models/produk/productType.js";
 const newCategoryProduct = asyncHandler(async (req, res) => {
   const newCategoryProduct = {
     name: req.body.name,
+    image: req.body.image,
   };
   try {
     const isExist = await kategoriProduct.findOne({
@@ -31,23 +32,11 @@ const getCategoryProduct = asyncHandler(async (req, res) => {
   }
 });
 
-const deleteCategoryProduct = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  try {
-    const categoryProduct = await kategoriProduct.findByIdAndDelete(id);
-    if (!categoryProduct) {
-      throw new Error("kategori Produk Tidak Ditemukan");
-    }
-    res.send(categoryProduct);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
 const editCategoryProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
     name: req.body.name,
+    image: req.body.image,
   };
   try {
     const categoryProduct = await kategoriProduct.findByIdAndUpdate(
@@ -64,6 +53,15 @@ const editCategoryProduct = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteCategoryProduct = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const categoryProduct = await kategoriProduct.findByIdAndDelete(id);
+    res.send(categoryProduct);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 // PRODUCT TYPE HANDLER
 
 const newProductType = asyncHandler(async (req, res) => {

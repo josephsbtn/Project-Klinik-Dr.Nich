@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ListProduct() {
+  const navigate = useNavigate();
   const [produk, setProduk] = useState([]);
   const [judul, setJudul] = useState("");
   const [link, setLink] = useState("");
@@ -420,8 +422,8 @@ function ListProduct() {
 
         <div className="absolute right-0 bottom-0 p-4 z-0">
           <button
-            onClick={() => setOpen(true)}
-            className="bg-primary text-white px-4 py-2 rounded-md">
+            className="bg-primary text-white px-4 py-2 rounded-md"
+            onClick={() => navigate("/tambahproduk")}>
             Add Gallery
           </button>
         </div>

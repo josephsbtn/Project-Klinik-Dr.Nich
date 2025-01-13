@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import ConfirmPopUp from "../../../assets/component/confirmPopUp";
 
-function EditProduk() {
+function AddProduct() {
   const { id } = useParams();
   const [nama, setNama] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
@@ -156,7 +156,7 @@ function EditProduk() {
               </div>
             </div>
             <form
-              onSubmit={editGaleri}
+              onSubmit={submitHandler}
               className="flex flex-col w-full lg:w-3/4 items-center justify-center rounded-3xl">
               <div className="w-full p-5 border rounded-md shadow-md bg-white">
                 <h3 className="text-xl font-semibold mb-4 font-montserrat">
@@ -165,12 +165,12 @@ function EditProduk() {
                 <div className="flex flex-col space-y-4">
                   <div>
                     <label className="block text-gray-700 font-montserrat mb-1">
-                      Content Title
+                      Product Name
                     </label>
                     <input
                       type="text"
-                      value={editJudul}
-                      onChange={(e) => setEditJudul(e.target.value)}
+                      value={nama}
+                      onChange={(e) => setNama(e.target.value)}
                       placeholder="Name"
                       className="border rounded-md w-full p-2 font-montserrat"
                     />
@@ -178,38 +178,38 @@ function EditProduk() {
 
                   <div className="w-96">
                     <label className="block text-gray-700 font-montserrat mb-1">
-                      Link Content
+                      Product Description
                     </label>
                     <input
                       type="text"
                       className="w-full p-2 border rounded-md font-montserrat"
-                      value={editLink}
-                      onChange={(e) => setEditLink(e.target.value)}
+                      value={deskripsi}
+                      onChange={(e) => setDeskripsi(e.target.value)}
                       placeholder="Enter content link url"
                     />
                   </div>
 
                   <div>
                     <label className="block text-gray-700 font-montserrat mb-1">
-                      Content Creator Channel
+                      Cara Pakai
                     </label>
                     <input
                       type="text"
                       className="w-full p-2 border rounded-md font-montserrat"
-                      value={editChannel}
-                      onChange={(e) => setEditChannel(e.target.value)}
+                      value={caraPakai}
+                      onChange={(e) => setCaraPakai(e.target.value)}
                       placeholder="Enter content creator channel name "
                     />
                   </div>
                   <div>
                     <label className="block text-gray-700 font-montserrat mb-1">
-                      Social Media
+                      Manfaat
                     </label>
                     <input
                       type="text"
                       className="w-full p-2 border rounded-md font-montserrat"
-                      value={editSosmed}
-                      onChange={(e) => setEditSosmed(e.target.value)}
+                      value={manfaat}
+                      onChange={(e) => setManfaat(e.target.value)}
                       placeholder="Social Media "
                     />
                   </div>
@@ -228,4 +228,4 @@ function EditProduk() {
   );
 }
 
-export default EditProduk;
+export default AddProduct;

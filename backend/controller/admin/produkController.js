@@ -77,4 +77,6 @@ const getprodukbyID = asyncHandler(async (req, res) => {
   }
 });
 
+//kategori produk
+
 export { newproduk, getproduk, updateproduk, deleteproduk, getprodukbyID };
