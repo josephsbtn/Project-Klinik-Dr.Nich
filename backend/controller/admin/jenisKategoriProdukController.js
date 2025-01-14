@@ -25,8 +25,11 @@ const newCategoryProduct = asyncHandler(async (req, res) => {
 
 const getCategoryProduct = asyncHandler(async (req, res) => {
   try {
-    const categoryProduct = await kategoriProduct.find();
-    res.send(categoryProduct);
+    const data = await kategoriProduct.find();
+    if (!data) {
+      throw new Error("kategori Produk Tidak Ditemukan");
+    }
+    res.send(data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -73,8 +76,8 @@ const newProductType = asyncHandler(async (req, res) => {
     if (isExist) {
       throw new Error("kategori Produk Sudah Ada");
     }
-    const productType = await productType.create(newProductType);
-    res.send(productType);
+    const data = await productType.create(newProductType);
+    res.send(data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -82,8 +85,11 @@ const newProductType = asyncHandler(async (req, res) => {
 
 const getProductType = asyncHandler(async (req, res) => {
   try {
-    const productType = await productType.find();
-    res.send(productType);
+    const data = await productType.find();
+    if (!data) {
+      throw new Error("kategori Produk Tidak Ditemukan");
+    }
+    res.send(data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -95,12 +101,12 @@ const editProductType = asyncHandler(async (req, res) => {
     name: req.body.name,
   };
   try {
-    const productType = await productType.findByIdAndUpdate(
+    const data = await productType.findByIdAndUpdate(
       id,
       { $set: newData },
       { new: true }
     );
-    if (!productType) {
+    if (!data) {
       throw new Error("kategori Produk Tidak Ditemukan");
     }
   } catch (error) {
@@ -111,11 +117,11 @@ const editProductType = asyncHandler(async (req, res) => {
 const deleteProductType = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const productType = await productType.findByIdAndDelete(id);
-    if (!productType) {
+    const data = await productType.findByIdAndDelete(id);
+    if (!data) {
       throw new Error("kategori Produk Tidak Ditemukan");
     }
-    res.send(productType);
+    res.send(data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

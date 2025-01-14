@@ -23,10 +23,12 @@ const produkSchema = mongoose.Schema(
       type: Number,
     },
     kategori: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "categoryProduct",
     },
     tipeProduk: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "productType",
     },
     buyCount: {
       type: Number,

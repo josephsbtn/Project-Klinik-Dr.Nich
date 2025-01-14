@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../../assets/component/navbar";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import ConfirmPopUp from "../../../assets/component/confirmPopUp";
 
 function AddProduct() {
-  const { id } = useParams();
-  const [categoryProduct, setCategoryProduct] = useState();
-  const [productType, setProductType] = useState();
+  const [categoryProduct, setCategoryProduct] = useState([]);
+  const [productType, setProductType] = useState([]);
 
   const [nama, setNama] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
@@ -19,76 +17,119 @@ function AddProduct() {
   const [kategori, setKategori] = useState("");
   const [tipeProduk, setTipeProduk] = useState("");
 
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [message, setMessage] = useState(null);
+  const [messageType, setMessageType] = useState(null);
   const [open, setOpen] = useState(false);
-  const [confirmOpen, setConfirmOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const resCat = await axios.get(`/api/produk/getAllkategoriProduk`);
-        const resType = await axios.get(`/api/produk/getAllproductType`);
+        const resCat = await axios.get("/api/produk/getAllkategoriProduk");
+        const resType = await axios.get("/api/produk/getAllproductType");
+        if ((resCat === undefined || null) && (resType === undefined || null)) {
+          throw new Error("Data null / undefined");
+        }
         setCategoryProduct(resCat.data);
         setProductType(resType.data);
       } catch (error) {
-        setError(error.response?.data?.message || "An error occurred");
-        console.log(error.response?.data?.message || "An error occurred");
+        showMessage(
+          error.response?.data?.message || "An error occurred",
+          "error"
+        );
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, [id]);
+  }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
     setLoading(true);
     try {
-      const { data } = await axios.put(`/api/layanan/updateLayanan/${id}`, {
+      // Validate all required fields
+      if (
+        !nama.trim() ||
+        !deskripsi.trim() ||
+        !image ||
+        !manfaat.trim() ||
+        !caraPakai.trim() ||
+        !harga.trim() ||
+        !tipeProduk
+      ) {
+        throw new Error("Please fill in all fields");
+      }
+
+      // Ensure the price is a valid number
+      if (isNaN(harga) || parseFloat(harga) <= 0) {
+        throw new Error("Please enter a valid price");
+      }
+
+      // Prepare payload
+      const payload = {
         nama,
         deskripsi,
-        image,
+        foto: image,
         manfaat,
-        caraPakai,
-        harga,
+        cara_pakai: caraPakai,
+        harga: parseFloat(harga), // Ensure price is sent as a number
         kategori,
         tipeProduk,
-      });
-      setSuccessMessage(data.message);
+      };
+
+      // Send data to the server
+      const { data } = await axios.post("/api/produk/tambahproduk", payload);
+
+      // Show success message
+      showMessage(data.message || "Product added successfully", "success");
+
+      // Optionally, reset form fields after successful submission
+      setNama("");
+      setDeskripsi("");
+      setImage("");
+      setManfaat("");
+      setCaraPakai("");
+      setHarga("");
+      setKategori("");
+      setTipeProduk("");
     } catch (error) {
-      setError(error.response?.data?.message || "An error occurred");
+      // Show error message
+      showMessage(
+        error.response?.data?.message || error.message || "An error occurred",
+        "error"
+      );
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async () => {
-    try {
-      const { data } = await axios.delete(`/api/layanan/deleteLayanan/${id}`);
-      setSuccessMessage(data.message);
-    } catch (error) {
-      setError(error.response?.data?.message || "An error occurred");
-    }
+  const showMessage = (msg, type) => {
+    setMessage(msg);
+    setMessageType(type);
+    setTimeout(() => setMessage(null), 10000);
   };
 
   const convertBase64 = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      setError("No image selected");
+      showMessage("No image selected", "error");
       return;
     }
     const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!validImageTypes.includes(file.type)) {
-      setError("Invalid file type. Only JPEG and PNG files are allowed.");
+      showMessage(
+        "Invalid file type. Only JPEG and PNG files are allowed.",
+        "error"
+      );
       return;
     }
 
     const maxSize = 5 * 1024 * 1024; // 5MB size limit
     if (file.size > maxSize) {
-      setError("File is too large. Maximum file size is 5MB.");
+      showMessage("File is too large. Maximum file size is 5MB.", "error");
       return;
     }
     const reader = new FileReader();
@@ -101,27 +142,22 @@ function AddProduct() {
   return (
     <>
       <main className="container h-screen flex flex-col items-center">
-        <ConfirmPopUp open={open} onClose={() => setOpen(false)}>
-          Apakah Anda yakin ingin mengubah data produk ini?
-          <div className="flex justify-between bg-white mt-4">
-            <button
-              className="px-4 py-2 bg-gray-400 text-white rounded-md"
-              onClick={() => setOpen(false)}>
-              Cancel
-            </button>
-            <button
-              className="px-4 py-2 bg-primary text-white rounded-md"
-              onClick={handleDelete}>
-              Edit
-            </button>
-          </div>
-        </ConfirmPopUp>
         <Navbar />
-        <section className="w-full lg:pt-14  flex flex-col items-center justify-center min-h-screen ">
-          <div className="w-[80%] h-auto bg-blue-400 flex items-start space-x-4">
-            <div className="w-full lg:w-full p-5 border rounded-md shadow-md bg-white">
+        <section className="w-full lg:pt-20  flex flex-col items-center justify-center min-h-screen ">
+          {message && (
+            <div className="w-full flex items-center justify-center">
+              <div
+                className={`${
+                  messageType === "error" ? "bg-red-500" : "bg-green-500"
+                } text-white px-4 py-2 rounded-md`}>
+                {message}
+              </div>
+            </div>
+          )}
+          <div className="w-[90%] p-4 pt-4 h-auto  flex items-start space-x-4">
+            <div className="w-full h-[90%] lg:w-full p-5 border rounded-md shadow-md bg-white">
               <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                Content Thumbnail
+                Product Image
               </h3>
               <div className="flex flex-col space-y-4">
                 {image ? (
@@ -155,11 +191,11 @@ function AddProduct() {
             </div>
             <form
               onSubmit={submitHandler}
-              className="flex flex-col w-full lg:w-3/4 items-center justify-center rounded-3xl">
-              <div className="w-full space-x-4 flex justify-center items-center">
+              className="flex flex-col w-full h-full lg:w-3/4 items-center justify-center rounded-3xl">
+              <div className="w-full h-full space-x-4 flex justify-center items-center">
                 <div className="w-full p-5 border rounded-md shadow-md bg-white">
                   <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                    Content Details
+                    Product Details
                   </h3>
                   <div className="flex flex-col space-y-4">
                     <div>
@@ -202,73 +238,83 @@ function AddProduct() {
                         rows="4"
                       />
                     </div>
-                    <div>
-                      <label className="block text-gray-700 font-montserrat mb-1">
-                        Manfaat
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded-md font-montserrat"
-                        value={manfaat}
-                        onChange={(e) => setManfaat(e.target.value)}
-                        placeholder="Social Media "
-                      />
-                    </div>
                   </div>
                 </div>
                 <div className="w-full p-5 h-full border rounded-md shadow-md bg-white">
                   <div className="flex flex-col space-y-4">
                     <div>
                       <label className="block text-gray-700 font-montserrat mb-1">
-                        Product Name
+                        Manfaat
                       </label>
-                      <input
+                      <textarea
                         type="text"
-                        value={nama}
-                        onChange={(e) => setNama(e.target.value)}
-                        placeholder="Name"
-                        className="border rounded-md w-full p-2 font-montserrat"
+                        className="w-full p-2 border rounded-md font-montserrat"
+                        value={manfaat}
+                        onChange={(e) => setManfaat(e.target.value)}
+                        placeholder="Enter content creator channel name "
+                        rows="4"
                       />
                     </div>
 
                     <div className="w-96">
                       <label className="block text-gray-700 font-montserrat mb-1">
-                        Product Description
+                        Harga
                       </label>
-                      <textarea
+                      <input
                         type="text"
                         className="w-full p-2 border rounded-md font-montserrat"
-                        value={deskripsi}
-                        onChange={(e) => setDeskripsi(e.target.value)}
-                        placeholder="Enter content link url"
-                        rows="4"
+                        value={harga}
+                        onChange={(e) => setHarga(e.target.value)}
+                        placeholder="Enter product price"
                       />
                     </div>
 
                     <div>
                       <label className="block text-gray-700 font-montserrat mb-1">
-                        Cara Pakai
+                        Kategori Product
                       </label>
-                      <textarea
-                        type="text"
-                        className="w-full p-2 border rounded-md font-montserrat"
-                        value={caraPakai}
-                        onChange={(e) => setCaraPakai(e.target.value)}
-                        placeholder="Enter content creator channel name "
-                        rows="4"
-                      />
+                      <select
+                        className="w-full p-2 border rounded-md border-disable-line"
+                        value={kategori}
+                        onChange={(e) => setKategori(e.target.value)}>
+                        <option value="" disabled>
+                          Select Category Product
+                        </option>
+                        {categoryProduct.map((cat) => (
+                          <option value={cat._id} key={cat._id}>
+                            {cat.name}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div>
                       <label className="block text-gray-700 font-montserrat mb-1">
-                        Manfaat
+                        Product Type
                       </label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border rounded-md font-montserrat"
-                        value={manfaat}
-                        onChange={(e) => setManfaat(e.target.value)}
-                        placeholder="Social Media "
-                      />
+                      <select
+                        className="w-full p-2 border rounded-md font-SFPro pt-2"
+                        value={tipeProduk}
+                        onChange={(e) => setTipeProduk(e.target.value)}>
+                        <option className="" value="" disabled>
+                          Select Type Product
+                        </option>
+                        {productType && productType.length > 0 ? (
+                          productType.map((cat) => (
+                            <option
+                              className="font-montserrat text-sm"
+                              value={cat._id}
+                              key={cat._id}>
+                              {cat.name}
+                            </option>
+                          ))
+                        ) : (
+                          <option
+                            disabled
+                            className=" lg:p-2 p-1 rounded-md   ">
+                            <p className="font-normal">No Product Type Found</p>
+                          </option>
+                        )}
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -277,7 +323,7 @@ function AddProduct() {
               <button
                 type="submit"
                 className="p-2 bg-primary w-full text-white font-SFPro mt-4 px-10 rounded-xl">
-                Update
+                Tambah
               </button>
             </form>
           </div>

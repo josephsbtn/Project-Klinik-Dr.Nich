@@ -57,7 +57,7 @@ function ProdukTerbaru() {
             <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
               <div className="carousel-item gap-9">
                 {produk ? (
-                  produk.slice(0, 7).map((item) => (
+                  produk.slice(0, 6).map((item) => (
                     <div key={item._id}>
                       <ProdukCard item={item} />
                     </div>

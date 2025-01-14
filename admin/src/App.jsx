@@ -20,6 +20,7 @@ import Mesin from "./screen/userDisplayUpdate/foto-sertif-mesin/mesin.jsx";
 //produk
 import Produk from "./screen/userDisplayUpdate/produk/produk.jsx";
 import AddProduct from "./screen/userDisplayUpdate/produk/AddProduct.jsx";
+import EditProduct from "./screen/userDisplayUpdate/produk/EditProduct.jsx";
 
 //pos
 import { Home } from "./screen/POS/Home.jsx";
@@ -48,12 +49,13 @@ function App() {
           <Route path="/mesin" element={<Mesin />} />
           <Route path="/produk" element={<Produk />} />
           <Route path="/tambahproduk" element={<AddProduct />} />
+          <Route path="/editProduk/:id" element={<EditProduct />} />
 
-          <Route path="/pos" element={<Home/>} />
-          <Route path="/pos/user" element={<USer/>} />
-          <Route path="/pos/produks" element={<Products/>} />
-          <Route path="/pos/laporan" element={<Laporan/>} />
-          <Route path="/pos/promo" element={<Promo/>} />
+          <Route path="/pos" element={<Home />} />
+          <Route path="/pos/user" element={<USer />} />
+          <Route path="/pos/produks" element={<Products />} />
+          <Route path="/pos/laporan" element={<Laporan />} />
+          <Route path="/pos/promo" element={<Promo />} />
         </Routes>
       </Router>
     </>

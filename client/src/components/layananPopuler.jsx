@@ -1,64 +1,77 @@
 import React, { useEffect, useState } from "react";
 import CardLayanan from "./CardLayanan";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function LayananPopuler() {
-  const navigate = useNavigate();
-  const [layanan, setLayanan] = useState();
+  const [layanan, setLayanan] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
     try {
       const resLayanan = (await axios.get("/api/layanan/getAllLayanan")).data;
-
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
-      );
+      ); // Sort by reserved count
       setLayanan(sorted);
+      setLoading(false);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
+      setLoading(false);
     }
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchData();
   }, []);
 
   return (
-    <>
-      <section className="w-full flex flex-col items-center lg:items-start py-2">
-        <main className="w-full flex justify-between">
-          <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
-            Layanan Populer
+    <section className="flex flex-col my-[26px] w-full items-center">
+      <main className="w-full flex justify-between">
+        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
+          Layanan Populer
+        </h1>
+        <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+          Lihat Semua
+        </h1>
+      </main>
+      {loading ? (
+        <div className="h-full w-full flex items-center justify-center">
+          <h1 className="font-SFPro text-base text-secondary font-medium">
+            Loading..
           </h1>
-          <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
-            Lihat Semua
+        </div>
+      ) : error ? (
+        <div className="h-full w-full flex items-center justify-center">
+          <h1 className="font-SFPro text-base text-red-800 font-medium">
+            {error}
           </h1>
-        </main>
-
-        {error ? (
-          <p>{error}</p>
-        ) : (
-          <div className="flex max-w-full justify-start space-x-4 mt-4 overflow-x-scroll overflow-y-hidden">
-            {layanan && layanan.length > 0 ? (
-              layanan.slice(0, 4).map((item) => (
-                <div key={item._id}>
-                  <CardLayanan
-                    item={item}
-                    onClick={() =>
-                      navigate(`/layanan/detailTreatment/${item._id}`)
-                    }
-                  />
-                </div>
-              ))
-            ) : (
-              <p>No data available</p>
-            )}
+        </div>
+      ) : (
+        <div className="flex flex-col w-full lg:w-full pt-[15px]">
+          <div className="flex lg:justify-start justify-center items-center pt-[15px]">
+            <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
+              <div className="carousel-item gap-9">
+                {layanan.length > 0 ? (
+                  layanan.slice(0, 6).map((item) => (
+                    <div key={item._id}>
+                      <CardLayanan item={item} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="h-full w-full flex items-center justify-center">
+                    <h1 className="font-SFPro text-base text-secondary font-medium">
+                      Layanan Tidak Ditemukan
+                    </h1>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-        )}
-      </section>
-    </>
+        </div>
+      )}
+    </section>
   );
 }
 

@@ -26,7 +26,11 @@ const newproduk = asyncHandler(async (req, res) => {
 
 const getproduk = asyncHandler(async (req, res) => {
   try {
-    const produk = await produkModels.find();
+    const produk = await produkModels
+      .find()
+      .populate("categoryProduct") // Populating 'kategori' from the schema
+      .populate("productType"); // Populating 'tipeProduk' from the schema
+
     res.send(produk);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -70,13 +74,19 @@ const deleteproduk = asyncHandler(async (req, res) => {
 const getprodukbyID = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const produk = await produkModels.findById(id);
-    res.send(produk);
+    const produk = await produkModels
+      .findById(id)
+      .populate("kategori", "name")
+      .populate("tipeProduk", "name");
+
+    if (!produk) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.json(produk);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: "Server error: " + error.message });
   }
 });
-
-//kategori produk
 
 export { newproduk, getproduk, updateproduk, deleteproduk, getprodukbyID };
