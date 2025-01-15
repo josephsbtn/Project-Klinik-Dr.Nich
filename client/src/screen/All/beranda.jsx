@@ -5,6 +5,10 @@ import { useSwipeable } from "react-swipeable";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 
+//Import WA Template
+import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController.js";
+import { sendWhatsAppProdukMessage } from "../../../../backend/controller/whatsappController.js";
+
 // COMPONENTS
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
@@ -206,6 +210,7 @@ export default function Beranda() {
           src={waBtn}
           className="fixed z-50 right-0 px-[18px] bottom-[21.71px]"
           alt="WhatsApp Button"
+          onClick={sendWhatsAppReservasiMessage}
         />
       </div>
 
