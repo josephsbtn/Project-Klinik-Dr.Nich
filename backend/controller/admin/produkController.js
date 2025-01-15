@@ -28,8 +28,8 @@ const getproduk = asyncHandler(async (req, res) => {
   try {
     const produk = await produkModels
       .find()
-      .populate("categoryProduct") // Populating 'kategori' from the schema
-      .populate("productType"); // Populating 'tipeProduk' from the schema
+      .populate("kategori") // Populating 'kategori' from the schema
+      .populate("tipeProduk"); // Populating 'tipeProduk' from the schema
 
     res.send(produk);
   } catch (error) {

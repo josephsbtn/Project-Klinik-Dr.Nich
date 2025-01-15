@@ -8,14 +8,12 @@ import { useNavigate } from "react-router-dom";
 function ListProduct() {
   const navigate = useNavigate();
   const [produk, setProduk] = useState([]);
-
   const [selectedContent, setSelectedContent] = useState(null);
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const fetchProduct = async () => {
     try {
@@ -27,18 +25,18 @@ function ListProduct() {
           (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
         );
         setProduk(sortedData);
-        setLoading(false);
         setError("");
       } else {
         throw new Error("Invalid response format");
       }
     } catch (err) {
-      setLoading(false);
-      console.error("Error fetching promo:", err.message);
+      console.error("Error fetching products:", err.message);
       setError(
-        "Failed to fetch promo. Please try again later." +
+        "Failed to fetch products. Please try again later." +
           err.response?.data.message
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,24 +44,27 @@ function ListProduct() {
     fetchProduct();
   }, []);
 
-  const deleteGaleri = () => {
+  const deleteGaleri = async () => {
     try {
-      const response = axios.delete(
-        `/api/produk/deleteproduk/${selectedContent._id}`
+      setDeleting(true);
+      await axios.delete(`/api/produk/deleteproduk/${selectedContent._id}`);
+      // Update the state to remove the deleted item
+      setProduk((prevProduk) =>
+        prevProduk.filter((item) => item._id !== selectedContent._id)
       );
-      window.location.reload();
-      fetchProduct();
+      setConfirmOpen(false); // Close confirmation popup
+      setError("");
     } catch (error) {
-      console.error("Error deleting promo:", error.message);
-      setError("Failed to delete promo. Please try again later.");
+      console.error("Error deleting product:", error.message);
+      setError("Failed to delete product. Please try again later.");
+    } finally {
+      setDeleting(false);
     }
-    console.log("Delete promo with id:", selectedContent._id);
   };
 
   const handleEdit = (item, e) => {
     e.preventDefault();
     navigate(`/editProduk/${item._id}`);
-    console.log("Edit promo with id:", item._id);
   };
 
   const handleDelete = (item, e) => {
@@ -77,7 +78,7 @@ function ListProduct() {
       <Navbar selected={"/produk"} />
       <ConfirmPopup open={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <div className="flex flex-col space-y-4 p-8 bg-white rounded-md shadow-md">
-          <h1>Anda yakin ingin menghapus ini?</h1>
+          <h1>Are you sure you want to delete this?</h1>
           <div className="flex items-center justify-between">
             <button
               onClick={() => setConfirmOpen(false)}
@@ -85,9 +86,12 @@ function ListProduct() {
               Cancel
             </button>
             <button
-              onClick={() => (setConfirmOpen(false), deleteGaleri())}
-              className="bg-red-500 text-white px-4 py-2 rounded-md">
-              Delete
+              onClick={deleteGaleri}
+              disabled={deleting}
+              className={`bg-red-500 text-white px-4 py-2 rounded-md ${
+                deleting ? "opacity-50 cursor-not-allowed" : ""
+              }`}>
+              {deleting ? "Deleting..." : "Delete"}
             </button>
           </div>
         </div>
@@ -119,9 +123,7 @@ function ListProduct() {
                 </div>
               ))
             : !error && (
-                <div className="text-gray-500 mt-8">
-                  No promotions available
-                </div>
+                <div className="text-gray-500 mt-8">No products available</div>
               )}
         </div>
 

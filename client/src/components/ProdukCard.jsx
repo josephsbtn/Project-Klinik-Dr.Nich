@@ -14,7 +14,7 @@ function ProdukCard({ item }) {
             className="w-[173px] h-[167px] mx-auto mt-1 rounded-xl"
             alt=""
           />
-          <p className="w-[166px] text-[#464646] text-left text-sm mx-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
+          <p className="w-[166px] text-[#464646] text-left text-sm mx-2 lg:mt-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
             {item.nama}
           </p>
           {/* type shi */}

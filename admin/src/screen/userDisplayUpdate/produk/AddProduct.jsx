@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../../assets/component/navbar";
 import axios from "axios";
 import ConfirmPopUp from "../../../assets/component/confirmPopUp";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
+  const navigate = useNavigate();
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [productType, setProductType] = useState([]);
 
@@ -57,7 +59,7 @@ function AddProduct() {
         !image ||
         !manfaat.trim() ||
         !caraPakai.trim() ||
-        !harga.trim() ||
+        !harga ||
         !tipeProduk
       ) {
         throw new Error("Please fill in all fields");
@@ -85,6 +87,10 @@ function AddProduct() {
 
       // Show success message
       showMessage(data.message || "Product added successfully", "success");
+
+      setTimeout(() => {
+        navigate(`/produk`); // Navigate to another page after success (optional)
+      }, 3000);
 
       // Optionally, reset form fields after successful submission
       setNama("");

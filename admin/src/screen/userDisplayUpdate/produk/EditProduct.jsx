@@ -3,10 +3,11 @@ import React, { Children, useEffect, useState } from "react";
 import Navbar from "../../../assets/component/navbar";
 import axios from "axios";
 import ConfirmPopUp from "../../../assets/component/confirmPopUp";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function EditProduct() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [productType, setProductType] = useState([]);
 
@@ -121,6 +122,10 @@ function EditProduct() {
 
       // Show success message
       showMessage(data.message || "Product Edited successfully", "success");
+
+      setTimeout(() => {
+        navigate("/produk");
+      }, 3000);
 
       // Reset form fields
       setNama("");
@@ -341,7 +346,7 @@ function EditProduct() {
                                 className="font-montserrat text-sm"
                                 value={cat._id}
                                 key={cat._id}>
-                                {cat._id}
+                                {cat.name}
                               </option>
                             ))
                           ) : (
@@ -372,7 +377,7 @@ function EditProduct() {
                                 className="font-montserrat text-sm"
                                 value={cat._id}
                                 key={cat._id}>
-                                {cat._id}
+                                {cat.name}
                               </option>
                             ))
                           ) : (
