@@ -10,55 +10,32 @@ import Footer from "../auth/footer";
 import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
 
-// IMAGE AND ICON
-import arrow from "../../assets/arrow-right.svg";
-import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
-import banner1 from "../../assets/img-produk/banner.png";
-import banner2 from "../../assets/img-produk/banner2.png";
-import banner3 from "../../assets/img-produk/banner3.png";
-import collagen from "../../assets/img-produk/collagen.png";
-import flimtyfiber from "../../assets/img-produk/flimtyfiber.png";
-import haircare from "../../assets/img-produk/haircare.png";
-import makeup from "../../assets/img-produk/makeup.png";
-import skincare from "../../assets/img-produk/skincare.png";
-import waxingkit from "../../assets/img-produk/waxingkit.png";
-
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-
-function Produk() {
-  const navigate = useNavigate();
+function skincare() {
 
 
     // FETCH DATA
     const fetchData = async () => {
-      try {
-        setLoading(true);
-        const resLayanan = (await axios.get("/api/promo/getAllProduk")).data;
-  
-        const sorted = resLayanan.sort(
-          (a, b) => b.reservedCount - a.reservedCount
-        );
-        console.log(sorted);
-        setContent(sorted);
-        setLoading(false);
-      } catch (error) {
-        setError(error.response?.data?.message || "An error occurred");
-      }
+        try {
+            setLoading(true);
+            const resLayanan = (await axios.get("/api/promo/getAllProduct")).data;
+
+            const sorted = resLayanan.sort(
+                (a, b) => b.reservedCount - a.reservedCount
+            );
+            console.log(sorted);
+            setContent(sorted);
+            setLoading(false);
+        } catch (error) {
+            setError(error.response?.data?.message || "An error occurred");
+        }
     };
-  
+
     useEffect(() => {
-      fetchData();
+        fetchData();
     }, []);
 
-    
-  return (
-    <>
+    return (
+        <>
       <Navbar selected={"Produk"} />
       <div className="flex items-center w-[90%] justify-start space-x-2 mx-auto mt-[18px] lg:mx-[120px]">
         <a
@@ -71,6 +48,12 @@ function Produk() {
           onClick={() => navigate("/promo")}
           className="cursor-pointer text-xs text-disable-text font-normal">
           Produk
+        </a>
+        <ArrowRightDisable />
+        <a
+          onClick={() => navigate("/promo")}
+          className="cursor-pointer text-xs text-disable-text font-normal">
+          Skincare
         </a>
       </div>
 
@@ -175,7 +158,7 @@ function Produk() {
 
       <Footer />
     </>
-  );
+    )
 }
 
-export default Produk;
+export default skincare
