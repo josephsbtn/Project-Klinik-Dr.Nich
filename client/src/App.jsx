@@ -22,7 +22,7 @@ import Skincare from "./screen/All/skincare.jsx";
 import Promo from "./screen/All/promo.jsx";
 //pencarian
 import Pencarian from "./screen/All/pencarian.jsx";
-import { Debug } from "./screen/All/debug.jsx";
+import  Debug  from "./screen/All/debug.jsx";
 
 function App() {
   return (
