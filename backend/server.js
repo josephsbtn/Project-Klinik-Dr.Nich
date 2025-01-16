@@ -17,10 +17,10 @@ dotenv.config();
 dbConfig();
 
 const allowedOrigins = [
-  "https://drnich.co.id/", // Production client
-  "https://admin.drnich.co.id/", // Production admin
-  "http://localhost:3000/", // Localhost for client development
-  "http://localhost:5173/", // Localhost for admin development
+  "https://drnich.co.id", // Production client
+  "https://admin.drnich.co.id", // Production admin
+  "http://localhost:3000", // Localhost for client development
+  "http://localhost:5173", // Localhost for admin development
 ];
 
 app.use(
