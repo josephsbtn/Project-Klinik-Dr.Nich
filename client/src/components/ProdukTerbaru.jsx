@@ -9,10 +9,21 @@ function ProdukTerbaru() {
   const [produk, setProduk] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(0);
+
   const data = async () => {
     try {
       const response = (await axios.get("/api/produk/getAllproduk")).data;
-      setProduk(response);
+
+      const sorted = response.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setProduk(sorted);
+      if (produk.length > 6) {
+        setLimit(6);
+      } else {
+        setLimit(produk.length);
+      }
       console.log("PRODUCT DATA :", produk);
       setLoading(false);
     } catch (error) {
