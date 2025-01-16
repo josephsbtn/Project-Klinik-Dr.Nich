@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 
-import Navbar from "../auth/navbar";
-import Footer from "../auth/footer";
+import Navbar from "../auth/navbar.jsx";
+import Footer from "../auth/footer.jsx";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import GaleriCard from "../../components/galeriCard.jsx";
-import ProdukTerbaru from "../../components/ProdukTerbaru";
+import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 
 // IMAGE AND ICON
 import klinik from "../../assets/img-profil/klinik.png";
@@ -33,13 +33,13 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useParams } from "react-router-dom";
 
-function Profile() {
+function Pencarian() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
   const [content, setContent] = useState();
-
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -52,10 +52,11 @@ function Profile() {
   };
 
   // FETCH DATA
+ 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const resLayanan = (await axios.get("/api/gallery/getAllGaleri")).data;
+      const resLayanan = (await axios.get('api/users/search')).data;
       console.log(resLayanan)
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
@@ -76,12 +77,12 @@ function Profile() {
       <div className="mt-[18px]">
         <div className="flex-col">
           <div className="flex gap-[6px] mx-[25px] lg:mx-[120px]">
-            <a className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
+            <a href="/" className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
               Beranda
             </a>
             <img src={arrow} alt="" />
             <p className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
-              Galeri
+              Hasil Pencarian dari {query}
             </p>
           </div>
         </div>
@@ -99,7 +100,7 @@ function Profile() {
 
             {/* Lihat Lainnya */}
             <div className="mt-6 h-full">
-              <button className="w-[109px] h-[31px] text-[#c2a353] text-xs font-normal rounded-[10px] border border-[#c2a353] text-sm font-medium">
+              <button className="w-[109px] h-[31px] text-[#c2a353] rounded-[10px] border border-[#c2a353] text-sm font-medium">
                 Lihat Lainnya
               </button>
             </div>
@@ -123,4 +124,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Pencarian;

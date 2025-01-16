@@ -30,9 +30,13 @@ import searchWhite from "../../assets/search-normal-white.svg";
 export default function Navbar({ selected }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [query, setQuery] = useState("")
   const navRef = useRef(null);
   const searchRef = useRef(null);
   const navigate = useNavigate();
+  const setSearch = () =>{
+    setQuery(searchRef.current.value)
+  }
 
   // Close nav menu when clicking outside
   useEffect(() => {
@@ -205,13 +209,15 @@ export default function Navbar({ selected }) {
         {/* Search Menu */}
         {isSearchOpen && (
           <div
-            ref={searchRef}
+            
             className={`bg-white w-full h-[90px] fixed top-0 left-0 z-50 flex items-center justify-center ${isSearchOpen ? "block" : "hidden"
               } lg:flex`}>
             <div className="flex items-center border-b border-[#c2a353] w-[326px] h-[45px]">
               <img src={searchWhite} alt="Search Icon" className="px-[10px]" />
               <input
+                ref={searchRef}
                 type="text"
+                onChange={()=>{setSearch}}
                 placeholder="Search..."
                 className="w-full h-full px-[10px] focus:outline-none"
               />
@@ -236,14 +242,17 @@ export default function Navbar({ selected }) {
 
           {/* Search Bar */}
           <div
-            ref={searchRef}
+            
             className={`flex items-center border-b border-[#c2a353] ${isSearchOpen ? "block" : "hidden"
               } lg:flex`}>
-            <img src={searchWhite} alt="Search Icon" className="w-[20px] h-[20px] mx-2" />
+            <a href={`/pencarian?query=${query}`}><img src={searchWhite} alt="Search Icon" className="w-[20px] h-[20px] mx-2" /></a>
             <input
-              type="text"
+            ref={searchRef}
+            type="text"
+            onChange={()=>{setSearch}}
               placeholder="Search..."
               className="w-full h-[38px] px-2 focus:outline-none"
+            
             />
           </div>
 

@@ -76,30 +76,31 @@ export default function Beranda() {
   const fetchData = async () => {
     try {
       setLoading(true);
+      
       const response = await axios.get("/api/layanan/getAllJenisLayanan");
-      const fotoMesin = (await axios.get("/api/foto/getAllMesin")).data;
-      const fotoSertif = (await axios.get("/api/foto/getAllSertif")).data;
+      const fotoMesinResponse = await axios.get("/api/foto/getAllMesin");
+      const fotoSertifResponse = await axios.get("/api/foto/getAllSertif");
+  
       const sortedJenisLayanan = response.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );
-
+  
       const dataWithTimestamp = {
         data: sortedJenisLayanan,
         timestamp: new Date().getTime(),
       };
       localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
-
-      setFotoMesin(fotoMesin);
-      setFotoSertif(fotoSertif);
-      console.log("foto mesin : " + fotoMesin);
-      console.log("foto sertif :" + fotoSertif);
+  
       setJenisLayanan(sortedJenisLayanan);
+  
+      // Ensure these are arrays before setting state
+      setFotoMesin(Array.isArray(fotoMesinResponse.data) ? fotoMesinResponse.data : []);
+      setFotoSertif(Array.isArray(fotoSertifResponse.data) ? fotoSertifResponse.data : []);
+      
     } catch (error) {
       setError(
-        "Failed to fetch jenis layanan. Please try again later (" +
-          error.message +
-          ")"
-      );
+        `Failed to fetch jenis layanan. Please try again later (${error.message}`)
+      ;
     } finally {
       setLoading(false);
     }

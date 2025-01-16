@@ -16,6 +16,8 @@ import Galeri from "./screen/All/galeri.jsx";
 import Produk from "./screen/All/produk.jsx";
 //promo
 import Promo from "./screen/All/promo.jsx";
+//pencarian
+import Pencarian from "./screen/All/pencarian.jsx";
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
         <Route path="/galeri" element={<Galeri />} />
         <Route path="/produk" element={<Produk />} />
         <Route path="/promo" element={<Promo />} />
+        <Route path="/pencarian" element={<Pencarian/>} />
       </Routes>
     </Router>
   );
