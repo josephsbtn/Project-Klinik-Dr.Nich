@@ -2,20 +2,20 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-function cardProduct({ item }) {
-  const navigate = useNavigate();
+export default function kategoriProductCard({ item }) {
+    const {name, image} = item;
+
   return (
-    <div className="w-full flex flex-col justify-center items-center inline-flex gap-4 lg:gap-8">
+    <div className="w-full flex flex-col justify-center items-center gap-4 lg:gap-8">
       onClick={() => navigate("/produk/detail", { state: item })}
       <img
         className="w-60 lg:w-[300px] lg:h-[280px] rounded-[10px] hover:shadow-xl"
-        src={item.image}
+        src={image || "https://via.placeholder.com/80"}
+        alt={name || "Thumbnail"}
       />
       <p className="text-center text-[#c2a353] text-xl font-medium font-SFPro leading-[25px] tracking-tight">
-        {item.name}
+        {name || "Jenis Produk"}
       </p>
     </div>
   )
 }
-
-export default cardProduct

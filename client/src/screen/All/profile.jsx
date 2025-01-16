@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
@@ -11,12 +11,11 @@ import bgVM from "../../assets/img-profil/bgVisiMisi.png";
 import bunga from "../../assets/img-profil/bungaIcon.svg";
 import misiIcon from "../../assets/img-profil/misiIcon.svg";
 
-// IMAGE & ICONS SERTIFIKAT
-import sertifikat1 from "../../assets/img-about/sertifikat1.png";
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+
+import axios from "axios";
 
 // Import Swiper styles
 import "swiper/css";
@@ -25,6 +24,12 @@ import "swiper/css/pagination";
 function Profile() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
+  const [jenisLayanan, setJenisLayanan] = useState([]);
+  const [fotoMesin, setFotoMesin] = useState();
+  const [fotoSertif, setFotoSertif] = useState();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const onAutoplayTimeLeft = (s, time, progress) => {
     const radius = 20;
@@ -40,6 +45,43 @@ function Profile() {
       progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     }
   };
+
+  // FETCH DATA
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/layanan/getAllJenisLayanan");
+      const fotoMesin = (await axios.get("/api/foto/getAllMesin")).data;
+      const fotoSertif = (await axios.get("/api/foto/getAllSertif")).data;
+      const sortedJenisLayanan = response.data.sort(
+        (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+
+      const dataWithTimestamp = {
+        data: sortedJenisLayanan,
+        timestamp: new Date().getTime(),
+      };
+      localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
+
+      setFotoMesin(fotoMesin);
+      setFotoSertif(fotoSertif);
+      console.log("foto mesin : " + fotoMesin);
+      console.log("foto sertif :" + fotoSertif);
+      setJenisLayanan(sortedJenisLayanan);
+    } catch (error) {
+      setError(
+        "Failed to fetch jenis layanan. Please try again later (" +
+        error.message +
+        ")"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -87,7 +129,7 @@ function Profile() {
           </div>
 
           {/* Misi */}
-          <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
+          <div className="relative w-full h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
             <img
               src={bgVM}
               className="absolute w-full h-full rounded-[10px] z-0"
@@ -126,18 +168,32 @@ function Profile() {
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={1}
-                className="w-full h-auto rounded-lg"
-              >
-                <SwiperSlide>
-                  <div className="flex items-center justify-center bg-blue-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
-                    Slide 1: Sertifikasi A
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="flex items-center justify-center bg-blue-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
-                    Slide 2: Sertifikasi B
-                  </div>
-                </SwiperSlide>
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
+                {fotoSertif && fotoSertif.length > 0 ? (
+                  fotoSertif.map((item) => (
+                    <SwiperSlide key={item._id}>
+                      <img
+                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
+                        src={item.foto}
+                        alt={item.nama}
+                      />
+                    </SwiperSlide>
+                  ))
+                ) : loading ? (
+                  <>
+                    <SwiperSlide>
+                      <div className="w-full h-full flex items-center justify-center ">
+                        <h1>loading . . .</h1>
+                      </div>
+                    </SwiperSlide>
+                  </>
+                ) : (
+                  <SwiperSlide>
+                    <div className="w-full h-full flex items-center justify-center ">
+                      <h1> No data found</h1>
+                    </div>
+                  </SwiperSlide>
+                )}
               </Swiper>
             </div>
 
@@ -152,18 +208,32 @@ function Profile() {
                 loop={true}
                 spaceBetween={20}
                 slidesPerView={1}
-                className="w-full h-auto rounded-lg"
-              >
-                <SwiperSlide>
-                  <div className="flex items-center justify-center bg-blue-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
-                    Slide 1: Sertifikasi A
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="flex items-center justify-center bg-green-500 text-white text-lg font-semibold w-full aspect-[16/9] lg:aspect-[4/3]">
-                    Slide 2: Sertifikasi B
-                  </div>
-                </SwiperSlide>
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
+                {fotoMesin && fotoMesin.length > 0 ? (
+                  fotoMesin.map((item) => (
+                    <SwiperSlide key={item._id}>
+                      <img
+                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
+                        src={item.foto}
+                        alt={item.nama}
+                      />
+                    </SwiperSlide>
+                  ))
+                ) : loading ? (
+                  <>
+                    <SwiperSlide>
+                      <div className="w-full h-full flex items-center justify-center ">
+                        <h1>loading . . .</h1>
+                      </div>
+                    </SwiperSlide>
+                  </>
+                ) : (
+                  <SwiperSlide>
+                    <div className="w-full h-full flex items-center justify-center ">
+                      <h1> No data found</h1>
+                    </div>
+                  </SwiperSlide>
+                )}
               </Swiper>
             </div>
 
