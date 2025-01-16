@@ -56,7 +56,7 @@ function Profile() {
     try {
       setLoading(true);
       const resLayanan = (await axios.get("/api/gallery/getAllGaleri")).data;
-      console.log(resLayanan)
+      console.log(resLayanan);
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
       );
@@ -114,8 +114,6 @@ function Profile() {
               <ProdukTerbaru />
             </section>
           </div>
-
-
         </div>
       </div>
       <Footer />

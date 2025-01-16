@@ -6,6 +6,7 @@ function LayananPopuler() {
   const [layanan, setLayanan] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(0);
 
   const fetchData = async () => {
     try {
@@ -14,6 +15,12 @@ function LayananPopuler() {
         (a, b) => b.reservedCount - a.reservedCount
       ); // Sort by reserved count
       setLayanan(sorted);
+      if (layanan.length > 6) {
+        setLimit(6);
+      } else {
+        setLimit(layanan.length);
+      }
+
       setLoading(false);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -54,7 +61,7 @@ function LayananPopuler() {
             <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
               <div className="carousel-item gap-9">
                 {layanan.length > 0 ? (
-                  layanan.slice(0, 6).map((item) => (
+                  layanan.slice(0, limit).map((item) => (
                     <div key={item._id}>
                       <CardLayanan item={item} />
                     </div>

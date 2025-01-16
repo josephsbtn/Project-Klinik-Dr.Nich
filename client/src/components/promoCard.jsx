@@ -1,10 +1,12 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 export default function PromoCard({ item }) {
   const { nama, detail, foto } = item;
 
   return (
     <div className="w-[311px] h-[439px] flex flex-col mx-auto items-center border border-[#efefef] rounded-lg shadow-sm my-8 lg:w-[50%] lg:h-[328px] lg:mx-auto lg:grid lg:grid-cols-2 lg:gap-4">
+      onClick={() => Navigate}
       <img
         className="w-full h-[328px] rounded-[5px] object-cover opacity-90"
         src={foto || "https://via.placeholder.com/80"} // Fallback jika foto tidak tersedia
