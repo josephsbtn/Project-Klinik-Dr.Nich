@@ -10,6 +10,9 @@ import Footer from "../auth/footer";
 import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
 
+// cardProduct
+import CardProduct from "../../components/cardProduct";
+
 // IMAGE AND ICON
 import arrow from "../../assets/arrow-right.svg";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
@@ -102,65 +105,7 @@ function Produk() {
       </div>
 
       <div className="flex items-center w-[90%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8 lg:mx-[120px] lg:gap-20 grid grid-cols-2 lg:grid-cols-3">
-        <div className="w-full flex flex-col justify-center items-center inline-flex gap-4 lg:gap-8">
-          <img
-            className="w-60 lg:w-[300px] lg:h-[280px] rounded-[10px] hover:shadow-xl"
-            src={skincare}
-          />
-          <p className="text-center text-[#c2a353] text-xl font-medium font-SFPro leading-[25px] tracking-tight">
-            Skin Care
-          </p>
-        </div>
-
-        <div className="w-full flex flex-col justify-center items-center inline-flex gap-4 lg:gap-8">
-          <img
-            className="w-60 lg:w-[300px] lg:h-[280px] rounded-[10px] hover:shadow-xl"
-            src={waxingkit}
-          />
-          <p className="text-center text-[#c2a353] text-xl font-medium font-SFPro leading-[25px] tracking-tight">
-            Waxing Kit
-          </p>
-        </div>
-
-        <div className="w-full flex flex-col justify-center items-center inline-flex gap-4 lg:gap-8">
-          <img
-            className="w-60 lg:w-[300px] lg:h-[280px] rounded-[10px] hover:shadow-xl"
-            src={makeup}
-          />
-          <p className="text-center text-[#c2a353] text-xl font-medium font-SFPro leading-[25px] tracking-tight">
-            Make Up
-          </p>
-        </div>
-
-        <div className="w-full flex flex-col justify-center items-center inline-flex gap-4 lg:gap-8">
-          <img
-            className="w-60 lg:w-[300px] lg:h-[280px] rounded-[10px] hover:shadow-xl"
-            src={haircare}
-          />
-          <p className="text-center text-[#c2a353] text-xl font-medium font-SFPro leading-[25px] tracking-tight">
-            Hair Care
-          </p>
-        </div>
-
-        <div className="w-full flex flex-col justify-center items-center inline-flex gap-4 lg:gap-8">
-          <img
-            className="w-60 lg:w-[300px] lg:h-[280px] rounded-[10px] hover:shadow-xl"
-            src={collagen}
-          />
-          <p className="text-center text-[#c2a353] text-xl font-medium font-SFPro leading-[25px] tracking-tight">
-            Collagen
-          </p>
-        </div>
-
-        <div className="w-full flex flex-col justify-center items-center inline-flex gap-4 lg:gap-8">
-          <img
-            className="w-60 lg:w-[300px] lg:h-[280px] rounded-[10px] hover:shadow-xl"
-            src={flimtyfiber}
-          />
-          <p className="text-center text-[#c2a353] text-xl font-medium font-SFPro leading-[25px] tracking-tight">
-            Flimty Fiber
-          </p>
-        </div>
+        <CardProduct />
       </div>
 
       <div className="flex flex-col gap-4 items-center w-[90%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">
