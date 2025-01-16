@@ -144,8 +144,10 @@ function ListProduct() {
 
     try {
       setLoading(true);
-      const response = await axios.post("/api/produk/addImage");
+      console.log("data", image);
+      const response = await axios.post("/api/produk/newImage", image);
 
+      console.log(response.data);
       setImageCarousel((prev) => [...prev, response.data]);
       setAddImageOpen(false);
       alert("Image added to carousel successfully.");
@@ -267,9 +269,9 @@ function ListProduct() {
       <ConfirmPopup open={addImageOpen} onClose={() => setAddImageOpen(false)}>
         <div className="w-full h-[90%] lg:w-full p-5 border rounded-md shadow-md bg-white">
           <h3 className="text-xl font-semibold mb-4 font-montserrat">
-            Product Image
+            Product Carousel Image
           </h3>
-          <div className="flex flex-col space-y-4">
+          <form className="flex flex-col space-y-4" onSubmit={handleAddImage}>
             {image ? (
               <img
                 src={image}
@@ -296,10 +298,17 @@ function ListProduct() {
                   onChange={convertBase64}
                 />
               </label>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-green-600 font-montserrat text-white rounded-md">
+                SUBMIT
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </ConfirmPopup>
+
+      {/* Categories Section */}
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
         <h1 className="text-xl font-bold text-secondary">List Categories</h1>
         {error && <div className="text-red-500 my-4">{error}</div>}
@@ -327,6 +336,7 @@ function ListProduct() {
         </div>
       </section>
 
+      {/* Carousel section */}
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
         <h1 className="text-xl font-bold text-secondary">Carousel Image</h1>
         {error && <div className="text-red-500 my-4">{error}</div>}
@@ -338,7 +348,7 @@ function ListProduct() {
                 className="flex flex-col justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
                 <img
                   src={item.image}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover mb-2"
                   alt="Carousel"
                 />
                 <ActionButtons
@@ -355,6 +365,8 @@ function ListProduct() {
           )}
         </div>
       </section>
+
+      {/* Product section */}
 
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
         <h1 className="text-xl font-bold text-secondary">List Product</h1>
@@ -382,17 +394,22 @@ function ListProduct() {
 
         <div className="fixed right-0 bottom-0 p-4 z-0 flex justify-center items-center space-x-4">
           <button
-            className="bg-primary text-white px-4 py-2 rounded-md"
+            className="bg-primary text-white w-48 py-2 rounded-md"
             onClick={() => navigate("/tambahproduk")}>
             Add Product
           </button>
           <button
-            className="bg-primary text-white px-4 py-2 rounded-md"
+            className="bg-primary text-white w-48 py-2 rounded-md"
             onClick={handleAddCategory}>
             Add Category
           </button>
           <button
-            className="bg-primary text-white px-4 py-2 rounded-md"
+            className="bg-primary text-white w-48 py-2 rounded-md"
+            onClick={() => setAddImageOpen(true)}>
+            Add Product Type
+          </button>
+          <button
+            className="bg-primary text-white w-48 py-2 rounded-md"
             onClick={() => setAddImageOpen(true)}>
             Add Carousel Image
           </button>
