@@ -16,11 +16,11 @@ const ActionButtons = ({ onEdit, onDelete, deleting }) => (
     <button
       onClick={onDelete}
       className={`bg-red-500 text-sm text-white px-4 py-2 rounded-md ${
-        deleting ? "opacity-50 cursor-not-allowed" : ""
+        deleting ? "cursor-not-allowed" : ""
       }`}
       disabled={deleting}
       aria-label="Delete Item">
-      {deleting ? "Deleting..." : "Delete"}
+      {deleting ? "Delete" : "Delete"}
     </button>
   </div>
 );
@@ -36,10 +36,17 @@ function ListProduct() {
   const [isDeletingCategory, setIsDeletingCategory] = useState(false);
   const [image, setImage] = useState("");
   const [newCategoryName, setNewCategoryName] = useState("");
+  const [editCategoryName, setEditCategoryName] = useState("");
+  const [categoryImage, setCategoryImage] = useState("");
+  const [editImageOpen, setEditImageOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [newImage, setNewImage] = useState(null);
 
   const [addOpen, setAddOpen] = useState(false);
   const [addImageOpen, setAddImageOpen] = useState(false);
   const [addCategoryOpen, setAddCategoryOpen] = useState(false);
+  const [newCategoryImage, setNewCategoryImage] = useState(null);
+  const [editCategoryOpen, setEditCategoryOpen] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -127,8 +134,9 @@ function ListProduct() {
   const addCategory = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/produk/newkategoriProduk", {
+      const response = await axios.post("/api/produk/tambahkategoriProduk", {
         name: newCategoryName,
+        image: categoryImage,
       });
       setCategoryProduct((prev) => [...prev, response.data]);
       setAddCategoryOpen(false);
@@ -161,7 +169,9 @@ function ListProduct() {
 
   const handleEditCategory = (category, e) => {
     e.preventDefault();
-    navigate(`/editKategoriProduk/${category._id}`);
+    setSelectedContent(category);
+    setEditCategoryName(category.name);
+    setEditCategoryOpen(true);
   };
 
   const handleDeleteCategory = (category, e) => {
@@ -196,7 +206,29 @@ function ListProduct() {
     setAddCategoryOpen(true);
   };
 
-  const convertBase64 = (e) => {
+  const handleEditCategorySubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`/api/produk/editkategoriProduk/${selectedContent._id}`, {
+        name: editCategoryName,
+        image: categoryImage,
+      });
+      setCategoryProduct((prev) =>
+        prev.map((item) =>
+          item._id === selectedContent._id
+            ? { ...item, name: editCategoryName, image: categoryImage }
+            : item
+        )
+      );
+      setEditCategoryOpen(false);
+      alert("Category updated successfully.");
+    } catch (error) {
+      console.error("Error updating category:", error.message);
+      alert("Failed to update category. Please try again.");
+    }
+  };
+
+  const convertBase64 = (e, setImageFunction) => {
     const file = e.target.files[0];
     if (!file) {
       setError("No image selected");
@@ -216,8 +248,27 @@ function ListProduct() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setImage(reader.result);
+      setImageFunction(reader.result);
     };
+  };
+
+  const handleEditImage = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("image", newImage);
+      await axios.put(`/api/produk/editImage/${selectedImage._id}`, formData);
+      setImageCarousel((prev) =>
+        prev.map((item) =>
+          item._id === selectedImage._id ? { ...item, image: newImage } : item
+        )
+      );
+      setEditImageOpen(false);
+      alert("Image updated successfully.");
+    } catch (error) {
+      console.error("Error updating image:", error.message);
+      alert("Failed to update image. Please try again.");
+    }
   };
 
   return (
@@ -258,11 +309,66 @@ function ListProduct() {
             placeholder="Category Name"
             required
           />
+          <label className="px-4 py-2 font-montserrat bg-blue-600 text-white rounded-md cursor-pointer">
+            Add Image
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => convertBase64(e, setCategoryImage)}
+            />
+          </label>
+          {categoryImage && (
+            <img
+              src={categoryImage}
+              alt="Category Preview"
+              className="w-auto h-40 aspect-video object-cover rounded-md border"
+            />
+          )}
           <button
             type="submit"
             className="px-4 py-2 bg-green-600 text-white rounded-md"
             disabled={loading}>
             {loading ? "Adding..." : "Submit"}
+          </button>
+        </form>
+      </ConfirmPopup>
+      <ConfirmPopup
+        open={editCategoryOpen}
+        onClose={() => setEditCategoryOpen(false)}>
+        <form
+          className="flex flex-col space-y-4 p-2 w-96 items-center"
+          onSubmit={handleEditCategorySubmit}>
+          <h3 className="text-xl font-semibold mb-4">Edit Category</h3>
+          <input
+            type="text"
+            value={editCategoryName}
+            onChange={(e) => setEditCategoryName(e.target.value)}
+            className="border border-gray-300 rounded-md p-2 w-full"
+            placeholder="Category Name"
+            required
+          />
+          <label className="px-4 py-2 font-montserrat bg-blue-600 text-white rounded-md cursor-pointer">
+            Change Image
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => convertBase64(e, setCategoryImage)}
+            />
+          </label>
+          {categoryImage && (
+            <img
+              src={categoryImage}
+              alt="Category Preview"
+              className="w-auto h-40 aspect-video object-cover rounded-md border"
+            />
+          )}
+          <button
+            type="submit"
+            className="px-4 py-2 bg-green-600 text-white rounded-md"
+            disabled={loading}>
+            {loading ? "Updating..." : "Submit"}
           </button>
         </form>
       </ConfirmPopup>
@@ -295,7 +401,7 @@ function ListProduct() {
                   type="file"
                   accept="image/*"
                   className="hidden"
-                  onChange={convertBase64}
+                  onChange={(e) => convertBase64(e, setImage)}
                 />
               </label>
               <button
@@ -318,9 +424,18 @@ function ListProduct() {
                 <div
                   key={category._id}
                   className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <span className="font-SFPro font-normal text-base text-text line-clamp-1">
-                    {category.name}
-                  </span>
+                  <div className="flex items-center gap-4">
+                    {category.image && (
+                      <img
+                        src={category.image}
+                        alt="Category"
+                        className="w-16 h-16 object-cover rounded-md"
+                      />
+                    )}
+                    <span className="font-SFPro font-normal text-base text-text line-clamp-1">
+                      {category.name}
+                    </span>
+                  </div>
                   <ActionButtons
                     onEdit={(e) => handleEditCategory(category, e)}
                     onDelete={(e) => handleDeleteCategory(category, e)}
@@ -352,15 +467,18 @@ function ListProduct() {
                   alt="Carousel"
                 />
                 <ActionButtons
-                  onEdit={() => {}}
+                  onEdit={() => {
+                    setSelectedImage(item);
+                    setEditImageOpen(true);
+                  }}
                   onDelete={(e) => handleDeleteImage(item, e)}
                   deleting={deleting}
                 />
               </div>
             ))
-          ) : (
+          ) : !error && (
             <div className="text-gray-500 mt-8">
-              No carousel images available
+              No categories available
             </div>
           )}
         </div>
@@ -415,6 +533,33 @@ function ListProduct() {
           </button>
         </div>
       </section>
+      {editImageOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Edit Carousel Image</h2>
+            <form onSubmit={handleEditImage}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setNewImage(e.target.files[0])}
+                className="mb-4 p-2 border border-gray-300 rounded"
+              />
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setEditImageOpen(false)}
+                  className="mr-4 p-2 bg-gray-300 rounded"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="p-2 bg-blue-500 text-white rounded">
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
