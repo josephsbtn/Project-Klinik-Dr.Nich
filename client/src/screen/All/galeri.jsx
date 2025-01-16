@@ -38,7 +38,7 @@ function Profile() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
-  const [content, setContent] = useState();
+  const [content, setContent] = useState([]);
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -94,7 +94,7 @@ function Profile() {
                   <div key={item._id}>
                     <GaleriCard item={item} />
                   </div>
-                ))}
+              ))}
             </div>
 
             {/* Lihat Lainnya */}

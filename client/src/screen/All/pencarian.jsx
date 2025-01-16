@@ -82,7 +82,7 @@ function Pencarian() {
             </a>
             <img src={arrow} alt="" />
             <p className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
-              Hasil Pencarian dari {query}
+              Hasil Pencarian dari
             </p>
           </div>
         </div>

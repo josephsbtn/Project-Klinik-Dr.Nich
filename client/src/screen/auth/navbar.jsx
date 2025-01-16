@@ -34,7 +34,8 @@ export default function Navbar({ selected }) {
   const navRef = useRef(null);
   const searchRef = useRef(null);
   const navigate = useNavigate();
-  const setSearch = () =>{
+  const setSearch = (e) =>{
+    e.preventDefault()
     setQuery(searchRef.current.value)
   }
 
@@ -257,7 +258,7 @@ export default function Navbar({ selected }) {
           </div>
 
           {/* Bag Icon */}
-          <a href="javascript:void(0)" aria-label="Bag" className="flex items-center">
+          <a href="" aria-label="Bag" className="flex items-center">
             {/* Icon untuk Mobile */}
             <img src={bag} alt="Bag Icon Mobile" className="w-[20px] h-[20px] lg:hidden" />
 
