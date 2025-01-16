@@ -16,9 +16,30 @@ const app = express();
 dotenv.config();
 dbConfig();
 
-app.use(cors());
-app.use(express.json({ limit: "20mb" }));
-app.use(express.urlencoded({ limit: "20mb", extended: true }));
+const allowedOrigins = [
+  "https://drnich.co.id/", // Production client
+  "https://admin.drnich.co.id/", // Production admin
+  "http://localhost:3000/", // Localhost for client development
+  "http://localhost:5173/", // Localhost for admin development
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Check if the origin is in the allowed origins list
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Allow cookies and other credentials
+  })
+);
+
+app.use(express.json({ limit: "50mb" })); // Adjust the limit as needed
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/api/layanan", layananRoutes);
 app.use("/api/users", userRoutes);
@@ -32,5 +53,5 @@ app.get("/", (req, res) => res.send("Server is ready"));
 app.use(notFound);
 app.use(errorHandler);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Server started on port ${port}`));

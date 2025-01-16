@@ -19,8 +19,8 @@ function ArrowRight() {
               stroke="#C2A353"
               stroke-width="1.5"
               stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </g>
         </g>
