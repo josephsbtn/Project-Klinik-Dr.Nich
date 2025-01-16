@@ -142,7 +142,7 @@ export default function Navbar({ selected }) {
                       alt="Location"
                     />
                     <a
-                      href="javascript:void(0)"
+                      href=""
                       className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
                       Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec. Argomulyo, Kota Salatiga, Jawa Tengah 50733
                     </a>

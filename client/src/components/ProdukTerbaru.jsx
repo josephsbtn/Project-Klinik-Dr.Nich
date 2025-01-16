@@ -14,16 +14,17 @@ function ProdukTerbaru() {
   const data = async () => {
     try {
       const response = (await axios.get("/api/produk/getAllproduk")).data;
+      if (response.length > 6) {
+        setLimit(6);
+      } else {
+        setLimit(response.length);
+      }
 
       const sorted = response.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
       setProduk(sorted);
-      if (produk.length > 6) {
-        setLimit(6);
-      } else {
-        setLimit(produk.length);
-      }
+      
       console.log("PRODUCT DATA :", produk);
       setLoading(false);
     } catch (error) {
@@ -68,7 +69,7 @@ function ProdukTerbaru() {
             <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
               <div className="carousel-item gap-9">
                 {produk ? (
-                  produk.slice(0, 6).map((item) => (
+                  produk.slice(0, limit).map((item) => (
                     <div key={item._id}>
                       <ProdukCard item={item} />
                     </div>

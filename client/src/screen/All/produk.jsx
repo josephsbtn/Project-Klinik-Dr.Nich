@@ -36,7 +36,7 @@ import "swiper/css/pagination";
 
 function Produk() {
   const navigate = useNavigate();
-
+  const [content, setContent] = useState([])
 
   // FETCH DATA
   const fetchData = async () => {
