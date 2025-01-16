@@ -34,8 +34,8 @@ export default function Navbar({ selected }) {
   const navRef = useRef(null);
   const searchRef = useRef(null);
   const navigate = useNavigate();
-  const setSearch = (e) =>{
-    e.preventDefault()
+  const setSearch = () =>{
+    console.log(query)
     setQuery(searchRef.current.value)
   }
 
@@ -218,7 +218,7 @@ export default function Navbar({ selected }) {
               <input
                 ref={searchRef}
                 type="text"
-                onChange={()=>{setSearch}}
+                onChange={()=>{setSearch()}}
                 placeholder="Search..."
                 className="w-full h-full px-[10px] focus:outline-none"
               />
@@ -250,7 +250,7 @@ export default function Navbar({ selected }) {
             <input
             ref={searchRef}
             type="text"
-            onChange={()=>{setSearch}}
+            onChange={()=>{setSearch()}}
               placeholder="Search..."
               className="w-full h-[38px] px-2 focus:outline-none"
             

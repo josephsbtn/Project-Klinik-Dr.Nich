@@ -33,13 +33,16 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import CardLayanan from "../../components/CardLayanan.jsx";
+import ProdukCard from "../../components/ProdukCard.jsx";
 
 function Pencarian() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
-  const [content, setContent] = useState();
+  const [layanan, setlayanan] = useState([]);
+  const [produk, setproduk] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -52,16 +55,22 @@ function Pencarian() {
   };
 
   // FETCH DATA
- 
+  const location = useLocation()
+  const queryParam = new URLSearchParams(location.search)
+  const query = queryParam.get("query")
   const fetchData = async () => {
     try {
       setLoading(true);
-      const resLayanan = (await axios.get('api/users/search')).data;
+      const resLayanan = (await axios.get('api/users/search?query='+query)).data;
       console.log(resLayanan)
-      const sorted = resLayanan.sort(
+      const sortlayanan = resLayanan.layanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
       );
-      setContent(sorted);
+      const sortproduk = resLayanan.produk.sort(
+        (a, b) => b.reservedCount - a.reservedCount
+      );
+      setlayanan(sortlayanan);
+      setproduk(sortproduk);
       setLoading(false);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -87,15 +96,26 @@ function Pencarian() {
           </div>
         </div>
         <div className="w-full h-full flex flex-col mt-[30px]">
-          {/* Galeri */}
+          {/* Layanan */}
           <div className="w-full h-[600px] flex flex-col items-center">
             <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
-              {content &&
-                content.map((item) => (
-                  <div key={item._id}>
-                    <GaleriCard item={item} />
+              {layanan &&
+                layanan.map((item) => (
+                  <div className="h-10 w-10 bg-black" key={item._id}>
+                    <CardLayanan item={item} />
+                    
                   </div>
-                ))}
+                ))} 
+            </div>
+            {/* Produk */}
+            <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
+              {produk &&
+                produk.map((item) => (
+                  <div className="h-10 w-10 bg-black" key={item._id}>
+                    <ProdukCard item={item} />
+                    
+                  </div>
+                ))} 
             </div>
 
             {/* Lihat Lainnya */}
