@@ -1,6 +1,62 @@
 import asyncHandler from "express-async-handler";
 import produkModels from "../../models/produk/produk.js";
+import carouselProducts from "../../models/produk/carouselProducts.js";
 
+/*CAROUSEL PRODUCT*/
+
+const newImage = asyncHandler(async (req, res) => {
+  const newImage = {
+    image: req.body.image,
+  };
+  try {
+    const isExist = await carouselProducts.findOne({ image: newImage.image });
+    if (isExist) {
+      throw new Error("Image Sudah Ada");
+    }
+    const image = await carouselProducts.create(newImage);
+    res.send(image);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const getImage = asyncHandler(async (req, res) => {
+  try {
+    const image = await carouselProducts.find();
+    res.send(image);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const deleteImage = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const image = await carouselProducts.findByIdAndDelete(id);
+    res.send(image);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const updateImage = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const newData = {
+    image: req.body.image,
+  };
+  try {
+    const image = await carouselProducts.findByIdAndUpdate(
+      id,
+      { $set: newData },
+      { new: true }
+    );
+    res.send(image);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+/*PRODUK*/
 const newproduk = asyncHandler(async (req, res) => {
   const newproduk = {
     nama: req.body.nama,
@@ -89,4 +145,14 @@ const getprodukbyID = asyncHandler(async (req, res) => {
   }
 });
 
-export { newproduk, getproduk, updateproduk, deleteproduk, getprodukbyID };
+export {
+  newproduk,
+  getproduk,
+  updateproduk,
+  deleteproduk,
+  getprodukbyID,
+  newImage,
+  getImage,
+  updateImage,
+  deleteImage,
+};

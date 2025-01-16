@@ -12,8 +12,12 @@ import DetailTreatment from "./screen/Layanan/DetailTreatment.jsx";
 import Profil from "./screen/All/profile.jsx";
 // galeri
 import Galeri from "./screen/All/galeri.jsx";
-//produk
+//=====produk=====
 import Produk from "./screen/All/produk.jsx";
+// skincare
+import Skincare from "./screen/All/skincare.jsx";
+//================
+
 //promo
 import Promo from "./screen/All/promo.jsx";
 //pencarian
@@ -41,7 +45,13 @@ function App() {
         />
         <Route path="/profil" element={<Profil />} />
         <Route path="/galeri" element={<Galeri />} />
+        {/* ==============PRODUK================= */}
         <Route path="/produk" element={<Produk />} />
+        {/* Skincare */}
+        <Route path="/produk/skincare" element={<Skincare />} />
+        {/* ===================================== */}
+
+        {/* PROMO */}
         <Route path="/promo" element={<Promo />} />
         <Route path="/pencarian" element={<Pencarian/>} />
       </Routes>

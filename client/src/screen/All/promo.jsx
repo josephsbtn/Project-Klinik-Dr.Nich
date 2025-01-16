@@ -67,7 +67,7 @@ function Promo() {
                 </div>
             </div> */}
 
-      <div className="flex items-center w-[90%] justify-start space-x-2 mt-[18px] lg:mx-[120px]">
+      <div className="flex items-center w-[90%] mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
         <a
           onClick={() => navigate("/")}
           className="cursor-pointer text-xs text-disable-text font-normal">
@@ -91,7 +91,7 @@ function Promo() {
           ))}
       </div>
 
-      <div className="flex flex-col gap-4 z-0 lg:mx-[120px]">
+      <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%]">
         {/* Layanan */}
         <section className="lg:w-full w-[full]">
           <LayananPopuler />

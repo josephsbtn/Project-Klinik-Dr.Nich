@@ -5,6 +5,10 @@ import {
   updateproduk,
   deleteproduk,
   getprodukbyID,
+  newImage,
+  getImage,
+  updateImage,
+  deleteImage,
 } from "../../controller/admin/produkController.js";
 import {
   newCategoryProduct,
@@ -18,6 +22,12 @@ import {
 } from "../../controller/admin/jenisKategoriProdukController.js";
 
 const router = express.Router();
+
+//CAROUSEL PRODUCT
+router.post("/newImage", newImage);
+router.get("/getImage", getImage);
+router.put("/updateImage/:id", updateImage);
+router.delete("/deleteImage/:id", deleteImage);
 
 //PRODUCT
 router.post("/tambahproduk", newproduk);
