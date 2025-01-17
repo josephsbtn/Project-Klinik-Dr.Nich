@@ -13,7 +13,11 @@ function ProdukTerbaru() {
 
   const data = async () => {
     try {
-      const response = (await axios.get("/api/produk/getAllproduk")).data;
+      const response = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAllproduk`
+        )
+      ).data;
       if (response.length > 6) {
         setLimit(6);
       } else {
@@ -24,7 +28,7 @@ function ProdukTerbaru() {
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
       setProduk(sorted);
-      
+
       console.log("PRODUCT DATA :", produk);
       setLoading(false);
     } catch (error) {

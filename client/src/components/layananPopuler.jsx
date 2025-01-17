@@ -10,7 +10,11 @@ function LayananPopuler() {
 
   const fetchData = async () => {
     try {
-      const resLayanan = (await axios.get("/api/layanan/getAllLayanan")).data;
+      const resLayanan = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllLayanan`
+        )
+      ).data;
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
       ); // Sort by reserved count

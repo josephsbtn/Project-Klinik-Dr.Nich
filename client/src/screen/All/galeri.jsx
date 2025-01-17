@@ -55,7 +55,11 @@ function Profile() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const resLayanan = (await axios.get("/api/gallery/getAllGaleri")).data;
+      const resLayanan = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/getAllGaleri`
+        )
+      ).data;
       console.log(resLayanan);
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
@@ -94,7 +98,7 @@ function Profile() {
                   <div key={item._id}>
                     <GaleriCard item={item} />
                   </div>
-              ))}
+                ))}
             </div>
 
             {/* Lihat Lainnya */}

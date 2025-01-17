@@ -25,6 +25,7 @@ import haircare from "../../assets/img-produk/haircare.png";
 import makeup from "../../assets/img-produk/makeup.png";
 import skincare from "../../assets/img-produk/skincare.png";
 import waxingkit from "../../assets/img-produk/waxingkit.png";
+import axios from "axios";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -36,13 +37,21 @@ import "swiper/css/pagination";
 
 function Produk() {
   const navigate = useNavigate();
-  const [content, setContent] = useState([])
+  const [content, setContent] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // FETCH DATA
   const fetchData = async () => {
     try {
       setLoading(true);
-      const resLayanan = (await axios.get("/api/promo/getAllkategoriProduk")).data;
+      const resLayanan = (
+        await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/promo/getAllkategoriProduk`
+        )
+      ).data;
 
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
@@ -58,7 +67,6 @@ function Produk() {
   useEffect(() => {
     fetchData();
   }, []);
-
 
   return (
     <>
@@ -110,8 +118,7 @@ function Produk() {
             <div key={item._id}>
               <CardProduct item={item} />
             </div>
-          ))
-        }
+          ))}
       </div>
 
       <div className="flex flex-col gap-4 items-center w-[90%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">

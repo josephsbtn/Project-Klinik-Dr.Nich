@@ -5,37 +5,48 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../auth/navbar";
 // footer
 import Footer from "../auth/footer";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // layaran dan produk terbaru
 import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
+import ArrowRightDisable from "../../components/ArrowRight-Disable";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-function skincare() {
+import axios from "axios";
 
+function Skincare() {
+  const navigate = useNavigate();
+  const [content, setContent] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  // FETCH DATA
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const resLayanan = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllProduct`
+        )
+      ).data;
 
-    // FETCH DATA
-    const fetchData = async () => {
-        try {
-            setLoading(true);
-            const resLayanan = (await axios.get("/api/promo/getAllProduct")).data;
+      const sorted = resLayanan.sort(
+        (a, b) => b.reservedCount - a.reservedCount
+      );
+      console.log(sorted);
+      setContent(sorted);
+      setLoading(false);
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+    }
+  };
 
-            const sorted = resLayanan.sort(
-                (a, b) => b.reservedCount - a.reservedCount
-            );
-            console.log(sorted);
-            setContent(sorted);
-            setLoading(false);
-        } catch (error) {
-            setError(error.response?.data?.message || "An error occurred");
-        }
-    };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    return (
-        <>
+  return (
+    <>
       <Navbar selected={"Produk"} />
       <div className="flex items-center w-[90%] justify-start space-x-2 mx-auto mt-[18px] lg:mx-[120px]">
         <a
@@ -158,7 +169,7 @@ function skincare() {
 
       <Footer />
     </>
-    )
+  );
 }
 
-export default skincare
+export default Skincare;

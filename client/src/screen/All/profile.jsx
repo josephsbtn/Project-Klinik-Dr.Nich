@@ -50,9 +50,21 @@ function Profile() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/layanan/getAllJenisLayanan");
-      const fotoMesin = (await axios.get("/api/foto/getAllMesin")).data;
-      const fotoSertif = (await axios.get("/api/foto/getAllSertif")).data;
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/getAllJenisLayanan`
+      );
+      const fotoMesin = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllMesin`
+        )
+      ).data;
+      const fotoSertif = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllSertif`
+        )
+      ).data;
       const sortedJenisLayanan = response.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );
@@ -71,8 +83,8 @@ function Profile() {
     } catch (error) {
       setError(
         "Failed to fetch jenis layanan. Please try again later (" +
-        error.message +
-        ")"
+          error.message +
+          ")"
       );
     } finally {
       setLoading(false);
@@ -123,7 +135,11 @@ function Profile() {
                 Visi Dr. Nich Beauty Aesthetic
               </h1>
               <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
-                Visi kami adalah untuk memimpin industri estetika dengan menjadi klinik terdepan yang dikenal karena inovasi, kualitas, dan layanan pelanggan yang luar biasa. Kami berupaya untuk terus berkembang dan beradaptasi dengan kemajuan teknologi untuk memberikan perawatan terbaik bagi setiap pasien.
+                Visi kami adalah untuk memimpin industri estetika dengan menjadi
+                klinik terdepan yang dikenal karena inovasi, kualitas, dan
+                layanan pelanggan yang luar biasa. Kami berupaya untuk terus
+                berkembang dan beradaptasi dengan kemajuan teknologi untuk
+                memberikan perawatan terbaik bagi setiap pasien.
               </p>
             </div>
           </div>
@@ -145,7 +161,11 @@ function Profile() {
                 Misi Dr. Nich Beauty Aesthetic
               </h1>
               <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
-                Misi kami adalah membantu setiap pasien mencapai kepercayaan diri dan kecantikan alami mereka melalui perawatan yang inovatif dan aman. Kami berkomitmen untuk menjadi klinik kecantikan pilihan utama dengan menyediakan layanan yang unggul dan hasil yang nyata.
+                Misi kami adalah membantu setiap pasien mencapai kepercayaan
+                diri dan kecantikan alami mereka melalui perawatan yang inovatif
+                dan aman. Kami berkomitmen untuk menjadi klinik kecantikan
+                pilihan utama dengan menyediakan layanan yang unggul dan hasil
+                yang nyata.
               </p>
             </div>
           </div>
@@ -161,7 +181,9 @@ function Profile() {
           {/* Carousel Container */}
           <div className="flex flex-col gap-[15px] justify-center items-center pt-4 pb-4 lg:flex-row">
             <div className="w-[325px] bg-white rounded-lg border border-gray-200 p-6 flex flex-col justify-center items-center shadow-sm lg:w-[504px]">
-              <h1 className="pb-4 text-[#c2a353] text-sm font-medium font-SFPro leading-tight tracking-tight">Berpengalaman dan Bersertifikat</h1>
+              <h1 className="pb-4 text-[#c2a353] text-sm font-medium font-SFPro leading-tight tracking-tight">
+                Berpengalaman dan Bersertifikat
+              </h1>
               <Swiper
                 modules={[Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -236,8 +258,6 @@ function Profile() {
                 )}
               </Swiper>
             </div>
-
-
           </div>
           <div className="flex flex-col gap-4 z-0">
             {/* Layanan */}
@@ -249,7 +269,6 @@ function Profile() {
             </section>
           </div>
         </div>
-
       </div>
       <Footer />
     </>

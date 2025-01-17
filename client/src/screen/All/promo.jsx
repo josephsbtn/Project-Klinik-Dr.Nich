@@ -33,7 +33,11 @@ function Promo() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const resLayanan = (await axios.get("/api/promo/getAllPromo")).data;
+      const resLayanan = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
+        )
+      ).data;
 
       const sorted = resLayanan.sort(
         (a, b) => b.reservedCount - a.reservedCount

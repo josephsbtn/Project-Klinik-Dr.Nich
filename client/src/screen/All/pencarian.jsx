@@ -55,14 +55,19 @@ function Pencarian() {
   };
 
   // FETCH DATA
-  const location = useLocation()
-  const queryParam = new URLSearchParams(location.search)
-  const query = queryParam.get("query")
+  const location = useLocation();
+  const queryParam = new URLSearchParams(location.search);
+  const query = queryParam.get("query");
   const fetchData = async () => {
     try {
       setLoading(true);
-      const resLayanan = (await axios.get('api/users/search?query='+query)).data;
-      console.log(resLayanan)
+      const resLayanan = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/users/search?query=` +
+            query
+        )
+      ).data;
+      console.log(resLayanan);
       const sortlayanan = resLayanan.layanan.sort(
         (a, b) => b.reservedCount - a.reservedCount
       );
@@ -86,7 +91,9 @@ function Pencarian() {
       <div className="mt-[18px]">
         <div className="flex-col">
           <div className="flex gap-[6px] mx-[25px] lg:mx-[120px]">
-            <a href="/" className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
+            <a
+              href="/"
+              className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
               Beranda
             </a>
             <img src={arrow} alt="" />
@@ -103,9 +110,8 @@ function Pencarian() {
                 layanan.map((item) => (
                   <div className="h-10 w-10 bg-black" key={item._id}>
                     <CardLayanan item={item} />
-                    
                   </div>
-                ))} 
+                ))}
             </div>
             {/* Produk */}
             <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
@@ -113,9 +119,8 @@ function Pencarian() {
                 produk.map((item) => (
                   <div className="h-10 w-10 bg-black" key={item._id}>
                     <ProdukCard item={item} />
-                    
                   </div>
-                ))} 
+                ))}
             </div>
 
             {/* Lihat Lainnya */}
@@ -135,8 +140,6 @@ function Pencarian() {
               <ProdukTerbaru />
             </section>
           </div>
-
-
         </div>
       </div>
       <Footer />
