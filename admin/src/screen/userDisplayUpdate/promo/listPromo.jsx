@@ -25,7 +25,9 @@ function ListPromo() {
 
   const fetchPromo = async () => {
     try {
-      const response = await axios.get("/api/promo/getAllPromo");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
+      );
       const data = response.data;
       if (Array.isArray(data)) {
         setPromo(data);
