@@ -21,7 +21,9 @@ function ListSertif() {
   const fetchSertif = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/foto/getAllSertif");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllSertif`
+      );
       const data = response.data;
       if (Array.isArray(data)) {
         setSertif(data);
@@ -44,9 +46,12 @@ function ListSertif() {
   const handleAddContent = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/foto/createSertif", {
-        foto: image,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/createSertif`,
+        {
+          foto: image,
+        }
+      );
       if (response.status === 200) {
         setOpen(false);
         fetchSertif();
@@ -62,7 +67,9 @@ function ListSertif() {
   const deleteGaleri = () => {
     try {
       const response = axios.delete(
-        `/api/foto/deleteSertif/${selectedContent._id}`
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/deleteSertif/${
+          selectedContent._id
+        }`
       );
       window.location.reload();
       fetchSertif();
@@ -76,7 +83,9 @@ function ListSertif() {
   const editGaleri = () => {
     try {
       const response = axios.put(
-        `/api/foto/editSertif/${selectedContent._id}`,
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/editSertif/${
+          selectedContent._id
+        }`,
         {
           foto: editImage,
         }

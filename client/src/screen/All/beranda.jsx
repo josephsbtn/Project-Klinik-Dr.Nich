@@ -76,9 +76,21 @@ export default function Beranda() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/layanan/getAllJenisLayanan");
-      const fotoMesin = (await axios.get("/api/foto/getAllMesin")).data;
-      const fotoSertif = (await axios.get("/api/foto/getAllSertif")).data;
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/getAllJenisLayanan`
+      );
+      const fotoMesin = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllMesin`
+        )
+      ).data;
+      const fotoSertif = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllSertif`
+        )
+      ).data;
       const sortedJenisLayanan = response.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );

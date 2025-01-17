@@ -44,9 +44,12 @@ function ListMesin() {
   const handleAddContent = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/foto/createMesin", {
-        foto: image,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/createMesin`,
+        {
+          foto: image,
+        }
+      );
       if (response.status === 200) {
         setOpen(false);
         fetchSertif();
@@ -62,7 +65,9 @@ function ListMesin() {
   const deleteGaleri = () => {
     try {
       const response = axios.delete(
-        `/api/foto/deleteMesin/${selectedContent._id}`
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/deleteMesin/${
+          selectedContent._id
+        }`
       );
       window.location.reload();
       fetchSertif();
@@ -75,9 +80,14 @@ function ListMesin() {
 
   const editGaleri = () => {
     try {
-      const response = axios.put(`/api/foto/editMesin/${selectedContent._id}`, {
-        foto: editImage,
-      });
+      const response = axios.put(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/editMesin/${
+          selectedContent._id
+        }`,
+        {
+          foto: editImage,
+        }
+      );
       fetchSertif();
     } catch (error) {
       console.error("Error editing promo:", error.message);
