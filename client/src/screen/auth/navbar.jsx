@@ -28,16 +28,17 @@ import ig from "../../assets/Instagram.png";
 import searchWhite from "../../assets/search-normal-white.svg";
 
 export default function Navbar({ selected }) {
+  const [querySearch, setQuerySeacrh] = useState("");
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState("");
   const navRef = useRef(null);
   const searchRef = useRef(null);
   const navigate = useNavigate();
-  const setSearch = () =>{
-    console.log(query)
-    setQuery(searchRef.current.value)
-  }
+  const setSearch = () => {
+    console.log(query);
+    setQuery(searchRef.current.value);
+  };
 
   // Close nav menu when clicking outside
   useEffect(() => {
@@ -115,14 +116,16 @@ export default function Navbar({ selected }) {
                     className="flex items-center justify-between w-full cursor-pointer"
                     onClick={() => handleNavigation(item.path, item.text)}>
                     <span
-                      className={`font-SFPro font-medium text-sm ${selected === item.text ? "text-primary" : "text-white"
-                        }`}>
+                      className={`font-SFPro font-medium text-sm ${
+                        selected === item.text ? "text-primary" : "text-white"
+                      }`}>
                       {item.text}
                     </span>
                     <img
                       src={arrow}
-                      className={`w-[15px] h-[15px] ${selected === item.text ? "hidden" : "opacity-100"
-                        }`}
+                      className={`w-[15px] h-[15px] ${
+                        selected === item.text ? "hidden" : "opacity-100"
+                      }`}
                       alt="Arrow Icon"
                     />
                   </div>
@@ -144,7 +147,8 @@ export default function Navbar({ selected }) {
                     <a
                       href=""
                       className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
-                      Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec. Argomulyo, Kota Salatiga, Jawa Tengah 50733
+                      Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec.
+                      Argomulyo, Kota Salatiga, Jawa Tengah 50733
                     </a>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -210,15 +214,17 @@ export default function Navbar({ selected }) {
         {/* Search Menu */}
         {isSearchOpen && (
           <div
-            
-            className={`bg-white w-full h-[90px] fixed top-0 left-0 z-50 flex items-center justify-center ${isSearchOpen ? "block" : "hidden"
-              } lg:flex`}>
+            className={`bg-white w-full h-[90px] fixed top-0 left-0 z-50 flex items-center justify-center ${
+              isSearchOpen ? "block" : "hidden"
+            } lg:flex`}>
             <div className="flex items-center border-b border-[#c2a353] w-[326px] h-[45px]">
               <img src={searchWhite} alt="Search Icon" className="px-[10px]" />
               <input
                 ref={searchRef}
                 type="text"
-                onChange={()=>{setSearch()}}
+                onChange={() => {
+                  setSearch();
+                }}
                 placeholder="Search..."
                 className="w-full h-full px-[10px] focus:outline-none"
               />
@@ -243,31 +249,44 @@ export default function Navbar({ selected }) {
 
           {/* Search Bar */}
           <div
-            
-            className={`flex items-center border-b border-[#c2a353] ${isSearchOpen ? "block" : "hidden"
-              } lg:flex`}>
-            <a href={`/pencarian?query=${query}`}><img src={searchWhite} alt="Search Icon" className="w-[20px] h-[20px] mx-2" /></a>
+            className={`flex items-center border-b border-[#c2a353] ${
+              isSearchOpen ? "block" : "hidden"
+            } lg:flex`}>
+            <a href={`/pencarian?query=${query}`}>
+              <img
+                src={searchWhite}
+                alt="Search Icon"
+                className="w-[20px] h-[20px] mx-2"
+              />
+            </a>
             <input
-            ref={searchRef}
-            type="text"
-            onChange={()=>{setSearch()}}
+              ref={searchRef}
+              type="text"
+              onChange={() => {
+                setSearch();
+              }}
               placeholder="Search..."
               className="w-full h-[38px] px-2 focus:outline-none"
-            
             />
           </div>
 
           {/* Bag Icon */}
           <a href="" aria-label="Bag" className="flex items-center">
             {/* Icon untuk Mobile */}
-            <img src={bag} alt="Bag Icon Mobile" className="w-[20px] h-[20px] lg:hidden" />
+            <img
+              src={bag}
+              alt="Bag Icon Mobile"
+              className="w-[20px] h-[20px] lg:hidden"
+            />
 
             {/* Icon untuk Desktop */}
-            <img src={bagLg} alt="Bag Icon Desktop" className="w-[20px] h-[20px] hidden lg:block" />
+            <img
+              src={bagLg}
+              alt="Bag Icon Desktop"
+              className="w-[20px] h-[20px] hidden lg:block"
+            />
           </a>
-
         </div>
-
       </div>
     </div>
   );

@@ -32,7 +32,9 @@ function ListGallery() {
   const fetchGallery = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/gallery/getAllGaleri");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/getAllGaleri`
+      );
       const data = response.data;
       if (Array.isArray(data)) {
         setGallery(data);
@@ -55,14 +57,22 @@ function ListGallery() {
   const handleAddContent = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/gallery/createGaleri", {
-        judul: judul,
-        thumbnail: image,
-        link: link,
-        channel: channel,
-        sosmed: sosmed,
-        deskripsi: deskripsi,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/createGaleri`,
+        {
+          judul: judul,
+          thumbnail: image,
+          link: link,
+          channel: channel,
+          sosmed: sosmed,
+          deskripsi: deskripsi,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
+      );
       if (response.status === 200) {
         setOpen(false);
         fetchGallery();
@@ -78,7 +88,9 @@ function ListGallery() {
   const deleteGaleri = () => {
     try {
       const response = axios.delete(
-        `/api/gallery/deleteGaleri/${selectedContent._id}`
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/deleteGaleri/${
+          selectedContent._id
+        }`
       );
       window.location.reload();
       fetchGallery();
@@ -92,7 +104,9 @@ function ListGallery() {
   const editGaleri = () => {
     try {
       const response = axios.put(
-        `/api/gallery/editGaleri/${selectedContent._id}`,
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/editGaleri/${
+          selectedContent._id
+        }`,
         {
           judul: editJudul,
           thumbnail: editImage,
@@ -100,6 +114,11 @@ function ListGallery() {
           channel: editChannel,
           sosmed: editSosmed,
           deskripsi: editDeskripsi,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
         }
       );
       fetchGallery();
