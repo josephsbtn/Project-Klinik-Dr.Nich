@@ -126,6 +126,7 @@ export default function Beranda() {
       setFotoSertif(fotoSertif);
       console.log("foto mesin : " + fotoMesin);
       console.log("foto sertif :" + fotoSertif);
+      console.log("DATA PROMO :" + promo);
       setJenisLayanan(sortedJenisLayanan);
     } catch (error) {
       setError(
@@ -419,7 +420,7 @@ export default function Beranda() {
               <div className="carousel carousel-center w-80 lg:w-full space-x-[10px]">
                 {/* Conditional Rendering of Carousel Items */}
                 {gallery && gallery.length > 0 ? (
-                  gallery.map((item, index) => (
+                  gallery.slice(0, limitGallery).map((item, index) => (
                     <div key={index} className="carousel-item">
                       <div className="w-[326px] h-[213.28px] relative flex flex-col items-start">
                         {/* Dynamic Image */}

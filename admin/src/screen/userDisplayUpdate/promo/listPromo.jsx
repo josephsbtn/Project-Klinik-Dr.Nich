@@ -46,12 +46,20 @@ function ListPromo() {
   const handleAddPromo = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/promo/tambahpromo", {
-        nama: name,
-        detail: deskripsi,
-        syarat: syarat,
-        foto: image,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/tambahpromo`,
+        {
+          nama: name,
+          detail: deskripsi,
+          syarat: syarat,
+          foto: image,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
+      );
       if (response.status === 200) {
         setOpen(false);
         fetchPromo();
@@ -86,12 +94,19 @@ function ListPromo() {
       console.log("Edit syarat:", editSyarat);
       console.log("Edit image:", editImage);
       const response = axios.put(
-        `/api/promo/updatepromo/${selectedPromo._id}`,
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/updatepromo/${
+          selectedPromo._id
+        }`,
         {
           nama: editName,
           detail: editDeskripsi,
           syarat: editSyarat,
           foto: editImage,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
         }
       );
       setEditDeskripsi("");
