@@ -60,7 +60,9 @@ function ListProduct() {
           axios.get(
             `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAllproduk`
           ),
-          axios.get("/api/produk/getImage"),
+          axios.get(
+            `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getImage`
+          ),
           axios.get(
             `${
               import.meta.env.VITE_BASE_URL_BACKEND
@@ -110,19 +112,29 @@ function ListProduct() {
     try {
       setDeleting(true);
       if (isDeletingCarousel) {
-        await axios.delete(`/api/produk/deleteImage/${selectedContent._id}`);
+        await axios.delete(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/deleteImage/${
+            selectedContent._id
+          }`
+        );
         setImageCarousel((prev) =>
           prev.filter((item) => item._id !== selectedContent._id)
         );
       } else if (isDeletingCategory) {
         await axios.delete(
-          `/api/produk/deletekategoriProduk/${selectedContent._id}`
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/deletekategoriProduk/${selectedContent._id}`
         );
         setCategoryProduct((prev) =>
           prev.filter((item) => item._id !== selectedContent._id)
         );
       } else {
-        await axios.delete(`/api/produk/deleteproduk/${selectedContent._id}`);
+        await axios.delete(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/deleteproduk/${
+            selectedContent._id
+          }`
+        );
         setProduk((prev) =>
           prev.filter((item) => item._id !== selectedContent._id)
         );
@@ -186,7 +198,10 @@ function ListProduct() {
     try {
       setLoading(true);
       console.log("data", image);
-      const response = await axios.post("/api/produk/newImage", image);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/newImage`,
+        image
+      );
 
       console.log(response.data);
       setImageCarousel((prev) => [...prev, response.data]);
@@ -242,10 +257,15 @@ function ListProduct() {
   const handleEditCategorySubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/produk/editkategoriProduk/${selectedContent._id}`, {
-        name: editCategoryName,
-        image: categoryImage,
-      });
+      await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/produk/editkategoriProduk/${selectedContent._id}`,
+        {
+          name: editCategoryName,
+          image: categoryImage,
+        }
+      );
       setCategoryProduct((prev) =>
         prev.map((item) =>
           item._id === selectedContent._id
@@ -290,7 +310,12 @@ function ListProduct() {
     try {
       const formData = new FormData();
       formData.append("image", newImage);
-      await axios.put(`/api/produk/editImage/${selectedImage._id}`, formData);
+      await axios.put(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/editImage/${
+          selectedImage._id
+        }`,
+        formData
+      );
       setImageCarousel((prev) =>
         prev.map((item) =>
           item._id === selectedImage._id ? { ...item, image: newImage } : item
