@@ -134,10 +134,16 @@ function ListProduct() {
   const addCategory = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/produk/tambahkategoriProduk", {
-        name: newCategoryName,
-        image: categoryImage,
-      });
+      const response = await axios.post(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/produk/tambahkategoriProduk`,
+        {
+          name: newCategoryName,
+          image: categoryImage,
+        }
+      );
+
       setCategoryProduct((prev) => [...prev, response.data]);
       setAddCategoryOpen(false);
       alert("Category added successfully.");
@@ -456,31 +462,31 @@ function ListProduct() {
         <h1 className="text-xl font-bold text-secondary">Carousel Image</h1>
         {error && <div className="text-red-500 my-4">{error}</div>}
         <div className="grid grid-cols-3 gap-4 w-full max-w-4xl mt-5">
-          {imageCarousel.length > 0 ? (
-            imageCarousel.map((item) => (
-              <div
-                key={item._id}
-                className="flex flex-col justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                <img
-                  src={item.image}
-                  className="w-full h-full object-cover mb-2"
-                  alt="Carousel"
-                />
-                <ActionButtons
-                  onEdit={() => {
-                    setSelectedImage(item);
-                    setEditImageOpen(true);
-                  }}
-                  onDelete={(e) => handleDeleteImage(item, e)}
-                  deleting={deleting}
-                />
-              </div>
-            ))
-          ) : !error && (
-            <div className="text-gray-500 mt-8">
-              No categories available
-            </div>
-          )}
+          {imageCarousel.length > 0
+            ? imageCarousel.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex flex-col justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                  <img
+                    src={item.image}
+                    className="w-full h-full object-cover mb-2"
+                    alt="Carousel"
+                  />
+                  <ActionButtons
+                    onEdit={() => {
+                      setSelectedImage(item);
+                      setEditImageOpen(true);
+                    }}
+                    onDelete={(e) => handleDeleteImage(item, e)}
+                    deleting={deleting}
+                  />
+                </div>
+              ))
+            : !error && (
+                <div className="text-gray-500 mt-8">
+                  No categories available
+                </div>
+              )}
         </div>
       </section>
 
@@ -548,11 +554,12 @@ function ListProduct() {
                 <button
                   type="button"
                   onClick={() => setEditImageOpen(false)}
-                  className="mr-4 p-2 bg-gray-300 rounded"
-                >
+                  className="mr-4 p-2 bg-gray-300 rounded">
                   Cancel
                 </button>
-                <button type="submit" className="p-2 bg-blue-500 text-white rounded">
+                <button
+                  type="submit"
+                  className="p-2 bg-blue-500 text-white rounded">
                   Save Changes
                 </button>
               </div>
