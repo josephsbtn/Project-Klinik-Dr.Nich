@@ -57,9 +57,15 @@ function ListProduct() {
       setLoading(true);
       const [productsResponse, imagesResponse, categoryResponse] =
         await Promise.all([
-          axios.get("/api/produk/getAllproduk"),
+          axios.get(
+            `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAllproduk`
+          ),
           axios.get("/api/produk/getImage"),
-          axios.get("/api/produk/getAllkategoriProduk"),
+          axios.get(
+            `${
+              import.meta.env.VITE_BASE_URL_BACKEND
+            }/api/produk/getAllkategoriProduk`
+          ),
         ]);
 
       const products = productsResponse.data;
