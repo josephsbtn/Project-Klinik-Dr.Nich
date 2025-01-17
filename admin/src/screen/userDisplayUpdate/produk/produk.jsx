@@ -133,6 +133,7 @@ function ListProduct() {
 
   const addCategory = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(
         `${
@@ -141,15 +142,35 @@ function ListProduct() {
         {
           name: newCategoryName,
           image: categoryImage,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
         }
       );
 
       setCategoryProduct((prev) => [...prev, response.data]);
+
       setAddCategoryOpen(false);
       alert("Category added successfully.");
+
+      //Optionally reset form fields
+      setNewCategoryName("");
+      setCategoryImage(null);
     } catch (error) {
-      console.error("Error adding category:", error.message);
-      alert("Failed to add category. Please try again.");
+      // Capture more detailed error if available
+      if (error.response && error.response.data) {
+        console.error("Error adding category:", error.response.data);
+        alert(
+          `Failed to add category: ${
+            error.response.data.message || "Please try again."
+          }`
+        );
+      } else {
+        console.error("Error adding category:", error.message);
+        alert("Failed to add category. Please try again.");
+      }
     }
   };
 
