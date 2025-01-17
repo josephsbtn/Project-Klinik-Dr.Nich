@@ -102,9 +102,9 @@ export default function Beranda() {
         )
       ).data;
 
-      const getGallery = (
+      const galeriData = (
         await axios.get(
-          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/getAllGallery`
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/getAllGaleri`
         )
       ).data;
 
@@ -118,7 +118,7 @@ export default function Beranda() {
       };
       localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
 
-      setGallery(getGallery);
+      setGallery(galeriData);
       gallery.length > 5 ? setLimitGallery(5) : setLimitGallery(gallery.length);
       setPromo(getPromo);
       promo.length > 3 ? setLimitCarousel(3) : setLimitCarousel(promo.length);
