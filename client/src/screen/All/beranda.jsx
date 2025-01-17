@@ -67,6 +67,10 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
 
 export default function Beranda() {
   const [jenisLayanan, setJenisLayanan] = useState([]);
+  const [limitCarousel, setLimitCarousel] = useState(0);
+  const [limitGallery, setLimitGallery] = useState(0);
+  const [gallery, setGallery] = useState([]);
+  const [promo, setPromo] = useState([]);
   const [fotoMesin, setFotoMesin] = useState();
   const [fotoSertif, setFotoSertif] = useState();
   const [error, setError] = useState("");
@@ -91,6 +95,19 @@ export default function Beranda() {
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllSertif`
         )
       ).data;
+
+      const getPromo = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
+        )
+      ).data;
+
+      const getGallery = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/getAllGallery`
+        )
+      ).data;
+
       const sortedJenisLayanan = response.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );
@@ -101,6 +118,10 @@ export default function Beranda() {
       };
       localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
 
+      setGallery(getGallery);
+      gallery.length > 5 ? setLimitGallery(5) : setLimitGallery(gallery.length);
+      setPromo(getPromo);
+      promo.length > 3 ? setLimitCarousel(3) : setLimitCarousel(promo.length);
       setFotoMesin(fotoMesin);
       setFotoSertif(fotoSertif);
       console.log("foto mesin : " + fotoMesin);
@@ -204,16 +225,17 @@ export default function Beranda() {
         loop={true} // Enable looping
         navigation={CarouselNavigation} // Use the CarouselNavigation component
       >
-        {[img1, img2, img1].map((src, index) => (
-          <div key={index} className="relative">
-            <img
-              src={src}
-              alt={`Slide ${index + 1}`}
-              className="h-full lg:h-[80vh] w-full object-cover relative lg:object-center"
-            />
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100"></div>
-          </div>
-        ))}
+        {promo &&
+          promo.slice(0, limitCarousel).map((item, index) => (
+            <div key={item._id} className="relative">
+              <img
+                src={item.foto}
+                alt={`Slide ${index + 1}`}
+                className="h-full lg:h-[80vh] w-full object-cover relative lg:object-center"
+              />
+              <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100"></div>
+            </div>
+          ))}
       </Carousel>
 
       {/* WhatsApp Button */}
@@ -395,29 +417,39 @@ export default function Beranda() {
           <div className="flex flex-col lg:w-full pt-[15px]">
             <div className="flex lg:justify-start justify-center items-center pt-[15px]">
               <div className="carousel carousel-center w-80 lg:w-full space-x-[10px]">
-                {/* Carousel Item */}
-                <div className="carousel-item">
-                  <div className="w-[326px] h-[213.28px] relative flex flex-col items-start">
-                    {/* Image */}
-                    <img
-                      src={galeri1}
-                      className="mx-auto rounded-[10px]"
-                      alt="Produk Baru"
-                    />
+                {/* Conditional Rendering of Carousel Items */}
+                {gallery && gallery.length > 0 ? (
+                  gallery.map((item, index) => (
+                    <div key={index} className="carousel-item">
+                      <div className="w-[326px] h-[213.28px] relative flex flex-col items-start">
+                        {/* Dynamic Image */}
+                        <img
+                          src={item.thumbnail} // Assuming `imageUrl` is the property for image source
+                          className="mx-auto rounded-[10px]"
+                          alt={item.judul || "Product Image"} // Fallback alt text
+                        />
 
-                    {/* Product Name */}
-                    <p className="w-full text-[#464646] text-left text-sm mx-2 my-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
-                      Dr. Nich Brightening Jelly Pak 10pcs
-                    </p>
+                        {/* Dynamic Product Name */}
+                        <p className="w-full text-[ #464646] text-left text-sm mx-2 my-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
+                          {item.judul}
+                        </p>
 
-                    {/* Product Type */}
-                    <div className="flex items-center gap-2 mx-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
-                      <p>Skincare</p>
-                      <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
-                      <p>Serum</p>
+                        {/* Dynamic Product Type */}
+                        <div className="flex items-center gap-2 mx-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
+                          <p>{item.sosmed}</p>{" "}
+                          {/* Assuming `type` holds the product type */}
+                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
+                          <p>{item.channel}</p>{" "}
+                          {/* Assuming `category` holds the product category */}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  ))
+                ) : (
+                  <p className="text-center text-gray-500">
+                    No items available
+                  </p>
+                )}
               </div>
             </div>
           </div>
