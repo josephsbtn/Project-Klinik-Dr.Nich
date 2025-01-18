@@ -40,9 +40,44 @@ import ProdukCard from "../../components/ProdukCard.jsx";
 function Pencarian() {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-
   const [layanan, setlayanan] = useState([]);
   const [produk, setproduk] = useState([]);
+  //Paging
+  const [indexlayanan, setIndexL] = useState(0);
+  const [indexProduk, setIndexP] = useState(0);
+  const postPerPage = 4;
+  const firstIndexL = indexlayanan * postPerPage;
+  const firstIndexP = indexProduk * postPerPage;
+  const lastIndexL = firstIndexL + postPerPage;
+  const lastIndexP = firstIndexP + postPerPage;
+  let recordLayanan = layanan.slice(firstIndexL, lastIndexL);
+  let recordProduk = produk.slice(firstIndexP, lastIndexP);
+  const npagelayanan = Math.ceil(layanan.length / postPerPage + 1);
+  const npageproduk = Math.ceil(layanan.length / postPerPage + 1);
+  const pageslayanan = [...Array(npagelayanan).keys()].slice(1);
+  const pagesproduk = [...Array(npageproduk).keys()].slice(1);
+  const prevL = () => {
+    indexlayanan > 0 && setIndexL(indexlayanan - 1);
+  };
+  const nextL = () => {
+    indexlayanan < npagelayanan - 2 && setIndexL(indexlayanan + 1);
+  };
+
+  const topageL = (id) => {
+    setIndexL(id - 1);
+  };
+  const prevP = () => {
+    indexProduk > 0 && setIndexP(indexProduk - 1);
+  };
+  const nextP = () => {
+    indexProduk < npageproduk - 2 && setIndexP(indexProduk + 1);
+  };
+
+  const topageP = (id) => {
+    setIndexP(id - 1);
+  };
+  //////////////////////
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -102,26 +137,107 @@ function Pencarian() {
             </p>
           </div>
         </div>
-        <div className="w-full h-full flex flex-col mt-[30px]">
+        <div className="w-full h-full flex flex-col items-center mt-[30px]">
           {/* Layanan */}
-          <div className="w-full h-[600px] flex flex-col items-center">
-            <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
-              {layanan &&
-                layanan.map((item) => (
-                  <div className="h-10 w-10 bg-black" key={item._id}>
+          <div className="w-full h-fit flex flex-col text-center">
+            <h3 className="font-bold">Hasil Pencarian Layanan</h3>
+            <div
+              className={`w-full h-fit mt-5 grid grid-cols-1 place-items-center ${
+                layanan.length > 0 ? "lg:grid-cols-3 lg:gap-4" : ""
+              } gap-2`}>
+              {recordLayanan.length > 0 ? (
+                recordLayanan.map((item) => (
+                  <div className="h-fit w-1fit bg-black" key={item._id}>
                     <CardLayanan item={item} />
                   </div>
-                ))}
+                ))
+              ) : (
+                <div className="flex w-full justify-center">
+                  <h4 className="">Tidak Ada Data</h4>
+                </div>
+              )}
             </div>
+            {recordLayanan.length > 0 && (
+              <div className="flex gap-1 mt-4 justify-center text-gray-600">
+                <button
+                  className=" border-2 border-gray-700 hover:bg-gray-500 hover:text-white rounded-l-lg w-10"
+                  onClick={() => {
+                    prevL();
+                  }}>
+                  {" "}
+                  {`<`}{" "}
+                </button>
+                {pageslayanan.map((n, i) => (
+                  <button
+                    className={`border-2 border-gray-700 h-10 hover:bg-gray-500 hover:text-white rounded-sm w-10 ${
+                      indexlayanan === n - 1 && "text-white bg-gray-700"
+                    }`}
+                    key={i}
+                    onClick={() => topageL(n)}>
+                    {" "}
+                    {n}{" "}
+                  </button>
+                ))}
+                <button
+                  className=" border-2 border-gray-700 hover:bg-gray-500 hover:text-white rounded-r-lg w-10"
+                  onClick={() => {
+                    nextL();
+                  }}>
+                  {" "}
+                  {`>`}{" "}
+                </button>
+              </div>
+            )}
+
             {/* Produk */}
-            <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
-              {produk &&
-                produk.map((item) => (
-                  <div className="h-10 w-10 bg-black" key={item._id}>
+            <h3 className="font-bold mt-3">Hasil Pencarian Layanan</h3>
+            <div
+              className={`w-full h-fit mt-5 grid grid-cols-1 place-items-center ${
+                produk.length > 0 ? "lg:grid-cols-4 lg:gap-4" : ""
+              } gap-2`}>
+              {recordProduk.length > 0 ? (
+                recordProduk.map((item) => (
+                  <div className="h-fit w-fit bg-black" key={item._id}>
                     <ProdukCard item={item} />
                   </div>
-                ))}
+                ))
+              ) : (
+                <div className="flex w-full justify-center">
+                  <h4 className="mb-2">Tidak Ada Data</h4>
+                </div>
+              )}
             </div>
+            {recordProduk.length > 0 && (
+              <div className="flex gap-1 mt-4 justify-center text-gray-600">
+                <button
+                  className=" border-2 border-gray-700 hover:bg-gray-500 hover:text-white rounded-l-lg w-10"
+                  onClick={() => {
+                    prevP();
+                  }}>
+                  {" "}
+                  {`<`}{" "}
+                </button>
+                {pagesproduk.map((n, i) => (
+                  <button
+                    className={`border-2 border-gray-700 h-10 hover:bg-gray-500 hover:text-white rounded-sm w-10 ${
+                      indexProduk === n - 1 && "text-white bg-gray-700"
+                    }`}
+                    key={i}
+                    onClick={() => topageP(n)}>
+                    {" "}
+                    {n}{" "}
+                  </button>
+                ))}
+                <button
+                  className=" border-2 border-gray-700 hover:bg-gray-500 hover:text-white rounded-r-lg w-10"
+                  onClick={() => {
+                    nextP();
+                  }}>
+                  {" "}
+                  {`>`}{" "}
+                </button>
+              </div>
+            )}
 
             {/* Lihat Lainnya */}
             <div className="mt-6 h-full">
@@ -129,16 +245,6 @@ function Pencarian() {
                 Lihat Lainnya
               </button>
             </div>
-          </div>
-
-          <div className="flex flex-col gap-4 z-0 lg:mx-[120px]">
-            {/* Layanan */}
-            <section className="lg:w-full w-[full]">
-              <LayananPopuler />
-            </section>
-            <section className="lg:w-full w-full">
-              <ProdukTerbaru />
-            </section>
           </div>
         </div>
       </div>

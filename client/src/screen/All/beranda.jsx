@@ -78,64 +78,82 @@ export default function Beranda() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const fetchData = async () => {
+    setLoading(true);
+
     try {
-      setLoading(true);
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_BASE_URL_BACKEND
-        }/api/layanan/getAllJenisLayanan`
-      );
-      const fotoMesin = (
-        await axios.get(
+      // Fetch promo data
+      await fetchPromoData();
+
+      // Fetch other data in parallel
+      const [
+        jenisLayananResponse,
+        fotoMesinResponse,
+        fotoSertifResponse,
+        galeriResponse,
+      ] = await Promise.all([
+        axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getAllJenisLayanan`
+        ),
+        axios.get(
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllMesin`
-        )
-      ).data;
-      const fotoSertif = (
-        await axios.get(
+        ),
+        axios.get(
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllSertif`
-        )
-      ).data;
-
-      const getPromo = (
-        await axios.get(
-          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
-        )
-      ).data;
-
-      const galeriData = (
-        await axios.get(
+        ),
+        axios.get(
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/getAllGaleri`
-        )
-      ).data;
+        ),
+      ]);
 
-      const sortedJenisLayanan = response.data.sort(
+      // Process and set jenis layanan
+      const sortedJenisLayanan = jenisLayananResponse.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );
+      setJenisLayanan(sortedJenisLayanan);
 
+      // Store in local storage with timestamp
       const dataWithTimestamp = {
         data: sortedJenisLayanan,
         timestamp: new Date().getTime(),
       };
       localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
 
-      setGallery(galeriData);
-      gallery.length > 5 ? setLimitGallery(5) : setLimitGallery(gallery.length);
-      setPromo(getPromo);
-      promo.length > 3 ? setLimitCarousel(3) : setLimitCarousel(promo.length);
-      setFotoMesin(fotoMesin);
-      setFotoSertif(fotoSertif);
-      console.log("foto mesin : " + fotoMesin);
-      console.log("foto sertif :" + fotoSertif);
-      console.log("DATA PROMO :" + promo);
-      setJenisLayanan(sortedJenisLayanan);
+      // Set other state
+      setFotoMesin(fotoMesinResponse.data);
+      setFotoSertif(fotoSertifResponse.data);
+      setGallery(galeriResponse.data);
+
+      // Limit gallery and carousel based on data length
+      setLimitGallery(
+        galeriResponse.data.length > 5 ? 5 : galeriResponse.data.length
+      );
+      // setLimitCarousel(promo.length > 3 ? 3 : promo.length);
     } catch (error) {
       setError(
-        "Failed to fetch jenis layanan. Please try again later (" +
-          error.message +
-          ")"
+        `Failed to fetch data. Please try again later (${error.message})`
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchPromoData = async () => {
+    try {
+      const promoResponse = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
+      );
+      if (Array.isArray(promoResponse.data)) {
+        setPromo(promoResponse.data);
+        console.log("PROMO DATA : " + promoResponse.data);
+        setError("");
+      } else {
+        throw new Error("Invalid response format for promo data");
+      }
+    } catch (error) {
+      console.error("Error fetching promo:", error.message);
+      setError("Failed to fetch promo. Please try again later.");
     }
   };
 
@@ -407,7 +425,7 @@ export default function Beranda() {
           {/* Header */}
           <main className="w-full flex lg:px-0 px-6 justify-between">
             <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
-              Produk Baru!
+              Gallery
             </h1>
             <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
               Lihat Semua

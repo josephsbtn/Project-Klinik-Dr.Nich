@@ -28,7 +28,6 @@ import ig from "../../assets/Instagram.png";
 import searchWhite from "../../assets/search-normal-white.svg";
 
 export default function Navbar({ selected }) {
-  const [querySearch, setQuerySeacrh] = useState("");
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
