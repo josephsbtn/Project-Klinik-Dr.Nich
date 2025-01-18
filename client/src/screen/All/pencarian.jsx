@@ -248,6 +248,12 @@ function Pencarian() {
           </div>
         </div>
       </div>
+      <section className="lg:w-[70%] w-[90%]">
+        <LayananPopuler />
+      </section>
+      <section className="lg:w-[70%] w-[90%]">
+        <ProdukTerbaru />
+      </section>
       <Footer />
     </>
   );

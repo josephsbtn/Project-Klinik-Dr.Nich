@@ -30,15 +30,28 @@ function EditProduct() {
       try {
         setLoading(true);
         console.log("FETCHING ...");
-        const resCat = await axios.get("/api/produk/getAllkategoriProduk");
-        const resType = await axios.get("/api/produk/getAllproductType");
+        const resCat = await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/getAllkategoriProduk`
+        );
+        const resType = await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/getAllproductType`
+        );
         if ((resCat === undefined || null) && (resType === undefined || null)) {
           throw new Error("Data null / undefined");
         }
         setCategoryProduct(resCat.data);
         setProductType(resType.data);
-        const resProduct = (await axios.get(`/api/produk/getprodukbyId/${id}`))
-          .data;
+        const resProduct = (
+          await axios.get(
+            `${
+              import.meta.env.VITE_BASE_URL_BACKEND
+            }/api/produk/getprodukbyId/${id}`
+          )
+        ).data;
         console.log("CURRENT PRODUCT : ", resProduct);
         setNama(resProduct.nama);
         setDeskripsi(resProduct.deskripsi);
@@ -116,8 +129,15 @@ function EditProduct() {
 
       // Send data to the server
       const { data } = await axios.put(
-        `/api/produk/updateproduk/${id}`,
-        payload
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/produk/updateproduk/${id}`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
       );
 
       // Show success message

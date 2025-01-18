@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CardJenisLayanan from "../../components/cardJenisLayanan";
 import LayananPopuler from "../../components/layananPopuler";
+import ProdukTerbaru from "../../components/ProdukTerbaru";
 function ListLayanan() {
   const [jenisLayanan, setJenisLayanan] = useState();
 
@@ -15,8 +16,13 @@ function ListLayanan() {
   const fetchLayanan = async () => {
     try {
       setLoading(true);
-      const resJenis = (await axios.get("/api/layanan/getAllJenisLayanan"))
-        .data;
+      const resJenis = (
+        await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getAllJenisLayanan`
+        )
+      ).data;
       setJenisLayanan(resJenis);
       setLoading(false);
     } catch (error) {
@@ -76,7 +82,12 @@ function ListLayanan() {
                 <p>No data available</p>
               )}
             </div>
-            <LayananPopuler />
+            <section className="lg:w-full w-full">
+              <LayananPopuler />
+            </section>
+            <section className="lg:w-full w-full">
+              <ProdukTerbaru />
+            </section>
           </main>
         )}
         <Footer />

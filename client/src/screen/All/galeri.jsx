@@ -111,10 +111,10 @@ function Profile() {
 
           <div className="flex flex-col gap-4 z-0 lg:mx-[120px]">
             {/* Layanan */}
-            <section className="lg:w-full w-[full]">
+            <section className="lg:w-[70%] w-[90%]">
               <LayananPopuler />
             </section>
-            <section className="lg:w-full w-full">
+            <section className="lg:w-[70%] w-[90%]">
               <ProdukTerbaru />
             </section>
           </div>

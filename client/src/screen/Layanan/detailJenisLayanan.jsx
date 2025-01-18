@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import SecondCardLayanan from "../../components/SecondCardLayanan";
 import LayananPopuler from "../../components/layananPopuler";
+import ProdukTerbaru from "../../components/ProdukTerbaru";
 function DetailJenisLayanan() {
   const navigate = useNavigate();
   const { idJenis } = useParams();
@@ -21,10 +22,18 @@ function DetailJenisLayanan() {
     try {
       setLoading(true);
       const resJenis = (
-        await axios.get(`/api/layanan/getJenisLayananById/${idJenis}`)
+        await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getJenisLayananById/${idJenis}`
+        )
       ).data;
       const resList = (
-        await axios.get(`/api/layanan/getLayananByJenisLayanan/${idJenis}`)
+        await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getLayananByJenisLayanan/${idJenis}`
+        )
       ).data;
       setListLayanan(resList);
       setJudul(resJenis.nama);
@@ -97,7 +106,12 @@ function DetailJenisLayanan() {
                 </div>
               ))}
             </div>
-            <LayananPopuler />
+            <section className="lg:w-full w-full">
+              <LayananPopuler />
+            </section>
+            <section className="lg:w-full w-full">
+              <ProdukTerbaru />
+            </section>
           </main>
         )}
         <Footer />

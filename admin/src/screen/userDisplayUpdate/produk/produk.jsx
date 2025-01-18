@@ -200,7 +200,12 @@ function ListProduct() {
       console.log("data", image);
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/newImage`,
-        image
+        image,
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
       );
 
       console.log(response.data);

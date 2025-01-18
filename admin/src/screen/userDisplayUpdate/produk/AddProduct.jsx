@@ -83,7 +83,15 @@ function AddProduct() {
       };
 
       // Send data to the server
-      const { data } = await axios.post("/api/produk/tambahproduk", payload);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/tambahproduk`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
+      );
 
       // Show success message
       showMessage(data.message || "Product added successfully", "success");

@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
 import axios from "axios";
 import LayananPopuler from "../../components/layananPopuler.jsx";
+import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 
 function DetailTreatment() {
   const { idJenis, idTreatment } = useParams();
@@ -25,7 +26,9 @@ function DetailTreatment() {
 
       if (idJenis) {
         const jenisResponse = await axios.get(
-          `/api/layanan/getJenisLayananById/${idJenis}`
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getJenisLayananById/${idJenis}`
         );
         setResDataJenis(jenisResponse.data);
         setJenis(jenisResponse.data.nama);
@@ -33,7 +36,9 @@ function DetailTreatment() {
 
       if (idTreatment) {
         const treatmentResponse = await axios.get(
-          `/api/layanan/getLayananById/${idTreatment}`
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getLayananById/${idTreatment}`
         );
         const data = treatmentResponse.data;
         setJudul(data.nama);
@@ -125,7 +130,12 @@ function DetailTreatment() {
           </div>
 
           <div className="w-full">
-            <LayananPopuler />
+            <section className="lg:w-full w-full">
+              <LayananPopuler />
+            </section>
+            <section className="lg:w-full w-full">
+              <ProdukTerbaru />
+            </section>
           </div>
         </main>
       )}
