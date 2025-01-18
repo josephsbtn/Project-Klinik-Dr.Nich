@@ -86,7 +86,18 @@ const getproduk = asyncHandler(async (req, res) => {
       .find()
       .populate("kategori") // Populating 'kategori' from the schema
       .populate("tipeProduk"); // Populating 'tipeProduk' from the schema
+    res.send(produk);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
+const getprodukbycategory = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const produk = await produkModels.find({ kategori: id })
+      .populate("kategori")
+      .populate("tipeProduk");
     res.send(produk);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -155,4 +166,5 @@ export {
   getImage,
   updateImage,
   deleteImage,
+  getprodukbycategory,
 };

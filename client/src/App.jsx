@@ -14,8 +14,8 @@ import Profil from "./screen/All/profile.jsx";
 import Galeri from "./screen/All/galeri.jsx";
 //=====produk=====
 import Produk from "./screen/All/produk.jsx";
-// skincare
-import Skincare from "./screen/All/skincare.jsx";
+// detailKategori
+import DetailKategori from "./screen/All/detailKategori.jsx";
 //================
 
 //promo
@@ -48,8 +48,8 @@ function App() {
         <Route path="/galeri" element={<Galeri />} />
         {/* ==============PRODUK================= */}
         <Route path="/produk" element={<Produk />} />
-        {/* Skincare */}
-        <Route path="/produk/skincare" element={<Skincare />} />
+        {/* Detail Skincare */}
+        <Route path="/produk/detailKategori/:id" element={<DetailKategori />} />
         {/* ===================================== */}
 
         {/* PROMO */}
