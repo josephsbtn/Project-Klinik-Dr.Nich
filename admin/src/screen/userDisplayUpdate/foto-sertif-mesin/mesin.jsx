@@ -21,7 +21,9 @@ function ListMesin() {
   const fetchSertif = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/foto/getAllMesin");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getAllMesin`
+      );
       const data = response.data;
       if (Array.isArray(data)) {
         setMesin(data);
