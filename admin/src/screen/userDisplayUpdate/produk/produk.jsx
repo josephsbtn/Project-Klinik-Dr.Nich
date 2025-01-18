@@ -198,12 +198,13 @@ function ListProduct() {
     try {
       setLoading(true);
       console.log("data", image);
+
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/newImage`,
-        image,
+        { image: image }, // Sending as a JSON object
         {
           headers: {
-            "Content-Type": "application/json", // Ensure proper content type
+            "Content-Type": "application/json", // Correct for JSON data
           },
         }
       );
@@ -213,7 +214,10 @@ function ListProduct() {
       setAddImageOpen(false);
       alert("Image added to carousel successfully.");
     } catch (error) {
-      console.error("Error uploading image:", error.message);
+      console.error(
+        "Error uploading image:",
+        error.response?.data || error.message
+      );
       alert("Failed to upload image. Please try again.");
     } finally {
       setLoading(false);
@@ -269,6 +273,11 @@ function ListProduct() {
         {
           name: editCategoryName,
           image: categoryImage,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
         }
       );
       setCategoryProduct((prev) =>
@@ -319,7 +328,12 @@ function ListProduct() {
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/editImage/${
           selectedImage._id
         }`,
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
       );
       setImageCarousel((prev) =>
         prev.map((item) =>
