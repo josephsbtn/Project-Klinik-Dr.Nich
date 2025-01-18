@@ -6,34 +6,31 @@ function LayananPopuler() {
   const [layanan, setLayanan] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(6); // Default limit to 6
 
   const fetchData = async () => {
     try {
-      const resLayanan = (
-        await axios.get(
-          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllLayanan`
-        )
-      ).data;
-      const sorted = resLayanan.sort(
-        (a, b) => b.reservedCount - a.reservedCount
-      ); // Sort by reserved count
-      setLayanan(sorted);
-      if (layanan.length > 6) {
-        setLimit(6);
-      } else {
-        setLimit(layanan.length);
-      }
+      setLoading(true); // Move loading state to start of the try block
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllLayanan`
+      );
 
-      setLoading(false);
+      const sortedLayanan = response.data.sort(
+        (a, b) => b.reservedCount - a.reservedCount
+      );
+
+      setLayanan(sortedLayanan);
+      setLimit(sortedLayanan.length > 6 ? 6 : sortedLayanan.length); // Set limit based on fetched data
+
+      console.log("LAYANAN DATA :", sortedLayanan);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
-      setLoading(false);
+    } finally {
+      setLoading(false); // Ensure loading is stopped in both success and error cases
     }
   };
 
   useEffect(() => {
-    setLoading(true);
     fetchData();
   }, []);
 

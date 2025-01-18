@@ -438,7 +438,7 @@ export default function Beranda() {
               <div className="carousel carousel-center w-80 lg:w-full space-x-[10px]">
                 {/* Conditional Rendering of Carousel Items */}
                 {gallery && gallery.length > 0 ? (
-                  gallery.map((item, index) => (
+                  gallery.slice(0, limitGallery).map((item, index) => (
                     <div key={item._id} className="carousel-item">
                       <div className="w-[326px] h-[213.28px] relative flex flex-col items-start">
                         {/* Dynamic Image */}

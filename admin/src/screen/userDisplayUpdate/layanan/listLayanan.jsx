@@ -23,8 +23,14 @@ function ListLayanan() {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get("/api/layanan/getAllLayanan");
-      const jenisLayanan = await axios.get("/api/layanan/getAllJenisLayanan");
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllLayanan`
+      );
+      const jenisLayanan = await axios.get(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/getAllJenisLayanan`
+      );
       console.log("Fetched data before sorting:", jenisLayanan.data);
       const sortedLayanan = response.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
@@ -56,8 +62,19 @@ function ListLayanan() {
       deskripsi: deskripsi,
     };
     try {
-      const res = (await axios.post("/api/layanan/tambahJenisLayanan", Djenis))
-        .data;
+      const res = (
+        await axios.post(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/tambahJenisLayanan`,
+          Djenis,
+          {
+            headers: {
+              "Content-Type": "application/json", // Ensure proper content type
+            },
+          }
+        )
+      ).data;
       console.log(res);
       setOpen(false);
       fetchData();

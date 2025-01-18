@@ -122,7 +122,7 @@ function Pencarian() {
   }, []);
   return (
     <>
-      <Navbar selected={"Galeri"} />
+      <Navbar selected={""} />
       <div className="mt-[18px]">
         <div className="flex-col">
           <div className="flex gap-[6px] mx-[25px] lg:mx-[120px]">
@@ -190,7 +190,7 @@ function Pencarian() {
             )}
 
             {/* Produk */}
-            <h3 className="font-bold mt-3">Hasil Pencarian Layanan</h3>
+            <h3 className="font-bold mt-3">Hasil Pencarian Produk</h3>
             <div
               className={`w-full h-fit mt-5 grid grid-cols-1 place-items-center ${
                 produk.length > 0 ? "lg:grid-cols-4 lg:gap-4" : ""
