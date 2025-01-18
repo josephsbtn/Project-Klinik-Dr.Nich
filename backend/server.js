@@ -17,24 +17,24 @@ dotenv.config();
 dbConfig();
 
 const allowedOrigins = [
-  "https://drnich.co.id", // Production client
-  "https://admin.drnich.co.id", // Production admin
-  "http://localhost:3000", // Localhost for client development
-  "http://localhost:5173", // Localhost for admin development
+  "https://drnich.co.id",
+  "https://admin.drnich.co.id",
+  "http://localhost:3000",
+  "http://localhost:5173",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Check if the origin is in the allowed origins list
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.error(`CORS error: ${origin} is not allowed by CORS`);
         callback(new Error("Not allowed by CORS"));
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Allow cookies and other credentials
+    credentials: true,
   })
 );
 
