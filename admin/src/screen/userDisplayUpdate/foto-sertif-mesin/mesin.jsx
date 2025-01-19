@@ -3,15 +3,14 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ListMesin() {
   const [mesin, setMesin] = useState([]);
   const [image, setImage] = useState("");
-
   const [editImage, setEditImage] = useState("");
-
   const [selectedContent, setSelectedContent] = useState(null);
-
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -34,8 +33,8 @@ function ListMesin() {
       }
     } catch (err) {
       setLoading(false);
-      console.error("Error fetching promo:", err.message);
-      setError("Failed to fetch promo. Please try again later.");
+      console.error("Error fetching mesin:", err.message);
+      toast.error("Failed to fetch mesin. Please try again later.");
     }
   };
 
@@ -50,39 +49,44 @@ function ListMesin() {
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/createMesin`,
         {
           foto: image,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Correct for JSON data
+          },
         }
       );
       if (response.status === 200) {
         setOpen(false);
         fetchSertif();
+        toast.success("Image added successfully.");
       } else {
-        setError("Failed to add promo. Please try again later.");
+        toast.error("Failed to add image. Please try again later.");
       }
     } catch (err) {
-      console.error("Error adding promo:", err.message);
-      setError("Failed to add promo. Please try again later.");
+      console.error("Error adding mesin:", err.message);
+      toast.error("Failed to add image. Please try again later.");
     }
   };
 
-  const deleteGaleri = () => {
+  const deleteGaleri = async () => {
     try {
-      const response = axios.delete(
+      await axios.delete(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/deleteMesin/${
           selectedContent._id
         }`
       );
-      window.location.reload();
       fetchSertif();
+      toast.success("Image deleted successfully.");
     } catch (error) {
-      console.error("Error deleting promo:", error.message);
-      setError("Failed to delete promo. Please try again later.");
+      console.error("Error deleting mesin:", error.message);
+      toast.error("Failed to delete image. Please try again later.");
     }
-    console.log("Delete promo with id:", selectedContent._id);
   };
 
-  const editGaleri = () => {
+  const editGaleri = async () => {
     try {
-      const response = axios.put(
+      await axios.put(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/editMesin/${
           selectedContent._id
         }`,
@@ -91,11 +95,11 @@ function ListMesin() {
         }
       );
       fetchSertif();
+      toast.success("Image updated successfully.");
     } catch (error) {
-      console.error("Error editing promo:", error.message);
-      setError("Failed to edit promo. Please try again later.");
+      console.error("Error editing mesin:", error.message);
+      toast.error("Failed to update image. Please try again later.");
     }
-    console.log("Edit promo with id:", selectedContent._id);
   };
 
   const handleEdit = (item, e) => {
@@ -103,7 +107,6 @@ function ListMesin() {
     setEditing(true);
     setSelectedContent(item);
     setEditImage(item.foto);
-    console.log("Edit promo with id:", item._id);
   };
 
   const handleDelete = (item, e) => {
@@ -115,18 +118,18 @@ function ListMesin() {
   const convertBase64 = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      setError("No image selected");
+      toast.error("No image selected");
       return;
     }
     const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!validImageTypes.includes(file.type)) {
-      setError("Invalid file type. Only JPEG and PNG files are allowed.");
+      toast.error("Invalid file type. Only JPEG and PNG files are allowed.");
       return;
     }
 
     const maxSize = 5 * 1024 * 1024; // 5MB size limit
     if (file.size > maxSize) {
-      setError("File is too large. Maximum file size is 5MB.");
+      toast.error("File is too large. Maximum file size is 5MB.");
       return;
     }
     const reader = new FileReader();
@@ -143,6 +146,7 @@ function ListMesin() {
   return (
     <main className="flex flex-col container">
       <Navbar selected={"/mesin"} />
+      <ToastContainer />
       <ConfirmPopup open={open} onClose={() => setOpen(false)}>
         <div className="w-fit flex items-start space-x-4">
           <div className="w-full lg:w-full p-5 border rounded-md shadow-md bg-white">
@@ -256,36 +260,33 @@ function ListMesin() {
       </ConfirmPopup>
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
         <h1 className="text-xl font-bold text-secondary">List Mesin</h1>
-        {error && <div className="text-red-500 my-4">{error}</div>}
         <div className="grid grid-cols-2 gap-4 w-full max-w-4xl mt-5">
-          {mesin.length > 0
-            ? mesin.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex flex-col justify-between w-fit h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <img
-                    className="h-auto max-w-96 aspect-video p-4"
-                    src={item.foto}
-                  />
-                  <div className="flex gap-2">
-                    <button
-                      onClick={(e) => handleEdit(item, e)}
-                      className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
-                      Edit
-                    </button>
-                    <button
-                      onClick={(e) => handleDelete(item, e)}
-                      className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
-                      Delete
-                    </button>
-                  </div>
+          {mesin.length > 0 ? (
+            mesin.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-col justify-between w-fit h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                <img
+                  className="h-auto max-w-96 aspect-video p-4"
+                  src={item.foto}
+                />
+                <div className="flex gap-2">
+                  <button
+                    onClick={(e) => handleEdit(item, e)}
+                    className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
+                    Edit
+                  </button>
+                  <button
+                    onClick={(e) => handleDelete(item, e)}
+                    className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
+                    Delete
+                  </button>
                 </div>
-              ))
-            : !error && (
-                <div className="text-gray-500 mt-8">
-                  No promotions available
-                </div>
-              )}
+              </div>
+            ))
+          ) : (
+            <div className="text-gray-500 mt-8">No images available</div>
+          )}
         </div>
 
         <div className="fixed right-0 bottom-0 p-4 z-0">

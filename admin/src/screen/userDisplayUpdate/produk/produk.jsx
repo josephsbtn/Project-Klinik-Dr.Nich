@@ -4,6 +4,8 @@ import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ActionButtons = ({ onEdit, onDelete, deleting }) => (
   <div className="flex gap-2">
@@ -20,7 +22,7 @@ const ActionButtons = ({ onEdit, onDelete, deleting }) => (
       }`}
       disabled={deleting}
       aria-label="Delete Item">
-      {deleting ? "Delete" : "Delete"}
+      {deleting ? "Deleting..." : "Delete"}
     </button>
   </div>
 );
@@ -140,10 +142,10 @@ function ListProduct() {
         );
       }
       setConfirmOpen(false);
-      alert("Item deleted successfully.");
+      toast.success("Item deleted successfully.");
     } catch (error) {
       console.error("Error deleting item:", error.message);
-      alert("Failed to delete item. Please try again.");
+      toast.error("Failed to delete item. Please try again.");
     } finally {
       setDeleting(false);
     }
@@ -171,7 +173,7 @@ function ListProduct() {
       setCategoryProduct((prev) => [...prev, response.data]);
 
       setAddCategoryOpen(false);
-      alert("Category added successfully.");
+      toast.success("Category added successfully.");
 
       //Optionally reset form fields
       setNewCategoryName("");
@@ -180,14 +182,14 @@ function ListProduct() {
       // Capture more detailed error if available
       if (error.response && error.response.data) {
         console.error("Error adding category:", error.response.data);
-        alert(
+        toast.error(
           `Failed to add category: ${
             error.response.data.message || "Please try again."
           }`
         );
       } else {
         console.error("Error adding category:", error.message);
-        alert("Failed to add category. Please try again.");
+        toast.error("Failed to add category. Please try again.");
       }
     }
   };
@@ -212,13 +214,13 @@ function ListProduct() {
       console.log(response.data);
       setImageCarousel((prev) => [...prev, response.data]);
       setAddImageOpen(false);
-      alert("Image added to carousel successfully.");
+      toast.success("Image added to carousel successfully.");
     } catch (error) {
       console.error(
         "Error uploading image:",
         error.response?.data || error.message
       );
-      alert("Failed to upload image. Please try again.");
+      toast.error("Failed to upload image. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -288,10 +290,10 @@ function ListProduct() {
         )
       );
       setEditCategoryOpen(false);
-      alert("Category updated successfully.");
+      toast.success("Category updated successfully.");
     } catch (error) {
       console.error("Error updating category:", error.message);
-      alert("Failed to update category. Please try again.");
+      toast.error("Failed to update category. Please try again.");
     }
   };
 
@@ -341,16 +343,17 @@ function ListProduct() {
         )
       );
       setEditImageOpen(false);
-      alert("Image updated successfully.");
+      toast.success("Image updated successfully.");
     } catch (error) {
       console.error("Error updating image:", error.message);
-      alert("Failed to update image. Please try again.");
+      toast.error("Failed to update image. Please try again.");
     }
   };
 
   return (
     <main className="flex flex-col container">
       <Navbar selected={"/produk"} />
+      <ToastContainer />
       <ConfirmPopup open={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <div className="flex flex-col space-y-4 p-8 bg-white rounded-md shadow-md">
           <h1>Are you sure you want to delete this item?</h1>
