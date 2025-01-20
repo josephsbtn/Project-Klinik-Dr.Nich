@@ -11,6 +11,7 @@ Berikut adalah detail saya:
 Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda. 😊
 `;
 
+
 const templateMessageProduk = `
 Halo, Dr. Nich. Saya ingin melakukan pemesanan untuk produk. 
 Mohon bantuannya untuk informasi ketersediaan dan prosedur pembelian lebih lanjut.
@@ -45,6 +46,36 @@ function sendWhatsAppReservasiMessage() {
   }
 }
 
+function sendWhatsAppReservasiLayananMessage(judul) {
+  const message = `Halo, Dr. Nich. Saya ingin melakukan reservasi untuk *${judul}*.
+Mohon bantuannya untuk informasi jadwal yang tersedia dan prosedur lebih lanjut.
+
+Berikut adalah detail saya:
+- Nama: [Nama Lengkap Anda]
+- Tanggal & Waktu Pilihan: [Tanggal dan waktu yang diinginkan]
+
+Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda. 😊`;
+
+  // Encode pesan agar sesuai dengan format URL
+  const encodedMessage = encodeURIComponent(message);
+
+  // Buat URL WhatsApp dengan nomor telepon dan pesan
+  const url = `https://wa.me/${phone}?text=${encodedMessage}`;
+
+  // Periksa perangkat dan buka URL sesuai
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    // Jika perangkat adalah ponsel, buka URL langsung
+    window.location.href = url;
+  } else {
+    // Jika perangkat adalah desktop, buka URL di tab baru
+    window.open(url, "_blank");
+  }
+}
+
 function sendWhatsAppProdukMessage() {
   // Buat URL untuk membuka WhatsApp dengan pesan template
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(
@@ -65,4 +96,4 @@ function sendWhatsAppProdukMessage() {
 }
 
 
-export { sendWhatsAppReservasiMessage, sendWhatsAppProdukMessage};
+export { sendWhatsAppReservasiMessage, sendWhatsAppProdukMessage, sendWhatsAppReservasiLayananMessage };

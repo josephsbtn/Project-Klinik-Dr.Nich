@@ -6,7 +6,7 @@ import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
 import axios from "axios";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
-import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController.js";
+import { sendWhatsAppReservasiLayananMessage } from "../../../../backend/controller/whatsappController.js";
 
 function DetailTreatment() {
   const { idJenis, idTreatment } = useParams();
@@ -123,7 +123,7 @@ function DetailTreatment() {
               <button
                 className="w-full py-3 lg:w-[15%] lg:mt-8  rounded-xl bg-secondary text-white text-sm font-SFPro font-medium"
                 onClick={() =>
-                  {sendWhatsAppReservasiMessage()}
+                  {sendWhatsAppReservasiLayananMessage(judul)}
                 }>
                 Reservasi
               </button>
