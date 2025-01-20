@@ -33,6 +33,11 @@ export default function Footer() {
     sendWhatsAppReservasiMessage();
   };
 
+  const handleSosmed = (path) => (e) => {
+    e.preventDefault();
+    window.location.href(path);
+  };
+
   const footerLinks = [
     { judul: "Profil", onClick: handleNavigation("/profil") },
     { judul: "Layanan", onClick: handleNavigation("/layanan") },
@@ -58,27 +63,33 @@ export default function Footer() {
             <img
               src={yt}
               alt="YouTube"
-              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]"
+              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
             <img
               src={linkedIn}
               alt="LinkedIn"
-              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]"
+              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
             <img
               src={tt}
               alt="TikTok"
-              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]"
+              onClick={handleSosmed(
+                "https://www.tiktok.com/@dr.nich_aesthetic"
+              )}
+              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
             <img
               src={fb}
               alt="Facebook"
-              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]"
+              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
             <img
               src={ig}
+              onClick={handleSosmed(
+                "https://www.instagram.com/dr.nich_beautyclinic/"
+              )}
               alt="Instagram"
-              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px]"
+              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
           </div>
         </div>

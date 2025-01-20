@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-
+import ProdukCard from "../../components/ProdukCard.jsx";
 //navbar
 import Navbar from "../auth/navbar.jsx";
 // footer
@@ -51,13 +51,13 @@ function DetailKategori() {
     fetchData();
   }, [id]);
   return (
-    <>
+    <main className="flex flex-col items-center w-full">
       <Navbar selected={"Produk"} />
-      <div className="grid grid-cols-2 w-[90%] lg:w-[80%]">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-red-200 w-[90%] lg:w-[80%]">
         {content ? (
           content.map((item) => (
             <div key={item._id}>
-              <CardProduct item={item} />
+              <ProdukCard item={item} />
             </div>
           ))
         ) : (
@@ -76,7 +76,7 @@ function DetailKategori() {
       </div>
 
       <Footer />
-    </>
+    </main>
   );
 }
 
