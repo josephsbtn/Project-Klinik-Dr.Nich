@@ -165,7 +165,7 @@ function AddProduct() {
       return;
     }
 
-    const maxSize = 5 * 1024 * 1024; // 5MB size limit
+    const maxSize = 1 * 1024 * 1024; // 5MB size limit
     if (file.size > maxSize) {
       showMessage("File is too large. Maximum file size is 5MB.", "error");
       return;

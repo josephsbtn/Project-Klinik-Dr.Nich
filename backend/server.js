@@ -38,6 +38,8 @@ app.use(
   })
 );
 
+app.options("*", cors());
+
 app.use(express.json({ limit: "50mb" })); // Adjust the limit as needed
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 

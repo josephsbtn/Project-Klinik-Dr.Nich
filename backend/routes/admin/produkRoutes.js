@@ -32,11 +32,11 @@ router.delete("/deleteImage/:id", deleteImage);
 
 //PRODUCT
 router.post("/tambahproduk", newproduk);
-router.get("/getAllproduk", getproduk);
+router.get("/getAllProduk", getproduk);
 router.put("/updateproduk/:id", updateproduk);
 router.delete("/deleteproduk/:id", deleteproduk);
 router.get("/getprodukbyId/:id", getprodukbyID);
-router.get("/getprodukbycategory/:id", getprodukbycategory);
+router.get("/getProductByCategory/:id", getprodukbycategory);
 
 //PRODUCT CATEGORY
 router.post("/tambahkategoriProduk", newCategoryProduct);

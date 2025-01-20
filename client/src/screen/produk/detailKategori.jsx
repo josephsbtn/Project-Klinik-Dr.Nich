@@ -31,7 +31,7 @@ function DetailKategori() {
         await axios.get(
           `${
             import.meta.env.VITE_BASE_URL_BACKEND
-          }/api/promo/getprodukbycategory/${id}`
+          }/api/produk/getProductByCategory/${id}`
         )
       ).data;
 
