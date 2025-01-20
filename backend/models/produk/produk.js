@@ -30,6 +30,10 @@ const produkSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "productType",
     },
+    tipeKulit: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "tipeKulit",
+    },
     buyCount: {
       type: Number,
       default: 0,

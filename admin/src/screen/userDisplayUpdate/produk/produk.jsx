@@ -543,7 +543,7 @@ function ListProduct() {
                   className="flex flex-col justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
                   <img
                     src={item.image}
-                    className="w-full h-full object-cover mb-2"
+                    className="w-full h-full object-cover mb-2 aspect-video rounded-md"
                     alt="Carousel"
                   />
                   <ActionButtons
@@ -613,34 +613,34 @@ function ListProduct() {
           </button>
         </div>
       </section>
-      {editImageOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold mb-4">Edit Carousel Image</h2>
-            <form onSubmit={handleEditImage}>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setNewImage(e.target.files[0])}
-                className="mb-4 p-2 border border-gray-300 rounded"
-              />
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setEditImageOpen(false)}
-                  className="mr-4 p-2 bg-gray-300 rounded">
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="p-2 bg-blue-500 text-white rounded">
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </div>
+      <ConfirmPopup
+        open={editImageOpen}
+        onClose={() => setEditImageOpen(false)}>
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-xl font-bold mb-4">Edit Carousel Image</h2>
+          <form onSubmit={handleEditImage}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setNewImage(e.target.files[0])}
+              className="mb-4 p-2 border border-gray-300 rounded"
+            />
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => setEditImageOpen(false)}
+                className="mr-4 p-2 bg-gray-300 rounded">
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="p-2 bg-blue-500 text-white rounded">
+                Save Changes
+              </button>
+            </div>
+          </form>
         </div>
-      )}
+      </ConfirmPopup>
     </main>
   );
 }
