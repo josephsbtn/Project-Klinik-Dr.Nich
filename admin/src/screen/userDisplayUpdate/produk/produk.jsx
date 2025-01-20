@@ -43,12 +43,13 @@ function ListProduct() {
   const [editImageOpen, setEditImageOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [newImage, setNewImage] = useState(null);
+  const [newProductType, setNewProductType] = useState(null);
 
-  const [addOpen, setAddOpen] = useState(false);
+  const [openProductType, setOpenProductType] = useState(false);
   const [addImageOpen, setAddImageOpen] = useState(false);
   const [addCategoryOpen, setAddCategoryOpen] = useState(false);
-  const [newCategoryImage, setNewCategoryImage] = useState(null);
   const [editCategoryOpen, setEditCategoryOpen] = useState(false);
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);

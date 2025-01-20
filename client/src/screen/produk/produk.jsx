@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Navbar and Footer
-import Navbar from "../auth/navbar";
-import Footer from "../auth/footer";
+import Navbar from "../auth/navbar.jsx";
+import Footer from "../auth/footer.jsx";
 
 // Layanan and Produk Components
-import LayananPopuler from "../../components/layananPopuler";
-import ProdukTerbaru from "../../components/ProdukTerbaru";
+import LayananPopuler from "../../components/layananPopuler.jsx";
+import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 
 // Card Product
 import CardProduct from "../../components/kategoriProductCard.jsx";
@@ -68,7 +68,7 @@ function Produk() {
   }, []);
 
   return (
-    <>
+    <main className="w-full flex-col items-center">
       <Navbar selected={"Produk"} />
       <div className="flex items-center w-[90%] justify-start space-x-2 mx-auto mt-[18px] lg:mx-[120px]">
         <a
@@ -84,7 +84,7 @@ function Produk() {
         </a>
       </div>
 
-      <div className="flex items-center w-[100%] justify-center space-x-2 mx-auto mt-[18px] lg:mx-[120px] lg:w-[90%] lg:h-full">
+      <div className="flex items-center w-[100%] justify-center space-x-2 mx-auto mt-[18px] lg:w-[90%] lg:h-full">
         <Swiper
           modules={[Autoplay, Pagination]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -97,7 +97,7 @@ function Produk() {
               <SwiperSlide key={index}>
                 <div className="flex items-center justify-center text-lg font-semibold w-full">
                   <img
-                    className="w-[90%] h-[158px] lg:w-full lg:h-[528.36px] rounded-[10px] object-cover"
+                    className="w-[80%] h-[158px] lg:w-full lg:h-[528.36px] rounded-[10px] object-cover"
                     src={item.image} // Ensure 'imageUrl' matches the key in your API response
                     alt={`Carousel Image ${index + 1}`}
                   />
@@ -112,7 +112,7 @@ function Produk() {
         </Swiper>
       </div>
 
-      <div className="flex items-center w-[90%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8 lg:mx-[120px] lg:gap-20 grid grid-cols-2 lg:grid-cols-3">
+      <div className=" items-center w-[90%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8  lg:gap-20 grid grid-cols-2 lg:grid-cols-3">
         {loading ? (
           <div className="h-full w-full flex items-center justify-center">
             <h1 className="font-SFPro text-base text-secondary font-medium">
@@ -144,7 +144,7 @@ function Produk() {
       </div>
 
       <Footer />
-    </>
+    </main>
   );
 }
 

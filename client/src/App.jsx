@@ -13,16 +13,16 @@ import Profil from "./screen/All/profile.jsx";
 // galeri
 import Galeri from "./screen/All/galeri.jsx";
 //=====produk=====
-import Produk from "./screen/All/produk.jsx";
+import Produk from "./screen/produk/produk.jsx";
 // detailKategori
-import DetailKategori from "./screen/All/detailKategori.jsx";
+import DetailKategori from "./screen/produk/detailKategori.jsx";
 //================
 
 //promo
 import Promo from "./screen/All/promo.jsx";
 //pencarian
 import Pencarian from "./screen/All/pencarian.jsx";
-import  Debug  from "./screen/All/debug.jsx";
+import Debug from "./screen/All/debug.jsx";
 
 function App() {
   return (
@@ -46,18 +46,21 @@ function App() {
         />
         <Route path="/profil" element={<Profil />} />
         <Route path="/galeri" element={<Galeri />} />
+
         {/* ==============PRODUK================= */}
+
         <Route path="/produk" element={<Produk />} />
         {/* Detail Skincare */}
         <Route path="/produk/detailKategori/:id" element={<DetailKategori />} />
+
         {/* ===================================== */}
 
         {/* PROMO */}
         <Route path="/promo" element={<Promo />} />
-        <Route path="/pencarian" element={<Pencarian/>} />
+        <Route path="/pencarian" element={<Pencarian />} />
 
         {/* Debug*/}
-        <Route path="/debug" element={<Debug/>} />
+        <Route path="/debug" element={<Debug />} />
       </Routes>
     </Router>
   );

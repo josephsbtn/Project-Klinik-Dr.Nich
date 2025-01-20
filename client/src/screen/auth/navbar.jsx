@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController";
 
 // Logo & images
 import logo from "../../assets/logodrnich.svg";
@@ -57,8 +58,12 @@ export default function Navbar({ selected }) {
     };
   }, []);
   const handleNavigation = (path, text) => {
-    navigate(path);
-    setIsNavOpen(false);
+    if (path === "/reservasi") {
+      sendWhatsAppReservasiMessage();
+    } else {
+      navigate(path);
+      setIsNavOpen(false);
+    }
   };
 
   return (
@@ -233,7 +238,7 @@ export default function Navbar({ selected }) {
 
         {/* Logo (Center) */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <img src={logo} className="w-[100px] h-auto" alt="Logo" />
+          <img src={logo} className="max-w-[100px] h-auto" alt="Logo" />
         </div>
 
         {/* Right Navigation */}
