@@ -20,6 +20,7 @@ import {
   getProductType,
   editProductType,
   deleteProductType,
+  getCategoryById,
 } from "../../controller/admin/jenisKategoriProdukController.js";
 
 const router = express.Router();
@@ -43,6 +44,7 @@ router.post("/tambahkategoriProduk", newCategoryProduct);
 router.get("/getAllkategoriProduk", getCategoryProduct);
 router.delete("/deletekategoriProduk/:id", deleteCategoryProduct);
 router.put("/editkategoriProduk/:id", editCategoryProduct);
+router.get("/getCategoryById/:id", getCategoryById);
 
 //PRODUCT TYPE
 router.post("/tambahproductType", newProductType);

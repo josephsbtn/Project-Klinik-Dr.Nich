@@ -65,6 +65,19 @@ const deleteCategoryProduct = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+const getCategoryById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await kategoriProduct.findById(id);
+    if (!data) {
+      throw new Error("kategori Produk Tidak Ditemukan");
+    }
+    res.send(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 // PRODUCT TYPE HANDLER
 
 const newProductType = asyncHandler(async (req, res) => {
@@ -136,4 +149,5 @@ export {
   getProductType,
   editProductType,
   deleteProductType,
+  getCategoryById,
 };

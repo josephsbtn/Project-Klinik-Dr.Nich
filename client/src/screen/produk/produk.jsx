@@ -112,7 +112,7 @@ function Produk() {
         </Swiper>
       </div>
 
-      <div className=" items-center w-[90%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8  lg:gap-20 grid grid-cols-2 lg:grid-cols-3">
+      <div className=" items-center w-[90%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8   lg:gap-20 grid grid-cols-2 lg:grid-cols-3">
         {loading ? (
           <div className="h-full w-full flex items-center justify-center">
             <h1 className="font-SFPro text-base text-secondary font-medium">
