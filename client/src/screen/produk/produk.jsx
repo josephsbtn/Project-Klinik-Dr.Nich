@@ -69,17 +69,20 @@ function Produk() {
 
   return (
     <main className="w-full flex-col items-center">
-      <Navbar selected={"Produk"} />
+      <div className="w-full fixed z-30">
+        <Navbar selected={"Produk"} />
+      </div>
+
       <div className="flex items-center w-[90%] justify-start space-x-2 mx-auto mt-[18px] lg:mx-[120px]">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/promo")}
-          className="cursor-pointer text-xs text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
           Produk
         </a>
       </div>
