@@ -68,12 +68,13 @@ function Produk() {
   }, []);
 
   return (
-    <main className="w-full flex-col items-center">
-      <div className="w-full fixed z-30">
+    <main className="w-full flex flex-col items-center ">
+      <div className="w-full fixed top-0 z-30 ">
         <Navbar selected={"Produk"} />
       </div>
 
-      <div className="flex items-center w-[90%] justify-start space-x-2 mx-auto mt-[18px] lg:mx-[120px]">
+      {/* Navigation */}
+      <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
         <a
           onClick={() => navigate("/")}
           className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
@@ -81,13 +82,13 @@ function Produk() {
         </a>
         <ArrowRightDisable />
         <a
-          onClick={() => navigate("/promo")}
+          onClick={() => navigate("/produk")}
           className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
           Produk
         </a>
       </div>
 
-      <div className="flex items-center w-[100%] justify-center space-x-2 mx-auto mt-[18px] lg:w-[90%] lg:h-full">
+      <div className="flex items-center w-[90%] bg-yellow-200 justify-center space-x-2 mx-auto mt-[18px] lg:w-[80%] lg:h-full">
         <Swiper
           modules={[Autoplay, Pagination]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -100,7 +101,7 @@ function Produk() {
               <SwiperSlide key={index}>
                 <div className="flex items-center justify-center text-lg font-semibold w-full">
                   <img
-                    className="w-[80%] h-[158px] lg:w-full lg:h-[528.36px] rounded-[10px] object-cover"
+                    className=" h-[158px] w-full lg:h-[528.36px] rounded-[10px] object-cover"
                     src={item.image} // Ensure 'imageUrl' matches the key in your API response
                     alt={`Carousel Image ${index + 1}`}
                   />
@@ -115,7 +116,7 @@ function Produk() {
         </Swiper>
       </div>
 
-      <div className=" items-center w-[90%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8   lg:gap-20 grid grid-cols-2 lg:grid-cols-3">
+      <div className=" items-center w-[90%] lg:w-[80%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8   lg:gap-20 grid grid-cols-2 lg:grid-cols-3">
         {loading ? (
           <div className="h-full w-full flex items-center justify-center">
             <h1 className="font-SFPro text-base text-secondary font-medium">
@@ -137,7 +138,7 @@ function Produk() {
         )}
       </div>
 
-      <div className="flex flex-col gap-4 items-center w-[90%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">
+      <div className="flex flex-col gap-4 items-center w-[90%] lg:w-[80%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">
         <section className="lg:w-full w-full">
           <LayananPopuler />
         </section>

@@ -12,9 +12,9 @@ import ConfirmPopUp from "../../components/confirmPopUp.jsx";
 // Other Components
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
-import ProdukCard from "../../components/ProdukCard.jsx";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
 import LoadingSpinner from "../../components/LoadingSpinner.jsx";
+import ProdukCard from "../../components/ProductCard2.jsx";
 
 function DetailKategori() {
   const { id } = useParams();
@@ -48,6 +48,7 @@ function DetailKategori() {
         (a, b) => b.reservedCount - a.reservedCount
       );
       setContent(sorted);
+      console.log(response.data);
     } catch (err) {
       setError(
         err.response?.data?.message || "An error occurred while fetching data."

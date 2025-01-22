@@ -104,7 +104,7 @@ export default function Navbar({ selected }) {
               </div>
 
               {/* Menu Links */}
-              <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight lg:grid lg:grid-cols-2 z-50">
+              <div className="flex flex-col w-full gap-[22px] pt-[42px] text-sm font-normal tracking-tight lg:grid lg:grid-cols-2 lg:gap-0 z-50">
                 {[
                   { text: "Beranda", path: "/" },
                   { text: "Profile", path: "/profil" },
@@ -117,7 +117,7 @@ export default function Navbar({ selected }) {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between w-full cursor-pointer"
+                    className="flex items-center justify-between w-full cursor-pointer hover:bg-primary hover:bg-opacity-30 p-3 rounded-xl transition-all duration-300"
                     onClick={() => handleNavigation(item.path, item.text)}>
                     <span
                       className={`font-SFPro font-medium text-sm ${

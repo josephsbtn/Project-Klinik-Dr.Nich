@@ -6,22 +6,26 @@ function ProdukCard({ item }) {
   return (
     <>
       <div
-        className="w-[184px] h-[276px] relative flex items-center justify-center"
+        className="flex items-center justify-center"
         onClick={() => navigate(`/produk/detailProduk/${item._id}`)}>
-        <div className="w-[184px] h-[276px] rounded-[10px] p-2 lg:p-3 bg-white border border-disable-line flex flex-col">
+        <div className="w-[155px] h-[256px] rounded-[10px] p-2 bg-white border border-disable-line flex flex-col">
           <img
             src={item.foto}
-            className="w-[173px] h-[167px] object-cover mx-auto mt-1 rounded-xl"
+            className="w-[155px] h-[155px] object-cover mx-auto mt-1 rounded-xl"
             alt=""
           />
-          <p className="w-[166px] text-[#464646] text-left text-sm mx-2 lg:mt-2 font-normal font-SFPro leading-tight tracking-tight">
+          <p className="w-full  text-[#464646] text-left text-sm mt-1 lg:mt-2 font-normal font-SFPro leading-tight tracking-tight line-clamp-2">
             {item.nama}
           </p>
           {/* type shi */}
-          <div className="flex items-center gap-2 mx-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
-            <p>{item.kategori?.name}</p>
+          <div className="flex items-center gap-2 mt-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
+            <p className="text-xs font-medium font-SFPro leading-tight tracking-tight">
+              {item.kategori?.name}
+            </p>
             <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
-            <p>{item.tipeProduk?.nama}</p>
+            <p className="text-xs font-medium  font-SFPro w-full leading-tight tracking-tight">
+              {item.tipeProduk?.name}
+            </p>
           </div>
           {/* harga */}
           <div className="flex items-center gap-2 mx-2 text-[#c2a353] my-2 text-base font-bold font-SFPro leading-tight tracking-tight">
