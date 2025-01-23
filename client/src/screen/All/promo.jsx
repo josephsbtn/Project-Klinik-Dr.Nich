@@ -20,6 +20,9 @@ function Promo() {
   const [content, setContent] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const progressCircle = useRef(null);
+  const progressContent = useRef(null);
+
   const onAutoplayTimeLeft = (s, time, progress) => {
     if (progressCircle.current) {
       progressCircle.current.style.setProperty("--progress", 1 - progress);
@@ -55,8 +58,11 @@ function Promo() {
   }, []);
 
   return (
-    <section className="w-full flex-col items-center">
-      <Navbar selected={"Galeri"} />
+    <section className="flex flex-col items-center space-y-4">
+      <div className="fixed w-full z-50">
+        <Navbar selected={"Galeri"} />
+      </div>
+
       {/* <div className="mt-[18px]">
                 <div className="flex-col">
                     <div className="flex gap-[6px] mx-[25px] lg:mx-[120px]">
@@ -71,7 +77,7 @@ function Promo() {
                 </div>
             </div> */}
 
-      <div className="flex items-center w-[90%] mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
+      <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
           className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
@@ -85,8 +91,11 @@ function Promo() {
         </a>
       </div>
 
+      <h1 className="w-[80%] text-start text-2xl text-secondary hidden lg:block ">
+        Promo
+      </h1>
       {/* Promo */}
-      <div className="flex flex-col lg:mx-[120px]">
+      <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-4 gap-2 w-full lg:w-[80%] ">
         {content &&
           content.map((item) => (
             <div key={item._id}>
@@ -95,7 +104,7 @@ function Promo() {
           ))}
       </div>
 
-      <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%]">
+      <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%] lg:w-[80%] items-center">
         {/* Layanan */}
         <section className="lg:w-full w-[full]">
           <LayananPopuler />
