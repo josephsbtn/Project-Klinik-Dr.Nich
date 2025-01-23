@@ -101,7 +101,8 @@ function ListGallery() {
     console.log("Delete promo with id:", selectedContent._id);
   };
 
-  const editGaleri = () => {
+  const editGaleri = (e) => {
+    e.preventDefault();
     try {
       const response = axios.put(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/editGaleri/${
@@ -280,7 +281,7 @@ function ListGallery() {
                   <input
                     type="text"
                     className="w-full p-2 border rounded-md font-montserrat"
-                    value={sosmed}
+                    value={deskripsi}
                     onChange={(e) => setDeskripsi(e.target.value)}
                     placeholder="Social Media "
                   />

@@ -64,6 +64,7 @@ function ListPromo() {
       );
       if (response.status === 200) {
         setOpen(false);
+        setPromo((prev) => [...prev, response.data]);
         fetchPromo();
       } else {
         setError("Failed to add promo. Please try again later.");
@@ -80,6 +81,7 @@ function ListPromo() {
         `/api/promo/deletePromo/${selectedPromo._id}`
       );
       fetchPromo();
+      setPromo((prev) => prev.filter((item) => item._id !== selectedPromo._id));
     } catch (error) {
       console.error("Error deleting promo:", error.message);
       setError("Failed to delete promo. Please try again later.");

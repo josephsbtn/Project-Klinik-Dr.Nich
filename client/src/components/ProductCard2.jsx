@@ -8,13 +8,13 @@ function ProdukCard({ item }) {
       <div
         className="flex items-center justify-center"
         onClick={() => navigate(`/produk/detailProduk/${item._id}`)}>
-        <div className="w-[155px] h-[256px] rounded-[10px] p-2 bg-white border border-disable-line flex flex-col">
+        <div className="w-fit h-[17rem] rounded-[10px] p-2 bg-white border border-disable-line flex flex-col">
           <img
             src={item.foto}
-            className="w-[155px] h-[155px] object-cover mx-auto mt-1 rounded-xl"
+            className="w-[155px] bg-red-100 min-h-[155px] object-cover mx-auto mt-1 rounded-xl"
             alt=""
           />
-          <p className="w-full  text-[#464646] text-left text-sm mt-1 lg:mt-2 font-normal font-SFPro leading-tight tracking-tight line-clamp-2">
+          <p className="w-full min-h-10 max-w-[155px] bg-yellow-200 text-[#464646] text-left text-sm mt-1 lg:mt-2 font-normal font-SFPro leading-tight tracking-tight line-clamp-2">
             {item.nama}
           </p>
           {/* type shi */}
