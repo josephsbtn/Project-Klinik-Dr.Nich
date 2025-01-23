@@ -14,6 +14,43 @@ import LoadingSpinner from "../../components/LoadingSpinner.jsx";
 import ProdukCard from "../../components/ProductCard2.jsx";
 
 function DetailProduk() {
+
+  // FETCH DATA
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(""); // Clear any previous error
+
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/produk/getProductByCategory/${id}`
+      );
+
+      const dataCategory = await axios.get(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/produk/getprodukbyId/${id}`
+      );
+
+      setCategory(dataCategory.data.name);
+      const sorted = response.data.sort(
+        (a, b) => b.reservedCount - a.reservedCount
+      );
+      setContent(sorted);
+      console.log(response.data);
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "An error occurred while fetching data."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [id]);
   return (
     <main className="flex flex-col items-center w-full">
       <div className="w-full fixed z-30">

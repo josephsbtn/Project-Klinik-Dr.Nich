@@ -16,6 +16,8 @@ import Galeri from "./screen/All/galeri.jsx";
 import Produk from "./screen/produk/produk.jsx";
 // detailKategori
 import DetailKategori from "./screen/produk/detailKategori.jsx";
+// detailProduk
+import DetailProduk from "./screen/produk/detailProduk.jsx";
 //================
 
 //promo
@@ -52,7 +54,8 @@ function App() {
         <Route path="/produk" element={<Produk />} />
         {/* Detail Skincare */}
         <Route path="/produk/detailKategori/:id" element={<DetailKategori />} />
-
+        {/* Detail Produk */}
+        <Route path="/produk/detailProduk/:id" element={<DetailProduk />} />
         {/* ===================================== */}
 
         {/* PROMO */}
