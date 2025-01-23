@@ -8,6 +8,7 @@ import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
 import ArrowRightDisable from "../../components/ArrowRight-Disable";
 import Footer from "../auth/footer";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 function DetailPromo() {
   const { id } = useParams();
@@ -70,9 +71,9 @@ function DetailPromo() {
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="flex flex-col items-center w-[90%] lg:w-[80%] md:w-[80%] bg-red-300">
+      <main className="flex flex-col items-center w-[90%] lg:w-[80%] md:w-[80%] ">
         {loading ? (
-          <h1>Loading...</h1>
+          <LoadingSpinner />
         ) : error ? (
           <h1>{error}</h1>
         ) : (
