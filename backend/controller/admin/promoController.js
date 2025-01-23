@@ -29,6 +29,16 @@ const getPromo = asyncHandler(async (req, res) => {
   }
 });
 
+const getPromoById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const promo = await promoModels.findById(id);
+    res.send(promo);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 const updatePromo = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
@@ -59,4 +69,4 @@ const deletePromo = asyncHandler(async (req, res) => {
   }
 });
 
-export { newPromo, getPromo, updatePromo, deletePromo };
+export { newPromo, getPromo, updatePromo, deletePromo, getPromoById };

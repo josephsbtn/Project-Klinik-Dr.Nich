@@ -22,6 +22,7 @@ import DetailProduk from "./screen/produk/detailProduk.jsx";
 
 //promo
 import Promo from "./screen/All/promo.jsx";
+import DetailPromo from "./screen/All/detailPromo.jsx";
 //pencarian
 import Pencarian from "./screen/All/pencarian.jsx";
 import Debug from "./screen/All/debug.jsx";
@@ -63,6 +64,10 @@ function App() {
 
         {/* PROMO */}
         <Route path="/promo" element={<Promo />} />
+        <Route path="/promo/detail/:id" element={<DetailPromo />} />
+
+        {/* Pencarian */}
+
         <Route path="/pencarian" element={<Pencarian />} />
 
         {/* Debug*/}

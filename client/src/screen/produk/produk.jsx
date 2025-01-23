@@ -13,10 +13,7 @@ import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import CardProduct from "../../components/kategoriProductCard.jsx";
 
 // Assets
-import arrow from "../../assets/arrow-right.svg";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
-import banner1 from "../../assets/img-produk/banner.png";
-import banner2 from "../../assets/img-produk/banner2.png";
 import axios from "axios";
 
 // Swiper Components
@@ -88,7 +85,7 @@ function Produk() {
         </a>
       </div>
 
-      <div className="flex items-center w-[90%] bg-yellow-200 justify-center space-x-2 mx-auto mt-[18px] lg:w-[80%] lg:h-full">
+      <div className="flex items-center w-[90%]  justify-center space-x-2 mx-auto mt-[18px] lg:w-[80%] lg:h-full">
         <Swiper
           modules={[Autoplay, Pagination]}
           autoplay={{ delay: 3000, disableOnInteraction: false }}

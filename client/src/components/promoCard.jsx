@@ -8,7 +8,7 @@ export default function PromoCard({ item }) {
   return (
     <div
       className="w-[311px] lg:w-[325px] lg:h-[479px] h-[439px] flex flex-col mx-auto items-center border border-[#efefef] rounded-lg shadow-sm my-8"
-      onClick={() => navigate(`/promo/detailPromo/${item._id}`)} // Moved onClick here
+      onClick={() => navigate(`/promo/detail/${item._id}`)} // Moved onClick here
     >
       <img
         className="w-full h-[328px] rounded-[5px] object-cover opacity-90"

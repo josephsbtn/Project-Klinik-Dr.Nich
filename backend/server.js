@@ -10,6 +10,7 @@ import userRoutes from "./routes/userRoutes.js";
 import fotoRoutes from "./routes/admin/sertifMesinRoutes.js";
 import cartRoutes from "./routes/admin/cartRoutes.js";
 import galleryRoutes from "./routes/admin/galleryRoutes.js";
+import ulasanRoutes from "./routes/admin/ulasanRoutes.js";
 import dbConfig from "./config/db.js";
 
 const app = express();
@@ -50,6 +51,7 @@ app.use("/api/produk", produkRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/foto", fotoRoutes);
 app.use("/api/gallery", galleryRoutes);
+app.use("/api/ulasan", ulasanRoutes);
 
 app.get("/", (req, res) => res.send("Server is ready"));
 app.use(notFound);
