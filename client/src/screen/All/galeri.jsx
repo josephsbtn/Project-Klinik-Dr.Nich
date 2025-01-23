@@ -7,6 +7,9 @@ import LayananPopuler from "../../components/layananPopuler.jsx";
 import GaleriCard from "../../components/galeriCard.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
 
+import { useNavigate } from "react-router-dom";
+import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
+
 // IMAGE AND ICON
 import klinik from "../../assets/img-profil/klinik.png";
 import bgVM from "../../assets/img-profil/bgVisiMisi.png";
@@ -35,6 +38,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 function Profile() {
+  const navigate = useNavigate();
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
@@ -78,16 +82,18 @@ function Profile() {
     <>
       <Navbar selected={"Galeri"} />
       <div className="mt-[18px]">
-        <div className="flex-col">
-          <div className="flex gap-[6px] mx-[25px] lg:mx-[120px]">
-            <a className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
-              Beranda
-            </a>
-            <img src={arrow} alt="" />
-            <p className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
-              Galeri
-            </p>
-          </div>
+        <div className="flex items-center w-[90%] mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
+          <a
+            onClick={() => navigate("/")}
+            className="cursor-pointer text-xs text-disable-text font-normal">
+            Beranda
+          </a>
+          <ArrowRightDisable />
+          <a
+            onClick={() => navigate("/galeri")}
+            className="cursor-pointer text-xs text-disable-text font-normal">
+            Galeri
+          </a>
         </div>
         <div className="w-full h-full flex flex-col mt-[30px]">
           {/* Galeri */}
@@ -109,12 +115,12 @@ function Profile() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 z-0 lg:mx-[120px]">
+          <div className="flex flex-col gap-4 z-0  items-center">
             {/* Layanan */}
-            <section className="lg:w-[70%] w-[90%]">
+            <section className="lg:w-[80%] w-[90%]">
               <LayananPopuler />
             </section>
-            <section className="lg:w-[70%] w-[90%]">
+            <section className="lg:w-[80%] w-[90%]">
               <ProdukTerbaru />
             </section>
           </div>

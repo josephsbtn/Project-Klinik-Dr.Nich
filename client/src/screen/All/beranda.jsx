@@ -435,26 +435,26 @@ export default function Beranda() {
           {/* Carousel */}
           <div className="flex flex-col lg:w-full pt-[15px]">
             <div className="flex lg:justify-start justify-center items-center pt-[15px]">
-              <div className="carousel carousel-center w-80 lg:w-full space-x-[10px]">
+              <div className="carousel carousel-center w-80 lg:w-full space-x-8">
                 {/* Conditional Rendering of Carousel Items */}
                 {gallery && gallery.length > 0 ? (
                   gallery.slice(0, limitGallery).map((item, index) => (
                     <div key={item._id} className="carousel-item">
-                      <div className="w-[326px] h-[213.28px] relative flex flex-col items-start">
+                      <div className="w-72 h-auto  relative flex flex-col items-start justify-start">
                         {/* Dynamic Image */}
                         <img
                           src={item.thumbnail} // Assuming `imageUrl` is the property for image source
-                          className="mx-auto rounded-[10px]"
+                          className="mx-auto rounded-[10px] h-auto w-full aspect-video "
                           alt={item.judul || "Product Image"} // Fallback alt text
                         />
 
                         {/* Dynamic Product Name */}
-                        <p className="w-full text-[ #464646] text-left text-sm mx-2 my-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
+                        <p className="w-full text-[ #464646] text-left text-sm  my-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
                           {item.judul}
                         </p>
 
                         {/* Dynamic Product Type */}
-                        <div className="flex items-center gap-2 mx-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
+                        <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
                           <p>{item.sosmed}</p>{" "}
                           {/* Assuming `type` holds the product type */}
                           <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
