@@ -95,7 +95,7 @@ function Promo() {
         Promo
       </h1>
       {/* Promo */}
-      <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-4 gap-2 w-full lg:w-[80%] ">
+      <div className="flex flex-col lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-4 gap-2 w-full lg:w-[80%] ">
         {content &&
           content.map((item) => (
             <div key={item._id}>
@@ -104,9 +104,9 @@ function Promo() {
           ))}
       </div>
 
-      <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%] lg:w-[80%] items-center">
+      <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%] lg:w-[80%] md:w-[80%] items-center">
         {/* Layanan */}
-        <section className="lg:w-full w-[full]">
+        <section className="lg:w-full w-full">
           <LayananPopuler />
         </section>
         <section className="lg:w-full w-full">
