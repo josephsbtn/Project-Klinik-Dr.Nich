@@ -68,13 +68,13 @@ function DetailTreatment() {
       <div className="flex items-center w-[90%] justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/layanan")}
-          className="cursor-pointer text-xs text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
           Layanan
         </a>
         <ArrowRightDisable />
@@ -122,9 +122,9 @@ function DetailTreatment() {
               </p>
               <button
                 className="w-full py-3 lg:w-[15%] lg:mt-8  rounded-xl bg-secondary text-white text-sm font-SFPro font-medium"
-                onClick={() =>
-                  {sendWhatsAppReservasiLayananMessage(judul)}
-                }>
+                onClick={() => {
+                  sendWhatsAppReservasiLayananMessage(judul);
+                }}>
                 Reservasi
               </button>
             </div>

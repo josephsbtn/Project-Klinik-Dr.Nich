@@ -55,7 +55,10 @@ function App() {
         {/* Detail Skincare */}
         <Route path="/produk/detailKategori/:id" element={<DetailKategori />} />
         {/* Detail Produk */}
-        <Route path="/produk/detailProduk/:id" element={<DetailProduk />} />
+        <Route
+          path="/produk/detailProduk/:idProduk"
+          element={<DetailProduk />}
+        />
         {/* ===================================== */}
 
         {/* PROMO */}

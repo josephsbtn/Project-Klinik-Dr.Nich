@@ -11,10 +11,10 @@ function ProdukCard({ item }) {
         <div className="w-fit h-[17rem] rounded-[10px] p-2 bg-white border border-disable-line flex flex-col">
           <img
             src={item.foto}
-            className="w-[155px] bg-red-100 min-h-[155px] object-cover mx-auto mt-1 rounded-xl"
+            className="w-[155px] bg-red-100 h-[155px] object-fill mx-auto mt-1 rounded-xl"
             alt=""
           />
-          <p className="w-full min-h-10 max-w-[155px] bg-yellow-200 text-[#464646] text-left text-sm mt-1 lg:mt-2 font-normal font-SFPro leading-tight tracking-tight line-clamp-2">
+          <p className="w-full h-auto max-w-[155px]   text-[#464646] text-left text-sm mt-1 lg:mt-2 font-normal font-SFPro leading-tight tracking-tight line-clamp-2">
             {item.nama}
           </p>
           {/* type shi */}

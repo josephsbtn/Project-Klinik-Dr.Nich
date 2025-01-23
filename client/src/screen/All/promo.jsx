@@ -55,7 +55,7 @@ function Promo() {
   }, []);
 
   return (
-    <>
+    <section className="w-full flex-col items-center">
       <Navbar selected={"Galeri"} />
       {/* <div className="mt-[18px]">
                 <div className="flex-col">
@@ -74,13 +74,13 @@ function Promo() {
       <div className="flex items-center w-[90%] mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/promo")}
-          className="cursor-pointer text-xs text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
           Promo
         </a>
       </div>
@@ -105,7 +105,7 @@ function Promo() {
         </section>
       </div>
       <Footer />
-    </>
+    </section>
   );
 }
 

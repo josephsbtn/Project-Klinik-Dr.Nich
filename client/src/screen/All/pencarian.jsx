@@ -56,6 +56,7 @@ function Pencarian() {
   const npageproduk = Math.ceil(layanan.length / postPerPage + 1);
   const pageslayanan = [...Array(npagelayanan).keys()].slice(1);
   const pagesproduk = [...Array(npageproduk).keys()].slice(1);
+
   const prevL = () => {
     indexlayanan > 0 && setIndexL(indexlayanan - 1);
   };
@@ -133,7 +134,7 @@ function Pencarian() {
             </a>
             <img src={arrow} alt="" />
             <p className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
-              Hasil Pencarian dari
+              Hasil Pencarian dari &quot;{query}&quot;
             </p>
           </div>
         </div>
@@ -147,7 +148,7 @@ function Pencarian() {
               } gap-2`}>
               {recordLayanan.length > 0 ? (
                 recordLayanan.map((item) => (
-                  <div className="h-fit w-1fit bg-black" key={item._id}>
+                  <div className="h-fit w-fit" key={item._id}>
                     <CardLayanan item={item} />
                   </div>
                 ))
