@@ -20,7 +20,7 @@ function DetailKategori() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(true);
   const [filterType, setFilterType] = useState("all");
   const [filterSkin, setFilterSkin] = useState("all");
 
