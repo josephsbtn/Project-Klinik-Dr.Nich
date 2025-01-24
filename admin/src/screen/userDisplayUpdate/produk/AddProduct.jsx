@@ -62,6 +62,7 @@ function AddProduct() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setOpen(false);
 
     setLoading(true);
     try {
@@ -73,8 +74,7 @@ function AddProduct() {
         !manfaat.trim() ||
         !caraPakai.trim() ||
         !harga.trim() ||
-        !kategori ||
-        !tipeProduk
+        !kategori
       ) {
         console.log({
           nama,
@@ -186,7 +186,7 @@ function AddProduct() {
             <button
               className="px-4 py-2 bg-gray-400 text-white rounded-md"
               onClick={() => setOpen(false)}>
-              Cancel
+              Batal
             </button>
             <button
               className="px-4 py-2 bg-primary text-white rounded-md"
@@ -217,7 +217,7 @@ function AddProduct() {
             <div className="w-[90%] p-4 pt-4 h-auto  flex items-start space-x-4">
               <div className="w-full h-[90%] lg:w-full p-5 border rounded-md shadow-md bg-white">
                 <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                  Product Image
+                  Gambar Produk
                 </h3>
                 <div className="flex flex-col space-y-4">
                   {image ? (
@@ -235,10 +235,10 @@ function AddProduct() {
                     <button
                       onClick={() => setImage(null)}
                       className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
-                      Remove
+                      Hapus
                     </button>
                     <label className="px-4 py-2 font-montserrat bg-blue-600 text-white rounded-md cursor-pointer">
-                      Add
+                      Tambah
                       <input
                         type="file"
                         accept="image/*"
@@ -253,32 +253,32 @@ function AddProduct() {
                 <div className="w-full h-full space-x-4 flex justify-center items-center">
                   <div className="w-full p-5 border rounded-md shadow-md bg-white">
                     <h3 className="text-xl font-semibold mb-4 font-montserrat">
-                      Product Details
+                      Detail Produk
                     </h3>
                     <div className="flex flex-col space-y-4">
                       <div>
                         <label className="block text-gray-700 font-montserrat mb-1">
-                          Product Name
+                          Nama Produk
                         </label>
                         <input
                           type="text"
                           value={nama}
                           onChange={(e) => setNama(e.target.value)}
-                          placeholder="Name"
+                          placeholder="Nama Produk"
                           className="border rounded-md w-full p-2 font-montserrat"
                         />
                       </div>
 
                       <div className="w-96">
                         <label className="block text-gray-700 font-montserrat mb-1">
-                          Product Description
+                          Deskripsi Produk
                         </label>
                         <textarea
                           type="text"
                           className="w-full p-2 border rounded-md font-montserrat"
                           value={deskripsi}
                           onChange={(e) => setDeskripsi(e.target.value)}
-                          placeholder="Enter content link url"
+                          placeholder="Deskripsi"
                           rows="4"
                         />
                       </div>
@@ -292,7 +292,7 @@ function AddProduct() {
                           className="w-full p-2 border rounded-md font-montserrat"
                           value={caraPakai}
                           onChange={(e) => setCaraPakai(e.target.value)}
-                          placeholder="Enter content creator channel name "
+                          placeholder="Cara Pemakaian Produk"
                           rows="4"
                         />
                       </div>
@@ -309,7 +309,7 @@ function AddProduct() {
                           className="w-full p-2 border rounded-md font-montserrat"
                           value={manfaat}
                           onChange={(e) => setManfaat(e.target.value)}
-                          placeholder="Enter content creator channel name "
+                          placeholder="Manfaat Produk"
                           rows="4"
                         />
                       </div>
@@ -323,13 +323,13 @@ function AddProduct() {
                           className="w-full p-2 border rounded-md font-montserrat"
                           value={harga}
                           onChange={(e) => setHarga(String(e.target.value))}
-                          placeholder="Enter product price"
+                          placeholder="Harga Produk"
                         />
                       </div>
 
                       <div>
                         <label className="block text-gray-700 font-montserrat mb-1">
-                          kategori Produk
+                          Kategori Produk
                         </label>
                         <select
                           className="w-full p-2 border rounded-md font-SFPro pt-2"
