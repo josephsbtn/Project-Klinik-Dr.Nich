@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import LoadingSpinner from "../../../assets/component/LoadingSpinner.jsx";
+
 const ActionButtons = ({ onEdit, onDelete, deleting }) => (
   <div className="flex gap-2">
     <button
@@ -468,6 +470,168 @@ function ListProduct() {
     <main className="flex flex-col container">
       <Navbar selected={"/produk"} />
       <ToastContainer />
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <section className="w-full pt-32 pb-20 flex flex-col items-center">
+            <h1 className="text-xl font-bold text-secondary">
+              List Categories
+            </h1>
+            {error && <div className="text-red-500 my-4">{error}</div>}
+            <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
+              {categoryProduct.length > 0
+                ? categoryProduct.map((category) => (
+                    <div
+                      key={category._id}
+                      className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                      <div className="flex items-center gap-4">
+                        {category.image && (
+                          <img
+                            src={category.image}
+                            alt="Category"
+                            className="w-16 h-16 object-cover rounded-md"
+                          />
+                        )}
+                        <span className="font-SFPro font-normal text-base text-text line-clamp-1">
+                          {category.name}
+                        </span>
+                      </div>
+                      <ActionButtons
+                        onEdit={(e) => handleEditCategory(category, e)}
+                        onDelete={(e) => handleDeleteCategory(category, e)}
+                        deleting={deleting}
+                      />
+                    </div>
+                  ))
+                : !error && (
+                    <div className="text-gray-500 mt-8">
+                      No categories available
+                    </div>
+                  )}
+            </div>
+          </section>
+
+          {/* Carousel section */}
+          <section className="w-full pt-32 pb-20 flex flex-col items-center">
+            <h1 className="text-xl font-bold text-secondary">Carousel Image</h1>
+            {error && <div className="text-red-500 my-4">{error}</div>}
+            <div className="grid grid-cols-3 gap-4 w-full max-w-4xl mt-5">
+              {imageCarousel.length > 0
+                ? imageCarousel.map((item) => (
+                    <div
+                      key={item._id}
+                      className="flex flex-col justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                      <img
+                        src={item.image}
+                        className="w-full h-full object-cover mb-2 aspect-video rounded-md"
+                        alt="Carousel"
+                      />
+                      <ActionButtons
+                        onEdit={() => {
+                          setSelectedImage(item);
+                          setEditImageOpen(true);
+                        }}
+                        onDelete={(e) => handleDeleteImage(item, e)}
+                        deleting={deleting}
+                      />
+                    </div>
+                  ))
+                : !error && (
+                    <div className="text-gray-500 mt-8">
+                      No categories available
+                    </div>
+                  )}
+            </div>
+          </section>
+
+          {/* Product Type Section */}
+
+          <section className="w-full pt-32 pb-20 flex flex-col items-center">
+            <h1 className="text-xl font-bold text-secondary">
+              List Product Type
+            </h1>
+            {error && <div className="text-red-500 my-4">{error}</div>}
+            <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
+              {productType.length > 0
+                ? productType.map((item) => (
+                    <div
+                      key={item._id}
+                      className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                      <div className="flex items-center gap-4">
+                        <span className="font-SFPro font-normal text-base text-text line-clamp-1">
+                          {item.name}
+                        </span>
+                      </div>
+                      <ActionButtons
+                        onEdit={(e) => handleEditProductType(item, e)}
+                        onDelete={(e) => handleDeleteProductType(item, e)}
+                        deleting={deleting}
+                      />
+                    </div>
+                  ))
+                : !error && (
+                    <div className="text-gray-500 mt-8">
+                      No categories available
+                    </div>
+                  )}
+            </div>
+          </section>
+
+          {/* Product section */}
+
+          <section className="w-full pt-32 pb-20 flex flex-col items-center">
+            <h1 className="text-xl font-bold text-secondary">List Product</h1>
+            {error && <div className="text-red-500 my-4">{error}</div>}
+            <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
+              {produk.length > 0
+                ? produk.map((item) => (
+                    <div
+                      key={item._id}
+                      className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                      <span className="font-SFPro font-normal text-base text-text line-clamp-1">
+                        {item.nama}
+                      </span>
+                      <ActionButtons
+                        onEdit={(e) => handleEdit(item, e)}
+                        onDelete={(e) => handleDeleteProduct(item, e)}
+                        deleting={deleting}
+                      />
+                    </div>
+                  ))
+                : !error && (
+                    <div className="text-gray-500 mt-8">
+                      No products available
+                    </div>
+                  )}
+            </div>
+
+            <div className="fixed right-0 bottom-0 p-4 z-0 flex justify-center items-center space-x-4">
+              <button
+                className="bg-primary text-white w-48 py-2 rounded-md"
+                onClick={() => navigate("/tambahproduk")}>
+                Add Product
+              </button>
+              <button
+                className="bg-primary text-white w-48 py-2 rounded-md"
+                onClick={handleAddCategory}>
+                Add Category
+              </button>
+              <button
+                className="bg-primary text-white w-48 py-2 rounded-md"
+                onClick={() => setOpenProductType(true)}>
+                Add Product Type
+              </button>
+              <button
+                className="bg-primary text-white w-48 py-2 rounded-md"
+                onClick={() => setAddImageOpen(true)}>
+                Add Carousel Image
+              </button>
+            </div>
+          </section>
+        </>
+      )}
+
       <ConfirmPopup open={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <div className="flex flex-col space-y-4 p-8 bg-white rounded-md shadow-md">
           <h1>Are you sure you want to delete this item?</h1>
@@ -610,155 +774,7 @@ function ListProduct() {
       </ConfirmPopup>
 
       {/* Categories Section */}
-      <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Categories</h1>
-        {error && <div className="text-red-500 my-4">{error}</div>}
-        <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
-          {categoryProduct.length > 0
-            ? categoryProduct.map((category) => (
-                <div
-                  key={category._id}
-                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <div className="flex items-center gap-4">
-                    {category.image && (
-                      <img
-                        src={category.image}
-                        alt="Category"
-                        className="w-16 h-16 object-cover rounded-md"
-                      />
-                    )}
-                    <span className="font-SFPro font-normal text-base text-text line-clamp-1">
-                      {category.name}
-                    </span>
-                  </div>
-                  <ActionButtons
-                    onEdit={(e) => handleEditCategory(category, e)}
-                    onDelete={(e) => handleDeleteCategory(category, e)}
-                    deleting={deleting}
-                  />
-                </div>
-              ))
-            : !error && (
-                <div className="text-gray-500 mt-8">
-                  No categories available
-                </div>
-              )}
-        </div>
-      </section>
 
-      {/* Carousel section */}
-      <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">Carousel Image</h1>
-        {error && <div className="text-red-500 my-4">{error}</div>}
-        <div className="grid grid-cols-3 gap-4 w-full max-w-4xl mt-5">
-          {imageCarousel.length > 0
-            ? imageCarousel.map((item) => (
-                <div
-                  key={item._id}
-                  className="flex flex-col justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <img
-                    src={item.image}
-                    className="w-full h-full object-cover mb-2 aspect-video rounded-md"
-                    alt="Carousel"
-                  />
-                  <ActionButtons
-                    onEdit={() => {
-                      setSelectedImage(item);
-                      setEditImageOpen(true);
-                    }}
-                    onDelete={(e) => handleDeleteImage(item, e)}
-                    deleting={deleting}
-                  />
-                </div>
-              ))
-            : !error && (
-                <div className="text-gray-500 mt-8">
-                  No categories available
-                </div>
-              )}
-        </div>
-      </section>
-
-      {/* Product Type Section */}
-
-      <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Product Type</h1>
-        {error && <div className="text-red-500 my-4">{error}</div>}
-        <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
-          {productType.length > 0
-            ? productType.map((item) => (
-                <div
-                  key={item._id}
-                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <div className="flex items-center gap-4">
-                    <span className="font-SFPro font-normal text-base text-text line-clamp-1">
-                      {item.name}
-                    </span>
-                  </div>
-                  <ActionButtons
-                    onEdit={(e) => handleEditProductType(item, e)}
-                    onDelete={(e) => handleDeleteProductType(item, e)}
-                    deleting={deleting}
-                  />
-                </div>
-              ))
-            : !error && (
-                <div className="text-gray-500 mt-8">
-                  No categories available
-                </div>
-              )}
-        </div>
-      </section>
-
-      {/* Product section */}
-
-      <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Product</h1>
-        {error && <div className="text-red-500 my-4">{error}</div>}
-        <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
-          {produk.length > 0
-            ? produk.map((item) => (
-                <div
-                  key={item._id}
-                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <span className="font-SFPro font-normal text-base text-text line-clamp-1">
-                    {item.nama}
-                  </span>
-                  <ActionButtons
-                    onEdit={(e) => handleEdit(item, e)}
-                    onDelete={(e) => handleDeleteProduct(item, e)}
-                    deleting={deleting}
-                  />
-                </div>
-              ))
-            : !error && (
-                <div className="text-gray-500 mt-8">No products available</div>
-              )}
-        </div>
-
-        <div className="fixed right-0 bottom-0 p-4 z-0 flex justify-center items-center space-x-4">
-          <button
-            className="bg-primary text-white w-48 py-2 rounded-md"
-            onClick={() => navigate("/tambahproduk")}>
-            Add Product
-          </button>
-          <button
-            className="bg-primary text-white w-48 py-2 rounded-md"
-            onClick={handleAddCategory}>
-            Add Category
-          </button>
-          <button
-            className="bg-primary text-white w-48 py-2 rounded-md"
-            onClick={() => setOpenProductType(true)}>
-            Add Product Type
-          </button>
-          <button
-            className="bg-primary text-white w-48 py-2 rounded-md"
-            onClick={() => setAddImageOpen(true)}>
-            Add Carousel Image
-          </button>
-        </div>
-      </section>
       <ConfirmPopup
         open={editImageOpen}
         onClose={() => setEditImageOpen(false)}>
