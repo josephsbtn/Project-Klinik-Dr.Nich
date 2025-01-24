@@ -6,7 +6,6 @@ import Footer from "../auth/footer";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import GaleriCard from "../../components/galeriCard.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
-import ProdukCard from "../../components/ProductCard2.jsx";
 
 import { useNavigate } from "react-router-dom";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
@@ -86,47 +85,45 @@ function Profile() {
         <div className="flex items-center w-[90%] mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
           <a
             onClick={() => navigate("/")}
-            className="cursor-pointer text-xs text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
             Beranda
           </a>
           <ArrowRightDisable />
           <a
             onClick={() => navigate("/galeri")}
-            className="cursor-pointer text-xs text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
             Galeri
           </a>
         </div>
         <div className="w-full h-full flex flex-col mt-[30px]">
           {/* Galeri */}
-          <div className="w-full h-full flex flex-col items-center">
-            <div className="w-full h-screen lg:grid-cols-2 lg:gap-4">
+          <div className="w-full h-[600px] flex flex-col items-center">
+            <div className="w-full h-screen grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2">
               {content &&
                 content.map((item) => (
                   <div key={item._id}>
                     <GaleriCard item={item} />
                   </div>
                 ))}
-            <div className="mt-6 justify-center flex">
+            </div>
+
+            {/* Lihat Lainnya */}
+            <div className="mt-6 h-full">
               <button className="w-[109px] h-[31px] text-[#c2a353] text-xs font-normal rounded-[10px] border border-[#c2a353] text-sm font-medium">
                 Lihat Lainnya
               </button>
             </div>
-            </div>
-            <ProdukCard />
-
-            {/* Lihat Lainnya */}
           </div>
-          <div className="flex flex-col top-0 gap-4 z-0 items-center">
+
+          <div className="flex flex-col gap-4 z-0  items-center">
             {/* Layanan */}
             <section className="lg:w-[80%] w-[90%]">
               <LayananPopuler />
             </section>
-            {/* produkterbaru */}
             <section className="lg:w-[80%] w-[90%]">
               <ProdukTerbaru />
             </section>
           </div>
-
         </div>
       </div>
       <Footer />

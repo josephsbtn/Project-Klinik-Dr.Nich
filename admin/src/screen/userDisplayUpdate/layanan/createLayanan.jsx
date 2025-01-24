@@ -20,7 +20,11 @@ function CreateLayanan() {
   useEffect(() => {
     const fetchJenisLayanan = async () => {
       try {
-        const response = await axios.get("/api/layanan/getAllJenisLayanan");
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getAllJenisLayanan`
+        );
         const data = response.data;
 
         if (Array.isArray(data)) {
@@ -53,15 +57,23 @@ function CreateLayanan() {
     }
 
     try {
-      const { data } = await axios.post(`/api/layanan/tambahLayanan`, {
-        nama,
-        durasi,
-        harga,
-        deskripsi,
-        image,
-        cardDeskripsi,
-        idJenis,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/tambahLayanan`,
+        {
+          nama,
+          durasi,
+          harga,
+          deskripsi,
+          image,
+          cardDeskripsi,
+          idJenis,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
+      );
 
       console.log(data);
       setSuccessMessage("Layanan successfully created!");

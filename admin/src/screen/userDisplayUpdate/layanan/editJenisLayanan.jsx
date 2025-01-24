@@ -23,7 +23,9 @@ function EditJenisLayanan() {
       try {
         setIsLoading(true);
         const response = await axios.get(
-          `/api/layanan/getJenisLayananById/${id}`
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getJenisLayananById/${id}`
         );
         setNama(response.data.nama);
         setImage(response.data.foto);
@@ -40,7 +42,11 @@ function EditJenisLayanan() {
   const handleDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/layanan/deleteJenisLayanan/${id}`);
+      await axios.delete(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/deleteJenisLayanan/${id}`
+      );
       navigate("/layanan");
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -61,8 +67,15 @@ function EditJenisLayanan() {
     try {
       setIsLoading(true);
       const res = await axios.put(
-        `/api/layanan/updateJenisLayanan/${id}`,
-        Djenis
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/updateJenisLayanan/${id}`,
+        Djenis,
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
       );
       setSuccess(true);
       setTimeout(() => {

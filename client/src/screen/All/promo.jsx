@@ -63,20 +63,6 @@ function Promo() {
         <Navbar selected={"Galeri"} />
       </div>
 
-      {/* <div className="mt-[18px]">
-                <div className="flex-col">
-                    <div className="flex gap-[6px] mx-[25px] lg:mx-[120px]">
-                        <a className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
-                            Beranda
-                        </a>
-                        <img src={arrow} alt="" />
-                        <p className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
-                            Promo
-                        </p>
-                    </div>
-                </div>
-            </div> */}
-
       <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}

@@ -26,7 +26,11 @@ function LayananUD() {
     const fetchJenisLayanan = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("/api/layanan/getAllJenisLayanan");
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getAllJenisLayanan`
+        );
         const sortedJenisLayanan = response.data.sort(
           (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
         );
@@ -41,7 +45,11 @@ function LayananUD() {
     const fetchDataLayanan = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/layanan/getLayananById/${id}`);
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getLayananById/${id}`
+        );
         setNama(response.data.nama);
         setDurasi(response.data.durasi);
         setHarga(response.data.harga);
@@ -64,14 +72,24 @@ function LayananUD() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.put(`/api/layanan/updateLayanan/${id}`, {
-        nama,
-        durasi,
-        harga,
-        deskripsi,
-        idJenis,
-        image,
-      });
+      const { data } = await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/updateLayanan/${id}`,
+        {
+          nama,
+          durasi,
+          harga,
+          deskripsi,
+          idJenis,
+          image,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
+      );
       setSuccessMessage(data.message);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -83,14 +101,18 @@ function LayananUD() {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      const res = await axios.delete(`/api/layanan/deleteLayanan/${id}`);
+      const res = await axios.delete(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/deleteLayanan/${id}`
+      );
       setNama("");
       setDurasi("");
       setHarga("");
       setDeskripsi("");
       setIdJenis("");
       setImage(null);
-      setSuccess(res.data.message);
+      setSuccessMessage(res.data.message);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
     } finally {
