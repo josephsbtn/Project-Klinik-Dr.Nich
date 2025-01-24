@@ -32,19 +32,28 @@ function ListProduct() {
   const [produk, setProduk] = useState([]);
   const [imageCarousel, setImageCarousel] = useState([]);
   const [categoryProduct, setCategoryProduct] = useState([]);
+  const [productType, setProductType] = useState([]);
 
   const [selectedContent, setSelectedContent] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [isDeletingProductType, setIsDeletingProductType] = useState(false);
   const [isDeletingCarousel, setIsDeletingCarousel] = useState(false);
   const [isDeletingCategory, setIsDeletingCategory] = useState(false);
+
   const [image, setImage] = useState("");
+  const [newImage, setNewImage] = useState(null);
+
   const [newCategoryName, setNewCategoryName] = useState("");
   const [editCategoryName, setEditCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState("");
-  const [editImageOpen, setEditImageOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [newImage, setNewImage] = useState(null);
-  const [newProductType, setNewProductType] = useState(null);
+  const [editProductTypeName, setEditProductTypeName] = useState("");
 
+  const [editImageOpen, setEditImageOpen] = useState(false);
+
+  const [newProductType, setNewProductType] = useState("");
+
+  const [isEditingType, setIsEditingType] = useState(false);
   const [openProductType, setOpenProductType] = useState(false);
   const [addImageOpen, setAddImageOpen] = useState(false);
   const [addCategoryOpen, setAddCategoryOpen] = useState(false);
@@ -53,29 +62,40 @@ function ListProduct() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [editingTypeLoading, setEditingTypeLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const [productsResponse, imagesResponse, categoryResponse] =
-        await Promise.all([
-          axios.get(
-            `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAllproduk`
-          ),
-          axios.get(
-            `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getImage`
-          ),
-          axios.get(
-            `${
-              import.meta.env.VITE_BASE_URL_BACKEND
-            }/api/produk/getAllkategoriProduk`
-          ),
-        ]);
+      const [
+        productsResponse,
+        imagesResponse,
+        categoryResponse,
+        productTypeResponse,
+      ] = await Promise.all([
+        axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAllproduk`
+        ),
+        axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getImage`
+        ),
+        axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/getAllkategoriProduk`
+        ),
+        axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/getAllproductType`
+        ),
+      ]);
 
       const products = productsResponse.data;
       const images = imagesResponse.data;
       const categories = categoryResponse.data;
+      const productTypes = productTypeResponse.data;
 
       if (Array.isArray(products)) {
         const sortedProducts = products.sort(
@@ -96,6 +116,12 @@ function ListProduct() {
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
         setCategoryProduct(sortedCategories);
+      }
+      if (Array.isArray(productTypes)) {
+        const sortedProductTypes = productTypes.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setProductType(sortedProductTypes);
       }
 
       setError("");
@@ -130,6 +156,15 @@ function ListProduct() {
           }/api/produk/deletekategoriProduk/${selectedContent._id}`
         );
         setCategoryProduct((prev) =>
+          prev.filter((item) => item._id !== selectedContent._id)
+        );
+      } else if (isDeletingProductType) {
+        await axios.delete(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/deleteproductType/${selectedContent._id}`
+        );
+        setProductType((prev) =>
           prev.filter((item) => item._id !== selectedContent._id)
         );
       } else {
@@ -227,6 +262,40 @@ function ListProduct() {
     }
   };
 
+  const handleAddProductType = async (e) => {
+    e.preventDefault();
+    try {
+      const res = (
+        await axios.post(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/tambahproductType`,
+          {
+            name: newProductType,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json", // Ensure proper content type
+            },
+          }
+        )
+      ).data;
+      setProductType((prev) => [...prev, res]);
+      setOpenProductType(false);
+      toast.success("Product Type added successfully.");
+    } catch (error) {
+      toast.error("Failed to add product type. Please try again.");
+      console.log("Error adding product type:", error.message);
+    }
+  };
+
+  const handleEditProductType = (productType, e) => {
+    e.preventDefault();
+    setSelectedContent(productType);
+    setEditProductTypeName(productType.name);
+    setIsEditingType(true);
+  };
+
   const handleEditCategory = (category, e) => {
     e.preventDefault();
     setSelectedContent(category);
@@ -234,16 +303,23 @@ function ListProduct() {
     setEditCategoryOpen(true);
   };
 
+  const handleEdit = (item, e) => {
+    e.preventDefault();
+    navigate(`/editproduk/${item._id}`);
+  };
+
+  const handleDeleteProductType = (item, e) => {
+    e.preventDefault();
+    setSelectedContent(item);
+    setIsDeletingProductType(true);
+    setConfirmOpen(true);
+  };
+
   const handleDeleteCategory = (category, e) => {
     e.preventDefault();
     setSelectedContent(category);
     setIsDeletingCategory(true);
     setConfirmOpen(true);
-  };
-
-  const handleEdit = (item, e) => {
-    e.preventDefault();
-    navigate(`/editproduk/${item._id}`);
   };
 
   const handleDeleteProduct = (item, e) => {
@@ -298,6 +374,72 @@ function ListProduct() {
     }
   };
 
+  const handleEditImage = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/updateImage/${
+          selectedImage._id
+        }`,
+        { image: newImage },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
+      );
+      setImageCarousel((prev) =>
+        prev.map((item) =>
+          item._id === selectedImage._id ? { ...item, image: newImage } : item
+        )
+      );
+      setEditImageOpen(false);
+      toast.success("Image updated successfully.");
+    } catch (error) {
+      console.error("Error updating image:", error.message);
+      toast.error("Failed to update image. Please try again.");
+    }
+  };
+
+  const handleEditProductTypeSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    try {
+      console.log("Submitting edit..."); // Debugging log
+      setEditingTypeLoading(true);
+
+      // API request
+      await axios.put(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/editproductType/${
+          selectedContent._id
+        }`,
+        { name: editProductTypeName },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      // Update local state
+      setProductType((prev) =>
+        prev.map((item) =>
+          item._id === selectedContent._id
+            ? { ...item, name: editProductTypeName }
+            : item
+        )
+      );
+
+      console.log("Edit successful!");
+      setIsEditingType(false); // Close the popup
+      toast.success("Product Type updated successfully.");
+    } catch (error) {
+      console.error(
+        "Error updating product type:",
+        error.response?.data?.message || error.message
+      );
+      toast.error("Failed to update product type. Please try again.");
+    } finally {
+      console.log("Resetting loading state");
+      setEditingTypeLoading(false); // Ensure loading state is reset
+    }
+  };
+
   const convertBase64 = (e, setImageFunction) => {
     const file = e.target.files[0];
     if (!file) {
@@ -320,35 +462,6 @@ function ListProduct() {
     reader.onload = () => {
       setImageFunction(reader.result);
     };
-  };
-
-  const handleEditImage = async (e) => {
-    e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("image", newImage);
-      await axios.put(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/editImage/${
-          selectedImage._id
-        }`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json", // Ensure proper content type
-          },
-        }
-      );
-      setImageCarousel((prev) =>
-        prev.map((item) =>
-          item._id === selectedImage._id ? { ...item, image: newImage } : item
-        )
-      );
-      setEditImageOpen(false);
-      toast.success("Image updated successfully.");
-    } catch (error) {
-      console.error("Error updating image:", error.message);
-      toast.error("Failed to update image. Please try again.");
-    }
   };
 
   return (
@@ -458,40 +571,41 @@ function ListProduct() {
           <h3 className="text-xl font-semibold mb-4 font-montserrat">
             Product Carousel Image
           </h3>
-          <form className="flex flex-col space-y-4" onSubmit={handleAddImage}>
-            {image ? (
-              <img
-                src={image}
-                alt="Uploaded Preview"
-                className="w-auto h-80 aspect-video object-cover rounded-md border"
+
+          {image ? (
+            <img
+              src={image}
+              alt="Uploaded Preview"
+              className="w-auto h-80 aspect-video object-cover rounded-md border"
+            />
+          ) : (
+            <div className="w-full h-48 bg-gray-200 rounded-md font-montserrat flex items-center justify-center text-gray-600">
+              + Add Image
+            </div>
+          )}
+          <div className="flex space-x-4">
+            <button
+              onClick={() => setImage("")}
+              className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
+              Remove
+            </button>
+            <label className="px-4 py-2 font-montserrat bg-blue-600 text-white rounded-md cursor-pointer">
+              Add
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => convertBase64(e, setImage)}
               />
-            ) : (
-              <div className="w-full h-48 bg-gray-200 rounded-md font-montserrat flex items-center justify-center text-gray-600">
-                + Add Image
-              </div>
-            )}
-            <div className="flex space-x-4">
-              <button
-                onClick={() => setImage(null)}
-                className="px-4 py-2 bg-red-600 font-montserrat text-white rounded-md">
-                Remove
-              </button>
-              <label className="px-4 py-2 font-montserrat bg-blue-600 text-white rounded-md cursor-pointer">
-                Add
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => convertBase64(e, setImage)}
-                />
-              </label>
+            </label>
+            <form className="flex flex-col space-y-4" onSubmit={handleAddImage}>
               <button
                 type="submit"
                 className="px-4 py-2 bg-green-600 font-montserrat text-white rounded-md">
                 SUBMIT
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </ConfirmPopup>
 
@@ -565,6 +679,37 @@ function ListProduct() {
         </div>
       </section>
 
+      {/* Product Type Section */}
+
+      <section className="w-full pt-32 pb-20 flex flex-col items-center">
+        <h1 className="text-xl font-bold text-secondary">List Product Type</h1>
+        {error && <div className="text-red-500 my-4">{error}</div>}
+        <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
+          {productType.length > 0
+            ? productType.map((item) => (
+                <div
+                  key={item._id}
+                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                  <div className="flex items-center gap-4">
+                    <span className="font-SFPro font-normal text-base text-text line-clamp-1">
+                      {item.name}
+                    </span>
+                  </div>
+                  <ActionButtons
+                    onEdit={(e) => handleEditProductType(item, e)}
+                    onDelete={(e) => handleDeleteProductType(item, e)}
+                    deleting={deleting}
+                  />
+                </div>
+              ))
+            : !error && (
+                <div className="text-gray-500 mt-8">
+                  No categories available
+                </div>
+              )}
+        </div>
+      </section>
+
       {/* Product section */}
 
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
@@ -604,7 +749,7 @@ function ListProduct() {
           </button>
           <button
             className="bg-primary text-white w-48 py-2 rounded-md"
-            onClick={() => setAddImageOpen(true)}>
+            onClick={() => setOpenProductType(true)}>
             Add Product Type
           </button>
           <button
@@ -623,7 +768,7 @@ function ListProduct() {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setNewImage(e.target.files[0])}
+              onChange={(e) => convertBase64(e, setNewImage)}
               className="mb-4 p-2 border border-gray-300 rounded"
             />
             <div className="flex justify-end">
@@ -639,6 +784,53 @@ function ListProduct() {
                 Save Changes
               </button>
             </div>
+          </form>
+        </div>
+      </ConfirmPopup>
+      <ConfirmPopup
+        open={openProductType}
+        onClose={() => setOpenProductType(false)}>
+        <div className="bg-white rounded-lg w-96 p-6 ">
+          <h2 className="text-xl font-bold mb-4">Add Product Type</h2>
+          <form onSubmit={handleAddProductType}>
+            <input
+              type="text"
+              value={newProductType}
+              onChange={(e) => setNewProductType(e.target.value)}
+              className="mb-4 p-2 w-full border border-gray-300 rounded font-SFPro"
+              placeholder="Product Type"
+            />
+
+            <button
+              type="submit"
+              className="p-2 bg-blue-500 text-white rounded">
+              Save Changes
+            </button>
+          </form>
+        </div>
+      </ConfirmPopup>
+      <ConfirmPopup
+        open={isEditingType}
+        onClose={() => setIsEditingType(false)}>
+        <div className="bg-white rounded-lg w-96 p-6 ">
+          <h2 className="text-xl font-bold mb-4">Edit Product Type</h2>
+          <form onSubmit={handleEditProductTypeSubmit}>
+            <input
+              type="text"
+              value={editProductTypeName}
+              onChange={(e) => setEditProductTypeName(e.target.value)}
+              className="mb-4 p-2 w-full border border-gray-300 rounded font-SFPro"
+              placeholder="Product Type"
+            />
+
+            <button
+              type="submit"
+              disabled={editingTypeLoading}
+              className={`p-2 bg-blue-500 text-white rounded ${
+                editingTypeLoading ? "cursor-not-allowed opacity-50" : ""
+              }`}>
+              {editingTypeLoading ? "Saving..." : "Save Changes"}
+            </button>
           </form>
         </div>
       </ConfirmPopup>

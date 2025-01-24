@@ -122,6 +122,7 @@ const editProductType = asyncHandler(async (req, res) => {
     if (!data) {
       throw new Error("kategori Produk Tidak Ditemukan");
     }
+    res.send(data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

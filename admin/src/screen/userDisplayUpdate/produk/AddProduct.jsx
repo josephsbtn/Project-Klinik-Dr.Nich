@@ -329,14 +329,14 @@ function AddProduct() {
 
                       <div>
                         <label className="block text-gray-700 font-montserrat mb-1">
-                          Kategori Product
+                          kategori Produk
                         </label>
                         <select
                           className="w-full p-2 border rounded-md font-SFPro pt-2"
                           value={kategori}
                           onChange={(e) => setKategori(e.target.value)}>
                           <option className="" value="" disabled>
-                            Select Category Product
+                            Pilih katagori produk
                           </option>
                           {categoryProduct && categoryProduct.length > 0 ? (
                             categoryProduct.map((cat) => (
@@ -352,7 +352,7 @@ function AddProduct() {
                               disabled
                               className=" lg:p-2 p-1 rounded-md   ">
                               <p className="font-normal">
-                                No Product Type Found
+                                Tipe produk tidak ditemukan
                               </p>
                             </option>
                           )}
@@ -360,7 +360,7 @@ function AddProduct() {
                       </div>
                       <div>
                         <label className="block text-gray-700 font-montserrat mb-1">
-                          Product Type
+                          Tipe Produk
                         </label>
                         <select
                           className="w-full p-2 border rounded-md font-SFPro pt-2"
@@ -383,7 +383,7 @@ function AddProduct() {
                               disabled
                               className=" lg:p-2 p-1 rounded-md   ">
                               <p className="font-normal">
-                                No Product Type Found
+                                Tipe produk tidak ditemukan
                               </p>
                             </option>
                           )}
