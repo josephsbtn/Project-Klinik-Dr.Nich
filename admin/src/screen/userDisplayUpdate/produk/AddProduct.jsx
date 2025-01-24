@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { Children, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../../assets/component/navbar";
 import axios from "axios";
 import ConfirmPopUp from "../../../assets/component/confirmPopUp";
 import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddProduct() {
   const { id } = useParams();
@@ -20,8 +22,6 @@ function AddProduct() {
   const [kategori, setKategori] = useState("");
   const [tipeProduk, setTipeProduk] = useState("");
 
-  const [message, setMessage] = useState(null);
-  const [messageType, setMessageType] = useState(null);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,6 @@ function AddProduct() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        console.log("FETCHING ...");
         const resCat = await axios.get(
           `${
             import.meta.env.VITE_BASE_URL_BACKEND
@@ -40,19 +39,15 @@ function AddProduct() {
             import.meta.env.VITE_BASE_URL_BACKEND
           }/api/produk/getAllproductType`
         );
-        if ((resCat === undefined || null) && (resType === undefined || null)) {
-          throw new Error("Data null / undefined");
+        if (!resCat?.data || !resType?.data) {
+          throw new Error("Data is empty or undefined");
         }
         setCategoryProduct(resCat.data);
         setProductType(resType.data);
-
-        setLoading(false);
       } catch (error) {
-        showMessage(
-          error.response?.data?.message || "An error occurred",
-          "error"
-        );
-        setLoading(false);
+        toast.error(error.response?.data?.message || "Failed to fetch data", {
+          autoClose: 5000,
+        });
       } finally {
         setLoading(false);
       }
@@ -63,69 +58,70 @@ function AddProduct() {
   const submitHandler = async (e) => {
     e.preventDefault();
     setOpen(false);
-
     setLoading(true);
+
     try {
-      // Validate all required fields
-      if (
-        !nama.trim() ||
-        !deskripsi.trim() ||
-        !image ||
-        !manfaat.trim() ||
-        !caraPakai.trim() ||
-        !harga.trim() ||
-        !kategori
-      ) {
-        console.log({
-          nama,
-          deskripsi,
-          image,
-          manfaat,
-          caraPakai,
-          harga,
-          kategori,
-          tipeProduk,
-        });
-        throw new Error("Please fill in all fields");
+      if (!nama.trim()) {
+        throw new Error("Mohon isi nama produk!");
       }
 
-      // Validate price as a positive number
+      if (!deskripsi.trim()) {
+        throw new Error("Mohon isi deskripsi produk!");
+      }
+
+      if (!image) {
+        throw new Error("Mohon pilih gambar produk!");
+      }
+
+      if (!manfaat.trim()) {
+        throw new Error("Mohon isi manfaat produk!");
+      }
+
+      if (!caraPakai.trim()) {
+        throw new Error("Mohon isi cara pakai produk!");
+      }
+
+      if (!harga.trim()) {
+        throw new Error("Mohon isi harga produk!");
+      }
+
+      if (!kategori) {
+        throw new Error("Mohon pilih kategori produk!");
+      }
       const parsedHarga = parseFloat(harga);
       if (isNaN(parsedHarga) || parsedHarga <= 0) {
         throw new Error("Please enter a valid price");
       }
 
-      // Prepare payload
       const payload = {
         nama,
         deskripsi,
         foto: image,
         manfaat,
         cara_pakai: caraPakai,
-        harga: parsedHarga, // Ensure price is sent as a number
+        harga: parsedHarga,
         kategori,
         tipeProduk,
       };
 
-      // Send data to the server
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/tambahproduk`,
         payload,
         {
           headers: {
-            "Content-Type": "application/json", // Ensure proper content type
+            "Content-Type": "application/json",
           },
         }
       );
 
-      // Show success message
-      showMessage(data.message || "Product Edited successfully", "success");
+      toast.success(data.message || "Product added successfully!", {
+        autoClose: 3000,
+      });
 
       setTimeout(() => {
         navigate("/produk");
       }, 3000);
 
-      // Reset form fields
       setNama("");
       setDeskripsi("");
       setImage("");
@@ -135,39 +131,34 @@ function AddProduct() {
       setKategori("");
       setTipeProduk("");
     } catch (error) {
-      showMessage(
+      toast.error(
         error.response?.data?.message || error.message || "An error occurred",
-        "error"
+        { autoClose: 5000 }
       );
     } finally {
       setLoading(false);
     }
   };
 
-  const showMessage = (msg, type) => {
-    setMessage(msg);
-    setMessageType(type);
-    setTimeout(() => setMessage(null), 10000);
-  };
-
   const convertBase64 = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      showMessage("No image selected", "error");
+      toast.error("No image selected", { autoClose: 3000 });
       return;
     }
     const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!validImageTypes.includes(file.type)) {
-      showMessage(
-        "Invalid file type. Only JPEG and PNG files are allowed.",
-        "error"
-      );
+      toast.error("Invalid file type. Only JPEG and PNG files are allowed.", {
+        autoClose: 3000,
+      });
       return;
     }
 
     const maxSize = 2 * 1024 * 1024; // 2MB size limit
     if (file.size > maxSize) {
-      showMessage("File is too large. Maximum file size is 5MB.", "error");
+      toast.error("File is too large. Maximum file size is 2MB.", {
+        autoClose: 3000,
+      });
       return;
     }
     const reader = new FileReader();
@@ -195,6 +186,7 @@ function AddProduct() {
             </button>
           </div>
         </ConfirmPopUp>
+        <ToastContainer />
         <Navbar />
         {loading ? (
           <>
@@ -204,16 +196,6 @@ function AddProduct() {
           </>
         ) : (
           <section className="w-full lg:pt-20  flex flex-col items-center justify-center min-h-screen ">
-            {message && (
-              <div className="w-full flex items-center justify-center">
-                <div
-                  className={`${
-                    messageType === "error" ? "bg-red-500" : "bg-green-500"
-                  } text-white px-4 py-2 rounded-md`}>
-                  {message}
-                </div>
-              </div>
-            )}
             <div className="w-[90%] p-4 pt-4 h-auto  flex items-start space-x-4">
               <div className="w-full h-[90%] lg:w-full p-5 border rounded-md shadow-md bg-white">
                 <h3 className="text-xl font-semibold mb-4 font-montserrat">
