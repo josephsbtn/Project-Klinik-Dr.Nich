@@ -60,7 +60,7 @@ function Promo() {
   return (
     <section className="flex flex-col items-center space-y-4">
       <div className="fixed w-full z-50">
-        <Navbar selected={"Galeri"} />
+        <Navbar selected={"Promo"} />
       </div>
 
       <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">

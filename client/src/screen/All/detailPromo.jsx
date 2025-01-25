@@ -30,7 +30,7 @@ function DetailPromo() {
       const resPromo = response.data;
       setNama(resPromo.nama);
       setDetail(resPromo.detail);
-      setImage(resPromo.image);
+      setImage(resPromo.foto);
       setSyarat(resPromo.syarat);
       setLoading(false);
     } catch (error) {
@@ -75,7 +75,7 @@ function DetailPromo() {
           <>
             <img 
             className="w-full h-[328px] rounded-[5px] object-cover opacity-90"
-            src={image || "fafa"} // Fallback if foto is unavailable
+            src={image || "https://via.placeholder.com/80"} // Fallback if foto is unavailable
             alt={nama || "Thumbnail"}
             />
             <h1 className="w-[325px] text-[#c2a353] text-base font-medium font-SFPro leading-[25px] tracking-tight">{nama}</h1>

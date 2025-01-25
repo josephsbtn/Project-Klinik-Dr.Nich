@@ -51,8 +51,7 @@ function Profile() {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${
-          import.meta.env.VITE_BASE_URL_BACKEND
+        `${import.meta.env.VITE_BASE_URL_BACKEND
         }/api/layanan/getAllJenisLayanan`
       );
       const fotoMesin = (
@@ -83,8 +82,8 @@ function Profile() {
     } catch (error) {
       setError(
         "Failed to fetch jenis layanan. Please try again later (" +
-          error.message +
-          ")"
+        error.message +
+        ")"
       );
     } finally {
       setLoading(false);
@@ -97,7 +96,9 @@ function Profile() {
 
   return (
     <>
-      <Navbar selected={"Profile"} />
+      <div className="fixed w-full z-50 top-0">
+        <Navbar selected={"Profile"} />
+      </div>
       <div className="mx-[25px] mt-[18px] lg:mx-[120px]">
         <div className="flex-col lg:items-center lg:justify-center">
           <p className="text-[#bdbdbd] text-xs font-normal font-SFPro tracking-tight lg:text-sm">

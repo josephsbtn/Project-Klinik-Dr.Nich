@@ -62,7 +62,7 @@ function DetailTreatment() {
 
   return (
     <section className="flex flex-col items-center space-y-4">
-      <div className="fixed w-full">
+      <div className="fixed w-full z-30">
         <Navbar selected={"Layanan"} />
       </div>
       <div className="flex items-center w-[90%] justify-start space-x-2 mt-4 pt-20">
