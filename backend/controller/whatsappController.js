@@ -1,4 +1,4 @@
-const phone = "6285867413910";
+const phone = "6285700525830";
 
 const templateMessageReservasi = `
 Halo, Dr. Nich. Saya ingin melakukan reservasi. 
