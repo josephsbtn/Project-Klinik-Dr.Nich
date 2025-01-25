@@ -71,26 +71,31 @@ function DetailPromo() {
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="flex flex-col items-center w-[90%] lg:w-[80%] md:w-[80%] ">
+      <main className="flex flex-col items-center w-[90%] lg:w-[80%] md:w-[80%] lg:mb-20 lg:flex-row lg:justify-between lg:gap-4">
           <>
             <img 
-            className="w-full h-[328px] rounded-[5px] object-cover opacity-90"
+            className="w-full h-full rounded-[5px] object-cover opacity-90 lg:w-[325px] lg:h-[400px] h-[439px] flex flex-col mx-auto items-center border border-[#efefef] rounded-lg shadow-sm my-8"
             src={image || "https://via.placeholder.com/80"} // Fallback if foto is unavailable
             alt={nama || "Thumbnail"}
             />
-            <h1 className="w-[325px] text-[#c2a353] text-base font-medium font-SFPro leading-[25px] tracking-tight">{nama}</h1>
+            
+            <div className="lg:flex lg:flex-col lg:items-start w-full lg:pt-6 lg:pb-1">
+            <div className="flex flex-col items-start w-full mt-auto pb-1">
+            <h1 className="w-[325px] text-[#c2a353] text-base font-medium font-SFPro leading-[25px] tracking-tight lg:w-full lg:text-lg">{nama}</h1>
+            </div>
 
             {/* Deskripsi */}
             <div className="flex flex-col items-start w-full pt-6 pb-1">
-            <h1 className="text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight">Deskripsi Treatment</h1>
+            <h1 className="text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-base">Deskripsi Treatment</h1>
+            <p className="text-[#464646] text-xs font-normal font-SFPro leading-[17px] tracking-tight lg:text-sm">{detail}</p>
             </div>
-            <p className="text-[#464646] text-xs font-normal font-SFPro leading-[17px] tracking-tight">{detail}</p>
 
             {/* Syarat */}
             <div className="flex flex-col items-start w-full pt-6 pb-1">
-            <h1 className="text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight">Syarat dan Ketentuan</h1>
+            <h1 className="text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-base">Syarat dan Ketentuan</h1>
+            <p className=" text-[#464646] text-xs font-normal font-SFPro leading-[17px] tracking-tight lg:text-sm">{syarat}</p>
             </div>
-            <p className=" text-[#464646] text-xs font-normal font-SFPro leading-[17px] tracking-tight">{syarat}</p>
+            </div>
           </>
       </main>
 
