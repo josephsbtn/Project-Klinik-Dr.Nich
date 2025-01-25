@@ -47,7 +47,7 @@ function DetailPromo() {
   return (
     <section className="flex flex-col items-center space-y-4 w-full">
       <div className="fixed w-full z-50">
-        <Navbar selected={"Galeri"} />
+        <Navbar selected={"Promo"} />
       </div>
 
       <div className="flex items-center w-[90%] lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
@@ -72,15 +72,10 @@ function DetailPromo() {
 
       {/* MAIN CONTENT */}
       <main className="flex flex-col items-center w-[90%] lg:w-[80%] md:w-[80%] ">
-        {loading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          <h1>{error}</h1>
-        ) : (
           <>
             <img 
             className="w-full h-[328px] rounded-[5px] object-cover opacity-90"
-            src={image || "https://via.placeholder.com/80"} // Fallback if foto is unavailable
+            src={image || "fafa"} // Fallback if foto is unavailable
             alt={nama || "Thumbnail"}
             />
             <h1 className="w-[325px] text-[#c2a353] text-base font-medium font-SFPro leading-[25px] tracking-tight">{nama}</h1>
@@ -97,7 +92,6 @@ function DetailPromo() {
             </div>
             <p className=" text-[#464646] text-xs font-normal font-SFPro leading-[17px] tracking-tight">{syarat}</p>
           </>
-        )}
       </main>
 
       <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%] lg:w-[80%] md:w-[80%] items-center">
