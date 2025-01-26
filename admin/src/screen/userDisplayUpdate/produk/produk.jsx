@@ -915,7 +915,7 @@ function ListProduct() {
         onClose={() => setIsEditingTipeKulit(false)}>
         <div className="bg-white rounded-lg w-96 p-6 ">
           <h2 className="text-xl font-bold mb-4">Add Skin Type</h2>
-          <form onSubmit={handleEditTipeKulit}>
+          <form onSubmit={handleEditTipeKulitSubmit}>
             <input
               type="text"
               value={editTipeKulit}
