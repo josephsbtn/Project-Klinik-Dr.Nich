@@ -15,10 +15,14 @@ import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
 import LoadingSpinner from "../../components/LoadingSpinner.jsx";
 import ProdukCard from "../../components/ProductCard2.jsx";
+import CloseIcon from "../../assets/close-circle.svg";
 
 function DetailKategori() {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const [productType, setProductType] = useState([]);
+  const [jenisKulit, setJenisKulit] = useState([]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(true);
   const [filterType, setFilterType] = useState("all");
@@ -47,6 +51,21 @@ function DetailKategori() {
         }/api/produk/getCategoryById/${id}`
       );
 
+      const productType = (
+        await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/getAllproductType`
+        )
+      ).data;
+      const tipeKulit = (
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAlltipeKulit`
+        )
+      ).data;
+
+      setProductType(productType);
+      setJenisKulit(tipeKulit);
       setCategory(dataCategory.data.name);
       const sorted = response.data.sort(
         (a, b) => b.reservedCount - a.reservedCount
@@ -101,7 +120,16 @@ function DetailKategori() {
           <ConfirmPopUp
             open={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}>
-            <div className="flex flex-col items-center space-y-4"></div>
+            <div className="flex flex-col items-center space-y-4 w-screen h-[90vh] mt-20 ">
+              <button
+                onClick={() => setIsFilterOpen(false)}
+                className="absolute top-4 right-4">
+                <img src={CloseIcon} alt="Close" />
+              </button>
+              <div className="flex flex-col items-center space-y-2 ">
+                <h1 className="text-2xl font-bold">Filter</h1>
+              </div>
+            </div>
           </ConfirmPopUp>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-[90%] lg:w-[80%] gap-4 mt-[18px]">
