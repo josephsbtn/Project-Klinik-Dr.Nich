@@ -477,6 +477,35 @@ function ListProduct() {
     }
   };
 
+  const handleEditTipeKulitSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/editTipeKulit/${
+          selectedContent._id
+        }`,
+        { name: editTipeKulit },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure proper content type
+          },
+        }
+      );
+      setJenisKulit((prev) =>
+        prev.map((item) =>
+          item._id === selectedContent._id
+            ? { ...item, name: editTipeKulit }
+            : item
+        )
+      );
+      setIsEditingTipeKulit(false);
+      toast.success("Tipe Kulit updated successfully.");
+    } catch (error) {
+      console.error("Error updating skin type:", error.message);
+      toast.error("Failed to update. Please try again.");
+    }
+  };
+
   const handleEditProductTypeSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
     try {

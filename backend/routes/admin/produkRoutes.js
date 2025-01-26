@@ -59,6 +59,7 @@ router.get("/getAllproductType", getProductType);
 router.put("/editproductType/:id", editProductType);
 router.delete("/deleteproductType/:id", deleteProductType);
 
+//TIPE KULIT
 router.post("/createtipeKulit", newtipeKulit);
 router.get("/getAlltipeKulit", gettipeKulit);
 router.put("/edittipeKulit/:id", updatetipeKulit);

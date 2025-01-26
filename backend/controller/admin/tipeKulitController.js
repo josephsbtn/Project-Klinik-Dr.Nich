@@ -19,10 +19,7 @@ const newtipeKulit = asyncHandler(async (req, res) => {
 
 const gettipeKulit = asyncHandler(async (req, res) => {
   try {
-    const tipeKulit = await tipeKulitModels
-      .find()
-      .populate("kategori") // Populating 'kategori' from the schema
-      .populate("tipetipeKulit"); // Populating 'tipetipeKulit' from the schema
+    const tipeKulit = await tipeKulitModels.find();
     res.send(tipeKulit);
   } catch (error) {
     res.status(400).json({ message: error.message });
