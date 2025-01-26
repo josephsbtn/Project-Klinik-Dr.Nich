@@ -35,6 +35,7 @@ function ListProduct() {
   const [imageCarousel, setImageCarousel] = useState([]);
   const [categoryProduct, setCategoryProduct] = useState([]);
   const [productType, setProductType] = useState([]);
+  const [jenisKulit, setJenisKulit] = useState([]);
 
   const [selectedContent, setSelectedContent] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -42,6 +43,12 @@ function ListProduct() {
   const [isDeletingProductType, setIsDeletingProductType] = useState(false);
   const [isDeletingCarousel, setIsDeletingCarousel] = useState(false);
   const [isDeletingCategory, setIsDeletingCategory] = useState(false);
+  const [isDeletingTipeKulit, setIsDeletingTipeKulit] = useState(false);
+
+  const [isEditingTipeKulit, setIsEditingTipeKulit] = useState(false);
+  const [addTipeKulitOpen, setAddTipeKulitOpen] = useState(false);
+  const [newtipeKulit, setNewtipeKulit] = useState("");
+  const [editTipeKulit, setEditTipeKulit] = useState("");
 
   const [image, setImage] = useState("");
   const [newImage, setNewImage] = useState(null);
@@ -75,6 +82,7 @@ function ListProduct() {
         imagesResponse,
         categoryResponse,
         productTypeResponse,
+        jenisKulitResponse,
       ] = await Promise.all([
         axios.get(
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAllproduk`
@@ -92,12 +100,16 @@ function ListProduct() {
             import.meta.env.VITE_BASE_URL_BACKEND
           }/api/produk/getAllproductType`
         ),
+        await axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/getAlltipeKulit`
+        ),
       ]);
 
       const products = productsResponse.data;
       const images = imagesResponse.data;
       const categories = categoryResponse.data;
       const productTypes = productTypeResponse.data;
+      const jenisKulit = jenisKulitResponse.data;
 
       if (Array.isArray(products)) {
         const sortedProducts = products.sort(
@@ -124,6 +136,13 @@ function ListProduct() {
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
         setProductType(sortedProductTypes);
+      }
+
+      if (Array.isArray(jenisKulit)) {
+        const sortedJenisKulit = jenisKulit.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setJenisKulit(sortedJenisKulit);
       }
 
       setError("");
@@ -167,6 +186,15 @@ function ListProduct() {
           }/api/produk/deleteproductType/${selectedContent._id}`
         );
         setProductType((prev) =>
+          prev.filter((item) => item._id !== selectedContent._id)
+        );
+      } else if (setIsDeletingTipeKulit) {
+        await axios.delete(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/deletetipeKulit/${selectedContent._id}`
+        );
+        setJenisKulit((prev) =>
           prev.filter((item) => item._id !== selectedContent._id)
         );
       } else {
@@ -232,6 +260,39 @@ function ListProduct() {
     }
   };
 
+  const handleAddJenisKulit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = (
+        await axios.post(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/createtipeKulit`,
+          {
+            name: newtipeKulit,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json", // Ensure proper content type
+            },
+          }
+        )
+      ).data;
+      setJenisKulit((prev) => [...prev, res]);
+      setAddTipeKulitOpen(false);
+      toast.success("Jenis Kulit added successfully.");
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.error("Error adding category:", error.response.data);
+        toast.error(
+          `Failed to add category: ${
+            error.response.data.message || "Please try again."
+          }`
+        );
+      } else {
+        console.error("Error adding category:", error.message);
+        toast.error("Failed to add category. Please try again.");
+      }
+    }
+  };
   const handleAddImage = async (e) => {
     e.preventDefault();
 
@@ -291,6 +352,12 @@ function ListProduct() {
     }
   };
 
+  const handleEditTipeKulit = (tipeKulit, e) => {
+    e.preventDefault();
+    setSelectedContent(tipeKulit);
+    setEditTipeKulit(tipeKulit.name);
+    setIsEditingTipeKulit(true);
+  };
   const handleEditProductType = (productType, e) => {
     e.preventDefault();
     setSelectedContent(productType);
@@ -308,6 +375,13 @@ function ListProduct() {
   const handleEdit = (item, e) => {
     e.preventDefault();
     navigate(`/editproduk/${item._id}`);
+  };
+
+  const handedeleteTipeKulit = (item, e) => {
+    e.preventDefault();
+    setSelectedContent(item);
+    setIsDeletingTipeKulit(true);
+    setConfirmOpen(true);
   };
 
   const handleDeleteProductType = (item, e) => {
@@ -512,6 +586,36 @@ function ListProduct() {
             </div>
           </section>
 
+          {/* Tipe Kulit section */}
+          <section className="w-full pt-32 pb-20 flex flex-col items-center">
+            <h1 className="text-xl font-bold text-secondary">List Skin Type</h1>
+            {error && <div className="text-red-500 my-4">{error}</div>}
+            <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
+              {jenisKulit.length > 0
+                ? jenisKulit.map((item) => (
+                    <div
+                      key={item._id}
+                      className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                      <div className="flex items-center gap-4">
+                        <span className="font-SFPro font-normal text-base text-text line-clamp-1">
+                          {item.name}
+                        </span>
+                      </div>
+                      <ActionButtons
+                        onEdit={(e) => handleEditTipeKulit(item, e)}
+                        onDelete={(e) => handedeleteTipeKulit(item, e)}
+                        deleting={deleting}
+                      />
+                    </div>
+                  ))
+                : !error && (
+                    <div className="text-gray-500 mt-8">
+                      No categories available
+                    </div>
+                  )}
+            </div>
+          </section>
+
           {/* Carousel section */}
           <section className="w-full pt-32 pb-20 flex flex-col items-center">
             <h1 className="text-xl font-bold text-secondary">Carousel Image</h1>
@@ -626,6 +730,11 @@ function ListProduct() {
                 className="bg-primary text-white w-48 py-2 rounded-md"
                 onClick={() => setAddImageOpen(true)}>
                 Add Carousel Image
+              </button>
+              <button
+                className="bg-primary text-white w-48 py-2 rounded-md"
+                onClick={() => setAddTipeKulitOpen(true)}>
+                Add Skin Type
               </button>
             </div>
           </section>
@@ -772,6 +881,28 @@ function ListProduct() {
           </div>
         </div>
       </ConfirmPopup>
+      <ConfirmPopup
+        open={isEditingTipeKulit}
+        onClose={() => setIsEditingTipeKulit(false)}>
+        <div className="bg-white rounded-lg w-96 p-6 ">
+          <h2 className="text-xl font-bold mb-4">Add Skin Type</h2>
+          <form onSubmit={handleEditTipeKulit}>
+            <input
+              type="text"
+              value={editTipeKulit}
+              onChange={(e) => setEditTipeKulit(e.target.value)}
+              className="mb-4 p-2 w-full border border-gray-300 rounded font-SFPro"
+              placeholder="Skin Type"
+            />
+
+            <button
+              type="submit"
+              className="p-2 bg-blue-500 text-white rounded">
+              Save Changes
+            </button>
+          </form>
+        </div>
+      </ConfirmPopup>
 
       {/* Categories Section */}
 
@@ -846,6 +977,28 @@ function ListProduct() {
                 editingTypeLoading ? "cursor-not-allowed opacity-50" : ""
               }`}>
               {editingTypeLoading ? "Saving..." : "Save Changes"}
+            </button>
+          </form>
+        </div>
+      </ConfirmPopup>
+      <ConfirmPopup
+        open={addTipeKulitOpen}
+        onClose={() => setAddTipeKulitOpen(false)}>
+        <div className="bg-white rounded-lg w-96 p-6 ">
+          <h2 className="text-xl font-bold mb-4">Add Skin Type</h2>
+          <form onSubmit={handleAddJenisKulit}>
+            <input
+              type="text"
+              value={newtipeKulit}
+              onChange={(e) => setNewtipeKulit(e.target.value)}
+              className="mb-4 p-2 w-full border border-gray-300 rounded font-SFPro"
+              placeholder="Skin Type"
+            />
+
+            <button
+              type="submit"
+              className="p-2 bg-blue-500 text-white rounded">
+              Add Skin Type
             </button>
           </form>
         </div>

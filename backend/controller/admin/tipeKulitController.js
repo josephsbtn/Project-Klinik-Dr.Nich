@@ -3,10 +3,10 @@ import tipeKulitModels from "../../models/produk/tipeKulit.js";
 
 const newtipeKulit = asyncHandler(async (req, res) => {
   const newtipeKulit = {
-    name: req.body.nama,
+    name: req.body.name,
   };
   try {
-    const isExist = await tipeKulitModels.findOne({ nama: newtipeKulit.nama });
+    const isExist = await tipeKulitModels.findOne({ name: newtipeKulit.name });
     if (isExist) {
       throw new Error("tipeKulit Sudah Ada");
     }
@@ -32,7 +32,7 @@ const gettipeKulit = asyncHandler(async (req, res) => {
 const updatetipeKulit = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
-    nama: req.body.nama,
+    name: req.body.name,
   };
   try {
     const tipeKulit = await tipeKulitModels.findByIdAndUpdate(

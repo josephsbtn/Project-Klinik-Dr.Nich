@@ -36,7 +36,7 @@ function DetailKategori() {
   // FETCH DATA
   const fetchData = async () => {
     try {
-      setLoading(true);
+      setLoading(false);
       setError(""); // Clear any previous error
 
       const response = await axios.get(
@@ -120,14 +120,15 @@ function DetailKategori() {
           <ConfirmPopUp
             open={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}>
-            <div className="flex flex-col items-center space-y-4 w-screen h-[90vh] mt-20 ">
-              <button
-                onClick={() => setIsFilterOpen(false)}
-                className="absolute top-4 right-4">
-                <img src={CloseIcon} alt="Close" />
-              </button>
-              <div className="flex flex-col items-center space-y-2 ">
-                <h1 className="text-base font-medium font-SFPro text-secondary">
+            <div className="flex flex-col items-center  w-screen h-screen">
+              <div className="w-[85%] flex justify-end items-center mt-10">
+                <button onClick={() => setIsFilterOpen(false)} className="">
+                  <img src={CloseIcon} alt="Close" className="w-7 h-7" />
+                </button>
+              </div>
+
+              <div className="flex flex-col items-start space-y-2  w-[85%]">
+                <h1 className="text-base font-medium font-SFPro text-secondary ">
                   Jenis Kulit
                 </h1>
                 <div className="grid grid-cols-2 w-[90%]">
