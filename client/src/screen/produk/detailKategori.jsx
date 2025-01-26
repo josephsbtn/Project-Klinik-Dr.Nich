@@ -127,7 +127,32 @@ function DetailKategori() {
                 <img src={CloseIcon} alt="Close" />
               </button>
               <div className="flex flex-col items-center space-y-2 ">
-                <h1 className="text-2xl font-bold">Filter</h1>
+                <h1 className="text-base font-medium font-SFPro text-secondary">
+                  Jenis Kulit
+                </h1>
+                <div className="grid grid-cols-2 w-[90%]">
+                  {jenisKulit ? (
+                    jenisKulit.map((item) => (
+                      <div
+                        className="flex items-center space-x-2"
+                        key={item._id}>
+                        <input
+                          type="radio"
+                          name="jenisKulit"
+                          value={item.name}
+                          onChange={(e) => setFilterSkin(e.target.value)}
+                          checked={filterSkin === item.name}
+                          key={item._id}
+                        />
+                        <label className="text-sm font-normal font-SFPro text-text">
+                          {item.name}
+                        </label>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center">Loading...</div>
+                  )}
+                </div>
               </div>
             </div>
           </ConfirmPopUp>

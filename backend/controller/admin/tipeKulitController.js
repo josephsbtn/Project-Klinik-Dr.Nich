@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import tipeKulitModels from "../../models/tipeKulit/tipeKulit.js";
+import tipeKulitModels from "../../models/produk/tipeKulit.js";
 
 const newtipeKulit = asyncHandler(async (req, res) => {
   const newtipeKulit = {
@@ -56,9 +56,4 @@ const deletetipeKulit = asyncHandler(async (req, res) => {
   }
 });
 
-export {
-  newtipeKulit,
-  gettipeKulit,
-  updatetipeKulit,
-  deletetipeKulit,
-};
+export { newtipeKulit, gettipeKulit, updatetipeKulit, deletetipeKulit };
