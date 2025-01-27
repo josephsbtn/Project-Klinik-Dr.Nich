@@ -50,62 +50,28 @@ import ulasan from "../../../../backend/models/ulasan/ulasanModels.js";
 
 // Carousel Navigation Component
 function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
-
-  const [ulasan, setUlasan] = useState([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(0);
-  
-
   return (
     <div className="absolute bottom-4 left-2/4 z-0 flex -translate-x-2/4 gap-2">
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
-            ? "w-[19px] h-2.5 bg-[#c2a353]"
-            : "w-2.5 h-2.5 bg-[#dcdcdc]"
-            }`}
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+            activeIndex === i
+              ? "w-[19px] h-2.5 bg-[#c2a353]"
+              : "w-2.5 h-2.5 bg-[#dcdcdc]"
+          }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
     </div>
   );
-
-  // FETCH DATA ULASAN
-  async function fetchData() {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/getAllUlasan`
-      );
-      if (Array.isArray(response.data)) {
-        setContent(response.data);
-        setLoading(false);
-      } else {
-        throw new Error("Invalid response format for ulasan data");
-      }
-
-      const sorted = response.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
-      console.log(sorted);
-      
-      setUlasan(sorted);
-      setLimit(sorted.length > 6 ? 6 : sorted.length);
-    } catch (error) {
-      setError(
-        `Failed to fetch data. Please try again later (${error.message})`
-      );
-    }
-  }
-  useEffect(() => {
-    fetchData();
-  }, []);
 }
 
 export default function Beranda() {
   const [jenisLayanan, setJenisLayanan] = useState([]);
   const [limitCarousel, setLimitCarousel] = useState(0);
+  const [ulasan, setUlasan] = useState([]);
+  const [limitUlasan, setLimitUlasan] = useState(0);
   const [limitGallery, setLimitGallery] = useState(0);
   const [gallery, setGallery] = useState([]);
   const [promo, setPromo] = useState([]);
@@ -128,9 +94,11 @@ export default function Beranda() {
         fotoMesinResponse,
         fotoSertifResponse,
         galeriResponse,
+        ulasanResponse,
       ] = await Promise.all([
         axios.get(
-          `${import.meta.env.VITE_BASE_URL_BACKEND
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
           }/api/layanan/getAllJenisLayanan`
         ),
         axios.get(
@@ -141,6 +109,9 @@ export default function Beranda() {
         ),
         axios.get(
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/gallery/getAllGaleri`
+        ),
+        axios.get(
+          `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/getAllUlasan`
         ),
       ]);
 
@@ -158,15 +129,25 @@ export default function Beranda() {
       localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
 
       // Set other state
+      if (Array.isArray(ulasanResponse.data)) {
+        setUlasan(ulasanResponse.data);
+      }
       setFotoMesin(fotoMesinResponse.data);
       setFotoSertif(fotoSertifResponse.data);
       setGallery(galeriResponse.data);
 
       // Limit gallery and carousel based on data length
       setLimitGallery(
-        galeriResponse.data.length > 5 ? 5 : galeriResponse.data.length
+        galeriResponse.data.length > 5 ? 5 : galeriResponse.data.length + 1
       );
       // setLimitCarousel(promo.length > 3 ? 3 : promo.length);
+      setLimitCarousel(
+        sortedJenisLayanan.length > 3 ? 3 : sortedJenisLayanan.length + 1
+      );
+      //limit ulasan
+      setLimitUlasan(
+        ulasanResponse.data.length > 3 ? 3 : ulasanResponse.data.length + 1
+      );
     } catch (error) {
       setError(
         `Failed to fetch data. Please try again later (${error.message})`
@@ -317,10 +298,11 @@ export default function Beranda() {
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
-                  ? "w-[19px] h-2.5 bg-[#c2a353]"
-                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                  }`}
+                className={` rounded-full transition-all duration-300 cursor-pointer ${
+                  activeIndex === index
+                    ? "w-[19px] h-2.5 bg-[#c2a353]"
+                    : "w-2.5 h-2.5 bg-[#dcdcdc]"
+                }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
@@ -512,14 +494,14 @@ export default function Beranda() {
           {/* ulasan */}
           <section className="lg:w-[70%] w-[90%]">
             {Array.isArray(ulasan) && ulasan.length > 0 ? (
-              ulasan.slice(0, 6).map((item) => (
-                <UlasanCard key={item._id} item={item} />
-              ))
+              ulasan
+                .slice(0, limitUlasan)
+                .map((item) => <UlasanCard key={item._id} item={item} />)
             ) : (
               <p className="text-center">No data available</p>
             )}
-          <UlasanCard />
-        </section>
+            <UlasanCard />
+          </section>
         </section>
       </div>
       <Footer />
