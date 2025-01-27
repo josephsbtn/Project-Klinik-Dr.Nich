@@ -75,15 +75,23 @@ function ListPromo() {
     }
   };
 
-  const deletePromo = () => {
+  const deletePromo = async () => {
     try {
-      const response = axios.delete(
+      // Ensure the function is asynchronous
+      const response = await axios.delete(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/deletePromo/${
           selectedPromo._id
         }`
       );
-      fetchPromo();
+
+      // Log successful deletion response (optional)
+      console.log("Promo deleted:", response.data);
+
+      // Update the promo list after deletion
       setPromo((prev) => prev.filter((item) => item._id !== selectedPromo._id));
+
+      // Optionally refetch promos to ensure data is up-to-date
+      await fetchPromo();
     } catch (error) {
       console.error("Error deleting promo:", error.message);
       setError("Failed to delete promo. Please try again later.");
