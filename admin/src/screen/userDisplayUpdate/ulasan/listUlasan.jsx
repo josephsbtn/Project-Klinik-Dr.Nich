@@ -4,7 +4,6 @@ import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { set } from "mongoose";
 
 function ListUlasan() {
   const [promo, setPromo] = useState([]);
