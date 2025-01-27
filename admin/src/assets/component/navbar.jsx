@@ -53,6 +53,7 @@ function Navbar({ selected }) {
           { path: "/sertifikat", label: "Sertifikat" },
           { path: "/mesin", label: "Mesin" },
           { path: "/produk", label: "Produk" },
+          { path: "/ulasan", label: "Ulasan" },
         ].map((item) => (
           <button
             key={item.path}

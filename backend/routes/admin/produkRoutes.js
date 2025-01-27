@@ -23,6 +23,13 @@ import {
   getCategoryById,
 } from "../../controller/admin/jenisKategoriProdukController.js";
 
+import {
+  newtipeKulit,
+  gettipeKulit,
+  updatetipeKulit,
+  deletetipeKulit,
+} from "../../controller/admin/tipeKulitController.js";
+
 const router = express.Router();
 
 //CAROUSEL PRODUCT
@@ -51,5 +58,11 @@ router.post("/tambahproductType", newProductType);
 router.get("/getAllproductType", getProductType);
 router.put("/editproductType/:id", editProductType);
 router.delete("/deleteproductType/:id", deleteProductType);
+
+//TIPE KULIT
+router.post("/createtipeKulit", newtipeKulit);
+router.get("/getAlltipeKulit", gettipeKulit);
+router.put("/edittipeKulit/:id", updatetipeKulit);
+router.delete("/deletetipeKulit/:id", deletetipeKulit);
 
 export default router;
