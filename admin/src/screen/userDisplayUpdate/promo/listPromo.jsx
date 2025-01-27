@@ -22,6 +22,7 @@ function ListPromo() {
   const [open, setOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [error, setError] = useState("");
 
   const fetchPromo = async () => {
     try {
@@ -36,6 +37,7 @@ function ListPromo() {
         throw new Error("Invalid response format");
       }
     } catch (err) {
+      setError(err.message);
       console.error("Error fetching promo:", err.message);
       toast.error("Failed to fetch promos. Please try again later.");
     }
@@ -76,6 +78,7 @@ function ListPromo() {
         toast.success("Promo added successfully!");
       }
     } catch (err) {
+      setError(err.message);
       console.error("Error adding promo:", err.message);
       toast.error("Failed to add promo. Please try again later.");
     }
@@ -92,6 +95,7 @@ function ListPromo() {
       setConfirmOpen(false);
       toast.success("Promo deleted successfully!");
     } catch (error) {
+      setError(error.message);
       console.error("Error deleting promo:", error.message);
       toast.error("Failed to delete promo. Please try again later.");
     }
@@ -100,7 +104,7 @@ function ListPromo() {
   const updatePromo = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(
+      const { data: updatedPromo } = await axios.put(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/updatepromo/${
           selectedPromo._id
         }`,
@@ -117,6 +121,11 @@ function ListPromo() {
         }
       );
       toast.success("Promo updated successfully!");
+      setPromo((prev) =>
+        prev.map((item) =>
+          item._id === selectedPromo._id ? { ...item, ...updatedPromo } : item
+        )
+      );
       setEditing(false);
       setEditDeskripsi("");
       setEditSyarat("");
@@ -124,9 +133,27 @@ function ListPromo() {
       setEditImage("");
       fetchPromo(); // Refresh the list
     } catch (error) {
+      setError(error.message);
       console.error("Error updating promo:", error.message);
       toast.error("Failed to update promo. Please try again later.");
     }
+  };
+
+  const handleEdit = (item, e) => {
+    e.preventDefault();
+    setEditing(true);
+    setSelectedPromo(item);
+    setEditName(item.nama);
+    setEditSyarat(item.syarat);
+    setEditDeskripsi(item.detail);
+    setEditImage(item.foto);
+    console.log("Edit promo with id:", item._id);
+  };
+
+  const handleDelete = (item, e) => {
+    e.preventDefault();
+    setConfirmOpen(true);
+    setSelectedPromo(item);
   };
 
   const convertBase64 = (e) => {
@@ -288,7 +315,6 @@ function ListPromo() {
           <form
             onSubmit={updatePromo}
             className="flex flex-col w-full lg:w-3/4 items-center justify-center p-2 rounded-3xl">
-            {error && <p className="text-red-500">{error}</p>}
             <div className="w-full p-5 border rounded-md shadow-md bg-white">
               <h3 className="text-xl font-semibold mb-4 font-montserrat">
                 Promo Details
@@ -362,7 +388,6 @@ function ListPromo() {
 
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
         <h1 className="text-xl font-bold text-secondary">List Promo</h1>
-        {error && <div className="text-red-500 my-4">{error}</div>}
         <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
           {promo.length > 0
             ? promo.map((item) => (
