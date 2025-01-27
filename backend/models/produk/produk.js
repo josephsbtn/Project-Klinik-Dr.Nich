@@ -25,14 +25,17 @@ const produkSchema = mongoose.Schema(
     kategori: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "categoryProduct",
+      default: null,
     },
     tipeProduk: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "productType",
+      default: null,
     },
     tipeKulit: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "tipeKulit",
+      default: null,
     },
     buyCount: {
       type: Number,

@@ -88,6 +88,7 @@ function AddProduct() {
       if (!kategori) {
         throw new Error("Mohon pilih kategori produk!");
       }
+
       const parsedHarga = parseFloat(harga);
       if (isNaN(parsedHarga) || parsedHarga <= 0) {
         throw new Error("Please enter a valid price");
@@ -101,7 +102,7 @@ function AddProduct() {
         cara_pakai: caraPakai,
         harga: parsedHarga,
         kategori,
-        tipeProduk,
+        tipeProduk: tipeProduk || null, // Set null if empty or undefined
       };
 
       const { data } = await axios.post(
@@ -129,7 +130,7 @@ function AddProduct() {
       setCaraPakai("");
       setHarga("");
       setKategori("");
-      setTipeProduk("");
+      setTipeProduk(""); // Reset tipeProduk
     } catch (error) {
       toast.error(
         error.response?.data?.message || error.message || "An error occurred",
