@@ -10,6 +10,9 @@ import EditJenisLayanan from "./screen/userDisplayUpdate/layanan/editJenisLayana
 //promo
 import ListPromo from "./screen/userDisplayUpdate/promo/listPromo.jsx";
 
+//ulasan
+import Ulasan from "./screen/userDisplayUpdate/ulasan/listUlasan.jsx";
+
 //galeri
 import ListGallery from "./screen/userDisplayUpdate/galery/listGallery.jsx";
 
@@ -50,6 +53,9 @@ function App() {
           <Route path="/produk" element={<Produk />} />
           <Route path="/tambahproduk" element={<AddProduct />} />
           <Route path="/editProduk/:id" element={<EditProduct />} />
+          <Route path="/ulasan" element={<Ulasan />} />
+
+          {/* POS */}
 
           <Route path="/pos" element={<Home />} />
           <Route path="/pos/user" element={<USer />} />
