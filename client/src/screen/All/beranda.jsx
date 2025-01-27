@@ -16,6 +16,7 @@ import AboutCard from "../../components/AboutCard";
 import CardJenisLayanan from "../../components/cardJenisLayanan.jsx";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
+import UlasanCard from "../../components/cardUlasan.jsx";
 
 import ArrowRight from "../../../../admin/src/assets/icon/ArrowRight";
 
@@ -53,11 +54,10 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-            activeIndex === i
-              ? "w-[19px] h-2.5 bg-[#c2a353]"
-              : "w-2.5 h-2.5 bg-[#dcdcdc]"
-          }`}
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
+            ? "w-[19px] h-2.5 bg-[#c2a353]"
+            : "w-2.5 h-2.5 bg-[#dcdcdc]"
+            }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
@@ -92,8 +92,7 @@ export default function Beranda() {
         galeriResponse,
       ] = await Promise.all([
         axios.get(
-          `${
-            import.meta.env.VITE_BASE_URL_BACKEND
+          `${import.meta.env.VITE_BASE_URL_BACKEND
           }/api/layanan/getAllJenisLayanan`
         ),
         axios.get(
@@ -280,11 +279,10 @@ export default function Beranda() {
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={` rounded-full transition-all duration-300 cursor-pointer ${
-                  activeIndex === index
-                    ? "w-[19px] h-2.5 bg-[#c2a353]"
-                    : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                }`}
+                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
+                  ? "w-[19px] h-2.5 bg-[#c2a353]"
+                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
+                  }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
@@ -444,7 +442,7 @@ export default function Beranda() {
                         {/* Dynamic Image */}
                         <img
                           src={item.thumbnail} // Assuming `imageUrl` is the property for image source
-                          className="mx-auto rounded-[10px] h-auto w-full aspect-video "
+                          className="mx-auto rounded-[10px] h-auto w-full aspect-video object-cover"
                           alt={item.judul || "Product Image"} // Fallback alt text
                         />
 
@@ -472,6 +470,11 @@ export default function Beranda() {
               </div>
             </div>
           </div>
+
+          {/* ulasan */}
+          <section className="lg:w-[70%] w-[90%]">
+          <UlasanCard />
+        </section>
         </section>
       </div>
       <Footer />
