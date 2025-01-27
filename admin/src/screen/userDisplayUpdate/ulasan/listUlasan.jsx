@@ -189,7 +189,7 @@ function ListUlasan() {
         <div className="w-fit flex space-x-4">
           <div className="w-full lg:w-fit p-5 border rounded-md shadow-md bg-white">
             <h3 className="text-xl font-semibold mb-4 font-montserrat">
-              Promo Image
+              Foto Reviewer
             </h3>
             <div className="flex flex-col space-y-4">
               {image ? (
@@ -388,7 +388,7 @@ function ListUlasan() {
       </ConfirmPopup>
 
       <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Promo</h1>
+        <h1 className="text-xl font-bold text-secondary">List Review</h1>
         <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
           {promo.length > 0
             ? promo.map((item) => (
@@ -423,7 +423,7 @@ function ListUlasan() {
           <button
             onClick={() => setOpen(true)}
             className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Add Promo
+            Tambah Review
           </button>
         </div>
       </section>
