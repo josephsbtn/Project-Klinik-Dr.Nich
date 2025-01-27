@@ -6,16 +6,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../auth/navbar.jsx";
 import Footer from "../auth/footer.jsx";
 
-// Popup
-import ConfirmPopUp from "../../components/confirmPopUp.jsx";
-
 // Other Components
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
 import LoadingSpinner from "../../components/LoadingSpinner.jsx";
 import ProdukCard from "../../components/ProductCard2.jsx";
-import CloseIcon from "../../assets/close-circle.svg";
 
 function DetailKategori() {
   const { id } = useParams();
@@ -24,9 +20,10 @@ function DetailKategori() {
   const [productType, setProductType] = useState([]);
   const [jenisKulit, setJenisKulit] = useState([]);
 
-  const [isFilterOpen, setIsFilterOpen] = useState(true);
-  const [filterType, setFilterType] = useState("all");
-  const [filterSkin, setFilterSkin] = useState("all");
+const [filterType, setFilterType] = useState("all"); // Filter for product type
+const [filterSkin, setFilterSkin] = useState("all"); // Filter for skin type
+
+  const [showFilters, setShowFilters] = useState(false);
 
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("");
@@ -85,6 +82,15 @@ function DetailKategori() {
     fetchData();
   }, [id]);
 
+  // Derived state for filtered products
+const filteredContent = content.filter((item) => { // Filtering logic for products
+
+    const matchesType = filterType === "all" || item.type === filterType;
+    const matchesSkin = filterSkin === "all" || item.skinType === filterSkin;
+    console.log(`Filtering: ${item.name}, Type Match: ${matchesType}, Skin Match: ${matchesSkin}`);
+    return matchesType && matchesSkin;
+  });
+
   return (
     <main className="flex flex-col items-center w-full">
       <div className="w-full fixed z-30">
@@ -97,7 +103,7 @@ function DetailKategori() {
         <div className="text-center text-red-500">{error}</div>
       ) : (
         <>
-          <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
+          <div className="flex items-center w-[90%] lg:w-4/5 justify-start space-x-2 mt-4 pt-20 ">
             <a
               onClick={() => navigate("/")}
               className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
@@ -117,74 +123,71 @@ function DetailKategori() {
             </a>
           </div>
 
-          <ConfirmPopUp
-            open={isFilterOpen}
-            onClose={() => setIsFilterOpen(false)}>
-            <div className="flex flex-col items-center  w-screen h-screen">
-              <div className="w-[85%] flex justify-end items-center mt-10">
-                <button onClick={() => setIsFilterOpen(false)} className="">
-                  <img src={CloseIcon} alt="Close" className="w-7 h-7" />
-                </button>
-              </div>
+          <div className="flex flex-col items-end w-[85%] mt-4">
+            <button onClick={() => setShowFilters(!showFilters)} className="flex items-center bg-gray-200 p-1 rounded-md hover:bg-gray-300 transition">
+              <span className="ml-1 text-sm">Filter</span>
+            </button>
+            {showFilters && (
+              <div className="absolute right-0 mt-4 w-48 bg-white shadow-md rounded-md p-2">
+                <h1 className="text-sm font-medium font-SFPro text-secondary ">
+                  Jenis Kulit
+                </h1>
+                <div className="grid grid-cols-2 w-full">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="filterSkin"
+                      value="all"
+                      checked={filterSkin === "all"}
+                      onChange={() => setFilterSkin("all")}
+                    />
+                    <span className="ml-2">Semua</span>
+                  </label>
+                  {jenisKulit.map((item) => (
+                    <label key={item._id} className="flex items-center">
+                      <input
+                        type="radio"
+                        name="filterSkin"
+                        value={item.name}
+                        checked={filterSkin === item.name}
+                        onChange={() => setFilterSkin(item.name)}
+                      />
+                      <span className="ml-2">{item.name}</span>
+                    </label>
+                  ))}
+                </div>
+                <h1 className="text-sm font-medium font-SFPro text-secondary ">
+                  Kategori
+                </h1>
+                <div className="grid grid-cols-2 w-full">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="filterType"
+                      value="all"
+                      checked={filterType === "all"}
+                      onChange={() => setFilterType("all")}
+                    />
+                    <span className="ml-2">Semua</span>
+                  </label>
+                  {productType.map((item) => (
+                    <label key={item._id} className="flex items-center">
+                      <input
+                        type="radio"
+                        name="filterType"
+                        value={item.name}
+                        checked={filterType === item.name}
+                        onChange={() => setFilterType(item.name)}
+                      />
+                      <span className="ml-2">{item.name}</span>
+                    </label>
+                  ))}
+                </div>
+<button onClick={() => setShowFilters(false)} className="mt-2 bg-blue-500 text-white rounded-md p-2">Terapkan</button>
 
-              <div className="flex flex-col items-start space-y-2  w-[85%]">
-                <h1 className="text-base font-medium font-SFPro text-secondary ">
-                  Jenis Kulit
-                </h1>
-                <div className="grid grid-cols-2 w-[90%]">
-                  {jenisKulit ? (
-                    jenisKulit.map((item) => (
-                      <div
-                        className="flex items-center space-x-2"
-                        key={item._id}>
-                        <input
-                          type="radio"
-                          name="jenisKulit"
-                          value={item.name}
-                          onChange={(e) => setFilterSkin(e.target.value)}
-                          checked={filterSkin === item.name}
-                          key={item._id}
-                        />
-                        <label className="text-sm font-normal font-SFPro text-text">
-                          {item.name}
-                        </label>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center">Loading...</div>
-                  )}
-                </div>
               </div>
-              <div className="flex flex-col items-start space-y-2  w-[85%]">
-                <h1 className="text-base font-medium font-SFPro text-secondary ">
-                  Jenis Kulit
-                </h1>
-                <div className="grid grid-cols-2 w-[90%]">
-                  {productType ? (
-                    productType.map((item) => (
-                      <div
-                        className="flex items-center space-x-2"
-                        key={item._id}>
-                        <input
-                          type="radio"
-                          name="productType"
-                          value={item.name}
-                          onChange={(e) => setFilterType(e.target.value)}
-                          checked={filterType === item.name}
-                          key={item._id}
-                        />
-                        <label className="text-sm font-normal font-SFPro text-text">
-                          {item.name}
-                        </label>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center">Loading...</div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </ConfirmPopUp>
+            )}
+          </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-[90%] lg:w-[80%] gap-4 mt-[18px]">
             {loading ? (
@@ -195,8 +198,8 @@ function DetailKategori() {
               <div className="col-span-full text-center text-red-500">
                 {error}
               </div>
-            ) : content.length > 0 ? (
-              content.map((item) => (
+            ) : filteredContent.length > 0 ? (
+              filteredContent.map((item) => (
                 <div key={item._id}>
                   <ProdukCard item={item} />
                 </div>
