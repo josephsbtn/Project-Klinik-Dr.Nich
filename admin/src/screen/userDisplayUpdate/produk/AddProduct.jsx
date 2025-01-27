@@ -335,7 +335,7 @@ function AddProduct() {
                               disabled
                               className=" lg:p-2 p-1 rounded-md   ">
                               <p className="font-normal">
-                                Tipe produk tidak ditemukan
+                                Kategori produk tidak ditemukan
                               </p>
                             </option>
                           )}
@@ -350,7 +350,7 @@ function AddProduct() {
                           value={tipeProduk}
                           onChange={(e) => setTipeProduk(e.target.value)}>
                           <option className="" value="" disabled>
-                            Select Type Product
+                            Pilih tipe produk
                           </option>
                           {productType && productType.length > 0 ? (
                             productType.map((cat) => (
