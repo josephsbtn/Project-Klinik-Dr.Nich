@@ -155,6 +155,34 @@ function DetailKategori() {
                   )}
                 </div>
               </div>
+              <div className="flex flex-col items-start space-y-2  w-[85%]">
+                <h1 className="text-base font-medium font-SFPro text-secondary ">
+                  Jenis Kulit
+                </h1>
+                <div className="grid grid-cols-2 w-[90%]">
+                  {productType ? (
+                    productType.map((item) => (
+                      <div
+                        className="flex items-center space-x-2"
+                        key={item._id}>
+                        <input
+                          type="radio"
+                          name="productType"
+                          value={item.name}
+                          onChange={(e) => setFilterType(e.target.value)}
+                          checked={filterType === item.name}
+                          key={item._id}
+                        />
+                        <label className="text-sm font-normal font-SFPro text-text">
+                          {item.name}
+                        </label>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center">Loading...</div>
+                  )}
+                </div>
+              </div>
             </div>
           </ConfirmPopUp>
 

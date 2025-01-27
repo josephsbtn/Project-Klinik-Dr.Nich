@@ -4,6 +4,7 @@ import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import LoadingSpinner from "../../../assets/component/LoadingSpinner.jsx";
 
 function ListPromo() {
   const [promo, setPromo] = useState([]);
@@ -20,31 +21,45 @@ function ListPromo() {
   const [selectedPromo, setSelectedPromo] = useState(null);
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
 
   const fetchPromo = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
       );
       const data = response.data;
-      if (Array.isArray(data)) {
-        setPromo(data);
-      } else {
+      if (!Array.isArray(data)) {
         throw new Error("Invalid response format");
       }
+      setPromo(data);
     } catch (err) {
       setError(err.message);
       console.error("Error fetching promo:", err.message);
       toast.error("Failed to fetch promos. Please try again later.");
+    } finally {
+      setLoading(false); // Ensure loading is reset
     }
   };
 
   useEffect(() => {
     fetchPromo();
   }, []);
+
+  const resetFormStates = () => {
+    setName("");
+    setSyarat("");
+    setDeskripsi("");
+    setImage("");
+    setEditName("");
+    setEditSyarat("");
+    setEditDeskripsi("");
+    setEditImage("");
+  };
 
   const handleAddPromo = async (e) => {
     e.preventDefault();
@@ -53,6 +68,7 @@ function ListPromo() {
       return;
     }
     try {
+      setLoading(true);
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/tambahpromo`,
         {
@@ -70,22 +86,22 @@ function ListPromo() {
       if (response.status === 200) {
         setPromo((prev) => [...prev, response.data]);
         setOpen(false);
-        setName("");
-        setSyarat("");
-        setDeskripsi("");
-        setImage("");
+        resetFormStates();
         toast.success("Promo added successfully!");
       }
     } catch (err) {
       setError(err.message);
       console.error("Error adding promo:", err.message);
       toast.error("Failed to add promo. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const deletePromo = async () => {
     try {
-      const response = await axios.delete(
+      setLoading(true);
+      await axios.delete(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/deletePromo/${
           selectedPromo._id
         }`
@@ -97,12 +113,19 @@ function ListPromo() {
       setError(error.message);
       console.error("Error deleting promo:", error.message);
       toast.error("Failed to delete promo. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const updatePromo = async (e) => {
     e.preventDefault();
+    if (!editName || !editSyarat || !editDeskripsi || !editImage) {
+      toast.error("Please fill out all fields before submitting.");
+      return;
+    }
     try {
+      setLoading(true);
       const { data: updatedPromo } = await axios.put(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/updatepromo/${
           selectedPromo._id
@@ -119,22 +142,20 @@ function ListPromo() {
           },
         }
       );
-      toast.success("Promo updated successfully!");
       setPromo((prev) =>
         prev.map((item) =>
           item._id === selectedPromo._id ? { ...item, ...updatedPromo } : item
         )
       );
+      toast.success("Promo updated successfully!");
+      resetFormStates();
       setEditing(false);
-      setEditDeskripsi("");
-      setEditSyarat("");
-      setEditName("");
-      setEditImage("");
-      fetchPromo(); // Refresh the list
     } catch (error) {
       setError(error.message);
       console.error("Error updating promo:", error.message);
       toast.error("Failed to update promo. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -146,7 +167,6 @@ function ListPromo() {
     setEditSyarat(item.syarat);
     setEditDeskripsi(item.detail);
     setEditImage(item.foto);
-    console.log("Edit promo with id:", item._id);
   };
 
   const handleDelete = (item, e) => {
@@ -174,8 +194,13 @@ function ListPromo() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      if (editing) setEditImage(reader.result);
-      else setImage(reader.result);
+      try {
+        if (editing) setEditImage(reader.result);
+        else setImage(reader.result);
+      } catch (error) {
+        toast.error("Failed to process the image. Please try again.");
+        console.error("Image processing error:", error);
+      }
     };
   };
 
@@ -384,47 +409,50 @@ function ListPromo() {
           </div>
         </div>
       </ConfirmPopup>
-
-      <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Promo</h1>
-        <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
-          {promo.length > 0
-            ? promo.map((item) => (
-                <div
-                  key={item._id}
-                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <span className="font-SFPro font-normal text-base text-text">
-                    {item.nama}
-                  </span>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={(e) => handleEdit(item, e)}
-                      className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
-                      Edit
-                    </button>
-                    <button
-                      onClick={(e) => handleDelete(item, e)}
-                      className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
-                      Delete
-                    </button>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <section className="w-full pt-32 pb-20 flex flex-col items-center">
+          <h1 className="text-xl font-bold text-secondary">List Promo</h1>
+          <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
+            {promo.length > 0
+              ? promo.map((item) => (
+                  <div
+                    key={item._id}
+                    className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                    <span className="font-SFPro font-normal text-base text-text">
+                      {item.nama}
+                    </span>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={(e) => handleEdit(item, e)}
+                        className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
+                        Edit
+                      </button>
+                      <button
+                        onClick={(e) => handleDelete(item, e)}
+                        className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
+                        Delete
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))
-            : !error && (
-                <div className="text-gray-500 mt-8">
-                  No promotions available
-                </div>
-              )}
-        </div>
+                ))
+              : !error && (
+                  <div className="text-gray-500 mt-8">
+                    No promotions available
+                  </div>
+                )}
+          </div>
 
-        <div className="absolute right-0 bottom-0 p-4 z-0">
-          <button
-            onClick={() => setOpen(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Add Promo
-          </button>
-        </div>
-      </section>
+          <div className="absolute right-0 bottom-0 p-4 z-0">
+            <button
+              onClick={() => setOpen(true)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md">
+              Add Promo
+            </button>
+          </div>
+        </section>
+      )}
     </main>
   );
 }
