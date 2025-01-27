@@ -52,6 +52,10 @@ function ListUlasan() {
       toast.error("Please fill out all fields before submitting.");
       return;
     }
+    if (rating < 1 || rating > 4) {
+      toast.error("Rating must be between 1 and 4.");
+      return;
+    }
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/tambahulasan`,
@@ -103,6 +107,10 @@ function ListUlasan() {
   };
 
   const updatePromo = async (e) => {
+    if (editRating < 1 || editRating > 4) {
+      toast.error("Rating must be between 1 and 4.");
+      return;
+    }
     e.preventDefault();
     try {
       const { data: updatedPromo } = await axios.put(
