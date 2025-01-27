@@ -46,9 +46,17 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import ulasan from "../../../../backend/models/ulasan/ulasanModels.js";
 
 // Carousel Navigation Component
 function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
+
+  const [ulasan, setUlasan] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(0);
+  
+
   return (
     <div className="absolute bottom-4 left-2/4 z-0 flex -translate-x-2/4 gap-2">
       {new Array(length).fill("").map((_, i) => (
@@ -63,6 +71,36 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       ))}
     </div>
   );
+
+  // FETCH DATA ULASAN
+  async function fetchData() {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/getAllUlasan`
+      );
+      if (Array.isArray(response.data)) {
+        setContent(response.data);
+        setLoading(false);
+      } else {
+        throw new Error("Invalid response format for ulasan data");
+      }
+
+      const sorted = response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      console.log(sorted);
+      
+      setUlasan(sorted);
+      setLimit(sorted.length > 6 ? 6 : sorted.length);
+    } catch (error) {
+      setError(
+        `Failed to fetch data. Please try again later (${error.message})`
+      );
+    }
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 }
 
 export default function Beranda() {
@@ -473,6 +511,13 @@ export default function Beranda() {
 
           {/* ulasan */}
           <section className="lg:w-[70%] w-[90%]">
+            {Array.isArray(ulasan) && ulasan.length > 0 ? (
+              ulasan.slice(0, 6).map((item) => (
+                <UlasanCard key={item._id} item={item} />
+              ))
+            ) : (
+              <p className="text-center">No data available</p>
+            )}
           <UlasanCard />
         </section>
         </section>

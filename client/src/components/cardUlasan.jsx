@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Carousel } from "@material-tailwind/react";
 import { useSwipeable } from "react-swipeable";
 // Import Swiper React components
@@ -34,7 +35,8 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
     );
   }
 
-function CardUlasan() {
+function CardUlasan({item}) {
+    const navigate = useNavigate();
   return (
     <>
       {/* Carousel Title */}
@@ -57,12 +59,16 @@ function CardUlasan() {
           {/* Header: Image and Name */}
           <div className="flex items-center gap-2">
             <div>
-              <img src={img1} alt="Customer" className="w-10 h-10 rounded-full" />
+              <img src={item.image} alt="Customer" className="w-10 h-10 rounded-full" />
             </div>
             <div>
-              <p className="text-[#464646] text-sm font-medium font-SFPro">Nama Customer</p>
+              <p className="text-[#464646] text-sm font-medium font-SFPro">
+                {item.nama}
+              </p>
               <div className="flex items-center gap-1">
-                <span className="text-yellow-500 text-xs">★★★★★</span> {/* Example for stars */}
+                <span className="text-yellow-500 text-xs">
+                    {item.rating}
+                    </span> {/* Example for stars */}
               </div>
             </div>
           </div>
@@ -70,8 +76,7 @@ function CardUlasan() {
           {/* Review Content */}
           <div className="w-[230px]">
             <p className="text-[#464646] text-xs font-normal font-SFPro leading-tight tracking-tight">
-              Perawatan di Dr. Nich Aesthetic Beauty benar-benar mengubah kulit saya! Kulit saya
-              sekarang lebih cerah dan halus. Terima kasih untuk pelayanan yang luar biasa!
+                {item.ulasan}
             </p>
           </div>
         </div>
