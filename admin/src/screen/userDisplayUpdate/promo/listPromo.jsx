@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function ListPromo() {
   const [promo, setPromo] = useState([]);
@@ -19,7 +20,6 @@ function ListPromo() {
   const [selectedPromo, setSelectedPromo] = useState(null);
 
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState("");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
 
@@ -31,13 +31,13 @@ function ListPromo() {
       const data = response.data;
       if (Array.isArray(data)) {
         setPromo(data);
-        setError("");
+        toast.success("Promos fetched successfully!");
       } else {
         throw new Error("Invalid response format");
       }
     } catch (err) {
       console.error("Error fetching promo:", err.message);
-      setError("Failed to fetch promo. Please try again later.");
+      toast.error("Failed to fetch promos. Please try again later.");
     }
   };
 
@@ -47,6 +47,10 @@ function ListPromo() {
 
   const handleAddPromo = async (e) => {
     e.preventDefault();
+    if (!name || !syarat || !deskripsi || !image) {
+      toast.error("Please fill out all fields before submitting.");
+      return;
+    }
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/tambahpromo`,
@@ -58,56 +62,45 @@ function ListPromo() {
         },
         {
           headers: {
-            "Content-Type": "application/json", // Ensure proper content type
+            "Content-Type": "application/json",
           },
         }
       );
       if (response.status === 200) {
-        setOpen(false);
         setPromo((prev) => [...prev, response.data]);
-        fetchPromo();
-      } else {
-        setError("Failed to add promo. Please try again later.");
+        setOpen(false);
+        setName("");
+        setSyarat("");
+        setDeskripsi("");
+        setImage("");
+        toast.success("Promo added successfully!");
       }
     } catch (err) {
       console.error("Error adding promo:", err.message);
-      setError("Failed to add promo. Please try again later.");
+      toast.error("Failed to add promo. Please try again later.");
     }
   };
 
   const deletePromo = async () => {
     try {
-      // Ensure the function is asynchronous
       const response = await axios.delete(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/deletePromo/${
           selectedPromo._id
         }`
       );
-
-      // Log successful deletion response (optional)
-      console.log("Promo deleted:", response.data);
-
-      // Update the promo list after deletion
       setPromo((prev) => prev.filter((item) => item._id !== selectedPromo._id));
-
-      // Optionally refetch promos to ensure data is up-to-date
-      await fetchPromo();
+      setConfirmOpen(false);
+      toast.success("Promo deleted successfully!");
     } catch (error) {
       console.error("Error deleting promo:", error.message);
-      setError("Failed to delete promo. Please try again later.");
+      toast.error("Failed to delete promo. Please try again later.");
     }
-    console.log("Delete promo with id:", selectedPromo._id);
   };
 
-  const updatePromo = (e) => {
+  const updatePromo = async (e) => {
     e.preventDefault();
     try {
-      console.log("Edit promo with id:", selectedPromo._id);
-      console.log("Edit name:", editName);
-      console.log("Edit deskripsi:", editDeskripsi);
-      console.log("Edit syarat:", editSyarat);
-      console.log("Edit image:", editImage);
-      const response = axios.put(
+      await axios.put(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/updatepromo/${
           selectedPromo._id
         }`,
@@ -119,56 +112,37 @@ function ListPromo() {
         },
         {
           headers: {
-            "Content-Type": "application/json", // Ensure proper content type
+            "Content-Type": "application/json",
           },
         }
       );
+      toast.success("Promo updated successfully!");
+      setEditing(false);
       setEditDeskripsi("");
       setEditSyarat("");
       setEditName("");
       setEditImage("");
-      window.location.reload();
-      fetchPromo();
-      setEditing(false);
+      fetchPromo(); // Refresh the list
     } catch (error) {
-      console.error("Error editing promo:", error.message);
-      setError("Failed to edit promo. Please try again later.");
+      console.error("Error updating promo:", error.message);
+      toast.error("Failed to update promo. Please try again later.");
     }
-    console.log("Edit promo with id:", selectedPromo._id);
-  };
-
-  const handleEdit = (item, e) => {
-    e.preventDefault();
-    setEditing(true);
-    setSelectedPromo(item);
-    setEditName(item.nama);
-    setEditSyarat(item.syarat);
-    setEditDeskripsi(item.detail);
-    setEditImage(item.foto);
-    console.log("Edit promo with id:", item._id);
-  };
-
-  const handleDelete = (item, e) => {
-    e.preventDefault();
-    setConfirmOpen(true);
-    setSelectedPromo(item);
   };
 
   const convertBase64 = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      setError("No image selected");
+      toast.error("No image selected.");
       return;
     }
     const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!validImageTypes.includes(file.type)) {
-      setError("Invalid file type. Only JPEG and PNG files are allowed.");
+      toast.error("Invalid file type. Only JPEG and PNG files are allowed.");
       return;
     }
-
     const maxSize = 5 * 1024 * 1024; // 5MB size limit
     if (file.size > maxSize) {
-      setError("File is too large. Maximum file size is 5MB.");
+      toast.error("File is too large. Maximum file size is 5MB.");
       return;
     }
     const reader = new FileReader();
@@ -182,6 +156,7 @@ function ListPromo() {
   return (
     <main className="flex flex-col container">
       <Navbar selected={"/listpromo"} />
+      <ToastContainer />
       <ConfirmPopup open={open} onClose={() => setOpen(false)}>
         <div className="w-fit flex space-x-4">
           <div className="w-full lg:w-fit p-5 border rounded-md shadow-md bg-white">
