@@ -32,7 +32,6 @@ function ListPromo() {
       const data = response.data;
       if (Array.isArray(data)) {
         setPromo(data);
-        toast.success("Promos fetched successfully!");
       } else {
         throw new Error("Invalid response format");
       }
