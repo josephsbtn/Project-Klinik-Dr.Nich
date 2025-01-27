@@ -78,7 +78,9 @@ function ListPromo() {
   const deletePromo = () => {
     try {
       const response = axios.delete(
-        `/api/promo/deletePromo/${selectedPromo._id}`
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/deletePromo/${
+          selectedPromo._id
+        }`
       );
       fetchPromo();
       setPromo((prev) => prev.filter((item) => item._id !== selectedPromo._id));
