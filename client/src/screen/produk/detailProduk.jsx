@@ -182,17 +182,17 @@ function DetailProduk() {
               </div>
               <div className="w-full flex flex-col items-start mt-4">
                 {selected === "deskripsi" && (
-                  <p className="text-xs font-SFPro text-text lg:text-base">
+                  <p className="text-xs font-SFPro text-text lg:text-base whitespace-pre-line">
                     {description}
                   </p>
                 )}
                 {selected === "manfaat" && (
-                  <p className="text-xs font-SFPro text-text lg:text-base">
+                  <p className="text-xs font-SFPro text-text lg:text-base whitespace-pre-line">
                     {manfaat}
                   </p>
                 )}
                 {selected === "caraPakai" && (
-                  <p className="text-xs font-SFPro text-text lg:text-base">
+                  <p className="text-xs font-SFPro text-text lg:text-base whitespace-pre-line">
                     {caraPakai}
                   </p>
                 )}

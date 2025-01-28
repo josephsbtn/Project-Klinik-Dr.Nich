@@ -20,8 +20,8 @@ function DetailKategori() {
   const [productType, setProductType] = useState([]);
   const [jenisKulit, setJenisKulit] = useState([]);
 
-const [filterType, setFilterType] = useState("all"); // Filter for product type
-const [filterSkin, setFilterSkin] = useState("all"); // Filter for skin type
+  const [filterType, setFilterType] = useState("all"); // Filter for product type
+  const [filterSkin, setFilterSkin] = useState("all"); // Filter for skin type
 
   const [showFilters, setShowFilters] = useState(false);
 
@@ -83,11 +83,14 @@ const [filterSkin, setFilterSkin] = useState("all"); // Filter for skin type
   }, [id]);
 
   // Derived state for filtered products
-const filteredContent = content.filter((item) => { // Filtering logic for products
+  const filteredContent = content.filter((item) => {
+    // Filtering logic for products
 
     const matchesType = filterType === "all" || item.type === filterType;
     const matchesSkin = filterSkin === "all" || item.skinType === filterSkin;
-    console.log(`Filtering: ${item.name}, Type Match: ${matchesType}, Skin Match: ${matchesSkin}`);
+    console.log(
+      `Filtering: ${item.name}, Type Match: ${matchesType}, Skin Match: ${matchesSkin}`
+    );
     return matchesType && matchesSkin;
   });
 
@@ -124,7 +127,9 @@ const filteredContent = content.filter((item) => { // Filtering logic for produc
           </div>
 
           <div className="flex flex-col items-end w-[85%] mt-4">
-            <button onClick={() => setShowFilters(!showFilters)} className="flex items-center bg-gray-200 p-1 rounded-md hover:bg-gray-300 transition">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center bg-gray-200 p-1 rounded-md hover:bg-gray-300 transition">
               <span className="ml-1 text-sm">Filter</span>
             </button>
             {showFilters && (
@@ -183,8 +188,11 @@ const filteredContent = content.filter((item) => { // Filtering logic for produc
                     </label>
                   ))}
                 </div>
-<button onClick={() => setShowFilters(false)} className="mt-2 bg-blue-500 text-white rounded-md p-2">Terapkan</button>
-
+                <button
+                  onClick={() => setShowFilters(false)}
+                  className="mt-2 bg-blue-500 text-white rounded-md p-2">
+                  Terapkan
+                </button>
               </div>
             )}
           </div>
