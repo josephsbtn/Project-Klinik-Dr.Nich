@@ -162,6 +162,7 @@ function ListProduct() {
     try {
       setDeleting(true);
       if (isDeletingCarousel) {
+        toast.loading("Deleting carousel image...");
         await axios.delete(
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/deleteImage/${
             selectedContent._id
@@ -171,6 +172,7 @@ function ListProduct() {
           prev.filter((item) => item._id !== selectedContent._id)
         );
       } else if (isDeletingCategory) {
+        toast.loading("Deleting category...");
         await axios.delete(
           `${
             import.meta.env.VITE_BASE_URL_BACKEND
@@ -180,6 +182,7 @@ function ListProduct() {
           prev.filter((item) => item._id !== selectedContent._id)
         );
       } else if (isDeletingProductType) {
+        toast.loading("Deleting product type...");
         await axios.delete(
           `${
             import.meta.env.VITE_BASE_URL_BACKEND
@@ -188,7 +191,8 @@ function ListProduct() {
         setProductType((prev) =>
           prev.filter((item) => item._id !== selectedContent._id)
         );
-      } else if (setIsDeletingTipeKulit) {
+      } else if (isDeletingTipeKulit) {
+        toast.loading("Deleting tipe kulit...");
         await axios.delete(
           `${
             import.meta.env.VITE_BASE_URL_BACKEND
@@ -198,15 +202,20 @@ function ListProduct() {
           prev.filter((item) => item._id !== selectedContent._id)
         );
       } else {
-        await axios.delete(
+        toast.loading("Deleting product...");
+
+        const response = await axios.delete(
           `${import.meta.env.VITE_BASE_URL_BACKEND}/api/produk/deleteproduk/${
             selectedContent._id
           }`
         );
+        console.log(response.data);
+
         setProduk((prev) =>
           prev.filter((item) => item._id !== selectedContent._id)
         );
       }
+      toast.dismiss();
       setConfirmOpen(false);
       toast.success("Item deleted successfully.");
     } catch (error) {
@@ -400,9 +409,11 @@ function ListProduct() {
 
   const handleDeleteProduct = (item, e) => {
     e.preventDefault();
+    console.log("DELETE PRODUCT :", item);
     setSelectedContent(item);
     setIsDeletingCategory(false);
     setIsDeletingCarousel(false);
+    setIsDeletingTipeKulit(false);
     setConfirmOpen(true);
   };
 

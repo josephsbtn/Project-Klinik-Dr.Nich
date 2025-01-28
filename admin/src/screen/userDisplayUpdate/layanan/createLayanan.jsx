@@ -93,7 +93,10 @@ function CreateLayanan() {
       );
 
       toast.success("Layanan successfully created!");
-      window.location.href = "/layanan";
+      setTimeout(() => {
+        toast.success("Redirecting...");
+        window.location.href = "/layanan";
+      }, 3000);
       setNama("");
       setDurasi("");
       setHarga("");
