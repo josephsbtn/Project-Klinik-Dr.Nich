@@ -67,17 +67,16 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
 }
 
 // Custom Pagination Component
-function CustomPagination({progress, length, setProgress }) {
+function CustomPagination({ progress, length, setProgress }) {
   return (
     <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all ${
-            progress === i
+          className={`block h-1 cursor-pointer rounded-2xl transition-all ${progress === i
               ? "w-[19px] h-2.5 bg-[#c2a353]"
               : "w-2.5 h-2.5 bg-[#dcdcdc]"
-          }`}
+            }`}
           onClick={() => setProgress(i)}
         />
       ))}
@@ -512,57 +511,62 @@ export default function Beranda() {
           </div>
 
           {/* ulasan */}
+          <main className="w-full flex lg:px-0 px-6 justify-between pt-[25px] pb-[25px]">
+            <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
+            Customer Punya Cerita
+            </h1>
+          </main>
           {/* Carousel Component */}
           <Swiper
-    className="py-10"
-    modules={[Autoplay, Navigation]}
-    autoplay={{ delay: 3000 }}
-    loop={true}
-    slidesPerView={"auto"}
-    spaceBetween={5} // Set gap to 15px
-    centeredSlides={true}
-    onSlideChange={(swiper) => setProgress(swiper.realIndex)} // Update active index
-  >
-    {ulasan &&
-      ulasan.map((item, dex) => (
-        <SwiperSlide
-          key={item.id}
-          className="flex-shrink-0 w-[280px]" // Fixed card width
-        >
-          <div className="bg-white w-[265px] rounded-lg shadow-md p-6 border border-gray-200">
-            {/* Header */}
-            <div className="flex items-center gap-4">
-              <img
-                src={item.foto}
-                alt={item.nama}
-                className="w-12 h-12 rounded-full"
-              />
-              <div>
-                <p className="text-gray-800 text-sm font-medium">
-                  {item.nama}
-                </p>
-                <div className="flex items-center gap-1">
-                  <span className="text-yellow-500 text-xs">{item.rating}</span>
-                </div>
-              </div>
-            </div>
+            className="py-10"
+            modules={[Autoplay, Navigation]}
+            autoplay={{ delay: 3000 }}
+            loop={true}
+            slidesPerView={"auto"}
+            spaceBetween={-100} // Set gap to 15px
+            centeredSlides={true}
+            onSlideChange={(swiper) => setProgress(swiper.realIndex)} // Update active index
+          >
+            {ulasan &&
+              ulasan.map((item, dex) => (
+                <SwiperSlide
+                  key={item.id}
+                  className="flex-shrink-0 w-[280px]" // Fixed card width
+                >
+                  <div className="bg-white w-[265px] rounded-lg shadow-md p-6 border border-gray-200">
+                    {/* Header */}
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={item.foto}
+                        alt={item.nama}
+                        className="w-12 h-12 rounded-full"
+                      />
+                      <div>
+                        <p className="text-gray-800 text-sm font-medium">
+                          {item.nama}
+                        </p>
+                        <div className="flex items-center gap-1">
+                          <span className="text-yellow-500 text-xs">{item.rating}</span>
+                        </div>
+                      </div>
+                    </div>
 
-            {/* Review Content */}
-            <p className="mt-4 text-sm text-gray-600">{item.ulasan}</p>
-          </div>
-        </SwiperSlide>
-      ))}
-  </Swiper>
+                    {/* Review Content */}
+                    <p className="mt-4 text-sm text-gray-600">{item.ulasan}</p>
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
 
-          {/* Custom Pagination */}
-          <CustomPagination
+
+          {/* <CustomPagination
             progress={progress}
             length={ulasan.length}
             setProgress={(dex) => {
               setProgress(dex);
               document.querySelector(".swiper").swiper.slideToLoop(dex); // Slide to the clicked pagination
             }}
-          />
+          /> */}
         </section>
       </div>
       <Footer />
