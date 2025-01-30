@@ -8,6 +8,7 @@ import Beranda from "./screen/All/beranda.jsx";
 import ListLayanan from "./screen/Layanan/listLayanan.jsx";
 import DetailJenisLayanan from "./screen/Layanan/detailJenisLayanan.jsx";
 import DetailTreatment from "./screen/Layanan/DetailTreatment.jsx";
+import ViewAllTreatment from "./screen/Layanan/viewAllTreatment.jsx";
 // profil
 import Profil from "./screen/All/profile.jsx";
 // galeri
@@ -49,6 +50,11 @@ function App() {
           path="/layanan/detailTreatment/:idTreatment"
           element={<DetailTreatment />}
         />
+        <Route
+          path="/layanan/viewAllTreatment"
+          element={<ViewAllTreatment />}
+        />
+
         <Route path="/profil" element={<Profil />} />
         <Route path="/galeri" element={<Galeri />} />
 

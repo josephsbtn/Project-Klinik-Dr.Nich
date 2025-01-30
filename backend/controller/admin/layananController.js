@@ -17,7 +17,7 @@ const newJenisLayanan = asyncHandler(async (req, res) => {
 });
 const getJenisLayanan = asyncHandler(async (req, res) => {
   try {
-    const jenisLayanan = await JenisLayanan.find();
+    const jenisLayanan = await JenisLayanan.find().populate("idJenis");
     res.send(jenisLayanan);
   } catch (error) {
     res.status(400).json({ message: error.message });

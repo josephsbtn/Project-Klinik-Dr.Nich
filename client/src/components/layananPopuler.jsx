@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CardLayanan from "./CardLayanan";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LayananPopuler() {
+  const navigate = useNavigate();
   const [layanan, setLayanan] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,7 +48,9 @@ function LayananPopuler() {
         <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
           Layanan Populer
         </h1>
-        <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+        <h1
+          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer"
+          onClick={() => navigate("layanan/viewAllTreatment")}>
           Lihat Semua
         </h1>
       </main>
