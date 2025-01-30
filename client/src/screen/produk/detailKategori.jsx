@@ -134,8 +134,9 @@ function DetailKategori() {
             onClose={() => setIsFilterOpen(false)}>
             <div className="flex flex-col items-start w-[95vw] h-screen">
               <div className="flex flex-col items-start w-screen h-screen lg:w-[30vw] bg-white px-4">
+                {/* Close Button */}
                 <div className="w-full flex justify-end items-center mt-10">
-                  <button onClick={() => setIsFilterOpen(false)} className="">
+                  <button onClick={() => setIsFilterOpen(false)}>
                     <img
                       src={CloseIcon}
                       alt="Close"
@@ -144,85 +145,131 @@ function DetailKategori() {
                   </button>
                 </div>
 
-                <div className="flex flex-col items-start space-y-2  w-[85%]">
-                  <h1 className="text-base lg:text-xl font-medium font-SFPro text-secondary ">
+                {/* Skin Type Filter */}
+                <div className="flex flex-col items-center bg-red-300 lg:items-start space-y-2 w-[85%]">
+                  <h1 className="text-base lg:text-xl font-medium font-SFPro text-secondary">
                     Jenis Kulit
                   </h1>
                   <div className="grid grid-cols-2 w-[90%]">
-                    <div className="flex items-center space-x-2">
+                    {/* ALL Skin Types Option */}
+                    <label className="flex items-center space-x-2 cursor-pointer">
                       <input
                         type="radio"
                         name="filterSkin"
                         value="all"
+                        className="hidden"
                         checked={filterSkin === "all"}
                         onChange={() => setFilterSkin("all")}
                       />
-                      <label className="text-sm lg:text-base font-normal font-SFPro text-text">
+                      <div
+                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+              ${
+                filterSkin === "all" ? "border-[#B2955B]" : "border-gray-400"
+              }`}>
+                        {filterSkin === "all" && (
+                          <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
+                        )}
+                      </div>
+                      <span className="text-sm lg:text-base font-normal font-SFPro text-text">
                         All
-                      </label>
-                    </div>
-                    {jenisKulit ? (
-                      jenisKulit.map((item) => (
+                      </span>
+                    </label>
+
+                    {/* Dynamic Skin Types */}
+                    {jenisKulit?.map((item) => (
+                      <label
+                        className="flex items-center space-x-2 cursor-pointer"
+                        key={item._id}>
+                        <input
+                          type="radio"
+                          name="filterSkin"
+                          className="hidden"
+                          value={item.name}
+                          checked={filterSkin === item.name}
+                          onChange={() => setFilterSkin(item.name)}
+                        />
                         <div
-                          className="flex items-center space-x-2"
-                          key={item._id}>
-                          <input
-                            type="radio"
-                            name="filterSkin"
-                            value={item.name}
-                            checked={filterSkin === item.name}
-                            onChange={() => setFilterSkin(item.name)}
-                          />
-                          <label className="text-sm lg:text-base font-normal font-SFPro text-text">
-                            {item.name}
-                          </label>
+                          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+                ${
+                  filterSkin === item.name
+                    ? "border-[#B2955B]"
+                    : "border-gray-400"
+                }`}>
+                          {filterSkin === item.name && (
+                            <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
+                          )}
                         </div>
-                      ))
-                    ) : (
-                      <div className="text-center">Loading...</div>
-                    )}
+                        <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                          {item.name}
+                        </span>
+                      </label>
+                    ))}
                   </div>
                 </div>
-                <div className="flex flex-col items-start space-y-2  w-[85%]">
-                  <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary ">
+
+                {/* Category Filter */}
+                <div className="flex flex-col items-start space-y-2 w-[85%]">
+                  <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary">
                     Kategori
                   </h1>
                   <div className="grid grid-cols-2 w-[90%]">
-                    <div className="flex items-center space-x-2">
+                    {/* ALL Categories Option */}
+                    <label className="flex items-center space-x-2 cursor-pointer">
                       <input
                         type="radio"
-                        name="filterSkin"
+                        name="filterType"
                         value="all"
+                        className="hidden"
                         checked={filterType === "all"}
                         onChange={() => setFilterType("all")}
                       />
-                      <label className="text-sm lg:text-base font-normal font-SFPro text-text">
+                      <div
+                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+              ${
+                filterType === "all" ? "border-[#B2955B]" : "border-gray-400"
+              }`}>
+                        {filterType === "all" && (
+                          <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
+                        )}
+                      </div>
+                      <span className="text-sm lg:text-base font-normal font-SFPro text-text">
                         All
-                      </label>
-                    </div>
-                    {productType ? (
-                      productType.map((item) => (
+                      </span>
+                    </label>
+
+                    {/* Dynamic Product Types */}
+                    {productType?.map((item) => (
+                      <label
+                        className="flex items-center space-x-2 cursor-pointer"
+                        key={item._id}>
+                        <input
+                          type="radio"
+                          name="filterType"
+                          className="hidden"
+                          value={item.name}
+                          checked={filterType === item.name}
+                          onChange={() => setFilterType(item.name)}
+                        />
                         <div
-                          className="flex items-center space-x-2"
-                          key={item._id}>
-                          <input
-                            type="radio"
-                            name="productType"
-                            value={item.name}
-                            onChange={(e) => setFilterType(e.target.value)}
-                            checked={filterType === item.name}
-                            key={item._id}
-                          />
-                          <label className="text-sm lg:text-base font-normal font-SFPro text-text">
-                            {item.name}
-                          </label>
+                          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+                ${
+                  filterType === item.name
+                    ? "border-[#B2955B]"
+                    : "border-gray-400"
+                }`}>
+                          {filterType === item.name && (
+                            <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
+                          )}
                         </div>
-                      ))
-                    ) : (
-                      <div className="text-center">Loading...</div>
-                    )}
+                        <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                          {item.name}
+                        </span>
+                      </label>
+                    ))}
                   </div>
                 </div>
+
+                {/* Apply Button */}
                 <button
                   onClick={() => setIsFilterOpen(false)}
                   className="mt-2 w-[80%] lg:w-fit bg-secondary text-white rounded-md p-2">

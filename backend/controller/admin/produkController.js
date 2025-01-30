@@ -95,9 +95,11 @@ const getproduk = asyncHandler(async (req, res) => {
 const getprodukbycategory = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const produk = await produkModels.find({ kategori: id })
+    const produk = await produkModels
+      .find({ kategori: id })
       .populate("kategori")
-      .populate("tipeProduk");
+      .populate("tipeProduk")
+      .lean();
     res.send(produk);
   } catch (error) {
     res.status(400).json({ message: error.message });
