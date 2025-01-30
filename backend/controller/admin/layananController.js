@@ -17,7 +17,7 @@ const newJenisLayanan = asyncHandler(async (req, res) => {
 });
 const getJenisLayanan = asyncHandler(async (req, res) => {
   try {
-    const jenisLayanan = await JenisLayanan.find().populate("idJenis");
+    const jenisLayanan = await JenisLayanan.find();
     res.send(jenisLayanan);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -97,7 +97,7 @@ const newLayanan = asyncHandler(async (req, res) => {
 
 const getLayanan = asyncHandler(async (req, res) => {
   try {
-    const layanan = await layananModels.find();
+    const layanan = await layananModels.find().populate("idJenis");
     res.send(layanan);
   } catch (error) {
     res.status(400).json({ message: error.message });
