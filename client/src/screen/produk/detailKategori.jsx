@@ -133,7 +133,7 @@ function DetailKategori() {
             open={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}>
             <div className="flex flex-col items-start w-[95vw] h-screen">
-              <div className="flex flex-col items-start w-screen h-screen lg:w-[30vw] bg-white px-4">
+              <div className="flex flex-col space-y-3 items-center w-screen h-screen lg:w-[30vw] bg-white px-4">
                 {/* Close Button */}
                 <div className="w-full flex justify-end items-center mt-10">
                   <button onClick={() => setIsFilterOpen(false)}>
@@ -146,7 +146,7 @@ function DetailKategori() {
                 </div>
 
                 {/* Skin Type Filter */}
-                <div className="flex flex-col items-center bg-red-300 lg:items-start space-y-2 w-[85%]">
+                <div className="flex flex-col items-center  lg:items-start space-y-2 w-[85%]">
                   <h1 className="text-base lg:text-xl font-medium font-SFPro text-secondary">
                     Jenis Kulit
                   </h1>
@@ -209,7 +209,7 @@ function DetailKategori() {
 
                 {/* Category Filter */}
                 <div className="flex flex-col items-start space-y-2 w-[85%]">
-                  <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary">
+                  <h1 className="text-base lg:text-xl  font-medium font-SFPro text-secondary">
                     Kategori
                   </h1>
                   <div className="grid grid-cols-2 w-[90%]">
@@ -270,11 +270,13 @@ function DetailKategori() {
                 </div>
 
                 {/* Apply Button */}
-                <button
-                  onClick={() => setIsFilterOpen(false)}
-                  className="mt-2 w-[80%] lg:w-fit bg-secondary text-white rounded-md p-2">
-                  Terapkan
-                </button>
+                <div className="w-[85%] flex items-center justify-start">
+                  <button
+                    onClick={() => setIsFilterOpen(false)}
+                    className="mt-2 w-[80%] lg:w-fit bg-secondary text-white rounded-md p-2">
+                    Terapkan
+                  </button>
+                </div>
               </div>
             </div>
           </ConfirmPopUp>
