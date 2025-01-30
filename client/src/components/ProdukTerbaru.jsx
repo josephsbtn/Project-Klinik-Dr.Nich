@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // produk1
@@ -6,6 +7,7 @@ import produk1 from "../assets/img-about/produk1.png";
 import ProdukCard from "./ProdukCard";
 
 function ProdukTerbaru() {
+  const navigate = useNavigate();
   const [produk, setProduk] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,7 +49,9 @@ function ProdukTerbaru() {
         <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
           Produk Baru!
         </h1>
-        <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+        <h1
+          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer"
+          onClick={() => navigate("/produk/AllProduct")}>
           Lihat Semua
         </h1>
       </main>

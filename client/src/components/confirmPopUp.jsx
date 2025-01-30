@@ -11,7 +11,7 @@ function ConfirmPopUp({ open, onClose, children }) {
       }`}>
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`bg-white rounded-xl shadow p-6 transition-all duration-300 ${
+        className={` rounded-xl shadow p-6 transition-all duration-300 ${
           open ? "scale-100 opacity-100" : "scale-150 opacity-0"
         }`}>
         {children}

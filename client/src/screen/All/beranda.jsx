@@ -3,6 +3,9 @@ import { Carousel } from "@material-tailwind/react";
 import { useSwipeable } from "react-swipeable";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay"; // Import autoplay styles
+import { Autoplay } from "swiper/modules";
 import axios from "axios";
 
 //Import WA Template
@@ -40,12 +43,15 @@ import sertifikat1 from "../../assets/img-about/sertifikat1.png";
 import galeri1 from "../../assets/img-about/galeri1.png";
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css";
+import "swiper/css/autoplay";
+
 import ulasan from "../../../../backend/models/ulasan/ulasanModels.js";
 
 // Carousel Navigation Component
@@ -55,10 +61,11 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${activeIndex === i
-            ? "w-[19px] h-2.5 bg-[#c2a353]"
-            : "w-2.5 h-2.5 bg-[#dcdcdc]"
-            }`}
+          className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+            activeIndex === i
+              ? "w-[19px] h-2.5 bg-[#c2a353]"
+              : "w-2.5 h-2.5 bg-[#dcdcdc]"
+          }`}
           onClick={() => setActiveIndex(i)}
         />
       ))}
@@ -73,10 +80,11 @@ function CustomPagination({ progress, length, setProgress }) {
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all ${progress === i
+          className={`block h-1 cursor-pointer rounded-2xl transition-all ${
+            progress === i
               ? "w-[19px] h-2.5 bg-[#c2a353]"
               : "w-2.5 h-2.5 bg-[#dcdcdc]"
-            }`}
+          }`}
           onClick={() => setProgress(i)}
         />
       ))}
@@ -99,7 +107,6 @@ export default function Beranda() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
-
   const fetchData = async () => {
     setLoading(true);
 
@@ -116,7 +123,8 @@ export default function Beranda() {
         ulasanResponse,
       ] = await Promise.all([
         axios.get(
-          `${import.meta.env.VITE_BASE_URL_BACKEND
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
           }/api/layanan/getAllJenisLayanan`
         ),
         axios.get(
@@ -265,8 +273,6 @@ export default function Beranda() {
     }
   };
 
-
-
   return (
     <div className="w-full flex flex-col items-center bg-white">
       <div className="fixed w-full z-30">
@@ -277,7 +283,10 @@ export default function Beranda() {
       {/* Carousel Component */}
       <Carousel
         className="pb-10 pt-20"
-        autoplay={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: true,
+        }}
         autoplayDelay={3000}
         loop={true} // Enable looping
         navigation={CarouselNavigation} // Use the CarouselNavigation component
@@ -318,10 +327,11 @@ export default function Beranda() {
             {aboutCards.map((_, index) => (
               <span
                 key={index}
-                className={` rounded-full transition-all duration-300 cursor-pointer ${activeIndex === index
-                  ? "w-[19px] h-2.5 bg-[#c2a353]"
-                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
-                  }`}
+                className={` rounded-full transition-all duration-300 cursor-pointer ${
+                  activeIndex === index
+                    ? "w-[19px] h-2.5 bg-[#c2a353]"
+                    : "w-2.5 h-2.5 bg-[#dcdcdc]"
+                }`}
                 onClick={() => setActiveIndex(index)}
               />
             ))}
@@ -341,39 +351,39 @@ export default function Beranda() {
               <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
                 Berpengalaman dan Bersertifikat
               </h1>
-              <Swiper
-                modules={[Autoplay]}
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                loop={true}
-                spaceBetween={20}
+              <Carousel
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg overflow-hidden "
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: false,
+                }}
+                autoplayDelay={2000}
                 slidesPerView={1}
-                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
+                spaceBetween={20}
+                loop={true} // Enable looping
+                navigation={false}>
                 {fotoSertif && fotoSertif.length > 0 ? (
                   fotoSertif.map((item) => (
-                    <SwiperSlide key={item._id}>
-                      <img
-                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
-                        src={item.foto}
-                        alt={item.nama}
-                      />
-                    </SwiperSlide>
+                    <div key={item._id} className="relative px-2">
+                      <div className="h-[250px] lg:h-[350px] w-full">
+                        <img
+                          className="object-cover bg-yellow-200"
+                          src={item.foto}
+                          alt={item.nama}
+                        />
+                      </div>
+                    </div>
                   ))
                 ) : loading ? (
-                  <>
-                    <SwiperSlide>
-                      <div className="w-full h-full flex items-center justify-center ">
-                        <h1>loading . . .</h1>
-                      </div>
-                    </SwiperSlide>
-                  </>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>loading . . .</h1>
+                  </div>
                 ) : (
-                  <SwiperSlide>
-                    <div className="w-full h-full flex items-center justify-center ">
-                      <h1> No data found</h1>
-                    </div>
-                  </SwiperSlide>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>No data found</h1>
+                  </div>
                 )}
-              </Swiper>
+              </Carousel>
             </div>
 
             {/* Teknologi */}
@@ -381,39 +391,38 @@ export default function Beranda() {
               <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
                 Teknologi Terkini & Produk Berkualitas
               </h1>
-              <Swiper
-                modules={[Autoplay]}
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                loop={true}
-                spaceBetween={20}
+              <Carousel
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg [&_.carousel-navigation]:hidden overflow-hidden"
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: true,
+                }}
                 slidesPerView={1}
-                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
+                spaceBetween={20}
+                autoplayDelay={2000}
+                loop={true}
+                navigation={({ nextEl: "hidden", prevEl: "hidden" }, false)} // Use the CarouselNavigation component
+              >
                 {fotoMesin && fotoMesin.length > 0 ? (
                   fotoMesin.map((item) => (
-                    <SwiperSlide key={item._id}>
+                    <div key={item._id} className="relative px-2">
                       <img
-                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
+                        className="h-[198px] lg:h-full w-full object-cover bg-blue-500 text-white text-lg font-semibold"
                         src={item.foto}
                         alt={item.nama}
                       />
-                    </SwiperSlide>
+                    </div>
                   ))
                 ) : loading ? (
-                  <>
-                    <SwiperSlide>
-                      <div className="w-full h-full flex items-center justify-center ">
-                        <h1>loading . . .</h1>
-                      </div>
-                    </SwiperSlide>
-                  </>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>loading . . .</h1>
+                  </div>
                 ) : (
-                  <SwiperSlide>
-                    <div className="w-full h-full flex items-center justify-center ">
-                      <h1> No data found</h1>
-                    </div>
-                  </SwiperSlide>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>No data found</h1>
+                  </div>
                 )}
-              </Swiper>
+              </Carousel>
             </div>
           </div>
         </div>
@@ -513,7 +522,7 @@ export default function Beranda() {
           {/* ulasan */}
           <main className="w-full flex lg:px-0 px-6 justify-between pt-[25px] pb-[25px]">
             <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
-            Customer Punya Cerita
+              Customer Punya Cerita
             </h1>
           </main>
           {/* Carousel Component */}
@@ -546,7 +555,9 @@ export default function Beranda() {
                           {item.nama}
                         </p>
                         <div className="flex items-center gap-1">
-                          <span className="text-yellow-500 text-xs">{item.rating}</span>
+                          <span className="text-yellow-500 text-xs">
+                            {item.rating}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -558,15 +569,14 @@ export default function Beranda() {
               ))}
           </Swiper>
 
-
-          {/* <CustomPagination
+          <CustomPagination
             progress={progress}
             length={ulasan.length}
             setProgress={(dex) => {
               setProgress(dex);
               document.querySelector(".swiper").swiper.slideToLoop(dex); // Slide to the clicked pagination
             }}
-          /> */}
+          />
         </section>
       </div>
       <Footer />

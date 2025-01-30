@@ -15,6 +15,8 @@ import {
 
 const router = express.Router();
 
+router.use(cors()); // Ensure CORS applies to this router
+
 router.post("/tambahJenisLayanan", newJenisLayanan);
 router.get("/getAllJenisLayanan", getJenisLayanan);
 router.post("/tambahLayanan", newLayanan);

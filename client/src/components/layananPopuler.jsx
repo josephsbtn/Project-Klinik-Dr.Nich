@@ -10,9 +10,11 @@ function LayananPopuler() {
 
   const fetchData = async () => {
     try {
-      setLoading(true); // Move loading state to start of the try block
+      setLoading(true);
+
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllLayanan`
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllLayanan`,
+        { timeout: 1000000 } // 10 seconds timeout
       );
 
       const sortedLayanan = response.data.sort(
@@ -20,13 +22,17 @@ function LayananPopuler() {
       );
 
       setLayanan(sortedLayanan);
-      setLimit(sortedLayanan.length > 6 ? 6 : sortedLayanan.length); // Set limit based on fetched data
+      setLimit(sortedLayanan.length > 6 ? 6 : sortedLayanan.length);
 
       console.log("LAYANAN DATA :", sortedLayanan);
     } catch (error) {
-      setError(error.response?.data?.message || "An error occurred");
+      if (error.code === "ECONNABORTED") {
+        setError("Request timed out. Please try again later.");
+      } else {
+        setError(error.response?.data?.message || "An error occurred");
+      }
     } finally {
-      setLoading(false); // Ensure loading is stopped in both success and error cases
+      setLoading(false);
     }
   };
 
