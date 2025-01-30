@@ -223,15 +223,21 @@ export default function Navbar({ selected }) {
             } lg:flex`}>
             <div className="flex items-center border-b border-[#c2a353] w-[326px] h-[45px]">
               <img src={searchWhite} alt="Search Icon" className="px-[10px]" />
-              <input
-                ref={searchRef}
-                type="text"
-                onChange={() => {
-                  setSearch();
-                }}
-                placeholder="Search..."
-                className="w-full h-full px-[10px] focus:outline-none"
-              />
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  window.location.href = `/pencarian?query=${query}`;
+                }}>
+                <input
+                  ref={searchRef}
+                  type="text"
+                  onChange={() => {
+                    setSearch();
+                  }}
+                  placeholder="Search..."
+                  className="w-full h-full px-[10px] focus:outline-none"
+                />
+              </form>
             </div>
           </div>
         )}
@@ -263,15 +269,21 @@ export default function Navbar({ selected }) {
                 className="w-[20px] h-[20px] mx-2"
               />
             </a>
-            <input
-              ref={searchRef}
-              type="text"
-              onChange={() => {
-                setSearch();
-              }}
-              placeholder="Search..."
-              className="w-full h-[38px] px-2 focus:outline-none"
-            />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                window.location.href = `/pencarian?query=${query}`;
+              }}>
+              <input
+                ref={searchRef}
+                type="text"
+                onChange={() => {
+                  setSearch();
+                }}
+                placeholder="Search..."
+                className="w-full h-[38px] px-2 focus:outline-none"
+              />
+            </form>
           </div>
 
           {/* Bag Icon */}

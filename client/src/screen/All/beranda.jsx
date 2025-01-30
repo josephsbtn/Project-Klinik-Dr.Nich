@@ -20,6 +20,7 @@ import CardJenisLayanan from "../../components/cardJenisLayanan.jsx";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import UlasanCard from "../../components/cardUlasan.jsx";
+import StarIcon from "../../assets/star.svg";
 
 import ArrowRight from "../../../../admin/src/assets/icon/ArrowRight";
 
@@ -554,10 +555,14 @@ export default function Beranda() {
                         <p className="text-gray-800 text-sm font-medium">
                           {item.nama}
                         </p>
-                        <div className="flex items-center gap-1">
-                          <span className="text-yellow-500 text-xs">
-                            {item.rating}
-                          </span>
+                        <div className="flex items-center gap-2">
+                          {Array.from({ length: item.rating }, (_, index) => (
+                            <img
+                              key={index}
+                              src={StarIcon}
+                              className="min-w-5 min-h-5" // Adjust size
+                            />
+                          ))}
                         </div>
                       </div>
                     </div>
