@@ -132,97 +132,103 @@ function DetailKategori() {
           <ConfirmPopUp
             open={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}>
-            <div className="flex flex-col items-center  w-screen h-screen lg:w-[40vw]">
-              <div className="w-[85%] flex justify-end items-center mt-10">
-                <button onClick={() => setIsFilterOpen(false)} className="">
-                  <img src={CloseIcon} alt="Close" className="w-7 h-7" />
+            <div className="flex flex-col items-start w-[95vw] h-screen">
+              <div className="flex flex-col items-start w-screen h-screen lg:w-[30vw] bg-white px-4">
+                <div className="w-full flex justify-end items-center mt-10">
+                  <button onClick={() => setIsFilterOpen(false)} className="">
+                    <img
+                      src={CloseIcon}
+                      alt="Close"
+                      className="w-7 lg:w-10 lg:h-10 h-7"
+                    />
+                  </button>
+                </div>
+
+                <div className="flex flex-col items-start space-y-2  w-[85%]">
+                  <h1 className="text-base lg:text-xl font-medium font-SFPro text-secondary ">
+                    Jenis Kulit
+                  </h1>
+                  <div className="grid grid-cols-2 w-[90%]">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        name="filterSkin"
+                        value="all"
+                        checked={filterSkin === "all"}
+                        onChange={() => setFilterSkin("all")}
+                      />
+                      <label className="text-sm lg:text-base font-normal font-SFPro text-text">
+                        All
+                      </label>
+                    </div>
+                    {jenisKulit ? (
+                      jenisKulit.map((item) => (
+                        <div
+                          className="flex items-center space-x-2"
+                          key={item._id}>
+                          <input
+                            type="radio"
+                            name="filterSkin"
+                            value={item.name}
+                            checked={filterSkin === item.name}
+                            onChange={() => setFilterSkin(item.name)}
+                          />
+                          <label className="text-sm lg:text-base font-normal font-SFPro text-text">
+                            {item.name}
+                          </label>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center">Loading...</div>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col items-start space-y-2  w-[85%]">
+                  <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary ">
+                    Kategori
+                  </h1>
+                  <div className="grid grid-cols-2 w-[90%]">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        name="filterSkin"
+                        value="all"
+                        checked={filterType === "all"}
+                        onChange={() => setFilterType("all")}
+                      />
+                      <label className="text-sm lg:text-base font-normal font-SFPro text-text">
+                        All
+                      </label>
+                    </div>
+                    {productType ? (
+                      productType.map((item) => (
+                        <div
+                          className="flex items-center space-x-2"
+                          key={item._id}>
+                          <input
+                            type="radio"
+                            name="productType"
+                            value={item.name}
+                            onChange={(e) => setFilterType(e.target.value)}
+                            checked={filterType === item.name}
+                            key={item._id}
+                          />
+                          <label className="text-sm lg:text-base font-normal font-SFPro text-text">
+                            {item.name}
+                          </label>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center">Loading...</div>
+                    )}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsFilterOpen(false)}
+                  className="mt-2 w-[80%] lg:w-fit bg-secondary text-white rounded-md p-2">
+                  Terapkan
                 </button>
               </div>
-
-              <div className="flex flex-col items-start space-y-2  w-[85%]">
-                <h1 className="text-base font-medium font-SFPro text-secondary ">
-                  Jenis Kulit
-                </h1>
-                <div className="grid grid-cols-2 w-[90%]">
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="radio"
-                      name="filterSkin"
-                      value="all"
-                      checked={filterSkin === "all"}
-                      onChange={() => setFilterSkin("all")}
-                    />
-                    <label className="text-sm font-normal font-SFPro text-text">
-                      All
-                    </label>
-                  </div>
-                  {jenisKulit ? (
-                    jenisKulit.map((item) => (
-                      <div
-                        className="flex items-center space-x-2"
-                        key={item._id}>
-                        <input
-                          type="radio"
-                          name="filterSkin"
-                          value={item.name}
-                          checked={filterSkin === item.name}
-                          onChange={() => setFilterSkin(item.name)}
-                        />
-                        <label className="text-sm font-normal font-SFPro text-text">
-                          {item.name}
-                        </label>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center">Loading...</div>
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-col items-start space-y-2  w-[85%]">
-                <h1 className="text-base font-medium font-SFPro text-secondary ">
-                  Kategori
-                </h1>
-                <div className="grid grid-cols-2 w-[90%]">
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="radio"
-                      name="filterSkin"
-                      value="all"
-                      checked={filterType === "all"}
-                      onChange={() => setFilterType("all")}
-                    />
-                    <label className="text-sm font-normal font-SFPro text-text">
-                      All
-                    </label>
-                  </div>
-                  {productType ? (
-                    productType.map((item) => (
-                      <div
-                        className="flex items-center space-x-2"
-                        key={item._id}>
-                        <input
-                          type="radio"
-                          name="productType"
-                          value={item.name}
-                          onChange={(e) => setFilterType(e.target.value)}
-                          checked={filterType === item.name}
-                          key={item._id}
-                        />
-                        <label className="text-sm font-normal font-SFPro text-text">
-                          {item.name}
-                        </label>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center">Loading...</div>
-                  )}
-                </div>
-              </div>
-              <button
-                onClick={() => setIsFilterOpen(false)}
-                className="mt-2 w-[80%] lg:w-fit bg-secondary text-white rounded-md p-2">
-                Terapkan
-              </button>
             </div>
           </ConfirmPopUp>
 
