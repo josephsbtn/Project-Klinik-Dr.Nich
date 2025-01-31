@@ -7,6 +7,7 @@ import axios from "axios";
 import CardJenisLayanan from "../../components/cardJenisLayanan";
 import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
+import LoadingSpinner from "../../components/LoadingSpinner";
 function ListLayanan() {
   const [jenisLayanan, setJenisLayanan] = useState();
 
@@ -57,7 +58,7 @@ function ListLayanan() {
         </div>
         {loading ? (
           <div className="h- h-screen w-full flex justify-center items-center">
-            <p>Loading...</p>
+            <LoadingSpinner />
           </div>
         ) : error ? (
           <div className="h-fit w-fit bg-white border border-disable-line ">

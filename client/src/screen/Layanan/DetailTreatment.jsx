@@ -7,6 +7,7 @@ import axios from "axios";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import { sendWhatsAppReservasiLayananMessage } from "../../../../backend/controller/whatsappController.js";
+import LoadingSpinner from "../../components/LoadingSpinner.jsx";
 
 function DetailTreatment() {
   const { idJenis, idTreatment } = useParams();
@@ -96,7 +97,7 @@ function DetailTreatment() {
       </div>
       {loading ? (
         <>
-          <h1>Loading</h1>
+          <LoadingSpinner />
         </>
       ) : error ? (
         <>

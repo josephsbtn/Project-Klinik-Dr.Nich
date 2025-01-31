@@ -97,14 +97,20 @@ export default function Footer() {
         {/* Contact Information and Navigation Links */}
         <div className="flex gap-11 lg:gap-0 lg:flex-row lg:justify-between lg:w-full">
           <div className="w-[147px] grid gap-4 lg:gap-6 lg:w-full">
-            <div className="flex items-start space-x-3">
+            <div
+              className="flex items-start space-x-3 cursor-pointer"
+              onClick={handleSosmed(
+                "https://maps.app.goo.gl/benokSLZCgXfyL5C9"
+              )}>
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
               <p className="text-sm leading-tight text-[#e8ebe0] lg:max-w-[60%]">
                 Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec.
                 Argomulyo, Kota Salatiga, Jawa Tengah 50733
               </p>
             </div>
-            <div className="flex items-center space-x-3">
+            <div
+              className="flex items-center space-x-3 cursor-pointer"
+              onClick={handleWhatsApp}>
               <img src={kontak} alt="Kontak" className="w-5 h-5" />
               <p className="text-sm text-[#e8ebe0]">+6289632517280</p>
             </div>

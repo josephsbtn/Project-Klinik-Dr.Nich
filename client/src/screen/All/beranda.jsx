@@ -11,6 +11,7 @@ import axios from "axios";
 //Import WA Template
 import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController.js";
 import { sendWhatsAppProdukMessage } from "../../../../backend/controller/whatsappController.js";
+import { useNavigate } from "react-router-dom";
 
 // COMPONENTS
 import Navbar from "../auth/navbar";
@@ -94,6 +95,7 @@ function CustomPagination({ progress, length, setProgress }) {
 }
 
 export default function Beranda() {
+  const navigate = useNavigate();
   const [jenisLayanan, setJenisLayanan] = useState([]);
   const [limitCarousel, setLimitCarousel] = useState(0);
   const [ulasan, setUlasan] = useState([]);
@@ -474,7 +476,9 @@ export default function Beranda() {
             <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
               Gallery
             </h1>
-            <h1 className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+            <h1
+              className="font-SFPro text-xs text-secondary font-medium lg:text-base"
+              onClick={() => navigate("/galeri")}>
               Lihat Semua
             </h1>
           </main>
@@ -482,11 +486,17 @@ export default function Beranda() {
           {/* Carousel */}
           <div className="flex flex-col lg:w-full pt-[15px]">
             <div className="flex lg:justify-start justify-center items-center pt-[15px]">
-              <div className="carousel carousel-center w-80 lg:w-full space-x-8">
+              <div className="carousel carousel-center w-80 lg:w-full space-x-8 h-auto py-5 px-2">
                 {/* Conditional Rendering of Carousel Items */}
                 {gallery && gallery.length > 0 ? (
                   gallery.slice(0, limitGallery).map((item, index) => (
-                    <div key={item._id} className="carousel-item">
+                    <div
+                      key={item._id}
+                      className="carousel-item hover:scale-105 transition-all duration-300"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `${item.link}`;
+                      }}>
                       <div className="w-72 h-auto  relative flex flex-col items-start justify-start">
                         {/* Dynamic Image */}
                         <img

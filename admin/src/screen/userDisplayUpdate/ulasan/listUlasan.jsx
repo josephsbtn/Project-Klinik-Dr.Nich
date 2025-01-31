@@ -52,8 +52,8 @@ function ListUlasan() {
       toast.error("Please fill out all fields before submitting.");
       return;
     }
-    if (rating < 1 || rating > 4) {
-      toast.error("Rating must be between 1 and 4.");
+    if (rating < 1 || rating > 5) {
+      toast.error("Rating must be between 1 and 5.");
       return;
     }
     try {

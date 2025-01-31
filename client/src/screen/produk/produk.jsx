@@ -19,6 +19,7 @@ import axios from "axios";
 // Swiper Components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import { Carousel } from "@material-tailwind/react";
 
 // Swiper Styles
 import "swiper/css";
@@ -90,31 +91,30 @@ function Produk() {
           </div>
 
           <div className="flex items-center w-[90%]  justify-center space-x-2 mx-auto mt-[18px] lg:w-[80%] lg:h-full">
-            <Swiper
-              modules={[Autoplay, Pagination]}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
-              loop={true}
-              spaceBetween={20}
-              slidesPerView={1}
+            <Carousel
+              autoPlay
+              interval={3000}
+              infiniteLoop
+              showThumbs={false}
+              showStatus={false}
+              showIndicators={true}
               className="w-full h-auto rounded-lg">
               {carousel.length > 0 ? (
                 carousel.map((item, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="flex items-center justify-center text-lg font-semibold w-full">
-                      <img
-                        className=" h-[158px] w-full lg:h-[528.36px] rounded-[10px] object-cover"
-                        src={item.image} // Ensure 'imageUrl' matches the key in your API response
-                        alt={`Carousel Image ${index + 1}`}
-                      />
-                    </div>
-                  </SwiperSlide>
+                  <div key={index} className="w-full">
+                    <img
+                      className="h-[158px] w-full lg:h-[528.36px] rounded-[10px] object-cover"
+                      src={item.image}
+                      alt={`Carousel Image ${index + 1}`}
+                    />
+                  </div>
                 ))
               ) : (
                 <div className="flex items-center justify-center w-full">
                   <p>No images available</p>
                 </div>
               )}
-            </Swiper>
+            </Carousel>
           </div>
 
           <div className=" items-center w-[90%] lg:w-[80%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8   lg:gap-20 grid grid-cols-2 lg:grid-cols-3">

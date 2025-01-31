@@ -110,7 +110,12 @@ function Profile() {
             <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 lg:gap-4">
               {content &&
                 content.slice(0, max).map((item) => (
-                  <div key={item._id}>
+                  <div
+                    key={item._id}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.href = `${item.link}`;
+                    }}>
                     <GaleriCard item={item} />
                   </div>
                 ))}
@@ -121,8 +126,7 @@ function Profile() {
               {content.length > 5 && (
                 <button
                   onClick={toggleShowAllContent}
-                  className="w-[109px] h-[31px] text-[#c2a353] text-xs font-normal rounded-[10px] border border-[#c2a353] text-sm font-medium"
-                >
+                  className="w-[109px] h-[31px] text-[#c2a353] text-xs font-normal rounded-[10px] border border-[#c2a353] text-sm font-medium">
                   {showAllContent ? "Show Less" : "Show All"}
                 </button>
               )}
