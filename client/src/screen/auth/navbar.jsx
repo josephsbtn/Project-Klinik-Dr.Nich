@@ -98,7 +98,7 @@ export default function Navbar({ selected }) {
               className="absolute bottom-0 w-full h-auto object-cover"
               alt="Background"
             />
-            <div className="flex flex-col relative top-0 items-start px-[25px] pt-[20px] justify-start h-full gap-4">
+            <div className="flex flex-col relative top-0 items-start px-[25px] pt-[20px] lg:pt-11 justify-start h-full gap-4">
               <div>
                 <img src={logo2} alt="Drnich Logo" />
               </div>

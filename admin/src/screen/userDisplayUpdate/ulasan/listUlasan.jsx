@@ -4,6 +4,7 @@ import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import LoadingSpinner from "../../../assets/component/LoadingSpinner.jsx";
 
 function ListUlasan() {
   const [promo, setPromo] = useState([]);
@@ -23,8 +24,10 @@ function ListUlasan() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchPromo = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/getAllulasan`
@@ -35,7 +38,9 @@ function ListUlasan() {
       } else {
         throw new Error("Invalid response format");
       }
+      setLoading(false);
     } catch (err) {
+      setLoading(false);
       setError(err.message);
       console.error("Error fetching promo:", err.message);
       toast.error("Failed to fetch promos. Please try again later.");
@@ -48,6 +53,7 @@ function ListUlasan() {
 
   const handleAddPromo = async (e) => {
     e.preventDefault();
+
     if (!name || !ulasan || !rating || !image) {
       toast.error("Please fill out all fields before submitting.");
       return;
@@ -56,6 +62,7 @@ function ListUlasan() {
       toast.error("Rating must be between 1 and 5.");
       return;
     }
+    setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/tambahulasan`,
@@ -72,6 +79,7 @@ function ListUlasan() {
         }
       );
       if (response.status === 200) {
+        setLoading(false);
         setPromo((prev) => [...prev, response.data]);
         setOpen(false);
         setName("");
@@ -81,6 +89,7 @@ function ListUlasan() {
         toast.success("Promo added successfully!");
       }
     } catch (err) {
+      setLoading(false);
       setError(err.message);
       console.error("Error adding promo:", err.message);
       toast.error("Failed to add promo. Please try again later.");
@@ -88,6 +97,7 @@ function ListUlasan() {
   };
 
   const deletePromo = async () => {
+    setLoading(true);
     try {
       const response = await axios.delete(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/deleteulasan/${
@@ -98,8 +108,10 @@ function ListUlasan() {
         prev.filter((item) => item._id !== selectedReview._id)
       );
       setConfirmOpen(false);
+      setLoading(false);
       toast.success("Promo deleted successfully!");
     } catch (error) {
+      setLoading(false);
       setError(error.message);
       console.error("Error deleting promo:", error.message);
       toast.error("Failed to delete promo. Please try again later.");
@@ -111,6 +123,7 @@ function ListUlasan() {
       toast.error("Rating must be between 1 and 4.");
       return;
     }
+    setLoading(true);
     e.preventDefault();
     try {
       const { data: updatedPromo } = await axios.put(
@@ -129,6 +142,7 @@ function ListUlasan() {
           },
         }
       );
+      setLoading(false);
       toast.success("Promo updated successfully!");
       setPromo((prev) =>
         prev.map((item) =>
@@ -142,6 +156,7 @@ function ListUlasan() {
       setEditImage("");
       fetchPromo(); // Refresh the list
     } catch (error) {
+      setLoading(false);
       setError(error.message);
       console.error("Error updating promo:", error.message);
       toast.error("Failed to update promo. Please try again later.");
@@ -193,6 +208,50 @@ function ListUlasan() {
     <main className="flex flex-col container">
       <Navbar selected={"/ulasan"} />
       <ToastContainer />
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <section className="w-full pt-32 pb-20 flex flex-col items-center">
+          <h1 className="text-xl font-bold text-secondary">List Review</h1>
+          <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
+            {promo.length > 0
+              ? promo.map((item) => (
+                  <div
+                    key={item._id}
+                    className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                    <span className="font-SFPro font-normal text-base text-text">
+                      {item.nama}
+                    </span>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={(e) => handleEdit(item, e)}
+                        className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
+                        Edit
+                      </button>
+                      <button
+                        onClick={(e) => handleDelete(item, e)}
+                        className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))
+              : !error && (
+                  <div className="text-gray-500 mt-8">
+                    No promotions available
+                  </div>
+                )}
+          </div>
+
+          <div className="absolute right-0 bottom-0 p-4 z-0">
+            <button
+              onClick={() => setOpen(true)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md">
+              Tambah Review
+            </button>
+          </div>
+        </section>
+      )}
       <ConfirmPopup open={open} onClose={() => setOpen(false)}>
         <div className="w-fit flex space-x-4">
           <div className="w-full lg:w-fit p-5 border rounded-md shadow-md bg-white">
@@ -394,47 +453,6 @@ function ListUlasan() {
           </div>
         </div>
       </ConfirmPopup>
-
-      <section className="w-full pt-32 pb-20 flex flex-col items-center">
-        <h1 className="text-xl font-bold text-secondary">List Review</h1>
-        <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
-          {promo.length > 0
-            ? promo.map((item) => (
-                <div
-                  key={item._id}
-                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                  <span className="font-SFPro font-normal text-base text-text">
-                    {item.nama}
-                  </span>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={(e) => handleEdit(item, e)}
-                      className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
-                      Edit
-                    </button>
-                    <button
-                      onClick={(e) => handleDelete(item, e)}
-                      className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))
-            : !error && (
-                <div className="text-gray-500 mt-8">
-                  No promotions available
-                </div>
-              )}
-        </div>
-
-        <div className="absolute right-0 bottom-0 p-4 z-0">
-          <button
-            onClick={() => setOpen(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Tambah Review
-          </button>
-        </div>
-      </section>
     </main>
   );
 }
