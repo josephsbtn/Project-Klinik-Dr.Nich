@@ -100,7 +100,11 @@ export default function Navbar({ selected }) {
             />
             <div className="flex flex-col relative top-0 items-start px-[25px] pt-[20px] lg:pt-11 justify-start h-full gap-4">
               <div>
-                <img src={logo2} alt="Drnich Logo" />
+                <img
+                  src={logo2}
+                  alt="Drnich Logo"
+                  className="w-[150px] lg:w-32 lg:h-12 h-[58px] object-contain"
+                />
               </div>
 
               {/* Menu Links */}
