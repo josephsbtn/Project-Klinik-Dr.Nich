@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { modalContext } from './Cashback3'
 
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
 
 export const ModalsCashback = () => {
     const { modal, setModal, jenis, kategori, produk, produkTerpilih, setProdukTerpilih, kategoriname } = useContext(modalContext)

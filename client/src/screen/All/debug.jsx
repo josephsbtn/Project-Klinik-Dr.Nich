@@ -10,9 +10,9 @@ import ProdukTerbaru from "../../components/ProdukTerbaru";
 // IMAGE AND ICON
 import klinik from "../../assets/img-profil/klinik.png";
 import bgVM from "../../assets/img-profil/bgVisiMisi.png";
-import bunga from "../../assets/img-profil/bungaIcon.svg";
-import misiIcon from "../../assets/img-profil/misiIcon.svg";
-import arrow from "../../assets/arrow-right.svg";
+import bunga from "../../assets/img-profil/bungaIcon.svg?url";
+import misiIcon from "../../assets/img-profil/misiIcon.svg?url";
+import arrow from "../../assets/arrow-right.svg?url";
 //image layanan
 import facialglowacne from "../../assets/img-layanan/facialglowacne.png";
 import laserhollywood from "../../assets/img-layanan/laserhollywood.png";

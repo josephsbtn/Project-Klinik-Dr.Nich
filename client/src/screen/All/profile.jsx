@@ -8,8 +8,8 @@ import ProdukTerbaru from "../../components/ProdukTerbaru";
 // IMAGE AND ICON
 import klinik from "../../assets/img-profil/klinik.png";
 import bgVM from "../../assets/img-profil/bgVisiMisi.png";
-import bunga from "../../assets/img-profil/bungaIcon.svg";
-import misiIcon from "../../assets/img-profil/misiIcon.svg";
+import bunga from "../../assets/img-profil/bungaIcon.svg?url";
+import misiIcon from "../../assets/img-profil/misiIcon.svg?url";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
 import iPanahB from '../../assets/iconmanajement/iPanahB.svg'
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
 
 
 export const TambahDiskon = () => {

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { navContext } from "../../App2"
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
 import iTamPu from "../../assets/iconkasir/iTamPu.svg"
 import axios from 'axios';
 

@@ -2,20 +2,20 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 // Import logo and images
-import logoPutih from "../../assets/logodrnich-white.svg";
+import logoPutih from "../../assets/logodrnich-white.svg?url";
 
 // Social media logos
-import yt from "../../assets/logo-sosmed/YouTube.svg";
-import linkedIn from "../../assets/logo-sosmed/LinkedIn.svg";
-import tt from "../../assets/logo-sosmed/TikTok.svg";
-import fb from "../../assets/logo-sosmed/Facebook.svg";
-import ig from "../../assets/logo-sosmed/Instagram.svg";
+import yt from "../../assets/logo-sosmed/YouTube.svg?url";
+import linkedIn from "../../assets/logo-sosmed/LinkedIn.svg?url";
+import tt from "../../assets/logo-sosmed/TikTok.svg?url";
+import fb from "../../assets/logo-sosmed/Facebook.svg?url";
+import ig from "../../assets/logo-sosmed/Instagram.svg?url";
 
 // Footer logos
-import alamat from "../../assets/logo-footer/location.svg";
-import kontak from "../../assets/logo-footer/call.svg";
-import clock from "../../assets/logo-footer/clock.svg";
-import email from "../../assets/logo-footer/email.svg";
+import alamat from "../../assets/logo-footer/location.svg?url";
+import kontak from "../../assets/logo-footer/call.svg?url";
+import clock from "../../assets/logo-footer/clock.svg?url";
+import email from "../../assets/logo-footer/email.svg?url";
 
 // WhatsApp function
 import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController";

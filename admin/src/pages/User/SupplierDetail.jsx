@@ -3,7 +3,7 @@ import { navContext } from "../../App2";
 import { AiOutlineRight } from "react-icons/ai";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import wa from "../../assets/wa.svg";
+import wa from "../../assets/wa.svg?url";
 
 export const SupplierDetail = () => {
   const { setNav } = useContext(navContext);

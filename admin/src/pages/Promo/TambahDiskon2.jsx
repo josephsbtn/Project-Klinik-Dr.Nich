@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { navContext } from "../../App2"
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
 import iPanahS from '../../assets/iconmanajement/iPanahS.svg'
 
 

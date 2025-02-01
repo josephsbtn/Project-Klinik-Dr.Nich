@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import PromoCard from "../../components/promoCard.jsx";
 
 // IMAGE AND ICON
-import arrow from "../../assets/arrow-right.svg";
+import arrow from "../../assets/arrow-right.svg?url";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
 
 function Promo() {
