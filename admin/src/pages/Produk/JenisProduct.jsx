@@ -53,7 +53,7 @@ export const JenisProduct = () => {
             {filterData.map((data, i) => (
               <Link
                 to={{
-                  pathname: `/jenisprodukdetail/${data._id}`,
+                  pathname: `jenisprodukdetail/${data._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}

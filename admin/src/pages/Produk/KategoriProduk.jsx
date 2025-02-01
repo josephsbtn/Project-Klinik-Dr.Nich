@@ -28,7 +28,7 @@ export const KategoriProduk = () => {
       <div className="flex flex-col gap-3 w-full h-full items-center justify-start">
       {kategori.map((kat)=>(
         <Link to={{
-          pathname: `/kategoridet/${kat.Kategori}`
+          pathname: `kategoridet/${kat.Kategori}`
         }} className="w-full text-[#454545] border flex justify-between items-center rounded-xl border-yellow-600/30 px-[20px] py-[15px]"  key={kat.id}>
         <ul className=" flex flex-col place-items-start font-medium">
           <li>{kat.jenis}</li>

@@ -61,7 +61,7 @@ export const KategoriProdukDetail = () => {
             <p>Tanggal Disini</p>
           </div>
           <div className="mx-1 flex flex-col gap-3 h-full justify-between">
-          <a href={`/produkbykategori/${datax.kategori}`} className=" w-full h-[50px] border-b-2">
+          <a href={`produkbykategori/${datax.kategori}`} className=" w-full h-[50px] border-b-2">
           <span className="hover:scale-110 w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-bold px-5 p-3">
                 Lihat Daftar Produk
                 <div className="flex ms-auto">
@@ -75,7 +75,7 @@ export const KategoriProdukDetail = () => {
                 Hapus
               </button>
               <Link
-                to={{ pathname: `/KategoriProdukUpdate/${id}` }}
+                to={{ pathname: `KategoriProdukUpdate/${id}` }}
                 onClick={() => {
                   console.log(datax);
                 }}
