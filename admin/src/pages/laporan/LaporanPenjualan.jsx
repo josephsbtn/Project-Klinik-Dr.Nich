@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg"
-import iTgL from "../../assets/iconproduk/iTgl.svg"
-import iSeru from "../../assets/iconLaporanPenjualan/iSeru.svg"
-import iPanIjo from "../../assets/iconLaporanPenjualan/iPanIjo.svg"
-import iGrafik from "../../assets/iconLaporanPenjualan/iGrafik.svg"
-import i1 from "../../assets/iconLaporanPenjualan/i1.svg"
-import i2 from "../../assets/iconLaporanPenjualan/i2.svg"
-import i3 from "../../assets/iconLaporanPenjualan/i3.svg"
-import i4 from "../../assets/iconLaporanPenjualan/i4.svg"
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
+import iTgL from "../../assets/iconproduk/iTgl.svg?url";
+import iSeru from "../../assets/iconLaporanPenjualan/iSeru.svg?url";
+import iPanIjo from "../../assets/iconLaporanPenjualan/iPanIjo.svg?url";
+import iGrafik from "../../assets/iconLaporanPenjualan/iGrafik.svg?url";
+import i1 from "../../assets/iconLaporanPenjualan/i1.svg?url";
+import i2 from "../../assets/iconLaporanPenjualan/i2.svg?url";
+import i3 from "../../assets/iconLaporanPenjualan/i3.svg?url";
+import i4 from "../../assets/iconLaporanPenjualan/i4.svg?url";
 
 
 

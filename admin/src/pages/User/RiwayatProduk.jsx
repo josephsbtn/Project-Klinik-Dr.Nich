@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { navContext } from '../../App2'
-import iRiwa from "../../assets/iconproduk/iRiwa.svg"
+import iRiwa from "../../assets/iconproduk/iRiwa.svg?url";
 
 
 

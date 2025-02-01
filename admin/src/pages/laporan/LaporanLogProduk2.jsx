@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPan from "../../assets/iconLaporanPenjualan/iPan.svg"
+import iPan from "../../assets/iconLaporanPenjualan/iPan.svg?url";
 
 export const LaporanLogProduk2 = () => {
     const { setNav } = useContext(navContext)

@@ -2,11 +2,11 @@ import { AiOutlineBorderLeft, AiOutlineLineHeight, AiOutlineMenu, AiOutlineMenuF
 import { BiDotsVertical } from "react-icons/bi"
 import { useContext, useEffect } from "react"
 import { navContext } from "../../App2"
-import iBar from "../../assets/iconlaporan/iBar.svg"
-import iPenj from "../../assets/iconlaporan/iPenj.svg"
-import iPers from "../../assets/iconlaporan/iPers.svg"
-import iStok from "../../assets/iconlaporan/iStok.svg"
-import iLine from "../../assets/iLine.svg"
+import iBar from "../../assets/iconlaporan/iBar.svg?url";
+import iPenj from "../../assets/iconlaporan/iPenj.svg?url";
+import iPers from "../../assets/iconlaporan/iPers.svg?url";
+import iStok from "../../assets/iconlaporan/iStok.svg?url";
+import iLine from "../../assets/iLine.svg?url";
 
 export const Laporan = () => {
   const {setNav} = useContext(navContext)

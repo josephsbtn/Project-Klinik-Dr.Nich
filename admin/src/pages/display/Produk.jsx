@@ -4,12 +4,12 @@ import { RxAlignCenterVertically } from "react-icons/rx"
 import { useContext, useEffect } from "react"
 import { navContext } from "../../App2"
 
-import iLine from "../../assets/iLine.svg"
-import ilayanan from "../../assets/iconDisplay/Layanan/ilayanan.svg"
-import icp from "../../assets/iconDisplay/produk/icp.svg"
-import idp from "../../assets/iconDisplay/produk/idp.svg"
-import itkp from "../../assets/iconDisplay/produk/itkp.svg"
-import itp from "../../assets/iconDisplay/produk/itp.svg"
+import iLine from "../../assets/iLine.svg?url";
+import ilayanan from "../../assets/iconDisplay/Layanan/ilayanan.svg?url";
+import icp from "../../assets/iconDisplay/produk/icp.svg?url";
+import idp from "../../assets/iconDisplay/produk/idp.svg?url";
+import itkp from "../../assets/iconDisplay/produk/itkp.svg?url";
+import itp from "../../assets/iconDisplay/produk/itp.svg?url";
 import { Link } from "react-router-dom"
 
 

@@ -2,10 +2,10 @@ import { useState } from "react"
 import { AiFillPlusCircle, AiOutlineRightCircle, AiOutlineSearch } from "react-icons/ai"
 import { useContext, useEffect } from "react"
 import { navContext } from "../../App2"
-import iCenKu from "../../assets/iconproduk/iCenKu.svg"
-import iMin from "../../assets/iconproduk/iMin.svg"
-import iPlus from "../../assets/iconproduk/iPlus.svg"
-import iTambah from "../../assets/iconproduk/iTambah.svg"
+import iCenKu from "../../assets/iconproduk/iCenKu.svg?url";
+import iMin from "../../assets/iconproduk/iMin.svg?url";
+import iPlus from "../../assets/iconproduk/iPlus.svg?url";
+import iTambah from "../../assets/iconproduk/iTambah.svg?url";
 import { BsCart4 } from "react-icons/bs";
 
 

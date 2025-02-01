@@ -2,11 +2,11 @@ import { AiOutlineRight, AiOutlineSearch } from "react-icons/ai"
 import { BiDotsVertical } from "react-icons/bi"
 import { useContext, useEffect } from "react" 
 
-import iSupp from "../../../assets/icon/POS/iconuser/iSuplier.svg"
-import iTerapis from "../../../assets/icon/POS/iconuser/iTerapis.svg"
-import iMark from "../../../assets/icon/POS/iconuser/iMark.svg"
-import iPel from "../../../assets/icon/POS/iconuser/iPel.svg"
-import iLine from "../../../assets/icon/POS/iLine.svg"
+import iSupp from "../../../assets/icon/POS/iconuser/iSuplier.svg?url";
+import iTerapis from "../../../assets/icon/POS/iconuser/iTerapis.svg?url";
+import iMark from "../../../assets/icon/POS/iconuser/iMark.svg?url";
+import iPel from "../../../assets/icon/POS/iconuser/iPel.svg?url";
+import iLine from "../../../assets/icon/POS/iLine.svg?url";
 import { NavbarPosActive } from "../components/NavbarPosActive"
 
 export const USer = () => {

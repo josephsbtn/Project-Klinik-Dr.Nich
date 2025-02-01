@@ -3,8 +3,8 @@ import { AiFillPlusCircle, AiOutlineSearch } from "react-icons/ai";
 import { useContext, useEffect } from "react";
 import { navContext } from "../../../../App2";
 
-import gkt from "../../../../assets/iconDisplay/produk/gkt.svg";
-// import gkt from "../../../../assets/iconDisplay/produk/gkt.svg"
+import gkt from "../../../../assets/iconDisplay/produk/gkt.svg?url";
+// import gkt from "../../../../assets/iconDisplay/produk/gkt.svg?url";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

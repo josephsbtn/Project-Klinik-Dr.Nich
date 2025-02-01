@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPemSu from "../../assets/iconproduk/iPemSu.svg"
-import iDown from "../../assets/iconproduk/iDown.svg"
+import iPemSu from "../../assets/iconproduk/iPemSu.svg?url";
+import iDown from "../../assets/iconproduk/iDown.svg?url";
 
 
 export const PembayaranProduk = () => {

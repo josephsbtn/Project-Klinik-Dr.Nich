@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { navContext } from "../../App2"
-import iPan from "../../assets/iconproduk/iPan.svg"
-import iSeru from "../../assets/iconproduk/iSeru.svg"
-import iTambahP from "../../assets/iconproduk/iTambahP.svg"
+import iPan from "../../assets/iconproduk/iPan.svg?url";
+import iSeru from "../../assets/iconproduk/iSeru.svg?url";
+import iTambahP from "../../assets/iconproduk/iTambahP.svg?url";
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { DaftarBelanja } from './DaftarBelanja'

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { navContext } from "../../App2"
-import iPanah from "../../assets/iconkasir/iPanah.svg"
-import iFrame100 from "../../assets/iconkasir/iFrame100.svg"
-import iPan from "../../assets/iconkasir/iPan.svg"
+import iPanah from "../../assets/iconkasir/iPanah.svg?url";
+import iFrame100 from "../../assets/iconkasir/iFrame100.svg?url";
+import iPan from "../../assets/iconkasir/iPan.svg?url";
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 

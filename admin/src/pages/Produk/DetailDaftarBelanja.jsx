@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { navContext } from "../../App2"
-import iSeru from "../../assets/iconproduk/iSeru.svg"
-import iPan from "../../assets/iconproduk/iPan.svg"
+import iSeru from "../../assets/iconproduk/iSeru.svg?url";
+import iPan from "../../assets/iconproduk/iPan.svg?url";
 import { BsCart4 } from "react-icons/bs";
 
 export const DetailDaftarBelanja = () => {

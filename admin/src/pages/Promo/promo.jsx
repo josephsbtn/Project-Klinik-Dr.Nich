@@ -2,9 +2,9 @@ import { useContext, useEffect } from "react"
 import { AiOutlineBorderLeft, AiOutlineLineHeight, AiOutlineMenu, AiOutlineMenuFold, AiOutlineRight, AiOutlineShop, AiOutlineUp, AiOutlineVerticalLeft } from "react-icons/ai"
 import { BiDotsVertical } from "react-icons/bi"
 import { navContext } from "../../App2"
-import iDis from "../../assets/iconpromo/iDis.svg"
-import iCas from "../../assets/iconpromo/iCash.svg"
-import iLine from "../../assets/iLine.svg"
+import iDis from "../../assets/iconpromo/iDis.svg?url";
+import iCas from "../../assets/iconpromo/iCash.svg?url";
+import iLine from "../../assets/iLine.svg?url";
 
 
 export const Promo = () => {

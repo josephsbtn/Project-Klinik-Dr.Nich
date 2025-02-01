@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPemSu from "../../assets/iconproduk/iPemSu.svg"
-import iDown from "../../assets/iconproduk/iDown.svg"
-import iShare from "../../assets/iconLaporanPenjualan/iShare.svg"
+import iPemSu from "../../assets/iconproduk/iPemSu.svg?url";
+import iDown from "../../assets/iconproduk/iDown.svg?url";
+import iShare from "../../assets/iconLaporanPenjualan/iShare.svg?url";
 
 
 

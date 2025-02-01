@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { navContext } from "../../App2"
 import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
-import iTamPu from "../../assets/iconkasir/iTamPu.svg"
+import iTamPu from "../../assets/iconkasir/iTamPu.svg?url";
 import axios from 'axios';
 
 export const TambahDiskon4 = () => {

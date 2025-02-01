@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { navContext } from "../../App2"
-import iPanah from "../../assets/iconkasir/iPanah.svg"
-import iTamKu from "../../assets/iconkasir/iTamKu.svg"
-import iPan from "../../assets/iconkasir/iPan.svg"
+import iPanah from "../../assets/iconkasir/iPanah.svg?url";
+import iTamKu from "../../assets/iconkasir/iTamKu.svg?url";
+import iPan from "../../assets/iconkasir/iPan.svg?url";
 import { kasirContext } from './Kasir'
 import axios from 'axios'
 import { PilihPelanggan } from './PilihPelanggan'

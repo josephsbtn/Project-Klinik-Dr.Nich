@@ -5,10 +5,10 @@ import { useContext, useEffect } from "react"
 import { navContext } from "../../../App2"
 import { Link } from "react-router-dom"
 
-import iLine from "../../../assets/iLine.svg"
+import iLine from "../../../assets/iLine.svg?url";
 
-import ilayanan from "../../../assets/iconDisplay/Layanan/ilayanan.svg"
-import ikategori from "../../../assets/iconDisplay/Layanan/ikategori.svg"
+import ilayanan from "../../../assets/iconDisplay/Layanan/ilayanan.svg?url";
+import ikategori from "../../../assets/iconDisplay/Layanan/ikategori.svg?url";
 
 
 

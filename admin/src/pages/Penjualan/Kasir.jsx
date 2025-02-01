@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { navContext } from "../../App2"
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg"
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg"
-import iMin from "../../assets/iconproduk/iMin.svg"
-import iPlus from "../../assets/iconproduk/iPlus.svg"
-import iPan  from "../../assets/iconproduk/iPan.svg"
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
+import iMin from "../../assets/iconproduk/iMin.svg?url";
+import iPlus from "../../assets/iconproduk/iPlus.svg?url";
+import iPan  from "../../assets/iconproduk/iPan.svg?url";
 import axios from 'axios'
 import { Kasir4 } from './Kasir4'
 import { useNavigate } from 'react-router-dom'

@@ -2,12 +2,12 @@ import { AiOutlineBorderLeft, AiOutlineLineHeight, AiOutlineMenu, AiOutlineMenuF
 import { BiDotsVertical } from "react-icons/bi"
 import { RxAlignCenterVertically } from "react-icons/rx"
 import { useContext, useEffect } from "react"
-import iDaf from "../../../assets/icon/POS/iconproduk/iDaf.svg"
-import iKat from "../../../assets/icon/POS/iconproduk/iKat.svg"
-import iMan from "../../../assets/icon/POS/iconproduk/iMan.svg"
-import iPro from "../../../assets/icon/POS/iconproduk/iPro.svg"
-import iPem from "../../../assets/icon/POS/iconproduk/iPem.svg"
-import iLine from "../../../assets/icon/POS/iLine.svg"
+import iDaf from "../../../assets/icon/POS/iconproduk/iDaf.svg?url";
+import iKat from "../../../assets/icon/POS/iconproduk/iKat.svg?url";
+import iMan from "../../../assets/icon/POS/iconproduk/iMan.svg?url";
+import iPro from "../../../assets/icon/POS/iconproduk/iPro.svg?url";
+import iPem from "../../../assets/icon/POS/iconproduk/iPem.svg?url";
+import iLine from "../../../assets/icon/POS/iLine.svg?url";
 import { NavbarPosActive } from "../components/NavbarPosActive"
 
 export const Products = () => {

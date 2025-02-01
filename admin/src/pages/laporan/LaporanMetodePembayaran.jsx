@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iTgl from "../../assets/iconProduk/iTgl.svg"
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg"
-import iSeruTrans from "../../assets/iconLaporanPenjualan/iSeruTrans.svg"
-import iPan from "../../assets/iconLaporanPenjualan/iPan.svg"
-import iFrameGra from "../../assets/iconLaporanPenjualan/iFrameGra.svg"
-import iFrameKet from "../../assets/iconLaporanPenjualan/iFrameKet.svg"
+import iTgl from "../../assets/iconProduk/iTgl.svg?url";
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
+import iSeruTrans from "../../assets/iconLaporanPenjualan/iSeruTrans.svg?url";
+import iPan from "../../assets/iconLaporanPenjualan/iPan.svg?url";
+import iFrameGra from "../../assets/iconLaporanPenjualan/iFrameGra.svg?url";
+import iFrameKet from "../../assets/iconLaporanPenjualan/iFrameKet.svg?url";
 
 
 export const LaporanMetodePembayaran = () => {

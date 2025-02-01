@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react"
 import { AiOutlineUser, AiOutlineRead, AiFillFolderAdd, AiFillDatabase, AiOutlineFile, AiOutlineBook, AiOutlineAlert, AiOutlineFileZip, AiOutlineShop } from "react-icons/ai"
-import Ava from "../../assets/icon/POS/img.svg"
-import iUser from "../../assets/icon/POS/iconuser.svg"
-import iProduk from "../../assets/icon/POS/iconproduk.svg"
-import iLaporan from "../../assets/icon/POS/iconlaporan.svg"
-import iPromo from "../../assets/icon/POS/iconpromo.svg"
-import iStat from "../../assets/icon/POS/iconstatistik.svg"
-import iPenj from "../../assets/icon/POS/iconpenjuala.svg"
+import Ava from "../../assets/icon/POS/img.svg?url";
+import iUser from "../../assets/icon/POS/iconuser.svg?url";
+import iProduk from "../../assets/icon/POS/iconproduk.svg?url";
+import iLaporan from "../../assets/icon/POS/iconlaporan.svg?url";
+import iPromo from "../../assets/icon/POS/iconpromo.svg?url";
+import iStat from "../../assets/icon/POS/iconstatistik.svg?url";
+import iPenj from "../../assets/icon/POS/iconpenjuala.svg?url";
 import { NavbarPos } from "./components/Navbar"
 
 

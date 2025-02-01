@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg"
-import i1 from "../../assets/iconLaporanPenjualan/i1.svg"
-import i2 from "../../assets/iconLaporanPenjualan/i2.svg"
-import i3 from "../../assets/iconLaporanPenjualan/i3.svg"
-import i4 from "../../assets/iconLaporanPenjualan/i4.svg"
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
+import i1 from "../../assets/iconLaporanPenjualan/i1.svg?url";
+import i2 from "../../assets/iconLaporanPenjualan/i2.svg?url";
+import i3 from "../../assets/iconLaporanPenjualan/i3.svg?url";
+import i4 from "../../assets/iconLaporanPenjualan/i4.svg?url";
 
 export const LaporanProdukTerlaris = () => {
     const { setNav } = useContext(navContext)
