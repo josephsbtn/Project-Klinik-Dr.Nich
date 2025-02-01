@@ -16,7 +16,7 @@ export const JenisProduct = () => {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("https://api.drnich.co.id/api/pos/produk/jenisproduk")
+        .get("https://api.drnich.co.id/api/pos/produk/jenisproduk", {withCredentials: true})
         .then((response) => {
           setdatax(response.data);
         });
