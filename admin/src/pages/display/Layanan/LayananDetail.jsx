@@ -8,7 +8,7 @@ import { data, Link } from "react-router-dom";
 import { navContext } from "../../../App2";
 import { useLocation } from "react-router-dom";
 
-import gkategori from "../../../assets/iconDisplay/layanan/gkategori.svg";
+import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
 
 export const LayananDetail = () => {
   const lokasi = useLocation();
