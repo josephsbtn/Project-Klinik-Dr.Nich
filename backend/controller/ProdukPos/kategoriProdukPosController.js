@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import kategoriProdukPosModels from "../../models/ProdukPos/kategoriProdukPos.js";
+import kategoriProdukPosModels from "../../models/ProdukPOS/kategoriProdukPos.js";
 import mongoose from 'mongoose';    
 
 const newkategoriProdukPos = asyncHandler(async (req, res) => {

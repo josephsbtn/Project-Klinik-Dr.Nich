@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import jenisProdukPosModels from "../../models/ProdukPos/jenisProdukPos.js";
+import jenisProdukPosModels from "../../models/ProdukPOS/jenisProdukPos.js";
 
   const newjenisProdukPos = asyncHandler(async (req, res) => {
     const newjenisProdukPos = {
