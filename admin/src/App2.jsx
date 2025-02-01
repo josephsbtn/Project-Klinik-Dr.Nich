@@ -122,15 +122,10 @@ import GaleriDetail from "./pages/display/Galeri/GaleriDetail";
 import Rating from "./pages/display/Rating/Rating";
 import RetingAdd from "./pages/display/Rating/RetingAdd";
 import RatingDetail from "./pages/display/Rating/RatingDetail";
-import Select from "./pages/display/belajarFetching/Select";
 import DiskonDetail from "./pages/Promo/DiskonDetail";
 import CashbackDetail from "./pages/cashback/CashBackDetail";
-import Tailwindcss from "./pages/display/belajarFetching/tailwindcss";
-import PelangganData from "./pages/display/belajarFetching/PelangganData";
 import { TerapisUpdate } from "./pages/User/TerapisUpdate";
 import { PelangganUpdate } from "./pages/User/PelangganUpdate";
-import MenambahkanPelanggan from "./pages/display/belajarFetching/MenambahkanPelanggan";
-import PelangganDetailni from "./pages/display/belajarFetching/PelangganDetailni";
 import UpdateSertifikat from "./pages/display/Sertifikat/UpdateSertifikat";
 import UpdateKategoti from "./pages/display/Layanan/UpdateKategoti";
 import UpdateLayanan from "./pages/display/Layanan/UpdateLayanan";
@@ -139,10 +134,8 @@ import UpdateTipeProduk from "./pages/display/Produk/tipeProduk/UpdateTipeProduk
 import UpdateDaftarProduk from "./pages/display/Produk/DaftarProduk/UpdateDaftarProduk";
 import UpdateGaleri from "./pages/display/Galeri/UpdateGaleri";
 import UpdateRating from "./pages/display/Rating/UpdateRating";
-import PelangganEdit from "./pages/display/belajarFetching/PelangganEdit";
 import { KategoriProdukUpdate } from "./pages/Produk/KategoriProdukUpdate";
 import { DaftarProdukUpdate } from "./pages/Produk/DaftarProdukUpdate";
-import FetchingProduk from "./pages/display/belajarFetching/fetchingProduk";
 import { Editsupplier } from "./pages/User/EditSupplier";
 import { UpdateMarketing } from "./pages/User/UpdateMarketing";
 import { UpdateJenisProduk } from "./pages/Produk/UpdateJenisProduk";
@@ -354,16 +347,6 @@ function App2() {
         <Route path="/diskon" element={<Diskon />} />
         <Route path="/cashbackDetail/:id" element={<CashbackDetail />} />
         {/* belajar */}
-        <Route path="/select" element={<Select />} />
-        <Route path="/tailwindcss" element={<Tailwindcss />} />
-        <Route path="/pelanggandata" element={<PelangganData />} />
-        <Route
-          path="/menambahkanpelanggan"
-          element={<MenambahkanPelanggan />}
-        />
-        <Route path="/pelanngandetailni/:id" element={<PelangganDetailni />} />
-        <Route path="/PelangganEdit/:id" element={<PelangganEdit />} />
-        <Route path="/fetchingData" element={<FetchingProduk />} />
         {/* end belajar */}
         <Route path="/terapisUpdate/:id" element={<TerapisUpdate />} />
         <Route path="/pelanggangupdate/:id" element={<PelangganUpdate />} />
