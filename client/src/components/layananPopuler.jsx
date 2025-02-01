@@ -45,11 +45,11 @@ function LayananPopuler() {
   return (
     <section className="flex flex-col my-[26px] w-full items-center">
       <main className="w-full flex justify-between">
-        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
-          Layanan Populer
+        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-tight">
+          Treatment Populer
         </h1>
         <h1
-          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer"
+          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer tracking-tight"
           onClick={() => navigate("layanan/viewAllTreatment")}>
           Lihat Semua
         </h1>

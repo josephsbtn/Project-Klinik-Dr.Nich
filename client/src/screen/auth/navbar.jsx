@@ -92,13 +92,13 @@ export default function Navbar({ selected }) {
         {isNavOpen && (
           <div
             ref={navRef}
-            className="bg-[#c2a353] w-[253px] h-full fixed top-0 left-0 z-50 lg:w-[462px]">
+            className="bg-[#c2a353] w-[253px] h-screen fixed top-0 left-0 z-50 lg:w-[462px]">
             <img
               src={bgHamburger}
               className="absolute bottom-0 w-full h-auto object-cover"
               alt="Background"
             />
-            <div className="flex flex-col relative top-0 items-start px-[25px] pt-[20px] lg:pt-11 justify-start h-full gap-4">
+            <div className="flex flex-col relative top-0 items-start px-[25px] pt-8 lg:pt-11 justify-start h-full gap-4">
               <div>
                 <img
                   src={logo2}
@@ -121,7 +121,7 @@ export default function Navbar({ selected }) {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between w-full cursor-pointer hover:bg-primary hover:bg-opacity-30 p-3 rounded-xl transition-all duration-300"
+                    className="flex items-center justify-between w-full cursor-pointer hover:bg-primary hover:bg-opacity-30  p-2 rounded-xl transition-all duration-300"
                     onClick={() => handleNavigation(item.path, item.text)}>
                     <span
                       className={`font-SFPro font-medium text-sm ${
@@ -141,8 +141,8 @@ export default function Navbar({ selected }) {
               </div>
 
               {/* Contact Information */}
-              <div className="flex flex-col pt-[40.41px]">
-                <h1 className="text-white text-base font-medium tracking-tight lg:text-xl">
+              <div className="flex flex-col pt-2 lg:pt-0">
+                <h1 className="text-white font-SFPro text-base font-medium tracking-tight lg:text-xl">
                   Kontak Kami
                 </h1>
                 <div className="flex flex-col w-[173px] space-y-4 pt-[26.59px] lg:w-[358px] lg:text-base">
@@ -154,7 +154,7 @@ export default function Navbar({ selected }) {
                     />
                     <a
                       href=""
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
+                      className="text-left font-SFPro text-[#e8ebe0] text-xs font-normal leading-tight">
                       Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec.
                       Argomulyo, Kota Salatiga, Jawa Tengah 50733
                     </a>
@@ -163,7 +163,7 @@ export default function Navbar({ selected }) {
                     <img src={email} className="w-[15px] h-[15px]" alt="Icon" />
                     <a
                       href="#"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
+                      className="text-left font-SFPro text-[#e8ebe0] text-xs font-normal leading-tight">
                       drnich@email.com
                     </a>
                   </div>
@@ -191,7 +191,7 @@ export default function Navbar({ selected }) {
               </div>
 
               {/* Social Media */}
-              <div className="flex flex-col items-center w-full pt-[40px]">
+              <div className="flex flex-col items-center w-full pt-[30px]">
                 <div className="w-[126px] flex items-center space-x-4">
                   {[yt, linkedIn, tt, fb, ig].map((icon, index) => (
                     <img

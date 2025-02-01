@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
@@ -10,10 +11,12 @@ import klinik from "../../assets/img-profil/klinik.png";
 import bgVM from "../../assets/img-profil/bgVisiMisi.png";
 import bunga from "../../assets/img-profil/bungaIcon.svg";
 import misiIcon from "../../assets/img-profil/misiIcon.svg";
+import ArrowRightDisable from "../../components/ArrowRight-Disable";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import { Carousel } from "@material-tailwind/react";
 
 import axios from "axios";
 
@@ -22,6 +25,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 function Profile() {
+  const navigate = useNavigate();
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const [jenisLayanan, setJenisLayanan] = useState([]);
@@ -51,7 +55,8 @@ function Profile() {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL_BACKEND
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
         }/api/layanan/getAllJenisLayanan`
       );
       const fotoMesin = (
@@ -82,8 +87,8 @@ function Profile() {
     } catch (error) {
       setError(
         "Failed to fetch jenis layanan. Please try again later (" +
-        error.message +
-        ")"
+          error.message +
+          ")"
       );
     } finally {
       setLoading(false);
@@ -95,21 +100,31 @@ function Profile() {
   }, []);
 
   return (
-    <>
+    <main className="w-full flex flex-col items-center">
       <div className="fixed w-full z-50 top-0">
         <Navbar selected={"Profile"} />
       </div>
-      <div className="mx-[25px] mt-[18px] lg:mx-[120px]">
-        <div className="flex-col lg:items-center lg:justify-center">
-          <p className="text-[#bdbdbd] text-xs font-normal font-SFPro tracking-tight lg:text-sm">
-            Profil
-          </p>
+      <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
+        <a
+          onClick={() => navigate("/")}
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
+          Beranda
+        </a>
+        <ArrowRightDisable />
+        <a
+          onClick={() => navigate("/promo")}
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
+          Promo
+        </a>
+      </div>
+      <div className=" flex flex-col items-center mx-[25px] lg:mx-[120px] w-[90%] lg:w-4/5">
+        <div className="flex-col items-center lg:items-center lg:justify-center">
           <img
             src={klinik}
             className="mt-[30px] lg:w-[1040px] lg:h-[719px] lg:mx-auto"
             alt="Klinik"
           />
-          <p className="w-[326px] mt-[24px] text-xs font-normal font-SFPro leading-tight tracking-tight lg:w-full lg:mx-auto lg:text-base">
+          <p className=" mt-[24px] text-xs font-normal font-SFPro leading-tight tracking-tight lg:mx-auto lg:text-base">
             Dr. Nick Aesthetic Clinic merupakan klinik kecantikan yg didirikan
             pada tahun 2024. Dengan dedikasi penuh terhadap keunggulan dan
             inovasi, kami membawa teknologi terbaru dan metode perawatan yang
@@ -135,7 +150,7 @@ function Profile() {
               <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-lg">
                 Visi Dr. Nich Beauty Aesthetic
               </h1>
-              <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
+              <p className="w-[250px] text-justify font-SFPro text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
                 Visi kami adalah untuk memimpin industri estetika dengan menjadi
                 klinik terdepan yang dikenal karena inovasi, kualitas, dan
                 layanan pelanggan yang luar biasa. Kami berupaya untuk terus
@@ -161,7 +176,7 @@ function Profile() {
               <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-lg">
                 Misi Dr. Nich Beauty Aesthetic
               </h1>
-              <p className="w-[250px] text-justify text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
+              <p className="w-[250px] text-justify font-SFPro text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
                 Misi kami adalah membantu setiap pasien mencapai kepercayaan
                 diri dan kecantikan alami mereka melalui perawatan yang inovatif
                 dan aman. Kami berkomitmen untuk menjadi klinik kecantikan
@@ -173,91 +188,90 @@ function Profile() {
         </div>
 
         {/* Sertifikasi Section */}
-        <div className="flex flex-col pt-10">
+        <div className="flex flex-col pt-10 w-full mx-auto ">
           {/* Section Title */}
-          <div className="w-full mx-auto text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight">
+          <div className="w-full mx-auto text-left text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-tight">
             Mengapa memilih Dr. Nich?
           </div>
 
           {/* Carousel Container */}
-          <div className="flex flex-col gap-[15px] justify-center items-center pt-4 pb-4 lg:flex-row">
-            <div className="w-[325px] bg-white rounded-lg border border-gray-200 p-6 flex flex-col justify-center items-center shadow-sm lg:w-[504px]">
-              <h1 className="pb-4 text-[#c2a353] text-sm font-medium font-SFPro leading-tight tracking-tight">
+          <div className="flex flex-col lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4 bg-blue-gray-600">
+            <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
                 Berpengalaman dan Bersertifikat
               </h1>
-              <Swiper
-                modules={[Autoplay]}
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                loop={true}
-                spaceBetween={20}
+              <Carousel
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg overflow-hidden "
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: false,
+                }}
+                autoplayDelay={2000}
                 slidesPerView={1}
-                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
+                spaceBetween={20}
+                loop={true} // Enable looping
+                navigation={false}>
                 {fotoSertif && fotoSertif.length > 0 ? (
                   fotoSertif.map((item) => (
-                    <SwiperSlide key={item._id}>
-                      <img
-                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
-                        src={item.foto}
-                        alt={item.nama}
-                      />
-                    </SwiperSlide>
+                    <div key={item._id} className="relative px-2">
+                      <div className="h-[250px] lg:h-[350px] w-full">
+                        <img
+                          className="object-cover bg-yellow-200"
+                          src={item.foto}
+                          alt={item.nama}
+                        />
+                      </div>
+                    </div>
                   ))
                 ) : loading ? (
-                  <>
-                    <SwiperSlide>
-                      <div className="w-full h-full flex items-center justify-center ">
-                        <h1>loading . . .</h1>
-                      </div>
-                    </SwiperSlide>
-                  </>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>loading . . .</h1>
+                  </div>
                 ) : (
-                  <SwiperSlide>
-                    <div className="w-full h-full flex items-center justify-center ">
-                      <h1> No data found</h1>
-                    </div>
-                  </SwiperSlide>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>No data found</h1>
+                  </div>
                 )}
-              </Swiper>
+              </Carousel>
             </div>
 
             {/* Teknologi */}
-            <div className="w-[325px] bg-white rounded-lg border border-gray-200 p-6 flex flex-col justify-center items-center shadow-sm lg:w-[504px]">
-              <h1 className="pb-4 text-[#c2a353] text-sm font-medium font-SFPro leading-tight tracking-tight text-center">
+            <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
                 Teknologi Terkini & Produk Berkualitas
               </h1>
-              <Swiper
-                modules={[Autoplay]}
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                loop={true}
-                spaceBetween={20}
+              <Carousel
+                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg [&_.carousel-navigation]:hidden overflow-hidden"
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: true,
+                }}
                 slidesPerView={1}
-                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg">
+                spaceBetween={20}
+                autoplayDelay={2000}
+                loop={true}
+                navigation={({ nextEl: "hidden", prevEl: "hidden" }, false)} // Use the CarouselNavigation component
+              >
                 {fotoMesin && fotoMesin.length > 0 ? (
                   fotoMesin.map((item) => (
-                    <SwiperSlide key={item._id}>
+                    <div key={item._id} className="relative px-2">
                       <img
-                        className="h-[198px] lg:h-full flex items-center justify-center bg-blue-500 text-white text-lg font-semibold"
+                        className="h-[198px] lg:h-full w-full object-cover bg-blue-500 text-white text-lg font-semibold"
                         src={item.foto}
                         alt={item.nama}
                       />
-                    </SwiperSlide>
+                    </div>
                   ))
                 ) : loading ? (
-                  <>
-                    <SwiperSlide>
-                      <div className="w-full h-full flex items-center justify-center ">
-                        <h1>loading . . .</h1>
-                      </div>
-                    </SwiperSlide>
-                  </>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>loading . . .</h1>
+                  </div>
                 ) : (
-                  <SwiperSlide>
-                    <div className="w-full h-full flex items-center justify-center ">
-                      <h1> No data found</h1>
-                    </div>
-                  </SwiperSlide>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <h1>No data found</h1>
+                  </div>
                 )}
-              </Swiper>
+              </Carousel>
             </div>
           </div>
           <div className="flex flex-col gap-4 z-0">
@@ -272,7 +286,7 @@ function Profile() {
         </div>
       </div>
       <Footer />
-    </>
+    </main>
   );
 }
 

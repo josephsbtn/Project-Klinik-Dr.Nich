@@ -6,27 +6,33 @@ function ProdukCard({ item }) {
   return (
     <>
       <div
-        className="w-[184px] h-[276px] relative flex items-center justify-center"
+        className="w-[184px] h-[276px] flex flex-col justify-start cursor-pointer items-center border border-disable-line rounded-lg p-1 shadow-sm bg-white
+        hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)] 
+       duration-300 transition-all ease-in-out"
         onClick={() => navigate(`/produk/detailProduk/${item._id}`)}>
-        <div className="w-[184px] h-[276px] rounded-[10px] p-2 lg:p-3 bg-white border border-disable-line flex flex-col">
-          <img
-            src={item.foto}
-            className="w-[173px] h-[167px] object-cover mx-auto mt-1 rounded-xl"
-            alt=""
-          />
-          <p className="w-[166px] text-[#464646] text-left text-sm mx-2 lg:mt-2 font-normal font-SFPro leading-tight tracking-tight">
-            {item.nama}
-          </p>
-          {/* type shi */}
-          <div className="flex items-center gap-2 mx-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
+        <img
+          src={item.foto}
+          alt={item.nama}
+          className=" w-[184px] h-[174px] object-cover rounded-md"
+        />
+
+        <div className="flex flex-col justify-start items-start lg:mt-2 space-y-1 w-full h-24 px-2">
+          <div className="flex items-center w-full justify-between pt-1 lg:pt-0">
+            <h1 className="text-sm font-normal text-text font-SFPro  leading-tight tracking-tight">
+              {item.nama}
+            </h1>
+          </div>
+
+          {/* Apply 2-line clamp */}
+          <p className="flex items-center space-x-2 text-xs lg:text-sm text-disable-text font-light leading-[17px] tracking-tight font-SFPro">
             <p>{item.kategori?.name}</p>
             <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
-            <p>{item.tipeProduk?.nama}</p>
-          </div>
-          {/* harga */}
-          <div className="flex items-center gap-2 mx-2 text-[#c2a353] my-2 text-base font-bold font-SFPro leading-tight tracking-tight">
-            <p>Rp {item.harga?.toLocaleString("id-ID")}</p>
-          </div>
+            <p>{item.tipeProduk?.name}</p>
+          </p>
+
+          <h1 className="text-gold pt-2 lg:pt-0 text-sm lg:text-base font-semibold text-secondary font-SFPro leading-tight tracking-tight">
+            Rp {item.harga?.toLocaleString("id-ID")}
+          </h1>
         </div>
       </div>
     </>

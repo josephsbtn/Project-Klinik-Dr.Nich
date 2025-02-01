@@ -46,11 +46,11 @@ function ProdukTerbaru() {
   return (
     <section className="flex flex-col my-[26px] w-full items-center">
       <main className="w-full flex justify-between">
-        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
+        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-tight">
           Produk Baru!
         </h1>
         <h1
-          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer"
+          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer  tracking-tight"
           onClick={() => navigate("/produk/AllProduct")}>
           Lihat Semua
         </h1>
@@ -72,10 +72,10 @@ function ProdukTerbaru() {
           </div>
         </>
       ) : (
-        <div className="flex flex-col w-full lg:w-full pt-[15px]">
-          <div className="flex lg:justify-start justify-center items-center pt-[15px]  ">
-            <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
-              <div className="carousel-item gap-9">
+        <div className="flex flex-col w-full lg:w-full pt-[15px] lg:pt-0">
+          <div className="flex lg:justify-start justify-center items-center pt-[15px] lg:pt-0  ">
+            <div className="carousel carousel-center w-full lg:w-full space-x-[10px] py-6 ">
+              <div className="carousel-item gap-6">
                 {produk ? (
                   produk.slice(0, limit).map((item) => (
                     <div key={item._id}>

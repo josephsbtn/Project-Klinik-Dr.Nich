@@ -83,7 +83,7 @@ function DetailTreatment() {
           <>
             <a
               onClick={() => navigate(`/layanan/detail/${idJenis}`)}
-              className="cursor-pointer text-xs text-disable-text font-normal">
+              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
               {resDataJenis?.nama}
             </a>
             <ArrowRightDisable />
@@ -91,7 +91,7 @@ function DetailTreatment() {
         )}
         <a
           onClick={() => navigate(`/layanan/detail/${idJenis}/${idTreatment}`)}
-          className="cursor-pointer text-xs text-disable-text font-normal">
+          className="cursor-pointer text-xs text-disable-text  lg:text-sm font-normal">
           {judul}
         </a>
       </div>
@@ -122,7 +122,7 @@ function DetailTreatment() {
                 Durasi Treatment: {durasi}
               </p>
               <button
-                className="w-full py-3 lg:w-[15%] lg:mt-8  rounded-xl bg-secondary text-white text-sm font-SFPro font-medium"
+                className="w-full py-3 lg:w-[15%] lg:mt-8  rounded-xl bg-secondary text-white text-sm font-SFPro font-medium hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)] transition-all duration-200"
                 onClick={() => {
                   sendWhatsAppReservasiLayananMessage(judul);
                 }}>

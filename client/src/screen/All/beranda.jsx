@@ -342,16 +342,16 @@ export default function Beranda() {
         </div>
 
         {/* Sertifikasi Section */}
-        <div className="flex flex-col w-[90%] lg:w-[70%] items-center justify-center pt-10 lg:mt-12">
+        <div className="flex flex-col w-[90%] lg:w-[80%] items-center justify-center pt-10 lg:mt-12 ">
           {/* Section Title */}
-          <div className="w-full mx-auto pl-[21px] text-left text-[#464646] text-base font-medium font-SFPro leading-tight tracking-tight lg:text-2xl lg:pl-0 lg:py-6 ">
+          <div className="w-full mx-auto text-left text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-tight">
             Mengapa memilih Dr. Nich?
           </div>
 
           {/* Carousel Container */}
-          <div className="flex flex-col lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4">
+          <div className="flex flex-col w-full lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4">
             <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-secondary lg:text-xl">
                 Berpengalaman dan Bersertifikat
               </h1>
               <Carousel
@@ -391,7 +391,7 @@ export default function Beranda() {
 
             {/* Teknologi */}
             <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-secondary lg:text-xl">
                 Teknologi Terkini & Produk Berkualitas
               </h1>
               <Carousel
@@ -432,19 +432,21 @@ export default function Beranda() {
 
         {/* Jenis Layanan Section */}
         <section className="flex flex-col my-8 w-full items-center">
-          <main className="w-[90%] flex flex-col items-center lg:w-[70%]  ">
-            <div className="flex w-full justify-between items-center lg:py-6 ">
-              <h1 className="font-SFPro font-medium text-base lg:text-xl">
+          <main className="w-[90%] flex flex-col items-center lg:w-[80%]   ">
+            <div className="flex w-full justify-between items-center lg:py-6  ">
+              <h1 className="font-SFPro font-normal text-base lg:text-xl leading-[25px] tracking-tight">
                 Layanan
               </h1>
-              <button className="font-SFPro text-xs text-secondary font-medium lg:text-base">
+              <button
+                className="font-SFPro text-xs text-secondary font-medium lg:text-base tracking-tight"
+                onClick={() => navigate("/layanan")}>
                 Lihat semua
               </button>
             </div>
             {loading ? (
               <p>Loading...</p>
             ) : (
-              <div className="grid w-full grid-cols-2 gap-4 items-center justify-center xl:grid-cols-4  sm:grid-cols-2 mt-4 lg:gap-10">
+              <div className="grid w-full  grid-cols-2 gap-4 items-center justify-center xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-4 lg:gap-12 ">
                 {jenisLayanan && jenisLayanan.length > 0 ? (
                   jenisLayanan.slice(0, 8).map((item) => (
                     <div key={item._id}>
@@ -462,22 +464,22 @@ export default function Beranda() {
           </main>
         </section>
 
-        <section className="lg:w-[70%] w-[90%]">
+        <section className="lg:w-[80%] w-[90%]">
           <LayananPopuler />
         </section>
-        <section className="lg:w-[70%] w-[90%]">
+        <section className="lg:w-[80%] w-[90%]">
           <ProdukTerbaru />
         </section>
 
         {/* Galeri Section */}
-        <section className="lg:w-[70%] flex flex-col my-[26px] w-full items-center">
+        <section className="lg:w-[80%] flex flex-col my-[26px] w-full items-center">
           {/* Header */}
           <main className="w-full flex lg:px-0 px-6 justify-between">
-            <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
-              Gallery
+            <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-tight">
+              Galeri
             </h1>
             <h1
-              className="font-SFPro text-xs text-secondary font-medium lg:text-base"
+              className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer tracking-tight"
               onClick={() => navigate("/galeri")}>
               Lihat Semua
             </h1>
@@ -492,7 +494,7 @@ export default function Beranda() {
                   gallery.slice(0, limitGallery).map((item, index) => (
                     <div
                       key={item._id}
-                      className="carousel-item hover:scale-105 transition-all duration-300"
+                      className="carousel-item  transition-all duration-300 cursor-pointer"
                       onClick={(e) => {
                         e.preventDefault();
                         window.location.href = `${item.link}`;
@@ -506,15 +508,15 @@ export default function Beranda() {
                         />
 
                         {/* Dynamic Product Name */}
-                        <p className="w-full text-[ #464646] text-left text-sm  my-2 font-normal font-['SF Pro Display'] leading-tight tracking-tight">
+                        <p className="w-full hover:text-secondary mt-2 transition-all duration-150 text-text text-left text-sm font-normal font-SFPro leading-tight tracking-tight">
                           {item.judul}
                         </p>
 
                         {/* Dynamic Product Type */}
-                        <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-tight tracking-tight">
+                        <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-[25px] tracking-tight ">
                           <p>{item.sosmed}</p>{" "}
                           {/* Assuming `type` holds the product type */}
-                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
+                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full font-SFPro" />
                           <p>{item.channel}</p>{" "}
                           {/* Assuming `category` holds the product category */}
                         </div>
@@ -540,10 +542,11 @@ export default function Beranda() {
           <Swiper
             className="py-10"
             modules={[Autoplay, Navigation]}
+            swipeHandler={true}
             autoplay={{ delay: 3000 }}
             loop={true}
-            slidesPerView={"auto"}
-            spaceBetween={-100} // Set gap to 15px
+            slidesPerView={window.innerWidth >= 1024 ? 3 : "auto"}
+            spaceBetween={1} // Set gap to 15px
             centeredSlides={true}
             onSlideChange={(swiper) => setProgress(swiper.realIndex)} // Update active index
           >
@@ -551,7 +554,7 @@ export default function Beranda() {
               ulasan.map((item, dex) => (
                 <SwiperSlide
                   key={item.id}
-                  className="flex-shrink-0 w-[280px]" // Fixed card width
+                  className="w-full flex-shrink-0 max-w-[280px]" // Fixed card width
                 >
                   <div className="bg-white w-[265px] rounded-lg shadow-md p-6 border border-gray-200">
                     {/* Header */}
@@ -578,7 +581,9 @@ export default function Beranda() {
                     </div>
 
                     {/* Review Content */}
-                    <p className="mt-4 text-sm text-gray-600">{item.ulasan}</p>
+                    <p className="mt-4 text-sm text-gray-600 line-clamp-5">
+                      {item.ulasan}
+                    </p>
                   </div>
                 </SwiperSlide>
               ))}

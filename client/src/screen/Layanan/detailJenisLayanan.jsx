@@ -86,7 +86,7 @@ function DetailJenisLayanan() {
             <h1 className="text-base font-medium font-SFPro text-secondary lg:text-2xl leading-5">
               {judul}
             </h1>
-            <p className="max-w-full text-start font-SFPro text-text text-xs lg:text-base">
+            <p className="max-w-full text-start font-SFPro text-text text-xs lg:text-lg">
               {deskripsi}
             </p>
 
@@ -94,7 +94,7 @@ function DetailJenisLayanan() {
               Daftar Treatment
             </h1>
 
-            <div className="flex flex-col items-center space-y-3 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  items-center space-y-3 w-full">
               {listLayanan?.map((item) => (
                 <div
                   key={item._id}
