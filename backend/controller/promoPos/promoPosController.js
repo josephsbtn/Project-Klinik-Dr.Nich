@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-import PromoModels from "../../models/promoPOS/promoPos.js";
-import PromoDetailModel from "../../models/promoPOS/promoDetailPos.js";
+import PromoModels from "../../models/PromoPOS/promoPos.js";
+import PromoDetailModel from "../../models/PromoPOS/promoDetailPos.js";
 
 const newPromo = asyncHandler(async (req, res) => {
   const { namaPromo, potongan, cashback, jenis, keterangan, jenisPotongan, promoDetail, berlakuDari, berlakuSampai } = req.body;

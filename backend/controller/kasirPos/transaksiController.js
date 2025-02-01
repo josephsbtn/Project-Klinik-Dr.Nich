@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import TransaksiModels from "../../models/KasirPOS/transaksiPos.js";
 import transaksiDetailModels from "../../models/KasirPOS/detailTransaksiPos.js";
 import ProdukModels from "../../models/ProdukPOS/produkPos.js";
-import promoModels from "../../models/promoPOS/promoPos.js";
+import promoModels from "../../models/PromoPOS/promoPos.js";
 import pelangganModels from "../../models/User/pelangganPos.js";
 
 const newTransaksi = asyncHandler(async (req, res) => {

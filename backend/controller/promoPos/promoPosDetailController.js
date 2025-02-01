@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import PromoDetailModels from "../../models/promoPOS/promoDetailPos.js";
+import PromoDetailModels from "../../models/PromoPOS/promoDetailPos.js";
 
 const newPromoDetail = asyncHandler(async (req, res) => {
   const { promo, produk } = req.body;
