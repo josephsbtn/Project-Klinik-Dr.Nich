@@ -209,6 +209,8 @@ function Profile() {
                 autoplayDelay={2000}
                 slidesPerView={1}
                 spaceBetween={20}
+                nextArrow={false}
+                prevArrow={false}
                 loop={true} // Enable looping
                 navigation={false}>
                 {fotoSertif && fotoSertif.length > 0 ? (
@@ -248,6 +250,8 @@ function Profile() {
                 }}
                 slidesPerView={1}
                 spaceBetween={20}
+                nextArrow={false}
+                prevArrow={false}
                 autoplayDelay={2000}
                 loop={true}
                 navigation={({ nextEl: "hidden", prevEl: "hidden" }, false)} // Use the CarouselNavigation component

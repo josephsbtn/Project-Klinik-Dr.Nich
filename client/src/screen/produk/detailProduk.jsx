@@ -77,7 +77,7 @@ function DetailProduk() {
   return (
     <section className="flex flex-col items-center space-y-4">
       <div className="fixed w-full z-10">
-        <Navbar selected={"Layanan"} />
+        <Navbar selected={"Produk"} />
       </div>
       <div className="flex items-center w-[90%] lg:w-[80%] justify-start space-x-2 mt-4 pt-20">
         <a
@@ -145,7 +145,7 @@ function DetailProduk() {
                 </h1>
               </div>
               <div className="w-full justify-between items-start mt-4 hidden lg:flex">
-                <button className="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg">
+                <button className="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg leading-tight tracking-tight hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)]">
                   Order Melalui WhatsApp
                 </button>
               </div>
@@ -156,18 +156,18 @@ function DetailProduk() {
                   onClick={(e) => changeSelected(e, "deskripsi")}
                   className={`${
                     selected === "deskripsi"
-                      ? "text-text border-b-secondary border-b"
+                      ? "text-text border-b-secondary border-b "
                       : "text-disable-text"
-                  } font-SFPro text-sm pb-2 px-2 lg:text-base`}>
+                  } font-SFPro text-sm pb-2 px-2 lg:text-base w-1/3 transition-all ease-in-out duration-200`}>
                   Deskripsi
                 </button>
                 <button
                   onClick={(e) => changeSelected(e, "manfaat")}
                   className={`${
                     selected === "manfaat"
-                      ? "text-text border-b-secondary border-b"
+                      ? "text-text border-b-secondary border-b "
                       : "text-disable-text"
-                  } font-SFPro text-sm pb-2 px-2 lg:text-base`}>
+                  } font-SFPro text-sm pb-2 px-2 lg:text-base w-1/3 transition-all ease-in-out duration-200`}>
                   Manfaat
                 </button>
                 <button
@@ -176,7 +176,7 @@ function DetailProduk() {
                     selected === "caraPakai"
                       ? "text-text border-b-secondary border-b"
                       : "text-disable-text"
-                  } font-SFPro text-sm pb-2 px-2 lg:text-base`}>
+                  } font-SFPro text-sm pb-2 px-2 lg:text-base w-1/3 transition-all ease-in-out duration-200 `}>
                   Cara Pakai
                 </button>
               </div>
@@ -247,7 +247,7 @@ function DetailProduk() {
               </div>
             </div>
             <div className="w-full flex justify-between items-start mt-4 lg:hidden">
-              <button className="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg">
+              <button className="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg leading-tight tracking-tight hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)] ">
                 Order Melalui WhatsApp
               </button>
             </div>

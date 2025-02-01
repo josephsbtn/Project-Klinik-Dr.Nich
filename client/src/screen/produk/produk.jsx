@@ -93,11 +93,21 @@ function Produk() {
           <div className="flex items-center w-[90%]  justify-center space-x-2 mx-auto mt-[18px] lg:w-[80%] lg:h-full">
             <Carousel
               autoPlay
-              interval={3000}
-              infiniteLoop
+              loop={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: true,
+              }}
+              autoplayDelay={3000}
+              interval={1000}
+              infiniteLoop={true}
               showThumbs={false}
               showStatus={false}
-              showIndicators={true}
+              showIndicators={false}
+              showArrows={false}
+              nextArrow={false}
+              prevArrow={false}
+              navigation={false}
               className="w-full h-auto rounded-lg">
               {carousel.length > 0 ? (
                 carousel.map((item, index) => (

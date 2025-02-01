@@ -360,6 +360,8 @@ export default function Beranda() {
                   delay: 3000,
                   disableOnInteraction: false,
                 }}
+                nextArrow={false}
+                prevArrow={false}
                 autoplayDelay={2000}
                 slidesPerView={1}
                 spaceBetween={20}
@@ -404,6 +406,8 @@ export default function Beranda() {
                 spaceBetween={20}
                 autoplayDelay={2000}
                 loop={true}
+                nextArrow={false}
+                prevArrow={false}
                 navigation={({ nextEl: "hidden", prevEl: "hidden" }, false)} // Use the CarouselNavigation component
               >
                 {fotoMesin && fotoMesin.length > 0 ? (
