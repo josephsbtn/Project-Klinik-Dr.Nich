@@ -5,7 +5,7 @@ import { navContext } from "../../App2"
 import iCenKu from "../../assets/iconproduk/iCenKu.svg";
 import iMin from "../../assets/iconproduk/iMin.svg";
 import iPlus from "../../assets/iconproduk/iPlus.svg";
-import iTambah from "../../assets/iconproduk/iTambah.svg";
+import iTambah from "../../assets/iconproduk/Itambah.svg";
 import { BsCart4 } from "react-icons/bs";
 
 
