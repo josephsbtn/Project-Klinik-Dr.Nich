@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iTgl from "../../assets/iconProduk/iTgl.svg";
+import iTgl from "../../assets/iconproduk/iTgl.svg";
 import iPanahB from "../../assets/iconmanajement/iPanahB.svg";
 import iSeruTrans from "../../assets/iconLaporanPenjualan/iSeruTrans.svg";
 import iPan from "../../assets/iconLaporanPenjualan/iPan.svg";
