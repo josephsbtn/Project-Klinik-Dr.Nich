@@ -12,9 +12,9 @@ import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import ArrowRightDisable from "../../components/ArrowRight-Disable.jsx";
 import LoadingSpinner from "../../components/LoadingSpinner.jsx";
 import ProdukCard from "../../components/ProductCard2.jsx";
-import CloseIcon from "../../assets/close-circle.svg?url";
+import CloseIcon from "../../assets/close-circle.svg";
 import ConfirmPopUp from "../../components/confirmPopUp.jsx";
-import FilterIcon from "../../components/FILTERICON.svg?url";
+import FilterIcon from "../../components/FILTERICON.svg";
 
 function DetailKategori() {
   const { id } = useParams();

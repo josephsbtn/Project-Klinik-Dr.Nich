@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { navContext } from "../../App2";
 import { AiOutlineRight, AiOutlineWhatsApp } from "react-icons/ai";
 import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
-import wa from "../../assets/wa.svg?url";
+import wa from "../../assets/wa.svg";
 import axios from "axios";
 
 export const TerapisDetail = () => {

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { navContext } from "../../../../App2";
 import { useLocation } from "react-router-dom";
 
-import gkt from "../../../../assets/iconDisplay/produk/gkt.svg?url";
+import gkt from "../../../../assets/iconDisplay/produk/gkt.svg";
 
 export const Detail1 = () => {
   const lokasi = useLocation();

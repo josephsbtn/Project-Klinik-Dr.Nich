@@ -6,10 +6,10 @@ import {
 } from "react-icons/ai";
 import { useContext, useEffect } from "react";
 import { navContext } from "../../App2";
-import iCen from "../../assets/iconproduk/iCen.svg?url";
-import iMin from "../../assets/iconproduk/iMin.svg?url";
-import iPlus from "../../assets/iconproduk/iPlus.svg?url";
-import iTambahP from "../../assets/iconproduk/iTambahP.svg?url";
+import iCen from "../../assets/iconproduk/iCen.svg";
+import iMin from "../../assets/iconproduk/iMin.svg";
+import iPlus from "../../assets/iconproduk/iPlus.svg";
+import iTambahP from "../../assets/iconproduk/iTambahP.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PembelianStok } from "./PembelianStok";

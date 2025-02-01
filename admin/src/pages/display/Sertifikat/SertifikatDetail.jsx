@@ -7,7 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import { navContext } from "../../../App2";
 
-import gSertifikat from "../../../assets/iconDisplay/Sertifikat/gSertifikat.svg?url";
+import gSertifikat from "../../../assets/iconDisplay/Sertifikat/gSertifikat.svg";
 
 export const SertifikatDetail = () => {
   const { setNav } = useContext(navContext);

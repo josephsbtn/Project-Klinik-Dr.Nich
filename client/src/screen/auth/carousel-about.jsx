@@ -4,8 +4,8 @@
 // // IMAGES & ICONS
 // import img1 from "../../assets/img-carousel/img1.png";
 // import img2 from "../../assets/img-carousel/img2.png";
-// import waBtn from "../../assets/whatsappBtn.svg?url";
-// import logo from "../../assets/logodrnich-white.svg?url";
+// import waBtn from "../../assets/whatsappBtn.svg";
+// import logo from "../../assets/logodrnich-white.svg";
 
 // // ABOUT IMAGES
 // import bgAbout from "../../assets/img-about/4.png";

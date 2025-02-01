@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { navContext } from "../../../App2";
-import gkategori from "../../../assets/iconDisplay/layanan/gkategori.svg?url";
+import gkategori from "../../../assets/iconDisplay/layanan/gkategori.svg";
 import { Link, useLocation } from "react-router-dom";
 
 export const GaleriDetail = () => {

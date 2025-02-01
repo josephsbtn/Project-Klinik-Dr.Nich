@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import iTgl from "../../assets/iconproduk/iTgl.svg?url";
+import iTgl from "../../assets/iconproduk/iTgl.svg";
 import { navContext } from "../../App2"
 import { BsCart4 } from "react-icons/bs";
 

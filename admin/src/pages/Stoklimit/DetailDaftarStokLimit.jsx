@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { navContext } from '../../App2'
-import iPanKu from "../../assets/iconkasir/iPanKu.svg?url";
-import iKranjang from "../../assets/iconkasir/iKranjang.svg?url";
+import iPanKu from "../../assets/iconkasir/iPanKu.svg";
+import iKranjang from "../../assets/iconkasir/iKranjang.svg";
 
 export const DetailDaftarStokLimit = () => {
     const { setNav } = useContext(navContext)

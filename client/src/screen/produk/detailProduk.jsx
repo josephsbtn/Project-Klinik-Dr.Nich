@@ -9,10 +9,10 @@ import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import LoadingSpinner from "../../components/LoadingSpinner.jsx";
 
 // E-commerce Logos
-import logoLazada from "../../assets/e-commerce/logoLazada.svg?url";
-import logoShopee from "../../assets/e-commerce/logoShopee.svg?url";
-import logoTokopedia from "../../assets/e-commerce/logoTokped.svg?url";
-import logoTiktok from "../../assets/e-commerce/logoTikTokShop.svg?url";
+import logoLazada from "../../assets/e-commerce/logoLazada.svg";
+import logoShopee from "../../assets/e-commerce/logoShopee.svg";
+import logoTokopedia from "../../assets/e-commerce/logoTokped.svg";
+import logoTiktok from "../../assets/e-commerce/logoTikTokShop.svg";
 
 function DetailProduk() {
   const { idProduk } = useParams();

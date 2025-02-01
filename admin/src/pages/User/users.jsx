@@ -3,11 +3,11 @@ import { BiDotsVertical } from "react-icons/bi"
 import { useContext, useEffect } from "react"
 import { navContext } from "../../App2"
 
-import iSupp from "../../assets/iconuser/iSuplier.svg?url";
-import iTerapis from "../../assets/iconuser/iTerapis.svg?url";
-import iMark from "../../assets/iconuser/iMark.svg?url";
-import iPel from "../../assets/iconuser/iPel.svg?url";
-import iLine from "../../assets/iLine.svg?url";
+import iSupp from "../../assets/iconuser/iSuplier.svg";
+import iTerapis from "../../assets/iconuser/iTerapis.svg";
+import iMark from "../../assets/iconuser/iMark.svg";
+import iPel from "../../assets/iconuser/iPel.svg";
+import iLine from "../../assets/iLine.svg";
 
 export const USer = () => {
     const {setNav} = useContext(navContext)

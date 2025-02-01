@@ -13,14 +13,14 @@ import { RxAlignCenterVertically } from "react-icons/rx";
 import { useContext, useEffect } from "react";
 import { navContext } from "../../App2";
 import { Link } from "react-router-dom";
-import iLine from "../../assets/iLine.svg?url";
-import ilaya from "../../assets/iconDisplay/ilaya.svg?url";
-import iserti from "../../assets/iconDisplay/iserti.svg?url";
-import igaleri from "../../assets/iconDisplay/igaleri.svg?url";
-import imes from "../../assets/iconDisplay/imes.svg?url";
-import iproduk from "../../assets/iconDisplay/iproduk.svg?url";
-import ipromo from "../../assets/iconDisplay/ipromo.svg?url";
-import irating from "../../assets/iconDisplay/irating.svg?url";
+import iLine from "../../assets/iLine.svg";
+import ilaya from "../../assets/iconDisplay/ilaya.svg";
+import iserti from "../../assets/iconDisplay/iserti.svg";
+import igaleri from "../../assets/iconDisplay/igaleri.svg";
+import imes from "../../assets/iconDisplay/imes.svg";
+import iproduk from "../../assets/iconDisplay/iproduk.svg";
+import ipromo from "../../assets/iconDisplay/ipromo.svg";
+import irating from "../../assets/iconDisplay/irating.svg";
 
 export const BelajarDisplay = () => {
   const { setNav } = useContext(navContext);

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { navContext } from "../../App2"
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
-import iTam from "../../assets/iconkasir/iTam.svg?url";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
+import iTam from "../../assets/iconkasir/iTam.svg";
 import { modaltransaksi } from './Kasir4'
 
 

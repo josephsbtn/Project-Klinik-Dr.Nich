@@ -3,12 +3,12 @@ import { BiDotsVertical } from "react-icons/bi"
 import { RxAlignCenterVertically } from "react-icons/rx"
 import { useContext, useEffect } from "react"
 import { navContext } from "../../App2"
-import iDaf from "../../assets/iconproduk/iDaf.svg?url";
-import iKat from "../../assets/iconproduk/iKat.svg?url";
-import iMan from "../../assets/iconproduk/iMan.svg?url";
-import iPro from "../../assets/iconproduk/iPro.svg?url";
-import iPem from "../../assets/iconproduk/iPem.svg?url";
-import iLine from "../../assets/iLine.svg?url";
+import iDaf from "../../assets/iconproduk/iDaf.svg";
+import iKat from "../../assets/iconproduk/iKat.svg";
+import iMan from "../../assets/iconproduk/iMan.svg";
+import iPro from "../../assets/iconproduk/iPro.svg";
+import iPem from "../../assets/iconproduk/iPem.svg";
+import iLine from "../../assets/iLine.svg";
 
 export const Products = () => {
   const {setNav} = useContext(navContext)

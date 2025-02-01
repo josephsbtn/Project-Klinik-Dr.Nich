@@ -3,20 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController";
 
 // Logo & images
-import logo from "../../assets/logodrnich.svg?url";
-import logo2 from "../../assets/logodrnich-white.svg?url";
-import bag from "../../assets/bag-2-md.svg?url";
-import bagLg from "../../assets/bag-2.svg?url";
-import search from "../../assets/search-normal.svg?url";
-import hamburger from "../../assets/hamburger.svg?url";
+import logo from "../../assets/logodrnich.svg";
+import logo2 from "../../assets/logodrnich-white.svg";
+import bag from "../../assets/bag-2-md.svg";
+import bagLg from "../../assets/bag-2.svg";
+import search from "../../assets/search-normal.svg";
+import hamburger from "../../assets/hamburger.svg";
 import bgHamburger from "../../assets/bgHamburger.png";
-import arrow from "../../assets/arrow-left.svg?url";
+import arrow from "../../assets/arrow-left.svg";
 
 // Logo hamburger
-import alamat from "../../assets/logo-footer/location.svg?url";
-import kontak from "../../assets/logo-footer/call.svg?url";
-import clock from "../../assets/logo-footer/clock.svg?url";
-import email from "../../assets/logo-footer/email.svg?url";
+import alamat from "../../assets/logo-footer/location.svg";
+import kontak from "../../assets/logo-footer/call.svg";
+import clock from "../../assets/logo-footer/clock.svg";
+import email from "../../assets/logo-footer/email.svg";
 
 // Logo sosmed
 import yt from "../../assets/YouTube.png";
@@ -26,7 +26,7 @@ import fb from "../../assets/Facebook.png";
 import ig from "../../assets/Instagram.png";
 
 // logo search
-import searchWhite from "../../assets/search-normal-white.svg?url";
+import searchWhite from "../../assets/search-normal-white.svg";
 
 export default function Navbar({ selected }) {
   const [isNavOpen, setIsNavOpen] = useState(false);

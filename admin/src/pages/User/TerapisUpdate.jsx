@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { navContext } from "../../App2";
-import ktp from "../../assets/ktp.svg?url"; // Default KTP image
+import ktp from "../../assets/ktp.svg"; // Default KTP image
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPanah from "../../assets/iconkasir/iPanah.svg?url";
-import iFrame100 from "../../assets/iconkasir/iFrame100.svg?url";
+import iPanah from "../../assets/iconkasir/iPanah.svg";
+import iFrame100 from "../../assets/iconkasir/iFrame100.svg";
 
 
 export const DraftTransaksi = () => {

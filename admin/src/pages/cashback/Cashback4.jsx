@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { navContext } from "../../App2";
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
-import iTamPu from "../../assets/iconkasir/iTamPu.svg?url";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
+import iTamPu from "../../assets/iconkasir/iTamPu.svg";
 import axios from "axios";
 import { Link } from "react-router-dom";
 

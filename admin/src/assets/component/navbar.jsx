@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../icon/logodrnich.svg?url";
+import logo from "../icon/logodrnich.svg";
 
 function Navbar({ selected }) {
   const navigate = useNavigate();

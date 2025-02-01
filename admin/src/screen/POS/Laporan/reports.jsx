@@ -1,11 +1,11 @@
 import { AiOutlineBorderLeft, AiOutlineLineHeight, AiOutlineMenu, AiOutlineMenuFold, AiOutlineRight, AiOutlineShop, AiOutlineUp, AiOutlineVerticalLeft } from "react-icons/ai"
 import { BiDotsVertical } from "react-icons/bi"
 import { useContext, useEffect } from "react"
-import iBar from "../../../assets/icon/POS/iconlaporan/iBar.svg?url";
-import iPenj from "../../../assets/icon/POS/iconlaporan/iPenj.svg?url";
-import iPers from "../../../assets/icon/POS/iconlaporan/iPers.svg?url";
-import iStok from "../../../assets/icon/POS/iconlaporan/iStok.svg?url";
-import iLine from "../../../assets/icon/POS/iLine.svg?url";
+import iBar from "../../../assets/icon/POS/iconlaporan/iBar.svg";
+import iPenj from "../../../assets/icon/POS/iconlaporan/iPenj.svg";
+import iPers from "../../../assets/icon/POS/iconlaporan/iPers.svg";
+import iStok from "../../../assets/icon/POS/iconlaporan/iStok.svg";
+import iLine from "../../../assets/icon/POS/iLine.svg";
 import { NavbarPosActive } from "../components/NavbarPosActive"
 
 export const Laporan = () => {

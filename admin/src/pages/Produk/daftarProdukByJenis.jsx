@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { data, Link, useParams } from "react-router-dom";
 import { navContext } from "../../App2";
-import iBar from "../../assets/iconproduk/iBarcode.svg?url";
+import iBar from "../../assets/iconproduk/iBarcode.svg";
 import { AiFillPlusCircle, AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
 

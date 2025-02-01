@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPan from "../../assets/iconproduk/iPan.svg?url";
-import iSeru from "../../assets/iconproduk/iSeru.svg?url";
-import iTambahP from "../../assets/iconproduk/iTambahP.svg?url";
+import iPan from "../../assets/iconproduk/iPan.svg";
+import iSeru from "../../assets/iconproduk/iSeru.svg";
+import iTambahP from "../../assets/iconproduk/iTambahP.svg";
 
 
 export const ManajementDetailProduk = () => {

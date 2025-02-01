@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { modalsContext } from "./TambahDiskon3";
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
-import iPanahS from "../../assets/iconmanajement/iPanahS.svg?url";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
+import iPanahS from "../../assets/iconmanajement/iPanahS.svg";
 
 export const ModalsDiskon = () => {
   const {

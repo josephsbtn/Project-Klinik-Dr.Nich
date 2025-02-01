@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { AiFillPlusCircle, AiOutlineSearch } from "react-icons/ai"
 import { useContext, useEffect } from "react"
 import { navContext } from "../../../App2"
-import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg?url";
+import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
 
 import axios from "axios"
 import { useNavigate } from "react-router-dom"

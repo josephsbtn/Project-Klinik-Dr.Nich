@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { navContext } from "../../App2"
-import iFrame0 from "../../assets/iconkasir/iFrame0.svg?url";
-import iFrame100 from "../../assets/iconkasir/iFrame100.svg?url";
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
-import iTamPu from "../../assets/iconkasir/iTamPu.svg?url";
+import iFrame0 from "../../assets/iconkasir/iFrame0.svg";
+import iFrame100 from "../../assets/iconkasir/iFrame100.svg";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
+import iTamPu from "../../assets/iconkasir/iTamPu.svg";
 import { modaltransaksi } from './Kasir4'
 
 

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPan from "../../assets/iconproduk/iPan.svg?url";
-import iTgL from "../../assets/iconproduk/iTgl.svg?url";
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
-import iPanahIjo from "../../assets/iconmanajement/iPanahIjo.svg?url";
-import iPanahMerah from "../../assets/iconmanajement/iPanahMerah.svg?url";
-import iPanahKuning from "../../assets/iconmanajement/iPanahKuning.svg?url";
+import iPan from "../../assets/iconproduk/iPan.svg";
+import iTgL from "../../assets/iconproduk/iTgl.svg";
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg";
+import iPanahIjo from "../../assets/iconmanajement/iPanahIjo.svg";
+import iPanahMerah from "../../assets/iconmanajement/iPanahMerah.svg";
+import iPanahKuning from "../../assets/iconmanajement/iPanahKuning.svg";
 
 
 export const LaporanLogProduk = () => {

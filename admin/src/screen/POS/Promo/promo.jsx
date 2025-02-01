@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react"
 import { AiOutlineBorderLeft, AiOutlineLineHeight, AiOutlineMenu, AiOutlineMenuFold, AiOutlineRight, AiOutlineShop, AiOutlineUp, AiOutlineVerticalLeft } from "react-icons/ai"
 import { BiDotsVertical } from "react-icons/bi"
-import iDis from "../../../assets/icon/POS/iconpromo/iDis.svg?url";
-import iCas from "../../../assets/icon/POS/iconpromo/iCash.svg?url";
-import iLine from "../../../assets/icon/POS/iLine.svg?url";
+import iDis from "../../../assets/icon/POS/iconpromo/iDis.svg";
+import iCas from "../../../assets/icon/POS/iconpromo/iCash.svg";
+import iLine from "../../../assets/icon/POS/iLine.svg";
 import { NavbarPosActive } from "../components/NavbarPosActive"
 
 

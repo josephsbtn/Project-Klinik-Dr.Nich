@@ -21,22 +21,22 @@ import CardJenisLayanan from "../../components/cardJenisLayanan.jsx";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
 import UlasanCard from "../../components/cardUlasan.jsx";
-import StarIcon from "../../assets/star.svg?url";
+import StarIcon from "../../assets/star.svg";
 
 import ArrowRight from "../../../../admin/src/assets/icon/ArrowRight";
 
 // IMAGES & ICONS ABOUT
 import img1 from "../../assets/img-carousel/img1.png";
 import img2 from "../../assets/img-carousel/img2.png";
-import waBtn from "../../assets/whatsappBtn.svg?url";
-import logo from "../../assets/logodrnich-white.svg?url";
+import waBtn from "../../assets/whatsappBtn.svg";
+import logo from "../../assets/logodrnich-white.svg";
 import bgAbout from "../../assets/img-about/4.png";
 import bgAbout2 from "../../assets/img-about/5.png";
 import acneFace from "../../assets/img-about/A Lifetime In 60 Seconds-Photoroom 1.png";
 import muka2 from "../../assets/img-about/gambar2.png";
-import masker from "../../assets/img-about/masker.svg?url";
-import pori from "../../assets/img-about/pori.svg?url";
-import air from "../../assets/img-about/air.svg?url";
+import masker from "../../assets/img-about/masker.svg";
+import pori from "../../assets/img-about/pori.svg";
+import air from "../../assets/img-about/air.svg";
 
 //  IMAGE & ICONS SERTIFKAT
 import sertifikat1 from "../../assets/img-about/sertifikat1.png";

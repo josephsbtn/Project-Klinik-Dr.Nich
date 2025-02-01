@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react"
 import { AiOutlineUser, AiOutlineRead, AiFillFolderAdd, AiFillDatabase, AiOutlineFile, AiOutlineBook, AiOutlineAlert, AiOutlineFileZip, AiOutlineShop } from "react-icons/ai"
 import { navContext } from "../App2"
-import Ava from "../assets/img.svg?url";
-import iUser from "../assets/iconuser.svg?url";
-import iProduk from "../assets/iconproduk.svg?url";
-import iLaporan from "../assets/iconlaporan.svg?url";
-import iPromo from "../assets/iconpromo.svg?url";
-import iStat from "../assets/iconstatistik.svg?url";
-import iPenj from "../assets/iconpenjuala.svg?url";
+import Ava from "../assets/img.svg";
+import iUser from "../assets/iconuser.svg";
+import iProduk from "../assets/iconproduk.svg";
+import iLaporan from "../assets/iconlaporan.svg";
+import iPromo from "../assets/iconpromo.svg";
+import iStat from "../assets/iconstatistik.svg";
+import iPenj from "../assets/iconpenjuala.svg";
 
 
 export const modalContext = createContext(null)

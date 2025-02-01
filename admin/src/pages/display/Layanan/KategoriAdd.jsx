@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { navContext } from "../../../App2";
-import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg?url";
+import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iCari from "../../assets/iconLaporanPenjualan/iCari.svg?url";
-import iPan from "../../assets/iconkasir/iPan.svg?url";
-import iPanahB from "../../assets/iconmanajement/iPanahB.svg?url";
+import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
+import iPan from "../../assets/iconkasir/iPan.svg";
+import iPanahB from "../../assets/iconmanajement/iPanahB.svg";
 
 export const DraftTransaksi4 = () => {
     const { setNav } = useContext(navContext)

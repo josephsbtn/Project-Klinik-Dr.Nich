@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
-import reactLogo from "./assets/react.svg?url";
-import viteLogo from "/vite.svg?url";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 import "./App.css";
 import { Navbar } from "./assets/navbar";
 import { Home } from "./pages/Home";

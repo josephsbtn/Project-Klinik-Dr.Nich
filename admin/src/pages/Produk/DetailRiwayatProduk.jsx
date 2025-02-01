@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iPan from "../../assets/iconproduk/iPan.svg?url";
+import iPan from "../../assets/iconproduk/iPan.svg";
 
 
 export const DetailRiwayatProduk = () => {

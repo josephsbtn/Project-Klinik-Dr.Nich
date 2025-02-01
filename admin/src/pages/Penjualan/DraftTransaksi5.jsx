@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { navContext } from "../../App2"
-import iFrame0 from "../../assets/iconkasir/iFrame0.svg?url";
-import iPanKu from "../../assets/iconkasir/iPanKu.svg?url";
-import iTamKu from "../../assets/iconkasir/iTamKu.svg?url";
-import iPan from "../../assets/iconkasir/iPan.svg?url";
+import iFrame0 from "../../assets/iconkasir/iFrame0.svg";
+import iPanKu from "../../assets/iconkasir/iPanKu.svg";
+import iTamKu from "../../assets/iconkasir/iTamKu.svg";
+import iPan from "../../assets/iconkasir/iPan.svg";
 
 export const DraftTransaksi5 = () => {
     const { setNav } = useContext(navContext)
