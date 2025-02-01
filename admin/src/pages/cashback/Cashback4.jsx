@@ -4,7 +4,6 @@ import iCari from "../../assets/iconLaporanPenjualan/iCari.svg";
 import iTamPu from "../../assets/iconkasir/iTamPu.svg";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Detail1 from "../display/produk/KategoriProduk/Detail1";
 
 export const Cashback4 = () => {
   const [kesbek, setKesbek] = useState([]);
