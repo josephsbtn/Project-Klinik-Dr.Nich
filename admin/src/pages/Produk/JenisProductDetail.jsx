@@ -41,7 +41,7 @@ export const JenisProductDetail = () => {
         <p>{datax.updatedAt}</p>
       </div>
       <div className="mx-1 flex flex-col gap-3 h-full justify-between">
-      <a href={`produkbyjenis/${datax.jenis}`} className=" w-full h-[50px] border-b-2">
+      <a href={`/pos/produkbyjenis/${datax.jenis}`} className=" w-full h-[50px] border-b-2">
       <span className="hover:scale-110 w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-semibold px-5">
  Lihat Daftar Produk
             <div className="flex ms-auto">
@@ -56,7 +56,7 @@ export const JenisProductDetail = () => {
             Hapus
           </button>
           <Link
-            to={`updatejenisproduk/${id}`}
+            to={`/pos/updatejenisproduk/${id}`}
             className="flex justify-center items-center bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white rounded-lg w-[70%] p-3 text-[14px]"
           >
             Edit

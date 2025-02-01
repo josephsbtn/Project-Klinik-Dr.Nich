@@ -53,7 +53,7 @@ export const JenisProduct = () => {
             {filterData.map((data, i) => (
               <Link
                 to={{
-                  pathname: `jenisprodukdetail/${data._id}`,
+                  pathname: `/pos/jenisprodukdetail/${data._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}
@@ -69,7 +69,7 @@ export const JenisProduct = () => {
       </div>
       <div className="mt-3">
         <a
-          href="addjenisproduk"
+          href="/pos/addjenisproduk"
           className="flex justify-center items-center gap-2 bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-bold rounded-xl p-3 text-[14px] mt-3"
         >
           <AiFillPlusCircle size={20} /> Tambah Jenis

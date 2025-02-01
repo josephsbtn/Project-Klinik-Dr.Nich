@@ -63,7 +63,7 @@ export const KategoriProduks = () => {
             {filteredData.map((data, i) => (
               <Link
                 to={{
-                  pathname: `/kategoriprodukdetail/${data?._id}`,
+                  pathname: `/pos/kategoriprodukdetail/${data?._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}
@@ -80,7 +80,7 @@ export const KategoriProduks = () => {
 
         {/* Tombol tambah jenis produk */}
         <Link
-          to="addkategoriproduk"
+          to="/pos/addkategoriproduk"
           className="flex justify-center items-center gap-2 bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-bold rounded-xl p-3 text-[14px] mt-3"
         >
           <AiFillPlusCircle size={20} /> Tambah Jenis
