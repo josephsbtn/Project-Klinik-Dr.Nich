@@ -104,7 +104,7 @@ export const TerapisDetail = () => {
             <button className="bg-white text-[#C2A353]">Hapus</button>
           </div>
           <Link
-            to={{ pathname: `/terapisUpdate/${id}` }}
+            to={{ pathname: `/pos/terapisUpdate/${id}` }}
             className="flex justify-center items-center bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white rounded-lg w-[70%] p-3 text-[14px]"
           >
             Edit

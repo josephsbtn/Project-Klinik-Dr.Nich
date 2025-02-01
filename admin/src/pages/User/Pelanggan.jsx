@@ -53,7 +53,7 @@ export const Pelanggan = () => {
             {filterdata.map((data, i) => (
               <Link
                 to={{
-                  pathname: `/pelanggandetail/${data._id}`,
+                  pathname: `/pos/pelanggandetail/${data._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}

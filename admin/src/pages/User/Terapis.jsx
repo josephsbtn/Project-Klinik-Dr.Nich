@@ -52,7 +52,7 @@ export const Terapis = () => {
             {filterData.map((data, i) => (
               <Link
                 to={{
-                  pathname: `/terapisdetail/${data._id}`,
+                  pathname: `/pos/terapisdetail/${data._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}

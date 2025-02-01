@@ -51,7 +51,7 @@ export const Marketing = () => {
             {filterData.map((data, i) => (
               <Link
                 to={{
-                  pathname: `/marketingdetail/${data._id}`,
+                  pathname: `/pos/marketingdetail/${data._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}

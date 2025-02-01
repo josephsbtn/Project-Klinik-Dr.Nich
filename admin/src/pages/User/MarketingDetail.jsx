@@ -115,7 +115,7 @@ export const MarketingDetail = () => {
             <button className="bg-white text-[#C2A353]">Hapus</button>
           </div>
           <Link
-            to={`/updatemarketing/${id}`}
+            to={`/pos/updatemarketing/${id}`}
             className="flex justify-center items-center bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white rounded-lg w-[70%] p-3 text-[14px]"
           >
             Edit

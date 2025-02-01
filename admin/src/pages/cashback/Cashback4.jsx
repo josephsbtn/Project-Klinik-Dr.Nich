@@ -37,7 +37,7 @@ export const Cashback4 = () => {
   setNav("Cashback");
   document.title = "Cashback";
   return (
-    <div className="flex flex-col px-5 py-8 gap-1 bg-white w-full h-full pt-8 text-[#454545] text-[12px]">
+    <div className="flex flex-col px-5 py-8 gap-1 bg-white w-full min-h-screen h-fit pt-8 text-[#454545] text-[12px]">
       {kesbek.length === 0 ? (
         <div className="flex justify-center items-center min-h-screen">
           Data tidak ada

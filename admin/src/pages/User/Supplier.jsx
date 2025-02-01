@@ -53,7 +53,7 @@ export const Supplier = () => {
             {datax.map((supp) => (
               <Link
                 to={{
-                  pathname: `/supplierdet/${supp._id}`,
+                  pathname: `/pos/supplierdet/${supp._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={supp._id}
