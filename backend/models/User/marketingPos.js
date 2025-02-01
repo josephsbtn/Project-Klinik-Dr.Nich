@@ -29,9 +29,9 @@ const marketingPosSchema = mongoose.Schema(
       type: Number,
 	default: 0,
     },
-    keterangan: {
-      type: String,
-    },
+    image : {
+      type : String
+    }
   },
   {
     timestamps: true,

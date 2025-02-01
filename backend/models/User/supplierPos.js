@@ -40,6 +40,10 @@ const supplierPosSchema = mongoose.Schema(
     keteranganRek: {
       type: String,
     },
+    produk : [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "produkPos",
+    }]
   },
   {
     timestamps: true,

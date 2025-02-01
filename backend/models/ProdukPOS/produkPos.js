@@ -1,33 +1,37 @@
 import mongoose from "mongoose";
 
-const pelangganPosSchema = mongoose.Schema(
+const produkPosSchema = mongoose.Schema(
   {
-    namapelanggan: {
+    namaProduk: {
       type: String,
       required: true,
     },
-    nomorTelepon:{
-      type: String,
-    },
-    gender: {
-      type: String,
-      required: true,
-    },
-    alamat:{
-      type: String,
-	required: true,
-    },
-    poin: {
+    hargaJual: {
       type: Number,
-	default: 0,
-    },
+	    required: true,},
+    hargaBeli: {
+      type: Number,
+	    required: true,},
     kategori: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "kategoriProdukPos",
     },
+    jenis: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "jenisProdukPos",
+    },
+    supplier: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "supplierPos",
+    },
+    bonusTerapis: {
+      type: Number,
+    },
+    stok: {
+      type: Number,
+    },
     minStok: {
       type: Number,
-      default: 0,
     },
   },
   {
@@ -35,4 +39,4 @@ const pelangganPosSchema = mongoose.Schema(
   }
 );
 
-export default mongoose.model("pelangganPos", pelangganPosSchema);
+export default mongoose.model("produkPos", produkPosSchema);

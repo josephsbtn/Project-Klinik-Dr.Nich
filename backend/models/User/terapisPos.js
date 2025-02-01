@@ -27,11 +27,10 @@ const terapisPosSchema = mongoose.Schema(
     },
     nomorRekening: {
       type: Number,
-	default: 0,
     },
-    keterangan: {
-      type: String,
-    },
+    image : {
+      type: String
+    }
   },
   {
     timestamps: true,

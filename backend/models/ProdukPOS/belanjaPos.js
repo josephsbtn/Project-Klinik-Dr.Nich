@@ -2,11 +2,16 @@ import mongoose from "mongoose";
 
 const BelanjaPosSchema = mongoose.Schema(
   {
-    poin:{
+    total: {
       type: Number,
-    required: true,
-    }
+      required: true,
+    },
+    belanjaDetail: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "detailBelanjaPos",
+    }],
   },
+
   {
     timestamps: true,
   }

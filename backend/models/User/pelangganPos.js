@@ -30,4 +30,4 @@ const pelangganPosSchema = mongoose.Schema(
   }
 );
 
-export default mongoose.model("pelangganPos", pelangganSchema);
+export default mongoose.model("pelangganPos", pelangganPosSchema);

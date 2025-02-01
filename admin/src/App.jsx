@@ -31,6 +31,7 @@ import { USer } from "./screen/POS/User/users.jsx";
 import { Products } from "./screen/POS/Produk/products.jsx";
 import { Laporan } from "./screen/POS/Laporan/reports.jsx";
 import { Promo } from "./screen/POS/Promo/promo.jsx";
+import App2 from "./App2.jsx";
 
 function App() {
   return (
@@ -57,11 +58,7 @@ function App() {
 
           {/* POS */}
 
-          <Route path="/pos" element={<Home />} />
-          <Route path="/pos/user" element={<USer />} />
-          <Route path="/pos/produks" element={<Products />} />
-          <Route path="/pos/laporan" element={<Laporan />} />
-          <Route path="/pos/promo" element={<Promo />} />
+          <Route path="/pos/*" element={<App2 />} />
         </Routes>
       </Router>
     </>

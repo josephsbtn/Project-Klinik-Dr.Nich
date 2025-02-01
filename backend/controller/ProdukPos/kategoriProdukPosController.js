@@ -8,9 +8,9 @@ const newkategoriProdukPos = asyncHandler(async (req, res) => {
     kategori: req.body.kategori
   };
   try {
-    const isExist = await kategoriProdukPosModels.findOne({ kategori: newkategoriProdukPos.kategori });
+    const isExist = await kategoriProdukPosModels.findOne({ jenis: newkategoriProdukPos.jenis, kategori: newkategoriProdukPos.kategori });
     if (isExist) {
-      throw new Error("kategoriProdukPos Sudah Ada");
+      throw new Error("kategori Produk Sudah Ada");
     }
     const kategoriProdukPos = await kategoriProdukPosModels.create(newkategoriProdukPos);
     res.send(kategoriProdukPos);
@@ -21,8 +21,9 @@ const newkategoriProdukPos = asyncHandler(async (req, res) => {
 
 const getkategoriProdukPos = asyncHandler(async (req, res) => {
   try {
-    const kategoriProdukPos = await kategoriProdukPosModels.find();
-    res.send(kategoriProdukPos);
+    const kategoriProdukPos = await kategoriProdukPosModels.find().
+    populate("jenis", "jenis");
+    res.send(kategoriProdukPos);    
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -31,14 +32,8 @@ const getkategoriProdukPos = asyncHandler(async (req, res) => {
 const updatekategoriProdukPos = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
-    nama: req.body.nama,
-    deskripsi: req.body.deskripsi,
-    foto: req.body.foto,
-    manfaat: req.body.manfaat,
-    cara_pakai: req.body.cara_pakai,
-    harga: req.body.harga,
-    kategori: req.body.kategori,
-    tipekategoriProdukPos: req.body.tipekategoriProdukPos,
+    jenis: req.body.jenis,
+    kategori: req.body.kategori
   };
   try {
     const kategoriProdukPos = await kategoriProdukPosModels.findByIdAndUpdate(
@@ -67,8 +62,7 @@ const getkategoriProdukPosbyID = asyncHandler(async (req, res) => {
   try {
     const kategoriProdukPos = await kategoriProdukPosModels
       .findById(id)
-      .populate("kategori", "name")
-      .populate("tipekategoriProdukPos", "name");
+      .populate("jenis", "jenis")
 
     if (!kategoriProdukPos) {
       return res.status(404).json({ message: "Product not found" });

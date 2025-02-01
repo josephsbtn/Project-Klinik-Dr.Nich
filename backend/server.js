@@ -11,6 +11,10 @@ import fotoRoutes from "./routes/admin/sertifMesinRoutes.js";
 import cartRoutes from "./routes/admin/cartRoutes.js";
 import galleryRoutes from "./routes/admin/galleryRoutes.js";
 import ulasanRoutes from "./routes/admin/ulasanRoutes.js";
+import produkPosRoutes from "./routes/admin/produkPosRoutes.js";
+import userPosRoutes from "./routes/admin/userPosRoutes.js";
+import promoPosRoutes from "./routes/admin/promoPosRoutes.js";
+import kasirPosRoutes from "./routes/admin/kasirPosRoutes.js";
 import dbConfig from "./config/db.js";
 
 const app = express();
@@ -40,7 +44,7 @@ app.use(
 );
 
 app.options("*", cors());
-
+app.use('/uploads', express.static('uploads'));
 app.use(express.json({ limit: "50mb" })); // Adjust the limit as needed
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
@@ -52,6 +56,15 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/foto", fotoRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/ulasan", ulasanRoutes);
+
+//API POS
+
+app.use("/api/pos/produk", produkPosRoutes);
+app.use("/api/pos/user", userPosRoutes);
+app.use("/api/pos/promo", promoPosRoutes);
+app.use("/api/pos/kasir", kasirPosRoutes);
+
+/////////
 
 app.get("/", (req, res) => res.send("Server is ready"));
 app.use(notFound);

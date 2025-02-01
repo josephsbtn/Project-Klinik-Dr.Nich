@@ -1,19 +1,20 @@
 import asyncHandler from "express-async-handler";
-import produkModels from "../../models/produk/produk.js";
+import produkModels from "../../models/ProdukPOS/produkPos.js";
 
 const newproduk = asyncHandler(async (req, res) => {
   const newproduk = {
-    nama: req.body.nama,
-    deskripsi: req.body.deskripsi,
-    foto: req.body.foto,
-    manfaat: req.body.manfaat,
-    cara_pakai: req.body.cara_pakai,
-    harga: req.body.harga,
+    jenis: req.body.jenis,
+    namaProduk: req.body.namaProduk,
+    hargaJual: req.body.hargaJual,
+    hargaBeli: req.body.hargaBeli,
     kategori: req.body.kategori,
-    tipeProduk: req.body.tipeProduk,
+    bonusTerapis: req.body.bonusTerapis,
+    stok: req.body.stok,
+    minStok: req.body.minStok,
+    supplier: req.body.supplier
   };
   try {
-    const isExist = await produkModels.findOne({ nama: newproduk.nama });
+    const isExist = await produkModels.findOne({ namaProduk: newproduk.namaProduk });
     if (isExist) {
       throw new Error("produk Sudah Ada");
     }
@@ -27,9 +28,7 @@ const newproduk = asyncHandler(async (req, res) => {
 const getproduk = asyncHandler(async (req, res) => {
   try {
     const produk = await produkModels
-      .find()
-      .populate("kategori") // Populating 'kategori' from the schema
-      .populate("tipeProduk"); // Populating 'tipeProduk' from the schema
+      .find().populate("kategori","kategori").populate("jenis", "jenis").populate("supplier", "supplier");
 
     res.send(produk);
   } catch (error) {
@@ -40,14 +39,15 @@ const getproduk = asyncHandler(async (req, res) => {
 const updateproduk = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
-    nama: req.body.nama,
-    deskripsi: req.body.deskripsi,
-    foto: req.body.foto,
-    manfaat: req.body.manfaat,
-    cara_pakai: req.body.cara_pakai,
-    harga: req.body.harga,
+    jenis: req.body.jenis,
+    namaProduk: req.body.namaProduk,
+    supplier : req.body.supplier,
+    hargaJual: req.body.hargaJual,
+    hargaBeli: req.body.hargaBeli,
     kategori: req.body.kategori,
-    tipeProduk: req.body.tipeProduk,
+    bonusTerapis: req.body.bonusTerapis,
+    stok: req.body.stok,
+    minStok: req.body.minStok
   };
   try {
     const produk = await produkModels.findByIdAndUpdate(
@@ -75,9 +75,7 @@ const getprodukbyID = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
     const produk = await produkModels
-      .findById(id)
-      .populate("kategori", "name")
-      .populate("tipeProduk", "name");
+      .findById(id).populate("kategori", "kategori").populate("jenis", "jenis").populate("supplier", "supplier");
 
     if (!produk) {
       return res.status(404).json({ message: "Product not found" });

@@ -1,18 +1,39 @@
 import mongoose from "mongoose";
 
-const pelangganPosSchema = mongoose.Schema(
+const transaksiPosSchema = mongoose.Schema(
   {
+    invoice: {
+        type : String
+    },
     promo:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "promoPos",
+    },
+    pelanggan:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "pelangganPos",
     },
     total: {
       type: Number,
       required: true,
     },
+    totalAkhir: {
+      type: Number,
+      required: true,
+    },
+    potongan: {
+      type : Number,
+    },
     poin:{
       type: Number,
-    required: true,
+    },
+    transaksiDetail: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "detailTransaksiPos",
+    }],
+    status : {
+      type : String,
+      required : true
     }
   },
   {
@@ -20,4 +41,4 @@ const pelangganPosSchema = mongoose.Schema(
   }
 );
 
-export default mongoose.model("pelangganPos", pelangganPosSchema);
+export default mongoose.model("transaksiPos", transaksiPosSchema);
