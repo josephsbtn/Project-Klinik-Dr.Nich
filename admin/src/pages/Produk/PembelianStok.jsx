@@ -2,7 +2,7 @@ import React, { createContext, useRef, useState } from 'react'
 import { useContext, useEffect } from "react"
 import { navContext } from "../../App2"
 import { BsCart4 } from "react-icons/bs";   
-import iTambah from "../../assets/iconproduk/iTambah.svg";
+import iTambah from "../../assets/iconproduk/Itambah.svg";
 import { modalContext } from './DaftarBelanja';
 import { modalsContext } from './DaftarBelanjaModals';
 
