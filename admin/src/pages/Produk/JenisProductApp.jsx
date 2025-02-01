@@ -21,7 +21,11 @@ export const JenisProductAdd = () => {
       jenis: inputValue,
     };
     axios
-      .post("https://api.drnich.co.id/api/pos/produk/jenisproduk", data, {withCredentials : true})
+      .post("https://api.drnich.co.id/api/pos/produk/jenisproduk", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials : true})
       .then((response) => {
         response.status == 200 && navigate("../jenisproduk");
       });
