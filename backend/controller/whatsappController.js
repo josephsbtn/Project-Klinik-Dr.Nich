@@ -1,15 +1,14 @@
 const phone = "6285700525830";
 
-const templateMessageReservasi = `
-Halo, Dr. Nich. Saya ingin melakukan reservasi. 
+const templateMessageReservasi = 
+`Halo, Dr. Nich. Saya ingin melakukan reservasi. 
 Mohon bantuannya untuk informasi jadwal yang tersedia dan prosedur lebih lanjut. 
 
 Berikut adalah detail saya:
 - Nama: [Nama Lengkap Anda]
 - Tanggal & Waktu Pilihan: [Tanggal dan waktu yang diinginkan]
 
-Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda.
-`;
+Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Dr. Nich.`;
 
 
 function sendWhatsAppReservasiMessage() {
@@ -39,7 +38,7 @@ Berikut adalah detail saya:
 - Nama: [Nama Lengkap Anda]
 - Tanggal & Waktu Pilihan: [Tanggal dan waktu yang diinginkan]
 
-Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda. `;
+Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Dr. Nich. `;
 
   // Encode pesan agar sesuai dengan format URL
   const encodedMessage = encodeURIComponent(message);
@@ -69,7 +68,7 @@ function sendWhatsAppProdukMessage(nama) {
   - Nama: [Nama Lengkap Anda]
   - Tanggal & Waktu Pilihan: [Tanggal dan waktu yang diinginkan]
   
-  Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda.`;
+  Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Dr. Nich.`;
   
     // Encode pesan agar sesuai dengan format URL
     const encodedMessage = encodeURIComponent(message);

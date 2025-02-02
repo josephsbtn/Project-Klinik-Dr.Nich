@@ -250,7 +250,9 @@ function DetailProduk() {
               </div>
             </div>
             <div className="w-full flex justify-between items-start mt-4 lg:hidden">
-              <button className="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg leading-tight tracking-tight hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)] ">
+              <button className="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg leading-tight tracking-tight hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)] "
+              onClick={() => sendWhatsAppProdukMessage(nama)}
+              >
                 Order Melalui WhatsApp
               </button>
             </div>
