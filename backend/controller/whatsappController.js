@@ -8,7 +8,7 @@ Berikut adalah detail saya:
 - Nama: [Nama Lengkap Anda]
 - Tanggal & Waktu Pilihan: [Tanggal dan waktu yang diinginkan]
 
-Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda. 😊
+Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda.
 `;
 
 
@@ -39,7 +39,7 @@ Berikut adalah detail saya:
 - Nama: [Nama Lengkap Anda]
 - Tanggal & Waktu Pilihan: [Tanggal dan waktu yang diinginkan]
 
-Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda. 😊`;
+Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda. `;
 
   // Encode pesan agar sesuai dengan format URL
   const encodedMessage = encodeURIComponent(message);
@@ -69,7 +69,7 @@ function sendWhatsAppProdukMessage(nama) {
   - Nama: [Nama Lengkap Anda]
   - Tanggal & Waktu Pilihan: [Tanggal dan waktu yang diinginkan]
   
-  Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda. 😊`;
+  Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Anda.`;
   
     // Encode pesan agar sesuai dengan format URL
     const encodedMessage = encodeURIComponent(message);
