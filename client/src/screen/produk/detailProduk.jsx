@@ -13,6 +13,7 @@ import logoLazada from "../../assets/e-commerce/logoLazada.svg";
 import logoShopee from "../../assets/e-commerce/logoShopee.svg";
 import logoTokopedia from "../../assets/e-commerce/logoTokped.svg";
 import logoTiktok from "../../assets/e-commerce/logoTikTokShop.svg";
+import { sendWhatsAppProdukMessage } from "../../../../backend/controller/whatsappController.js";
 
 function DetailProduk() {
   const { idProduk } = useParams();
@@ -145,7 +146,9 @@ function DetailProduk() {
                 </h1>
               </div>
               <div className="w-full justify-between items-start mt-4 hidden lg:flex">
-                <button className="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg leading-tight tracking-tight hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)]">
+                <button className ="w-full bg-secondary text-white font-SFPro text-sm py-2 rounded-lg leading-tight tracking-tight hover:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.30)] hover:shadow-[0px_8px_12px_6px_rgba(0,0,0,0.15)]"
+                  onClick={sendWhatsAppProdukMessage}
+                >
                   Order Melalui WhatsApp
                 </button>
               </div>
