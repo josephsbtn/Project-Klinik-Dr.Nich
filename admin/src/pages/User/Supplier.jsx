@@ -1,35 +1,59 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   AiFillPlusCircle,
   AiOutlineRightCircle,
   AiOutlineSearch,
 } from "react-icons/ai";
+import ikon from "../../assets/ikon.svg";
+import add from "../../assets/add.svg";
 import { useContext, useEffect } from "react";
 import { navContext } from "../../App2";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 export const Supplier = () => {
-  const { setNav } = useContext(navContext);
+  const { setNav, setSort, asc } = useContext(navContext);
   const [datax, setDatax] = useState([]);
+  const [tampil, setTampil] = useState([]);
   const [datasupplier, setdatasupplier] = useState([]);
-  const [cari, setCari] = useState("");
+  const cari = useRef(null)
 
   useEffect(() => {
     const fetchData = async () => {
       await axios
         .get("https://api.drnich.co.id/api/pos/user/supplier")
-        .then((response) => setDatax(response.data));
+        .then((response) => (setDatax(response.data),setTampil(response.data)));
     };
     fetchData();
     setNav("Supplier");
+    setSort(true)
   }, []);
 
-  const filterData = datax.filter(
+useEffect(()=>{
+
+  if(asc=='asc'){
+    const sorting = [...tampil].sort((a,b)=> a.namaPerusahaan.localeCompare(b.namaPerusahaan))
+    console.log(sorting)
+    setTampil(sorting)
+  }
+  else if(asc=='desc'){
+    const sorting = [...tampil].sort((a,b)=> b.namaPerusahaan.localeCompare(a.namaPerusahaan))
+    console.log(sorting)
+    setTampil(sorting)
+  }
+},[asc])
+
+
+
+  const filterData = () =>{ 
+    
+    const filter = datax.filter(
     (data) =>
-      data.namaPerusahaan?.toLowerCase().includes(cari.toLowerCase()) ||
-      data.nomorTelepon?.toLowerCase().includes(cari.toLowerCase())
+      data.namaPerusahaan?.toLowerCase().includes(cari.current.value.toLowerCase()) ||
+      data.nomorTelepon?.toLowerCase().includes(cari.current.value.toLowerCase())
   );
+  setTampil(filter)
+}
   // console.log(filterData);
 
   document.title = "Supplier";
@@ -38,6 +62,8 @@ export const Supplier = () => {
       <form className="mt-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
         <AiOutlineSearch size={20} />
         <input
+        onChange={filterData}
+          ref={cari}
           type="text"
           className="w-full focus:outline-none"
           placeholder="Cari..."
@@ -50,7 +76,7 @@ export const Supplier = () => {
           </div>
         ) : (
           <div className="flex flex-col gap-3 w-full h-full items-center justify-start">
-            {datax.map((supp) => (
+            {tampil.map((supp) => (
               <Link
                 to={{
                   pathname: `/pos/supplierdet/${supp._id}`,
@@ -58,27 +84,29 @@ export const Supplier = () => {
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={supp._id}
               >
-                <ul className=" flex flex-col place-items-start font-semibold">
+                <ul className=" flex flex-col place-items-start text-[12px]">
                   {/* <li>{supp.id}</li> */}
-                  <li>{supp.namaPerusahaan}</li>
-                  <li className="text-[#BDBDBD]">
+                  <li className="font-medium  text-[#454545]">
+                    {supp.namaPerusahaan}
+                  </li>
+                  <li className="text-[#BDBDBD] font-normal">
                     {supp.nomorTelepon}
                   </li>
                 </ul>
-                <AiOutlineRightCircle size={20} />
+                <img src={ikon} className="h-[20px] w-[20px]" />
               </Link>
             ))}
           </div>
         )}
       </div>
-        <div className="mt-3">
-          <a
-            href="addsupplier"
-            className="flex justify-center items-center gap-2 bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-bold rounded-xl p-3 text-[14px] mt-3"
-          >
-            <AiFillPlusCircle size={16} /> Tambah Supplier
-          </a>
-        </div>
+      <div className="mt-3">
+        <a
+          href="addsupplier"
+          className="flex justify-center items-center gap-2 bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-bold rounded-xl p-3 text-[14px] mt-3"
+        >
+          <img src={add} className="h-[20px] w-[20px]" /> Tambah Supplier
+        </a>
+      </div>
     </div>
   );
 };

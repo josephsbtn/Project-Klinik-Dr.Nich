@@ -8,7 +8,7 @@ import axios from "axios";
 export const DaftarProduk2 = () => {
   const [products, setproducts] = useState([]);
   const { Kategori } = useParams();
-  const { setNav } = useContext(navContext);
+  const { setNav, setSort } = useContext(navContext);
   const [cari, setCari] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +21,7 @@ export const DaftarProduk2 = () => {
     };
     fetchData();
     setNav("Daftar Produk");
+    setSort(true)
   }, []);
   const filterData = products.filter(
     (data) =>
@@ -49,7 +50,7 @@ export const DaftarProduk2 = () => {
             {filterData.map((pro, i) => (
               <Link
                 to={{
-                  pathname: `/productdetail/${pro._id}`,
+                  pathname: `/pos/productdetail/${pro._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}
@@ -62,9 +63,9 @@ export const DaftarProduk2 = () => {
                   </li>
                   <li className="w-full flex justify-between">
                     <span>{pro.namaProduk}</span>
-                    <span className="text-[#C2A353]">{pro.hargaJual}</span>
                   </li>
                 </ul>
+                <span className="text-[#C2A353]">Rp.{pro.hargaJual}</span>
               </Link>
             ))}
           </div>
