@@ -34,7 +34,7 @@ export const HomeAdmin = () => {
           <div className="grid-container grid-cols-2 md:grid-cols-3 place-items-center">
             {/* Data User */}
             <a
-              href="pos/users"
+              href="/pos/users"
               className="h-[125px] w-[150px] group relative z-20 group-hover:z-30 group-hover:scale-105 transition-all duration-300"
             >
               <span className="bg-white h-[125px] w-[150px] border-2 border-yellow-700 rounded-2xl md:rounded-xl hover:scale-105 duration-300 flex flex-col justify-center items-center font-bold">
@@ -45,7 +45,7 @@ export const HomeAdmin = () => {
 
             {/* Produk */}
             <a
-              href="pos/produks"
+              href="/pos/produks"
               className="h-[125px] w-[150px] group relative z-20 group-hover:z-30 group-hover:scale-105 transition-all duration-300"
             >
               <span className="bg-white h-[125px] w-[150px] border-2 border-yellow-700 rounded-2xl md:rounded-xl hover:scale-105 duration-300 flex flex-col justify-center items-center font-bold">
@@ -55,28 +55,28 @@ export const HomeAdmin = () => {
             </a>
 
             {/* Other Links */}
-            <a href="pos/laporan" 
+            <a href="/pos/laporan" 
               className="h-[125px] w-[150px] group relative z-20 group-hover:z-30 group-hover:scale-105 transition-all duration-300">
               <span className="bg-white h-[125px] w-[150px] border-2 border-yellow-700 rounded-2xl md:rounded-xl hover:scale-105 duration-300 flex flex-col justify-center items-center font-bold">
               <img src={iLaporan} color="brown" size={50} className="w-[50px] h-[50px]" />
                 Laporan
               </span>
             </a>
-            <a href="pos/promo" 
+            <a href="/pos/promo" 
               className="h-[125px] w-[150px] group relative z-20 group-hover:z-30 group-hover:scale-105 transition-all duration-300">
               <span className="bg-white h-[125px] w-[150px] border-2 border-yellow-700 rounded-2xl md:rounded-xl hover:scale-105 duration-300 flex flex-col justify-center items-center font-bold">
               <img src={iPromo} color="brown" size={50} className="w-[50px] h-[50px]" />
                 Promo
               </span>
             </a>
-            <a href="pos/statistik" 
+            <a href="/pos/statistik" 
               className="h-[125px] w-[150px] group relative z-20 group-hover:z-30 group-hover:scale-105 transition-all duration-300">
             <span className="bg-white h-[125px] w-[150px] border-2 border-yellow-700 rounded-2xl md:rounded-xl hover:scale-105 duration-300 flex flex-col justify-center items-center font-bold">
             <img src={iStat} color="brown" size={50} className="w-[50px] h-[50px]" />
                 Statistik
               </span>
             </a>
-            <a href="pos/Kasir" 
+            <a href="/pos/Kasir" 
                    className="h-[125px] w-[150px] group relative z-20 group-hover:z-30 group-hover:scale-105 transition-all duration-300">
               <span className="bg-white h-[125px] w-[150px] border-2 border-yellow-700 rounded-2xl md:rounded-xl hover:scale-105 duration-300 flex flex-col justify-center items-center font-bold">
               <img src={iPenj} color="brown" size={50} className="w-[50px] h-[50px]" />
