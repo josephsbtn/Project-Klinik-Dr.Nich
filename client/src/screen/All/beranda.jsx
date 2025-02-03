@@ -20,10 +20,8 @@ import AboutCard from "../../components/AboutCard";
 import CardJenisLayanan from "../../components/cardJenisLayanan.jsx";
 import LayananPopuler from "../../components/layananPopuler.jsx";
 import ProdukTerbaru from "../../components/ProdukTerbaru.jsx";
-import UlasanCard from "../../components/cardUlasan.jsx";
 import StarIcon from "../../assets/star.svg";
-
-import ArrowRight from "../../../../admin/src/assets/icon/ArrowRight";
+import YTicon from "../../assets/logos_youtube-icon.svg";
 
 // IMAGES & ICONS ABOUT
 import img1 from "../../assets/img-carousel/img1.png";
@@ -285,7 +283,7 @@ export default function Beranda() {
 
       {/* Carousel Component */}
       <Carousel
-        className="pb-10 pt-20"
+        className="pb-10 pt-16"
         autoplay={{
           delay: 3000,
           disableOnInteraction: true,
@@ -297,11 +295,27 @@ export default function Beranda() {
         {promo &&
           promo.map((item, index) => (
             <div key={item._id} className="relative">
-              <img
-                src={item.foto}
-                alt={`Slide ${index + 1}`}
-                className="h-full lg:h-[80vh] w-full object-cover relative lg:object-center"
-              />
+              <picture>
+                {/* Show fotoDesktop on screens larger than 1024px */}
+                <source media="(min-width: 1024px)" srcSet={item.fotoDesktop} />
+                {/* Default to fotoMobile for smaller screens */}
+                <img
+                  src={item.fotoMobile}
+                  alt={`Slide ${index + 1}`}
+                  className="h-screen lg:h-[80vh] w-full object-cover relative lg:object-center"
+                />
+              </picture>
+              <div className="absolute lg:hidden bottom-5 left-5 flex items-center justify-center z-10 gap-4">
+                <button className="text-base font-SFPro tracking-tight text-white bg-secondary py-3 px-8 rounded-3xl">
+                  Ambil Promo
+                </button>
+                <button
+                  className="text-base font-SFPro tracking-tight text-secondary bg-transparent border border-secondary py-3 px-6 rounded-3xl"
+                  onClick={() => navigate(`/promo/detail/${item._id}`)}>
+                  Detail
+                </button>
+              </div>
+
               <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100"></div>
             </div>
           ))}
@@ -504,6 +518,9 @@ export default function Beranda() {
                         window.location.href = `${item.link}`;
                       }}>
                       <div className="w-72 h-auto  relative flex flex-col items-start justify-start">
+                        <div className="absolute rounded-[10px] h-[74%] top-0 left-0 right-0 bottom-0 bg-black/50 flex items-center justify-center">
+                          <img src={YTicon} className="w-[30px] h-[21px]" />
+                        </div>
                         {/* Dynamic Image */}
                         <img
                           src={item.thumbnail} // Assuming `imageUrl` is the property for image source
@@ -512,7 +529,7 @@ export default function Beranda() {
                         />
 
                         {/* Dynamic Product Name */}
-                        <p className="w-full hover:text-secondary mt-2 transition-all duration-150 text-text text-left text-sm font-normal font-SFPro leading-tight tracking-tight">
+                        <p className="w-full hover:text-secondary mt-2 transition-all duration-150 text-text text-left text-sm font-normal font-SFPro leading-[25px] tracking-tight">
                           {item.judul}
                         </p>
 
@@ -520,7 +537,7 @@ export default function Beranda() {
                         <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-[25px] tracking-tight ">
                           <p>{item.sosmed}</p>{" "}
                           {/* Assuming `type` holds the product type */}
-                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full font-SFPro" />
+                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full " />
                           <p>{item.channel}</p>{" "}
                           {/* Assuming `category` holds the product category */}
                         </div>

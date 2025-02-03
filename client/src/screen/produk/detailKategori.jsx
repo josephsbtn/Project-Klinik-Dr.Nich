@@ -147,10 +147,10 @@ function DetailKategori() {
 
                 {/* Skin Type Filter */}
                 <div className="flex flex-col items-center  lg:items-start space-y-2 w-[85%]">
-                  <h1 className="text-base lg:text-xl font-medium font-SFPro text-secondary">
+                  <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary leading-snug tracking-tight">
                     Jenis Kulit
                   </h1>
-                  <div className="grid grid-cols-2 w-[90%]">
+                  <div className="grid grid-cols-2 w-[90%] gap-4">
                     {/* ALL Skin Types Option */}
                     <label className="flex items-center space-x-2 cursor-pointer">
                       <input
@@ -170,7 +170,7 @@ function DetailKategori() {
                           <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
                         )}
                       </div>
-                      <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                      <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tigh">
                         All
                       </span>
                     </label>
@@ -199,7 +199,7 @@ function DetailKategori() {
                             <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
                           )}
                         </div>
-                        <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                        <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tight">
                           {item.name}
                         </span>
                       </label>
@@ -209,10 +209,10 @@ function DetailKategori() {
 
                 {/* Category Filter */}
                 <div className="flex flex-col items-start space-y-2 w-[85%]">
-                  <h1 className="text-base lg:text-xl  font-medium font-SFPro text-secondary">
+                  <h1 className="text-base lg:text-lg  font-medium font-SFPro text-secondary leading-snug tracking-tight">
                     Kategori
                   </h1>
-                  <div className="grid grid-cols-2 w-[90%]">
+                  <div className="grid grid-cols-2 w-[90%]  gap-4">
                     {/* ALL Categories Option */}
                     <label className="flex items-center space-x-2 cursor-pointer">
                       <input
@@ -224,15 +224,15 @@ function DetailKategori() {
                         onChange={() => setFilterType("all")}
                       />
                       <div
-                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+                        className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all 
               ${
                 filterType === "all" ? "border-[#B2955B]" : "border-gray-400"
               }`}>
                         {filterType === "all" && (
-                          <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
+                          <div className="w-3 h-3 rounded-full bg-[#B2955B]"></div>
                         )}
                       </div>
-                      <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                      <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tigh">
                         All
                       </span>
                     </label>
@@ -251,17 +251,17 @@ function DetailKategori() {
                           onChange={() => setFilterType(item.name)}
                         />
                         <div
-                          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all 
                 ${
                   filterType === item.name
                     ? "border-[#B2955B]"
                     : "border-gray-400"
                 }`}>
                           {filterType === item.name && (
-                            <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
+                            <div className="w-3 h-3 rounded-full bg-[#B2955B]"></div>
                           )}
                         </div>
-                        <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                        <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tigh">
                           {item.name}
                         </span>
                       </label>
