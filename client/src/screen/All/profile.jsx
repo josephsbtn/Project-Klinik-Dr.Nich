@@ -13,6 +13,11 @@ import bunga from "../../assets/img-profil/bungaIcon.svg";
 import misiIcon from "../../assets/img-profil/misiIcon.svg";
 import ArrowRightDisable from "../../components/ArrowRight-Disable";
 
+// visi
+import visi from "../../assets/img-profil/visiAja.svg";
+// misi
+import misi from "../../assets/img-profil/misiAja.svg";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -107,13 +112,15 @@ function Profile() {
       <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
+        >
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/promo")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
+        >
           Promo
         </a>
       </div>
@@ -133,9 +140,17 @@ function Profile() {
         </div>
 
         {/* Visi & Misi Section */}
-        <div className="w-full flex flex-col mt-[30px] lg:flex-row lg:justify-center lg:gap-8">
+        <div className="w-[326px] flex flex-col mt-[30px] lg:flex-row lg:justify-center lg:gap-8">
           {/* Visi */}
-          <div className="relative w-full h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
+          <div className="flex flex-col items-center lg:items-start lg:justify-start">
+            <img
+              src={visi}
+
+              className="w-[326px] h-[244px] -translate-y-3 lg:w-16 lg:h-16"
+              alt="Visi Icon"
+            />
+            </div>
+          {/* <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
             <img
               src={bgVM}
               className="absolute w-full h-full rounded-[10px] z-0"
@@ -147,10 +162,9 @@ function Profile() {
                 className="w-[30px] h-full -translate-y-3 lg:w-16 lg:h-16"
                 alt="Bunga"
               />
-              <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-lg">
-                Visi Dr. Nich Beauty Aesthetic
+              <h1 className="text-white text-base font-medium font-SFPro leading-tight tracking-tight">Visi Dr. Nich Beauty Aesthetic
               </h1>
-              <p className="w-[250px] text-justify font-SFPro text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
+              <p className="w-[284px] text-justify text-white text-xs font-normal font-SFPro leading-tight tracking-tight">
                 Visi kami adalah untuk memimpin industri estetika dengan menjadi
                 klinik terdepan yang dikenal karena inovasi, kualitas, dan
                 layanan pelanggan yang luar biasa. Kami berupaya untuk terus
@@ -158,10 +172,18 @@ function Profile() {
                 memberikan perawatan terbaik bagi setiap pasien.
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Misi */}
-          <div className="relative w-full h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
+          <div className="flex flex-col items-center lg:items-start lg:justify-start">
+            <img
+              src={misi}
+
+              className="w-[326px] h-[244px] -translate-y-3 lg:w-16 lg:h-16"
+              alt="Visi Icon"
+            />
+            </div>
+          {/* <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
             <img
               src={bgVM}
               className="absolute w-full h-full rounded-[10px] z-0"
@@ -184,7 +206,7 @@ function Profile() {
                 yang nyata.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Sertifikasi Section */}
@@ -212,7 +234,8 @@ function Profile() {
                 nextArrow={false}
                 prevArrow={false}
                 loop={true} // Enable looping
-                navigation={false}>
+                navigation={false}
+              >
                 {fotoSertif && fotoSertif.length > 0 ? (
                   fotoSertif.map((item) => (
                     <div key={item._id} className="relative px-2">

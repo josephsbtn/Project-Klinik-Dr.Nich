@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 // Import logo and images
 import logoPutih from "../../assets/logodrnich-white.svg";
+import footerbaru from "../../assets/logo-footer/footerbaru.svg";
 
 // Social media logos
 import yt from "../../assets/logo-sosmed/YouTube.svg";
@@ -49,11 +50,13 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-gradient-to-br from-[#c2a353] to-[#00674f] text-white py-8 px-6 lg:px-24">
+    <footer className="w-full bg-footer-pattern bg-contain py-8 px-6 lg:px-24">
+
       {/* Main Container */}
-      <div className="flex flex-col lg:justify-between lg:items-start gap-8">
+      <div className="flex flex-col w-full h-full lg:justify-between lg:items-start">
+        {/* <img src={footerbaru} alt="" className="absolute z-0" /> */}
         {/* Logo and Social Media */}
-        <div className="flex flex-row gap-11 lg:space-y-6 lg:w-full lg:justify-between">
+        <div className="flex flex-row gap-11 lg:space-y-6 lg:w-full lg:justify-between z-10">
           <img
             src={logoPutih}
             alt="Logo Dr. Nich"
@@ -95,7 +98,7 @@ export default function Footer() {
         </div>
 
         {/* Contact Information and Navigation Links */}
-        <div className="flex gap-11 lg:gap-0 lg:flex-row lg:justify-between lg:w-full">
+        <div className="flex gap-11 lg:gap-0 lg:flex-row lg:justify-between lg:w-full z-10">
           <div className="w-[147px] grid gap-4 lg:gap-6 lg:w-full">
             <div
               className="flex items-start space-x-3 cursor-pointer"
@@ -104,9 +107,12 @@ export default function Footer() {
               )}>
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
               <p className="text-sm leading-tight text-[#e8ebe0] lg:max-w-[60%]">
-                Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec.
-                Argomulyo, Kota Salatiga, Jawa Tengah 50733
+                Jl. Diponegoro No.12, Salatiga, Jawa Tengah, 51552
               </p>
+            </div>
+            <div className="flex items-center space-x-3">
+              <img src={email} alt="Email" className="w-5 h-5" />
+              <p className="text-sm text-[#e8ebe0]">drnich@email.com</p>
             </div>
             <div
               className="flex items-center space-x-3 cursor-pointer"
@@ -117,10 +123,6 @@ export default function Footer() {
             <div className="flex items-center space-x-3">
               <img src={clock} alt="Jam Operasional" className="w-5 h-5" />
               <p className="text-sm text-[#e8ebe0]">10.00 - 19.00</p>
-            </div>
-            <div className="flex items-center space-x-3">
-              <img src={email} alt="Email" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">drnich@email.com</p>
             </div>
           </div>
 
@@ -140,7 +142,7 @@ export default function Footer() {
       </div>
 
       {/* Footer Bottom */}
-      <div className="mt-8 text-right text-xs text-[#e8ebe0]">
+      <div className="-mt-2 text-right text-xs text-[#e8ebe0]">
         <p>©2024 | Dr. Nich Beauty Aesthetic</p>
       </div>
     </footer>

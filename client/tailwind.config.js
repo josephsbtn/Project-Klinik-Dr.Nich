@@ -6,6 +6,13 @@ export default withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+
+      // bg semuanya pokoknye
+      backgroundImage: {
+        "hero-pattern": "url('/src/assets/bg/bg-1.jpg')",
+        "footer-pattern": "url('./src/assets/logo-footer/footerbaru.svg')",
+      },
+
       boxShadow: {
         "inner-shadow": "inset 0 0 10px 0 rgba(255, 255, 255, 0.5)",
       },
