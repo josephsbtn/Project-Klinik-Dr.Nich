@@ -35,7 +35,7 @@ return (
             </div>
         ))}
         
-        <a href='TambahDiskon3' className='flex items-end h-full'>
+        <a href='TambahDiskon3' className=' mt-auto flex items-end h-full'>
             <button className='flex justify-center gap-2 text-white text-[14px] bg-gradient-to-r rounded-xl from-[#EAC564] to-[#C2A353] w-full p-4'>
                 <img src={iTamPu} alt="TambahPu" />
                 <p>Tambah diskon</p>
