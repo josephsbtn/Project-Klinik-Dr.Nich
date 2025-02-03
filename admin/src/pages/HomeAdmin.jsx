@@ -19,7 +19,7 @@ export const HomeAdmin = () => {
   }, []);
 
   return (
-    <div className="w-full h-full relative overflow-hidden">
+    <div className="w-full h-full relative overflow-auto">
       {/* Super Admin section */}
       <div className="admin-section">
         <div className="grid z-50 absolute top-4 place-items-center">
