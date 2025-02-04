@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import produkModels from "../../models/produk/produk.js";
 import carouselProducts from "../../models/produk/carouselProducts.js";
+import tipeKulit from "../../models/produk/tipeKulit.js";
 
 /*CAROUSEL PRODUCT*/
 
@@ -67,6 +68,7 @@ const newproduk = asyncHandler(async (req, res) => {
     harga: req.body.harga,
     kategori: req.body.kategori,
     tipeProduk: req.body.tipeProduk,
+    tipeKulit: req.body.tipeKulit,
   };
   try {
     const isExist = await produkModels.findOne({ nama: newproduk.nama });
@@ -85,7 +87,8 @@ const getproduk = asyncHandler(async (req, res) => {
     const produk = await produkModels
       .find()
       .populate("kategori") // Populating 'kategori' from the schema
-      .populate("tipeProduk"); // Populating 'tipeProduk' from the schema
+      .populate("tipeProduk")
+      .populate("tipeKulit"); // Populating 'tipeProduk' from the schema
     res.send(produk);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -117,6 +120,7 @@ const updateproduk = asyncHandler(async (req, res) => {
     harga: req.body.harga,
     kategori: req.body.kategori,
     tipeProduk: req.body.tipeProduk,
+    tipeKulit: req.body.tipeKulit,
   };
   try {
     const produk = await produkModels.findByIdAndUpdate(
@@ -146,7 +150,8 @@ const getprodukbyID = asyncHandler(async (req, res) => {
     const produk = await produkModels
       .findById(id)
       .populate("kategori", "name")
-      .populate("tipeProduk", "name");
+      .populate("tipeProduk", "name")
+      .populate("tipeKulit", "name");
 
     if (!produk) {
       return res.status(404).json({ message: "Product not found" });

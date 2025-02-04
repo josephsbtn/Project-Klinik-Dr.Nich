@@ -26,8 +26,6 @@ function DetailKategori() {
   const [filterType, setFilterType] = useState("all"); // Filter for product type
   const [filterSkin, setFilterSkin] = useState("all"); // Filter for skin type
 
-  const [showFilters, setShowFilters] = useState(false);
-
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
@@ -90,8 +88,10 @@ function DetailKategori() {
   const filteredContent = content.filter((item) => {
     // Filtering logic for products
 
-    const matchesType = filterType === "all" || item.type === filterType;
-    const matchesSkin = filterSkin === "all" || item.skinType === filterSkin;
+    const matchesType =
+      filterType === "all" || item.tipeProduk.name === filterType;
+    const matchesSkin =
+      filterSkin === "all" || item.tipeKulit.name === filterSkin;
     console.log(
       `Filtering: ${item.name}, Type Match: ${matchesType}, Skin Match: ${matchesSkin}`
     );
