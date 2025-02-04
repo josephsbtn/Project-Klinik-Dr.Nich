@@ -6,7 +6,7 @@ import wa from "../../assets/wa.svg";
 import axios from "axios";
 
 export const PelangganDetail = () => {
-  const { setNav, setSort } = useContext(navContext);
+  const { setNav, setSort, setLink } = useContext(navContext);
   const [datax, setDatax] = useState([]);
   const { id } = useParams();
   const navigasi = useNavigate();
@@ -18,7 +18,8 @@ export const PelangganDetail = () => {
     };
     fetchData();
     setNav("Detail Pelanggan");
-    setSort(false)
+    setSort(false);
+    setLink('/pos/pelanggan')
   }, []);
 
   const handleDelete = async () => {
@@ -37,13 +38,13 @@ export const PelangganDetail = () => {
             </div>
           ) : (
             <>
-              <label className="text-start text-[#BDBDBD] text-[10px] md:text-[12px]">
+              <label className="text-start text-[#BDBDBD] text-[12px]">
                 Nama
               </label>
               <p className="text-start font-semibold h-[30px]">
                 {datax.namaPelanggan}
               </p>
-              <label className="text-start text-[#BDBDBD] text-[10px] md:text-[12px]">
+              <label className="text-start text-[#BDBDBD] text-[12px]">
                 Nomor Telepon
               </label>
               <button
@@ -60,19 +61,19 @@ export const PelangganDetail = () => {
                   {datax.nomorTelepon}
                 </p>
               </button>
-              <label className="text-start text-[#BDBDBD] text-[10px] md:text-[12px]">
+              <label className="text-start text-[#BDBDBD] text-[12px]">
                 Jenis Kelamin
               </label>
               <p className="text-start font-semibold h-[30px]">
                 {datax.gender}
               </p>
-              <label className="text-start text-[#BDBDBD] text-[10px] md:text-[12px]">
+              <label className="text-start text-[#BDBDBD] text-[12px]">
                 Alamat
               </label>
               <p className="text-start font-semibold h-[30px]">
                 {datax.alamat}
               </p>
-              <label className="text-start text-[#BDBDBD] text-[10px] md:text-[12px]">
+              <label className="text-start text-[#BDBDBD] text-[12px]">
                 Keterangan
               </label>
               <p className="text-start font-semibold h-[30px]">

@@ -6,7 +6,7 @@ import { AiFillPlusCircle, AiOutlineSearch } from "react-icons/ai";
 export const DaftarProduk = () => {
   const [products, setproducts] = useState([]);
   const { Kategori } = useParams();
-  const { setNav, setSort } = useContext(navContext);
+  const { setNav, setSort, setLink } = useContext(navContext);
   useEffect(() => {
     fetch("/produk.json")
       .then((response) => response.json())
@@ -29,7 +29,7 @@ export const DaftarProduk = () => {
         <AiOutlineSearch size={20} />
         <input
           type="text"
-          className="text-sm w-full focus:outline-none"
+          className="text-sm w-full h-[30px] focus:outline-none"
           placeholder="Cari..."
         ></input>
       </form>

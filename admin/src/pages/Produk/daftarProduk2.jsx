@@ -8,7 +8,7 @@ import axios from "axios";
 export const DaftarProduk2 = () => {
   const [products, setproducts] = useState([]);
   const { Kategori } = useParams();
-  const { setNav, setSort } = useContext(navContext);
+  const { setNav, setSort, setLink } = useContext(navContext);
   const [cari, setCari] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +21,7 @@ export const DaftarProduk2 = () => {
     };
     fetchData();
     setNav("Daftar Produk");
+    setLink('/pos/produks')
     setSort(true)
   }, []);
   const filterData = products.filter(
@@ -30,13 +31,13 @@ export const DaftarProduk2 = () => {
   );
   return (
     <div className="flex flex-col py-3 gap-1 bg-white w-full text-[12px] text-[#454545] min-h-screen h-full overflow-auto overflow-y-scroll scrollbar-hide px-7">
-      <form className="mt-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
+      <form className="my-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
         <AiOutlineSearch size={20} />
         <input
           onChange={(e) => setCari(e.target.value)}
           value={cari}
           type="text"
-          className="w-full focus:outline-none"
+          className="text-sm w-full h-[30px] focus:outline-none"
           placeholder="Cari..."
         ></input>
       </form>

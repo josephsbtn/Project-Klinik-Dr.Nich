@@ -16,7 +16,7 @@ import { PembelianStok } from "./PembelianStok";
 
 export const modalContext = createContext();
 export const DaftarBelanja = () => {
-  const { setNav, setSort } = useContext(navContext);
+  const { setNav, setSort, setLink } = useContext(navContext);
   const [angka, setAngka] = useState(0);
   const [total, setTotal] = useState(0);
   const [cart, setCart] = useState([]);
@@ -102,6 +102,7 @@ export const DaftarBelanja = () => {
     };
     fetch();
     setNav("Daftar Belanja");
+    setLink('/pos/produks')
     setSort(false);
     document.title = "Daftar Belanja";
   }, []);
@@ -125,7 +126,7 @@ export const DaftarBelanja = () => {
       }}
     >
       <form className="flex flex-col px-7 py-3 gap-1 bg-white w-full min-h-screen h-fit text-[12px] text-[#454545] overflow-auto overflow-y-scroll scrollbar-hide">
-        <form className="mt-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
+        <form className="my-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
           <AiOutlineSearch size={20} />
           <input
             type="text"

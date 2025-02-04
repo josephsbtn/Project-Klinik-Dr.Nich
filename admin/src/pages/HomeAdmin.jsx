@@ -12,17 +12,19 @@ import iPenj from "../assets/iconpenjuala.svg";
 
 export const modalContext = createContext(null)
 export const HomeAdmin = () => {
-  const { setNav } = useContext(navContext);
+  const { setNav, setLink } = useContext(navContext);
 
   useEffect(() => {
     setNav('home');
+    setLink('/pos')
   }, []);
 
   return (
-    <div className="w-full h-full overflow-auto md:overflow-hidden">
+    <div className="w-full h-full overflow-hidden md:overflow-hidden mt-[75px]">
+              
       {/* Super Admin section */}
       <div className="admin-section">
-        <div className="grid z-50 absolute top-4 place-items-center">
+        <div className="grid absolute top-4 place-items-center">
           <img src={Ava} className="rounded-full h-auto w-[100px]" />
           <h5 className="mt-3 font-semibold text-[16px]">Super Admin</h5>
         </div>
@@ -73,7 +75,7 @@ export const HomeAdmin = () => {
               className="h-[125px] w-[150px] z-20 p-[1px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] rounded-xl">
             <span className="gap-[15px] bg-white h-full w-full border border-[#C2A353] rounded-xl md:rounded-xl flex flex-col justify-center items-start py-[20px] px-[25px] font-medium text-[14px]">
             <img src={iStat} color="brown" className="w-[36px] h-[36px]" />
-                Statistik
+                Display
               </span>
             </a>
             <a href="/pos/Kasir" 

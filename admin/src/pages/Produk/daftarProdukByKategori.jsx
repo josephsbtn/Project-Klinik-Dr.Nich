@@ -8,7 +8,7 @@ import axios from "axios";
 export const DaftarProdukByKategori = () => {
   const [products, setproducts] = useState([]);
   const { Kategori } = useParams();
-  const { setNav } = useContext(navContext);
+  const { setNav, setLink } = useContext(navContext);
   const [cari, setCari] = useState("");
   const {kategori} = useParams()
   useEffect(() => {
@@ -22,6 +22,7 @@ export const DaftarProdukByKategori = () => {
     };
     fetchData();
     setNav("Daftar Produk");
+    setLink('/pos/kategoriproduk')
   }, []);
   const filterData = products.filter(
     (data) =>
@@ -36,7 +37,7 @@ export const DaftarProdukByKategori = () => {
           onChange={(e) => setCari(e.target.value)}
           value={cari}
           type="text"
-          className="text-sm w-full focus:outline-none"
+          className="text-sm w-full h-[30px] focus:outline-none"
           placeholder="Cari..."
         ></input>
       </form>

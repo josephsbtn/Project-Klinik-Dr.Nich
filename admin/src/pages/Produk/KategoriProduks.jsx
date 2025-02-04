@@ -9,7 +9,7 @@ import { navContext } from "../../App2";
 import axios from "axios";
 
 export const KategoriProduks = () => {
-  const { setNav } = useContext(navContext);
+  const { setNav, setLink } = useContext(navContext);
   const [datax, setDatax] = useState([]);
   const [search, setSearch] = useState(""); // Untuk pencarian
 
@@ -25,7 +25,8 @@ export const KategoriProduks = () => {
       }
     };
     fetchData();
-    setNav("Kategori Product");
+    setNav("Kategori Produk");
+    setLink('/pos/produks')
   }, []);
 
   // Filter data berdasarkan pencarian
@@ -40,11 +41,11 @@ export const KategoriProduks = () => {
   return (
     <div className="flex flex-col py-3 gap-1 bg-white w-full text-[12px] text-[#454545] h-screen  overflow-auto overflow-y-scroll scrollbar-hide px-7">
       {/* Pencarian */}
-      <form className="mt-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
+      <form className="my-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
         <AiOutlineSearch size={20} />
         <input
           type="text"
-          className="text-sm w-full focus:outline-none"
+          className="text-sm w-full h-[30px] focus:outline-none"
           placeholder="Cari..."
           value={search}
           onChange={(e) => setSearch(e.target.value)} // Update state pencarian

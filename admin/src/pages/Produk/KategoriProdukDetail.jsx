@@ -7,7 +7,7 @@ import axios from "axios";
 import next2 from "../../assets/next2.svg";
 
 export const KategoriProdukDetail = () => {
-  const { setNav, setSort } = useContext(navContext);
+  const { setNav, setSort, setLink } = useContext(navContext);
   const [datax, setDatax] = useState([]);
   const [fetched, setFetched] = useState(false);
   const { id } = useParams();
@@ -22,7 +22,8 @@ export const KategoriProdukDetail = () => {
     };
     fetchData();
 
-    setNav("Jenis Product");
+    setNav("Detail Kategori Produk");
+    setLink('/pos/kategoriproduk')
     setSort(false)
   }, []);
 
@@ -45,13 +46,13 @@ export const KategoriProdukDetail = () => {
       {fetched ? (
         <>
           <div className="flex flex-col gap-1  mx-1 rounded-xl border border-[#C2A353] px-4 py-6">
-            <label className="text-start font-normal text-[10px] text-[#BDBDBD]">
+            <label className="text-start font-normal text-[12px] text-[#BDBDBD]">
               Jenis Produk
             </label>
             <p className="text-start text-[#454545]  font-normal text-[12px] h-[30px]">
               {datax?.jenis.jenis}
             </p>
-            <label className="text-start font-normal text-[10px] text-[#BDBDBD]">
+            <label className="text-start font-normal text-[12px] text-[#BDBDBD]">
               Nama Kategori Produk
             </label>
             <p className="text-start text-[#454545]  font-normal text-[12px]">
