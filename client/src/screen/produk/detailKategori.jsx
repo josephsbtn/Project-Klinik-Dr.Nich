@@ -277,6 +277,20 @@ function DetailKategori() {
                     Terapkan
                   </button>
                 </div>
+                <div className="absolute bottom-0 left-0 z-40">
+                  <svg viewBox="0 0 1440 320" className="w-full h-32">
+                    <path
+                      fill="url(#gradient)"
+                      fillOpacity="1"
+                      d="M0,288L48,272C96,256,192,224,288,186.7C384,149,480,107,576,101.3C672,96,768,128,864,138.7C960,149,1056,139,1152,149.3C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    <defs>
+                      <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#a8d5ba" />
+                        <stop offset="100%" stopColor="#dfc49f" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
               </div>
             </div>
           </ConfirmPopUp>

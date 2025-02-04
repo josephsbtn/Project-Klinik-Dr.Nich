@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dasboard from "./screen/dashboard.jsx";
+import Login from "./screen/login.jsx";
 
 //layanan
 import ListLayanan from "./screen/userDisplayUpdate/layanan/listLayanan.jsx";
@@ -39,7 +40,8 @@ function App() {
       <Router>
         <Routes>
           {/* USER DISPLAY */}
-          <Route path="/" element={<Dasboard />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/dashboardDisplay" element={<Dasboard />} />
           <Route path="/layanan" element={<ListLayanan />} />
           <Route path="/layanan/updateLayanan/:id" element={<LayananUD />} />
           <Route

@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         SFPro: ["SF Pro Display", "sans-serif"],
+        Inter: ["Inter", "sans-serif"],
       },
       colors: {
         primary: "#00674F",
