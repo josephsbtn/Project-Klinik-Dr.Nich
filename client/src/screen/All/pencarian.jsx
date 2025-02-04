@@ -122,11 +122,11 @@ function Pencarian() {
     fetchData();
   }, []);
   return (
-    <>
+    <main className="w-full flex flex-col items-center">
       <Navbar selected={""} />
-      <div className="mt-[18px]">
-        <div className="flex-col">
-          <div className="flex gap-[6px] mx-[25px] lg:mx-[120px]">
+      <div className="mt-[18px] w-full flex flex-col items-center">
+        <div className="flex flex-col  w-full items-center">
+          <div className="flex w-[90%] lg:w-[80%] justify-start gap-[6px] mx-[25px]">
             <a
               href="/"
               className="text-[#bdbdbd] text-xs font-nxormal font-SFPro tracking-tight lg:text-sm">
@@ -249,14 +249,14 @@ function Pencarian() {
           </div>
         </div>
       </div>
-      <section className="lg:w-[70%] w-[90%]">
+      <section className="lg:w-[80%] w-[90%]">
         <LayananPopuler />
       </section>
-      <section className="lg:w-[70%] w-[90%]">
+      <section className="lg:w-[80%] w-[90%]">
         <ProdukTerbaru />
       </section>
       <Footer />
-    </>
+    </main>
   );
 }
 
