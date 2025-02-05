@@ -16,6 +16,7 @@ import userPosRoutes from "./routes/admin/userPosRoutes.js";
 import promoPosRoutes from "./routes/admin/promoPosRoutes.js";
 import kasirPosRoutes from "./routes/admin/kasirPosRoutes.js";
 import laporanPosRoutes from "./routes/admin/laporanRoutes.js";
+import adminRoutes from "./routes/admin/adminRoutes.js";
 import dbConfig from "./config/db.js";
 
 const app = express();
@@ -65,6 +66,7 @@ app.use("/api/pos/user", userPosRoutes);
 app.use("/api/pos/promo", promoPosRoutes);
 app.use("/api/pos/kasir", kasirPosRoutes);
 app.use("/api/pos/laporan", laporanPosRoutes);
+app.use("/api/pos", adminRoutes);
 
 
 /////////
