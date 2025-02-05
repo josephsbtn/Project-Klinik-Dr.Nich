@@ -48,7 +48,7 @@ const deleteadmin = asyncHandler(async (req, res) => {
 const cekLogin = asyncHandler(async (req, res) => {
   const { name, password } = req.body;
   try {
-    const admin = await admin.findOne({ name });
+    const admin = await adminModels.findOne({ name });
     if (!admin) {
       return res.status(400).json({ message: "admin not found" });
     }
