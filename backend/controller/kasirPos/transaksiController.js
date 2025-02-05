@@ -55,8 +55,15 @@ const newTransaksi = asyncHandler(async (req, res) => {
 
 const getTransaksi = asyncHandler(async (req, res) => {
   try {
-    const transaksi = await TransaksiModels.find()
-      .populate("promo", "namaPromo");
+    const transaksi = await TransaksiModels.find().populate("promo")
+    .populate("pelanggan")
+    .populate({
+      path : "transaksiDetail",
+      populate : {
+        path : 'produk',
+        model : 'produkPos'
+      }
+    });
 
     res.send(transaksi);
   } catch (error) {
