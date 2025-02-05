@@ -201,7 +201,7 @@ const laporanPenjualan = asyncHandler(async(req,res)=>{
 
     let total = 0;
     for (const item of transaksi){
-        total += item.total
+        total += item.totalAkhir
     }
     const totalTransaksi = transaksi.length;
     
