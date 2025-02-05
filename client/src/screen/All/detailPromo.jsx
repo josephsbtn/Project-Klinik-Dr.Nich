@@ -6,6 +6,7 @@ import axios from "axios";
 import Navbar from "../auth/navbar";
 import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
+import PromoLainnya from "../../components/PromoLainnya";
 import ArrowRightDisable from "../../components/ArrowRight-Disable";
 import Footer from "../auth/footer";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -30,7 +31,7 @@ function DetailPromo() {
       const resPromo = response.data;
       setNama(resPromo.nama);
       setDetail(resPromo.detail);
-      setImage(resPromo.foto);
+      setImage(resPromo.fotoMobile);
       setSyarat(resPromo.syarat);
       setLoading(false);
     } catch (error) {
@@ -116,6 +117,9 @@ function DetailPromo() {
 
       <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%] lg:w-[80%] md:w-[80%] items-center">
         {/* Layanan */}
+        <section className="w-full">
+          <PromoLainnya />
+        </section>
         <section className="lg:w-full w-full">
           <LayananPopuler />
         </section>

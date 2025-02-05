@@ -6,7 +6,6 @@ export default withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-
       // bg semuanya pokoknye
       backgroundImage: {
         "hero-pattern": "url('/src/assets/bg/bg-1.jpg')",

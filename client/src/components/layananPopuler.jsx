@@ -68,7 +68,7 @@ function LayananPopuler() {
         </div>
       ) : (
         <div className="flex flex-col w-full lg:w-full pt-[15px]">
-          <div className="flex lg:justify-start justify-center items-center pt-[15px]">
+          <div className="flex lg:justify-start justify-center items-center">
             <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
               <div className="carousel-item gap-9">
                 {layanan.length > 0 ? (
