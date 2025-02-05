@@ -51,7 +51,6 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-footer-pattern bg-contain py-8 px-6 lg:px-24">
-
       {/* Main Container */}
       <div className="flex flex-col w-full h-full lg:justify-between lg:items-start">
         {/* <img src={footerbaru} alt="" className="absolute z-0" /> */}
@@ -107,7 +106,8 @@ export default function Footer() {
               )}>
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
               <p className="text-sm leading-tight text-[#e8ebe0] lg:max-w-[60%]">
-                Jl. Diponegoro No.12, Salatiga, Jawa Tengah, 51552
+                Jl. Pringgodani Gg. Buntu No.4, Tegalrejo, Kec. Argomulyo, Kota
+                Salatiga, Jawa Tengah 50733
               </p>
             </div>
             <div className="flex items-center space-x-3">
