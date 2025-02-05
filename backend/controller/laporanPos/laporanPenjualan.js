@@ -196,8 +196,15 @@ const laporanPenjualan = asyncHandler(async(req,res)=>{
     const {dari, sampai} = req.body;
     const from = new Date(dari)
     const to = new Date(sampai)
-    const transaksi = await TransaksiModels.find({createdAt : {$gte : from, $lte : to}})
-    .populate("promo", "namaPromo");
+    const transaksi = await TransaksiModels.find({createdAt : {$gte : from, $lte : to}}).populate("promo")
+    .populate("pelanggan")
+    .populate({
+      path : "transaksiDetail",
+      populate : {
+        path : 'produk',
+        model : 'produkPos'
+      }
+    });
 
     let total = 0;
     for (const item of transaksi){
