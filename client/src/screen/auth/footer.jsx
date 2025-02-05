@@ -111,10 +111,10 @@ export default function Footer() {
                 Salatiga, Jawa Tengah 50733
               </p>
             </a>
-            <div className="flex items-center space-x-3">
+            <d iv className="flex items-center space-x-3">
               <img src={email} alt="Email" className="w-5 h-5" />
               <p className="text-sm text-[#e8ebe0]">drnich@email.com</p>
-            </div>
+            </d>
             <div
               className="flex items-center space-x-3 cursor-pointer"
               onClick={handleWhatsApp}>

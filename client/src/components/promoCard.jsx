@@ -6,7 +6,8 @@ export default function PromoCard({ item }) {
 
   return (
     <div
-      className="w-[311px] lg:w-[325px] lg:h-[479px] h-[439px] flex flex-col mx-auto items-center border border-[#efefef] rounded-lg shadow-sm my-8"
+      className="w-[311px] lg:w-[325px] lg:h-[479px] h-[439px] flex flex-col mx-auto items-center border border-[#efefef] rounded-lg my-8
+      shadow-[0px_2px_6px_2px_rgba(0,0,0,0.15)] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.30)] duration-300 transition-all ease-in-out hover:border-secondary"
       onClick={() => navigate(`/promo/detail/${item._id}`)} // Moved onClick here
     >
       <source media="(min-width: 1024px)" srcSet={item.fotoDesktop} />
