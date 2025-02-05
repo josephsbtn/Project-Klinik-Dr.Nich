@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import adminModels from "../../models/admin/adminModels.js";
-
+import bcrypt from "bcrypt";
 const newadmin = asyncHandler(async (req, res) => {
     const { name, password, level } = req.body;
 
