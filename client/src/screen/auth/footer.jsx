@@ -51,7 +51,6 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-footer-pattern bg-contain py-8 px-6 lg:px-24">
-
       {/* Main Container */}
       <div className="flex flex-col w-full h-full lg:justify-between lg:items-start">
         {/* <img src={footerbaru} alt="" className="absolute z-0" /> */}
@@ -100,16 +99,18 @@ export default function Footer() {
         {/* Contact Information and Navigation Links */}
         <div className="flex gap-11 lg:gap-0 lg:flex-row lg:justify-between lg:w-full z-10">
           <div className="w-[147px] grid gap-4 lg:gap-6 lg:w-full">
-            <div
+            <a
+              href="https://maps.app.goo.gl/benokSLZCgXfyL5C9"
               className="flex items-start space-x-3 cursor-pointer"
               onClick={handleSosmed(
                 "https://maps.app.goo.gl/benokSLZCgXfyL5C9"
               )}>
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
               <p className="text-sm leading-tight text-[#e8ebe0] lg:max-w-[60%]">
-                Jl. Diponegoro No.12, Salatiga, Jawa Tengah, 51552
+                Jl. Pringgodani Gg. Buntu No.4, Tegalrejo, Kec. Argomulyo, Kota
+                Salatiga, Jawa Tengah 50733
               </p>
-            </div>
+            </a>
             <div className="flex items-center space-x-3">
               <img src={email} alt="Email" className="w-5 h-5" />
               <p className="text-sm text-[#e8ebe0]">drnich@email.com</p>
@@ -118,11 +119,11 @@ export default function Footer() {
               className="flex items-center space-x-3 cursor-pointer"
               onClick={handleWhatsApp}>
               <img src={kontak} alt="Kontak" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">+6289632517280</p>
+              <p className="text-sm text-[#e8ebe0]">+6285700525830</p>
             </div>
             <div className="flex items-center space-x-3">
               <img src={clock} alt="Jam Operasional" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">10.00 - 19.00</p>
+              <p className="text-sm text-[#e8ebe0]">10.00 - 18.00</p>
             </div>
           </div>
 

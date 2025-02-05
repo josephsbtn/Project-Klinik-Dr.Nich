@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import UserIcon from "../assets/icon/userLogo.svg";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,8 +12,32 @@ function Login() {
 
   const [loading, setLoading] = useState(false);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/Login`,
+        {
+          name: username,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res.data);
+      toast.success("Login Berhasil");
+    } catch (error) {
+      console.error("Login failed:", error);
+      toast.error(error.response?.data?.message || "Registrasi Gagal");
+    }
+  };
+
   return (
     <main className="w-full h-screen bg-gradient-to-l from-[#c2a353] to-[#eac464] flex flex-col items-center justify-between">
+      <ToastContainer />
       <h1 className="text-base font-Inter font-semibold capitalize tracking-wide w-[90%] text-left text-white pt-5">
         Point of Sale
       </h1>
@@ -28,7 +53,7 @@ function Login() {
           </h1>
           <form
             className="w-full flex flex-col items-start justify-center gap-4 mt-10"
-            action="">
+            onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-2">
               <label>
                 <p className="font-Inter text-xs font-normal capitalize text-text">

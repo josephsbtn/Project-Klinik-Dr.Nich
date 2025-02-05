@@ -129,6 +129,7 @@ function DetailKategori() {
               {category}
             </a>
           </div>
+          <h1 className=""></h1>
           <ConfirmPopUp
             open={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}>
@@ -295,10 +296,10 @@ function DetailKategori() {
             </div>
           </ConfirmPopUp>
 
-          <div className="flex flex-col items-end w-[80%] mt-4">
+          <div className="flex flex-col items-end w-[80%] bg-red-300 mt-4">
             <button
               onClick={() => setIsFilterOpen(true)}
-              className="flex items-center bg-gray-200 p-1 rounded-md hover:bg-gray-300 transition">
+              className="flex items-center p-1 rounded-md hover:bg-gray-300 transition">
               <img src={FilterIcon} alt="Filter" className="w-6 h-6" />
             </button>
           </div>
