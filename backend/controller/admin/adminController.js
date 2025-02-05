@@ -13,7 +13,7 @@ const newadmin = asyncHandler(async (req, res) => {
     const levelHash = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(password, levelHash);
 
-    const newadmin = new admin({
+    const newadmin = new adminModels({
       name,
       password: hashPass,
       level,
