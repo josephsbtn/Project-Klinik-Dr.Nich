@@ -46,7 +46,7 @@ app.use(
 );
 
 app.options("*", cors());
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 app.use(express.json({ limit: "50mb" })); // Adjust the limit as needed
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
@@ -67,7 +67,6 @@ app.use("/api/pos/promo", promoPosRoutes);
 app.use("/api/pos/kasir", kasirPosRoutes);
 app.use("/api/pos/laporan", laporanPosRoutes);
 app.use("/api/pos", adminRoutes);
-
 
 /////////
 
