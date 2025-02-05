@@ -16,19 +16,30 @@ function RegisterAdmin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`/api/pos/newadmin`, {
-        username,
-        password,
-        leveling,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/newadmin`,
+        {
+          name: username,
+          password: password,
+          level: leveling,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log(res.data);
+      toast.success("Registrasi Berhasil");
     } catch (error) {
       console.error("Login failed:", error);
+      toast.error(error.response?.data?.message || "Registrasi Gagal");
     }
   };
 
   return (
     <main className="w-full h-screen bg-gradient-to-l from-[#c2a353] to-[#eac464] flex flex-col items-center justify-between">
+      <ToastContainer />
       <h1 className="text-base font-Inter font-semibold capitalize tracking-wide w-[90%] text-left text-white pt-5">
         Point of Sale
       </h1>
@@ -44,7 +55,7 @@ function RegisterAdmin() {
           </h1>
           <form
             className="w-full flex flex-col items-start justify-center gap-4 mt-10"
-            action="">
+            onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-2">
               <label>
                 <p className="font-Inter text-xs lg:text-sm font-normal capitalize text-text">
