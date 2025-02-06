@@ -43,7 +43,7 @@ function LayananPopuler() {
   }, []);
 
   return (
-    <section className="flex flex-col my-[26px] w-full items-center">
+    <section className="flex flex-col my-[15px] w-full items-center">
       <main className="w-full flex justify-between">
         <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-tight">
           Treatment Populer
@@ -67,10 +67,10 @@ function LayananPopuler() {
           </h1>
         </div>
       ) : (
-        <div className="flex flex-col w-full lg:w-full pt-[15px] ">
+        <div className="flex flex-col w-full lg:w-full lg:pt-[15px] ">
           <div className="flex lg:justify-start justify-center items-center ">
             <div className="carousel carousel-center w-full lg:w-full  ">
-              <div className="carousel-item gap-9 py-5 ">
+              <div className="carousel-item gap-2 py-4  ">
                 {layanan.length > 0 ? (
                   layanan.slice(0, limit).map((item) => (
                     <div key={item._id}>

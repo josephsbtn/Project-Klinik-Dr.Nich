@@ -50,7 +50,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-footer-pattern bg-contain py-8 px-6 lg:px-24">
+    <footer className="w-full bg-footer-pattern bg-cover py-8 px-6 lg:px-24 lg:bg-footer-pattern-desktop">
       {/* Main Container */}
       <div className="flex flex-col w-full h-full lg:justify-between lg:items-start">
         {/* <img src={footerbaru} alt="" className="absolute z-0" /> */}
@@ -111,10 +111,10 @@ export default function Footer() {
                 Salatiga, Jawa Tengah 50733
               </p>
             </a>
-            <d iv className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3">
               <img src={email} alt="Email" className="w-5 h-5" />
               <p className="text-sm text-[#e8ebe0]">drnich@email.com</p>
-            </d>
+            </div>
             <div
               className="flex items-center space-x-3 cursor-pointer"
               onClick={handleWhatsApp}>

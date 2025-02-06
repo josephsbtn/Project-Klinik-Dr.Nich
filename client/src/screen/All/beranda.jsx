@@ -582,16 +582,26 @@ export default function Beranda() {
             swipeHandler={true}
             autoplay={{ delay: 3000 }}
             loop={true}
-            slidesPerView={window.innerWidth >= 1024 ? 3 : "auto"}
-            spaceBetween={1} // Set gap to 15px
+            slidesPerView={window.innerWidth >= 1024 ? 1 : "auto"}
+
             centeredSlides={true}
             onSlideChange={(swiper) => setProgress(swiper.realIndex)} // Update active index
+              breakspoints={{
+                300: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                1040: {
+                  slidesPerView: 1,
+                  spaceBetween: 200,
+                },
+              }}
           >
             {ulasan &&
               ulasan.map((item, dex) => (
                 <SwiperSlide
                   key={item.id}
-                  className="w-full flex-shrink-0 max-w-[280px]" // Fixed card width
+                  className="w-[265px] flex-shrink-0 max-w-[280px]" // Fixed card width
                 >
                   <div className="bg-white w-[265px] rounded-lg shadow-md p-6 border border-gray-200">
                     {/* Header */}
