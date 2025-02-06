@@ -462,7 +462,11 @@ export default function Beranda() {
               </button>
             </div>
             {loading ? (
-              <p>Loading...</p>
+              <div className="h-full w-full flex items-center justify-center">
+                <h1 className="font-SFPro text-base text-secondary font-medium">
+                  Loading..
+                </h1>
+              </div>
             ) : (
               <div className="grid w-full  grid-cols-2 gap-4 items-center justify-center xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 mt-4 lg:gap-12 ">
                 {jenisLayanan && jenisLayanan.length > 0 ? (
@@ -475,7 +479,11 @@ export default function Beranda() {
                   <p className="text-center col-span-2">No data available</p>
                 )}
                 {loading && (
-                  <p className="text-center col-span-2">Loading...</p>
+                  <div className="h-full w-full flex items-center justify-center">
+                    <h1 className="font-SFPro text-base text-secondary font-medium">
+                      Loading..
+                    </h1>
+                  </div>
                 )}
               </div>
             )}
@@ -497,7 +505,7 @@ export default function Beranda() {
               Galeri
             </h1>
             <h1
-              className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer tracking-tight"
+              className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer  tracking-tight"
               onClick={() => navigate("/galeri")}>
               Lihat Semua
             </h1>
@@ -505,25 +513,35 @@ export default function Beranda() {
 
           {/* Carousel */}
           <div className="flex flex-col lg:w-full pt-[15px]">
-            <div className="flex lg:justify-start justify-center items-center pt-[15px]">
+            <div className="flex lg:justify-start justify-center items-center ">
               <div className="carousel carousel-center w-80 lg:w-full space-x-8 h-auto py-5 px-2">
                 {/* Conditional Rendering of Carousel Items */}
-                {gallery && gallery.length > 0 ? (
-                  gallery.slice(0, limitGallery).map((item, index) => (
+                {loading ? (
+                  <div className="h-full w-full flex items-center justify-center">
+                    <h1 className="font-SFPro text-base text-secondary font-medium">
+                      Loading..
+                    </h1>
+                  </div>
+                ) : gallery && gallery.length > 0 ? (
+                  gallery.slice(0, limitGallery).map((item) => (
                     <div
                       key={item._id}
-                      className="carousel-item  transition-all duration-300 cursor-pointer"
+                      className="carousel-item transition-all duration-300 cursor-pointer"
                       onClick={(e) => {
                         e.preventDefault();
-                        window.location.href = `${item.link}`;
+                        window.location.href = item.link; // Consider using `useNavigate`
                       }}>
-                      <div className="w-72 h-auto  relative flex flex-col items-start justify-start">
+                      <div className="w-72 h-auto relative flex flex-col items-start justify-start">
                         <div className="absolute rounded-[10px] h-[74%] top-0 left-0 right-0 bottom-0 bg-black/50 flex items-center justify-center">
-                          <img src={YTicon} className="w-[30px] h-[21px]" />
+                          <img
+                            src={YTicon}
+                            className="w-[30px] h-[21px]"
+                            alt="YouTube Icon"
+                          />
                         </div>
                         {/* Dynamic Image */}
                         <img
-                          src={item.thumbnail} // Assuming `imageUrl` is the property for image source
+                          src={item.thumbnail} // Assuming `imageUrl` is the correct property
                           className="mx-auto rounded-[10px] h-auto w-full aspect-video object-cover"
                           alt={item.judul || "Product Image"} // Fallback alt text
                         />
@@ -534,12 +552,10 @@ export default function Beranda() {
                         </p>
 
                         {/* Dynamic Product Type */}
-                        <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-[25px] tracking-tight ">
-                          <p>{item.sosmed}</p>{" "}
-                          {/* Assuming `type` holds the product type */}
-                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full " />
-                          <p>{item.channel}</p>{" "}
-                          {/* Assuming `category` holds the product category */}
+                        <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-[25px] tracking-tight">
+                          <p>{item.sosmed}</p>
+                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
+                          <p>{item.channel}</p>
                         </div>
                       </div>
                     </div>

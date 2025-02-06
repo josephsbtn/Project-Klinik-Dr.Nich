@@ -90,8 +90,8 @@ function Profile() {
   return (
     <>
       <Navbar selected={"Galeri"} />
-      <div className="mt-[18px]">
-        <div className="flex items-center w-[90%] mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
+      <div className="mt-[18px] flex flex-col w-full items-center">
+        <div className="flex items-center w-[90%] lg:w-4/5  mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
           <a
             onClick={() => navigate("/")}
             className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
@@ -104,10 +104,10 @@ function Profile() {
             Galeri
           </a>
         </div>
-        <div className="w-full h-full flex flex-col mt-[30px]">
+        <div className="w-[90%] lg:w-4/5  h-full flex flex-col mt-[30px]">
           {/* Galeri */}
-          <div className="w-full h-auto flex flex-col items-center">
-            <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 lg:gap-4">
+          <div className="h-auto bg-blue-gray-500 flex flex-col items-start">
+            <div className="w-fit h-full grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
               {content &&
                 content.slice(0, max).map((item) => (
                   <div
@@ -135,10 +135,10 @@ function Profile() {
 
           <div className="flex flex-col gap-4 z-0 items-center">
             {/* Layanan */}
-            <section className="lg:w-[80%] w-[90%]">
+            <section className="w-full">
               <LayananPopuler />
             </section>
-            <section className="lg:w-[80%] w-[90%]">
+            <section className="w-full">
               <ProdukTerbaru />
             </section>
           </div>
