@@ -9,9 +9,8 @@ export default withMT({
       // bg semuanya pokoknye
       backgroundImage: {
         "hero-pattern": "url('/src/assets/bg/bg-1.jpg')",
-        "footer-pattern": "url('./src/assets/logo-footer/footerbaru.svg')",
-        "footer-pattern-desktop":
-          "url('./src/assets/logo-footer/bgFooter.svg')",
+        "footer-pattern": "url('/src/assets/logo-footer/footerbaru.svg')",
+        "footer-pattern-desktop": "url('/src/assets/logo-footer/bgFooter.svg')",
       },
 
       boxShadow: {
