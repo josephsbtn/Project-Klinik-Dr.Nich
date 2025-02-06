@@ -26,8 +26,8 @@ const paketLayananSchema = mongoose.Schema(
     },
   },
   {
-    timestaps: true,
+    timestamps: true,
   }
 );
 
-export default mongoose.model("paketLayanan", paketLayananSchema);
+export default mongoose.model("PaketLayanan", paketLayananSchema);
