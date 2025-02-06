@@ -18,6 +18,8 @@ import kasirPosRoutes from "./routes/admin/kasirPosRoutes.js";
 import laporanPosRoutes from "./routes/admin/laporanRoutes.js";
 import adminRoutes from "./routes/admin/adminRoutes.js";
 import dbConfig from "./config/db.js";
+import cookieParser from 'cookie-parser';
+
 
 const app = express();
 dotenv.config();
@@ -49,6 +51,7 @@ app.options("*", cors());
 app.use("/uploads", express.static("uploads"));
 app.use(express.json({ limit: "50mb" })); // Adjust the limit as needed
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(cookieParser());
 
 app.use("/api/layanan", layananRoutes);
 app.use("/api/users", userRoutes);
