@@ -17,12 +17,13 @@ export const TambahDiskon4 = () => {
             
             )
         }
-        
+        fetchData();
+        setLink('/pos/promo')
         setNav('Diskon')   
         document.title = 'Diskon'
-        setLink('/pos/promo')
-        fetchData();
     },[])
+
+
 return (
     <div className="flex flex-col px-7 py-8 gap-1 bg-white w-full h-full pt-8 text-[#454545] text-[12px]">
         <div className='flex flex-col overflow-auto gap-[10px] mx-3 h-full'>
@@ -31,7 +32,7 @@ return (
                 <input type="text" className="text-sm w-full h-[30px] focus:outline-none" placeholder="Cari..."></input>
             </form>
             {data.map((item, i) => (
-                <a href='' key={i} className='grid place-items-start w-full border border-[#BDBDBD] rounded-xl px-[20px] py-[15px]'>
+                <a href={`/pos/diskondetail/${data._id}`} key={i} className='grid place-items-start w-full border border-[#BDBDBD] rounded-xl px-[20px] py-[15px]'>
                     <p className='font-semibold'>{item.namaPromo}</p>
                     <div className='flex justify-between items-start text-[#BDBDBD] w-full'>
                         <p>{item.potongan}</p>

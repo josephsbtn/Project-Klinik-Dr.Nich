@@ -103,7 +103,7 @@ export const TambahDiskon3 = () => {
             await axios.get('https://api.drnich.co.id/api/pos/produk/produk').then(response => setProduk(response.data))
         }
         fetchData()
-        setLink('/pos/tambahdiskon4')
+        setLink('/pos/TambahDiskon4')
         setNav('Tambah Diskon')   
         document.title = 'Tambah Diskon'
     }, [])
@@ -115,7 +115,6 @@ export const TambahDiskon3 = () => {
         const selected = listkategori.find(item => item.id == keteranganRef.current.value)
         setKategoriName(selected.setnama)
 }
-
 
 return (
     <modalsContext.Provider value={{modals, setModals, jenis, kategori, produk, produkTerpilih, setProdukTerpilih, kategoriName}}>
