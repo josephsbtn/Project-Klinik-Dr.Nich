@@ -72,10 +72,10 @@ function ProdukTerbaru() {
           </div>
         </>
       ) : (
-        <div className="flex flex-col w-full lg:w-full pt-[15px] lg:pt-0">
-          <div className="flex lg:justify-start justify-center items-center lg:pt-0  ">
-            <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
-              <div className="carousel-item gap-6">
+        <div className="flex flex-col w-full lg:w-full pt-[15px] ">
+          <div className="flex lg:justify-start justify-center items-center ">
+            <div className="carousel carousel-center w-full lg:w-full  ">
+              <div className="carousel-item gap-9 py-5 ">
                 {produk ? (
                   produk.slice(0, limit).map((item) => (
                     <div key={item._id}>

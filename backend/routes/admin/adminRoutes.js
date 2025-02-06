@@ -1,13 +1,17 @@
 import express from "express";
 import {
-    newadmin, getadmin, deleteadmin, cekLogin,
+  registerAdmin,
+  getAdmins,
+  deleteAdmin,
+  cekLogin,
 } from "../../controller/admin/adminController.js";
+import { protect } from "../../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/newadmin", newadmin);
-router.get("/getAlladmin", getadmin);
-router.delete("/deleteadmin/:id", deleteadmin);
-router.post("/Login", cekLogin);
+router.post("/registerAdmin", registerAdmin); 
+router.get("/getAdmins", getAdmins); 
+router.delete("/deleteAdmin/:id", protect([1]), deleteAdmin); 
+router.post("/Login", cekLogin); 
 
 export default router;

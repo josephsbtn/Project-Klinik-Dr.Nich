@@ -67,10 +67,10 @@ function LayananPopuler() {
           </h1>
         </div>
       ) : (
-        <div className="flex flex-col w-full lg:w-full pt-[15px]">
-          <div className="flex lg:justify-start justify-center items-center">
-            <div className="carousel carousel-center w-full lg:w-full space-x-[10px]">
-              <div className="carousel-item gap-9">
+        <div className="flex flex-col w-full lg:w-full pt-[15px] ">
+          <div className="flex lg:justify-start justify-center items-center ">
+            <div className="carousel carousel-center w-full lg:w-full  ">
+              <div className="carousel-item gap-9 py-5 ">
                 {layanan.length > 0 ? (
                   layanan.slice(0, limit).map((item) => (
                     <div key={item._id}>
