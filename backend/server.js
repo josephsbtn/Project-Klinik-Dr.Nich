@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 
+import paketLayananRoutes from "./routes/admin/paketLayananRoutes.js";
 import layananRoutes from "./routes/admin/layananRoutes.js";
 import promoRoutes from "./routes/admin/promoRoutes.js";
 import produkRoutes from "./routes/admin/produkRoutes.js";
@@ -61,6 +62,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/foto", fotoRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/ulasan", ulasanRoutes);
+app.use("/api/paketLayanan", paketLayananRoutes);
 
 //API POS
 
