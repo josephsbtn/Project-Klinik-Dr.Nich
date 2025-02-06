@@ -60,7 +60,7 @@ const getPromo = asyncHandler(async (req, res) => {
 const getPromoAktif = asyncHandler(async (req, res) => {
   try {
     // Find promos where berlakuDari is greater than the current date
-    const promo = await PromoModels.find({ berlakuDari: { $gte: new Date(Date.now()) } })
+    const promo = await PromoModels.find({ berlakuSampai: { $gte: new Date(Date.now()) } })
       .populate({
         path: 'promoDetail',
         populate: {
