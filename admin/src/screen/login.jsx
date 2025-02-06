@@ -6,30 +6,28 @@ import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
-  const [openPass, setOpenPass] = useState(false);  // Toggle visibility
+  const [openPass, setOpenPass] = useState(false);  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state for the button
-
+  const [loading, setLoading] = useState(false); 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
   
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/Login`, // Make sure the URL is correct and properly concatenated
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/Login`,
         { name: username, password: password },
         { headers: { "Content-Type": "application/json" } }
       );
   
       // Cek respons dari API
-      console.log("API Response:", res.data);  // Lihat struktur data yang diterima
-  
-      const { level } = res.data;  // Ambil level dari respons
+      console.log("API Response:", res.data);  
+      const { level } = res.data;  
       if (level === undefined) {
         toast.error("Level admin tidak ditemukan.");
         setLoading(false);
-        return; // Tidak lanjut jika level tidak ditemukan
+        return; 
       }
   
       toast.success("Login Berhasil");
