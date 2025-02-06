@@ -11,6 +11,7 @@ export default withMT({
         "hero-pattern": "url('/src/assets/bg/bg-1.jpg')",
         "footer-pattern": "url('/src/assets/logo-footer/footerbaru.svg')",
         "footer-pattern-desktop": "url('/src/assets/logo-footer/bgFooter.svg')",
+        "bg-filter-mobile": "url('/src/components/bg-filter-mobile.svg')",
       },
 
       boxShadow: {

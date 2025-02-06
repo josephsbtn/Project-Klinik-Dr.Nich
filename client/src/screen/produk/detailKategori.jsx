@@ -15,6 +15,8 @@ import ProdukCard from "../../components/ProductCard2.jsx";
 import CloseIcon from "../../assets/close-circle.svg";
 import ConfirmPopUp from "../../components/confirmPopUp.jsx";
 import FilterIcon from "../../components/FILTERICON.svg";
+import bgFilterMobile from "../../components/bg-filter-mobile.svg";
+import bgFilterDesktop from "../../components/bg-filter-dekstop.svg";
 
 function DetailKategori() {
   const { id } = useParams();
@@ -129,12 +131,11 @@ function DetailKategori() {
               {category}
             </a>
           </div>
-          <h1 className=""></h1>
           <ConfirmPopUp
             open={isFilterOpen}
             onClose={() => setIsFilterOpen(false)}>
-            <div className="flex flex-col items-start w-[95vw] h-screen">
-              <div className="flex flex-col space-y-3 items-center w-screen h-screen lg:w-[30vw] bg-white px-4">
+            <div className="flex flex-col items-start w-[95vw] h-screen opacity-90">
+              <div className="flex flex-col space-y-3 items-center w-screen h-screen lg:w-[462px] lg:h-[640px] bg-white px-4">
                 {/* Close Button */}
                 <div className="w-full flex justify-end items-center mt-10">
                   <button onClick={() => setIsFilterOpen(false)}>
@@ -279,24 +280,26 @@ function DetailKategori() {
                   </button>
                 </div>
                 <div className="absolute bottom-0 left-0 z-40">
-                  <svg viewBox="0 0 1440 320" className="w-full h-32">
-                    <path
-                      fill="url(#gradient)"
-                      fillOpacity="1"
-                      d="M0,288L48,272C96,256,192,224,288,186.7C384,149,480,107,576,101.3C672,96,768,128,864,138.7C960,149,1056,139,1152,149.3C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    <defs>
-                      <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#a8d5ba" />
-                        <stop offset="100%" stopColor="#dfc49f" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                  <picture>
+                    {/* Show fotoDesktop on screens larger than 1024px */}
+                    <source
+                      media="(min-width: 1024px)"
+                      srcSet={bgFilterDesktop}
+                    />
+                    {/* Default to fotoMobile for smaller screens */}
+                    <img src={bgFilterMobile} />
+                  </picture>
                 </div>
               </div>
             </div>
           </ConfirmPopUp>
 
-          <div className="flex flex-col items-end w-[80%] bg-red-300 mt-4">
+          <div className="flex items-center justify-between w-[80%] mt-4">
+            <h1
+              className="font-SFPro font-medium text-base tracking-tight leading-tight text-secondary
+            lg:text-2xl lg:leading-[30px] lg:tracking-wide">
+              {category}
+            </h1>
             <button
               onClick={() => setIsFilterOpen(true)}
               className="flex items-center p-1 rounded-md hover:bg-gray-300 transition">
