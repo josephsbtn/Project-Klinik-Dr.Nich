@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import UserIcon from "../assets/icon/userLogo.svg";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,14 +6,15 @@ import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
-  const [openPass, setOpenPass] = useState(false);
+  const [openPass, setOpenPass] = useState(false);  // Toggle visibility
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state for the button
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Start loading
+
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/Login`,
@@ -27,11 +28,28 @@ function Login() {
           },
         }
       );
+
       console.log(res.data);
       toast.success("Login Berhasil");
+
+      // Save token to localStorage
+      localStorage.setItem("token", res.data.token);
+
+      const adminLevel = res.data.admin.level;
+      if (adminLevel === 1) {
+        navigate("/pos"); 
+      } else if (adminLevel === 2) {
+        navigate("/pos/produks"); //admin gudang
+      } else if (adminLevel === 3) {
+        navigate("/pos/Kasir"); //kasir penjualan
+      } else if (adminLevel === 4) {
+        navigate("/pos/display"); // display 
+      }
     } catch (error) {
       console.error("Login failed:", error);
-      toast.error(error.response?.data?.message || "Registrasi Gagal");
+      toast.error(error.response?.data?.message || "Login Gagal");
+    } finally {
+      setLoading(false);  
     }
   };
 
@@ -47,13 +65,14 @@ function Login() {
           alt="User Icon"
           className="w-[100px] h-[100px] absolute top-20"
         />
-        <div className="w-[90%]  mt-20 ">
+        <div className="w-[90%] mt-20 ">
           <h1 className="w-full font-Inter text-center text-xl font-semibold capitalize tracking-tight">
             Masuk
           </h1>
           <form
             className="w-full flex flex-col items-start justify-center gap-4 mt-10"
-            onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}
+          >
             <div className="w-full flex flex-col gap-2">
               <label>
                 <p className="font-Inter text-xs font-normal capitalize text-text">
@@ -75,19 +94,30 @@ function Login() {
                   Password
                 </p>
               </label>
-              <input
-                type="password"
-                className="w-full h-[40px] border border-[#BDBDBD] rounded-lg px-3 text-xs font-Inter font-normal"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
+              <div className="relative">
+                <input
+                  type={openPass ? "text" : "password"} 
+                  className="w-full h-[40px] border border-[#BDBDBD] rounded-lg px-3 text-xs font-Inter font-normal"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-3"
+                  onClick={() => setOpenPass(!openPass)}
+                >
+                  {openPass ? "Hide" : "Show"}
+                </button>
+              </div>
             </div>
 
             <button
               type="submit"
-              className="w-full h-[40px] bg-gradient-to-l from-[#c2a353] to-[#eac464] rounded-lg text-white font-semibold">
-              Masuk
+              disabled={loading}  
+              className={`w-full h-[40px] ${loading ? "bg-gray-400" : "bg-gradient-to-l from-[#c2a353] to-[#eac464]"} rounded-lg text-white font-semibold`}
+            >
+              {loading ? "Loading..." : "Masuk"}
             </button>
           </form>
         </div>
