@@ -106,7 +106,7 @@ function Profile() {
         </div>
         <div className="w-[90%] lg:w-4/5  h-full flex flex-col mt-[30px]">
           {/* Galeri */}
-          <div className="h-auto bg-blue-gray-500 flex flex-col items-start">
+          <div className="h-auto  flex flex-col items-start">
             <div className="w-fit h-full grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
               {content &&
                 content.slice(0, max).map((item) => (
