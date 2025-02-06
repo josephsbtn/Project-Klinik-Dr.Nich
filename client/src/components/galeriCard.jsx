@@ -6,7 +6,7 @@ import playButton from "./playButton-circle.svg";
 function galeriCard({ item }) {
   return (
     <div className="w-screen h-fit flex items-center justify-start border py-2 border-[#efefef] lg:w-[433px] rounded-[10px]">
-      <div className="relative max-w-32 max-h-32 ml-4  bg-red-400">
+      <div className="relative max-w-32 max-h-32 ml-4 ">
         <img
           className=" w-full h-full rounded-[5px] opacity-90 object-cover aspect-square"
           src={item.thumbnail}
