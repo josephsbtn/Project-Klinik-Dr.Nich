@@ -95,18 +95,32 @@ const getproduk = asyncHandler(async (req, res) => {
   }
 });
 
-const getprodukbycategory = asyncHandler(async (req, res) => {
+const getProdukByCategory = asyncHandler(async (req, res) => {
   const { id } = req.params;
+
+  // Validate ID format
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid category ID" });
+  }
+
   try {
     const produk = await produkModels
       .find({ kategori: id })
       .populate("kategori")
       .populate("tipeProduk")
       .populate("tipeKulit")
-      .lean();
-    res.send(produk);
+      .lean()
+      .exec();
+
+    if (!produk.length) {
+      return res
+        .status(404)
+        .json({ message: "No products found for this category" });
+    }
+
+    res.json(produk);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -174,5 +188,5 @@ export {
   getImage,
   updateImage,
   deleteImage,
-  getprodukbycategory,
+  getProdukByCategory,
 };

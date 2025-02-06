@@ -9,7 +9,7 @@ import {
   getImage,
   updateImage,
   deleteImage,
-  getprodukbycategory,
+  getProdukByCategory,
 } from "../../controller/admin/produkController.js";
 import {
   newCategoryProduct,
@@ -44,7 +44,7 @@ router.get("/getAllProduk", getproduk);
 router.put("/updateproduk/:id", updateproduk);
 router.delete("/deleteproduk/:id", deleteproduk);
 router.get("/getprodukbyId/:id", getprodukbyID);
-router.get("/getProductByCategory/:id", getprodukbycategory);
+router.get("/getProductByCategory/:id", getProdukByCategory);
 
 //PRODUCT CATEGORY
 router.post("/tambahkategoriProduk", newCategoryProduct);
