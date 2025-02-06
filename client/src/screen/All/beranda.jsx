@@ -583,20 +583,18 @@ export default function Beranda() {
             autoplay={{ delay: 3000 }}
             loop={true}
             slidesPerView={window.innerWidth >= 1024 ? 1 : "auto"}
-
             centeredSlides={true}
             onSlideChange={(swiper) => setProgress(swiper.realIndex)} // Update active index
-              breakspoints={{
-                300: {
-                  slidesPerView: 1,
-                  spaceBetween: 20,
-                },
-                1040: {
-                  slidesPerView: 1,
-                  spaceBetween: 200,
-                },
-              }}
-          >
+            breakspoints={{
+              300: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              1040: {
+                slidesPerView: 1,
+                spaceBetween: 200,
+              },
+            }}>
             {ulasan &&
               ulasan.map((item, dex) => (
                 <SwiperSlide

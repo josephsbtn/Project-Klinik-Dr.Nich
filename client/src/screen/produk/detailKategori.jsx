@@ -89,14 +89,16 @@ function DetailKategori() {
   // Derived state for filtered products
   const filteredContent = content.filter((item) => {
     // Filtering logic for products
-
+    console.log(`Filtering: ${item.name}`);
     const matchesType =
-      filterType === "all" || item.tipeProduk.name === filterType;
+      filterType === "all" ||
+      (item.tipeProduk !== null && item.tipeProduk.name === filterType);
     const matchesSkin =
-      filterSkin === "all" || item.tipeKulit.name === filterSkin;
-    console.log(
-      `Filtering: ${item.name}, Type Match: ${matchesType}, Skin Match: ${matchesSkin}`
-    );
+      filterSkin === "all" ||
+      (item.tipeKulit !== null && item.tipeKulit.name === filterSkin);
+
+    console.log(`Matches type: ${matchesType}, Matches skin: ${matchesSkin}`);
+
     return matchesType && matchesSkin;
   });
 
@@ -137,7 +139,7 @@ function DetailKategori() {
             <div className="flex flex-col items-start w-[95vw] h-screen opacity-90">
               <div className="flex flex-col space-y-3 items-center w-screen h-screen lg:w-[462px] lg:h-[640px] bg-white px-4">
                 {/* Close Button */}
-                <div className="w-full flex justify-end items-center mt-10">
+                <div className="w-full flex justify-end items-center mt-10 lg:hidden">
                   <button onClick={() => setIsFilterOpen(false)}>
                     <img
                       src={CloseIcon}
@@ -149,7 +151,7 @@ function DetailKategori() {
 
                 {/* Skin Type Filter */}
                 <div className="flex flex-col items-center  lg:items-start space-y-2 w-[85%]">
-                  <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary leading-snug tracking-tight">
+                  <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary leading-snug tracking-normal">
                     Jenis Kulit
                   </h1>
                   <div className="grid grid-cols-2 w-[90%] gap-4">
@@ -166,13 +168,13 @@ function DetailKategori() {
                       <div
                         className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
               ${
-                filterSkin === "all" ? "border-[#B2955B]" : "border-gray-400"
+                filterSkin === "all" ? "border-[#B2955B]" : "border-[#DCDCDC]"
               }`}>
                         {filterSkin === "all" && (
                           <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
                         )}
                       </div>
-                      <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tigh">
+                      <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tight">
                         All
                       </span>
                     </label>
@@ -191,14 +193,14 @@ function DetailKategori() {
                           onChange={() => setFilterSkin(item.name)}
                         />
                         <div
-                          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+                          className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all 
                 ${
                   filterSkin === item.name
                     ? "border-[#B2955B]"
-                    : "border-gray-400"
+                    : "border-[#DCDCDC]"
                 }`}>
                           {filterSkin === item.name && (
-                            <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
+                            <div className="w-3 h-3 rounded-full bg-[#B2955B]"></div>
                           )}
                         </div>
                         <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tight">
@@ -287,7 +289,10 @@ function DetailKategori() {
                       srcSet={bgFilterDesktop}
                     />
                     {/* Default to fotoMobile for smaller screens */}
-                    <img src={bgFilterMobile} />
+                    <img
+                      src={bgFilterMobile}
+                      className="w-screen lg:w-full h-full object-cover"
+                    />
                   </picture>
                 </div>
               </div>
