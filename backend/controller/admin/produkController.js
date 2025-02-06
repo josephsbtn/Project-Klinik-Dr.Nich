@@ -102,7 +102,7 @@ const getprodukbycategory = asyncHandler(async (req, res) => {
       .find({ kategori: id })
       .populate("kategori")
       .populate("tipeProduk")
-      .populate("tipeKulit");
+      .populate("tipeKulit")
       .lean();
     res.send(produk);
   } catch (error) {
