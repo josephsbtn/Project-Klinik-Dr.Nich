@@ -105,7 +105,8 @@ const kalkulasiHarga = asyncHandler(async (req, res) => {
       let cashback = 0;
       for(const detail of produks){
         const produk = promoo.promoDetail.find((pd) => pd.produk._id.toString() === detail._id);
-          if (promoo.jenis === "Diskon") {
+        if(produk){
+        if (promoo.jenis === "Diskon") {
             if (promoo.jenisPotongan === "persen") {
               potongan += (produk.produk.hargaJual * promoo.potongan) / 100 * detail.jumlah;
             } else if (promoo.jenisPotongan === "rupiah") {
@@ -114,6 +115,7 @@ const kalkulasiHarga = asyncHandler(async (req, res) => {
           } else if (promoo.jenis === "Cashback") {
             cashback += promoo.cashback;
           }
+        }
       }
     const kalkulasi = {
       potongan: potongan,
