@@ -14,6 +14,11 @@ export default withMT({
         "bg-filter-mobile": "url('/src/components/bg-filter-mobile.svg')",
       },
 
+      screens: {
+        'mobile-300': '300px', // Custom screen size for 300px
+      },
+
+
       boxShadow: {
         "inner-shadow": "inset 0 0 10px 0 rgba(255, 255, 255, 0.5)",
       },

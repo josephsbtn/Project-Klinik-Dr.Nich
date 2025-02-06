@@ -35,7 +35,11 @@ import muka2 from "../../assets/img-about/gambar2.png";
 import masker from "../../assets/img-about/masker.svg";
 import pori from "../../assets/img-about/pori.svg";
 import air from "../../assets/img-about/air.svg";
+import banner1bg from "../../assets/img-carousel/banner1bg.svg";
+import bannerMobile1 from "../../assets/img-about/bannerMobile1.svg";
+import bannerMobile2 from "../../assets/img-about/bannerMobile2.svg";
 
+import banner2bg from "../../assets/img-carousel/banner2bg.svg";
 //  IMAGE & ICONS SERTIFKAT
 import sertifikat1 from "../../assets/img-about/sertifikat1.png";
 
@@ -223,26 +227,28 @@ export default function Beranda() {
 
   const aboutCards = [
     {
-      bg: bgAbout,
-      img: acneFace,
-      logo: logo,
-      title: "Kurang percaya diri dengan masalah kulit?",
-      description:
-        "Jadwalkan konsultasi sekarang dan dapatkan analisis menyeluruh dari spesialis kami!",
-      text: "Biar Wajahmu Bercerita, Kamu Bahagia Bersama Ahlinya",
+      bg: banner1bg,
+      bg2: bannerMobile1,
+      // img: acneFace,
+      // logo: logo,
+      // title: "Kurang percaya diri dengan masalah kulit?",
+      // description:
+      //   "Jadwalkan konsultasi sekarang dan dapatkan analisis menyeluruh dari spesialis kami!",
+      // text: "Biar Wajahmu Bercerita, Kamu Bahagia Bersama Ahlinya",
       button: "Konsultasi Sekarang",
     },
     {
-      bg: bgAbout2,
-      img: muka2,
-      logo: logo,
-      title: "Mau punya kulit sehat dan terawat?",
-      bene1: "Kulit lebih cerah dan merata",
-      iconBene1: masker,
-      bene2: "Menyamarkan noda hitam",
-      iconBene2: pori,
-      bene3: "Menutrisi kulit agar lebih sehat",
-      iconBene3: air,
+      bg: banner2bg,
+      bg2: bannerMobile2,
+      // img: muka2,
+      // logo: logo,
+      // title: "Mau punya kulit sehat dan terawat?",
+      // bene1: "Kulit lebih cerah dan merata",
+      // iconBene1: masker,
+      // bene2: "Menyamarkan noda hitam",
+      // iconBene2: pori,
+      // bene3: "Menutrisi kulit agar lebih sehat",
+      // iconBene3: air,
       button2: "Konsultasi Sekarang",
     },
   ];
