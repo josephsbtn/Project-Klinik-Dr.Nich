@@ -21,7 +21,7 @@ function ListPaketLayanan() {
         await axios.get(
           `${
             import.meta.env.VITE_BASE_URL_BACKEND
-          }/api/layanan/getAllJenisLayanan`
+          }/api/paketLayanan/getAllpaketLayanan`
         )
       ).data;
       setJenisLayanan(resJenis);
