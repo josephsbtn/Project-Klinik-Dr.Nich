@@ -15,6 +15,8 @@ import ProdukCard from "../../components/ProductCard2.jsx";
 import CloseIcon from "../../assets/close-circle.svg";
 import ConfirmPopUp from "../../components/confirmPopUp.jsx";
 import FilterIcon from "../../components/FILTERICON.svg";
+import bgFilterMobile from "../../components/bg-filter-mobile.svg";
+import bgFilterDesktop from "../../components/bg-filter-dekstop.svg";
 
 function ViewAllProduct() {
   const navigate = useNavigate();
@@ -75,12 +77,16 @@ function ViewAllProduct() {
   // Derived state for filtered products
   const filteredContent = content.filter((item) => {
     // Filtering logic for products
+    console.log(`Filtering: ${item.name}`);
+    const matchesType =
+      filterType === "all" ||
+      (item.tipeProduk !== null && item.tipeProduk.name === filterType);
+    const matchesSkin =
+      filterSkin === "all" ||
+      (item.tipeKulit !== null && item.tipeKulit.name === filterSkin);
 
-    const matchesType = filterType === "all" || item.type === filterType;
-    const matchesSkin = filterSkin === "all" || item.skinType === filterSkin;
-    console.log(
-      `Filtering: ${item.name}, Type Match: ${matchesType}, Skin Match: ${matchesSkin}`
-    );
+    console.log(`Matches type: ${matchesType}, Matches skin: ${matchesSkin}`);
+
     return matchesType && matchesSkin;
   });
 
