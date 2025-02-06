@@ -13,45 +13,51 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);  // Start loading
-
+    setLoading(true);
+  
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/Login`,
-        {
-          name: username,
-          password: password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/Login`, // Make sure the URL is correct and properly concatenated
+        { name: username, password: password },
+        { headers: { "Content-Type": "application/json" } }
       );
-
-      console.log(res.data);
-      toast.success("Login Berhasil");
-
-      // Save token to localStorage
-      localStorage.setItem("token", res.data.token);
-
-      const adminLevel = res.data.admin.level;
-      if (adminLevel === 1) {
-        navigate("/pos"); 
-      } else if (adminLevel === 2) {
-        navigate("/pos/produks"); //admin gudang
-      } else if (adminLevel === 3) {
-        navigate("/pos/Kasir"); //kasir penjualan
-      } else if (adminLevel === 4) {
-        navigate("/pos/display"); // display 
+  
+      // Cek respons dari API
+      console.log("API Response:", res.data);  // Lihat struktur data yang diterima
+  
+      const { level } = res.data;  // Ambil level dari respons
+      if (level === undefined) {
+        toast.error("Level admin tidak ditemukan.");
+        setLoading(false);
+        return; // Tidak lanjut jika level tidak ditemukan
       }
+  
+      toast.success("Login Berhasil");
+  
+      // Simpan token ke localStorage
+      localStorage.setItem("token", res.data.token);
+  
+      // Navigasi berdasarkan level admin
+      if (level === 1) {
+        navigate("/pos");
+      } else if (level === 2) {
+        navigate("/pos/produks");
+      } else if (level === 3) {
+        navigate("/pos/Kasir");
+      } else if (level === 4) {
+        navigate("/pos/display");
+      }
+  
     } catch (error) {
       console.error("Login failed:", error);
       toast.error(error.response?.data?.message || "Login Gagal");
     } finally {
-      setLoading(false);  
+      setLoading(false);
     }
   };
+  
+
+
 
   return (
     <main className="w-full h-screen bg-gradient-to-l from-[#c2a353] to-[#eac464] flex flex-col items-center justify-between">
@@ -96,7 +102,7 @@ function Login() {
               </label>
               <div className="relative">
                 <input
-                  type={openPass ? "text" : "password"} 
+                  type={openPass ? "text" : "password"}
                   className="w-full h-[40px] border border-[#BDBDBD] rounded-lg px-3 text-xs font-Inter font-normal"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
@@ -114,11 +120,12 @@ function Login() {
 
             <button
               type="submit"
-              disabled={loading}  
+              disabled={loading}
               className={`w-full h-[40px] ${loading ? "bg-gray-400" : "bg-gradient-to-l from-[#c2a353] to-[#eac464]"} rounded-lg text-white font-semibold`}
             >
               {loading ? "Loading..." : "Masuk"}
             </button>
+
           </form>
         </div>
       </section>
