@@ -138,7 +138,7 @@ function DetailKategori() {
             onClose={() => setIsFilterOpen(!isFilterOpen)}>
             <div className="flex flex-col  items-start w-screen lg:w-full h-screen opacity-90">
               <div className="flex flex-col space-y-3 items-center w-screen h-screen lg:w-[462px] bg-white px-4">
-                <div className="absolute z-50 mt-5 flex flex-col items-center w-full h-full ">
+                <div className="absolute z-50 mt-14  flex flex-col items-center w-full h-full ">
                   {/* Close Button */}
                   <div className="w-full flex justify-end items-center mt-10 lg:hidden">
                     <button onClick={() => setIsFilterOpen(false)}>

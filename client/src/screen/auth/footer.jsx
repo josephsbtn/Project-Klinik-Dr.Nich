@@ -57,6 +57,7 @@ export default function Footer() {
         {/* Logo and Social Media */}
         <div className="flex flex-row gap-11 lg:space-y-6 lg:w-full lg:justify-between z-10">
           <img
+            onClick={handleNavigation("/")}
             src={logoPutih}
             alt="Logo Dr. Nich"
             className="w-[150px] h-auto"
@@ -101,10 +102,10 @@ export default function Footer() {
           <div className="w-[147px] grid gap-4 lg:gap-6 lg:w-full">
             <a
               href="https://maps.app.goo.gl/benokSLZCgXfyL5C9"
-              className="flex items-start space-x-3 cursor-pointer"
-              onClick={handleSosmed(
-                "https://maps.app.goo.gl/benokSLZCgXfyL5C9"
-              )}>
+              className="flex items-start space-x-3 cursor-pointer clickable"
+              onClick={() =>
+                handleSosmed("https://maps.app.goo.gl/benokSLZCgXfyL5C9")
+              }>
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
               <p className="text-sm leading-tight text-[#e8ebe0] lg:max-w-[60%]">
                 Jl. Pringgodani Gg. Buntu No.4, Tegalrejo, Kec. Argomulyo, Kota
@@ -113,7 +114,7 @@ export default function Footer() {
             </a>
             <div className="flex items-center space-x-3">
               <img src={email} alt="Email" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">drnich@email.com</p>
+              <p className="text-sm text-[#e8ebe0]">drnichofficial@gmail.com</p>
             </div>
             <div
               className="flex items-center space-x-3 cursor-pointer"

@@ -247,8 +247,10 @@ export default function Navbar({ selected }) {
         )}
 
         {/* Logo (Center) */}
-        <div className="absolute left-1/2 transform -translate-x-1/2">
-          <img src={logo} className="max-w-[100px] h-auto" alt="Logo" />
+        <div
+          className="absolute left-1/2 transform -translate-x-1/2"
+          onClick={() => navigate("/")}>
+          <img src={logo} className="w-[130px] h-[56.39px] " alt="Logo" />
         </div>
 
         {/* Right Navigation */}
