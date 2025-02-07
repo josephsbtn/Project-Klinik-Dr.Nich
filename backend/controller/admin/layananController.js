@@ -130,10 +130,7 @@ const updateLayanan = asyncHandler(async (req, res) => {
 const deleteLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
-    const deleteJenis = await layananModels.findByIdAndDelete(id);
-    const deleteLayanan = await JenisLayanan.findByIdAndDelete(
-      deleteJenis.idJenis
-    );
+    const layanan = await layananModels.findByIdAndDelete(id);
     res.send(layanan);
   } catch (error) {
     res.status(400).json({ message: error.message });

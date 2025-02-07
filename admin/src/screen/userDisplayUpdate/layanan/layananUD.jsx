@@ -77,12 +77,13 @@ function LayananUD() {
           import.meta.env.VITE_BASE_URL_BACKEND
         }/api/layanan/updateLayanan/${id}`,
         {
-          nama,
-          durasi,
-          harga,
-          deskripsi,
-          idJenis,
-          image,
+          jenisLayanan: idJenis,
+          durasi: durasi,
+          harga: harga,
+          deskripsi: deskripsi,
+          cardDeskripsi: cardDeskripsi,
+          foto: image,
+          nama: nama,
         },
         {
           headers: {
@@ -90,6 +91,7 @@ function LayananUD() {
           },
         }
       );
+      console.log("updated", data);
       setSuccessMessage(data.message);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
@@ -301,10 +303,18 @@ function LayananUD() {
 
                   <button
                     type="submit"
-                    className="bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium">
-                    Tambah Layanan
+                    className={`bg-blue-600 text-white p-1 rounded-xl font-montserrat font-medium ${
+                      loading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}>
+                    Edit Layanan
                   </button>
                 </form>
+                <button
+                  onClick={handleDelete}
+                  className={`bg-red-600 text-white p-1 rounded-xl font-montserrat font-medium w-full mt-2
+                  ${loading ? "opacity-50 cursor-not-allowed" : ""}`}>
+                  Delete
+                </button>
               </div>
             </div>
           </div>

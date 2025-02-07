@@ -6,35 +6,35 @@ import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
-  const [openPass, setOpenPass] = useState(false);  
+  const [openPass, setOpenPass] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/pos/Login`,
         { name: username, password: password },
         { headers: { "Content-Type": "application/json" } }
       );
-  
+
       // Cek respons dari API
-      console.log("API Response:", res.data);  
-      const { level } = res.data;  
+      console.log("API Response:", res.data);
+      const { level } = res.data;
       if (level === undefined) {
         toast.error("Level admin tidak ditemukan.");
         setLoading(false);
-        return; 
+        return;
       }
-  
+
       toast.success("Login Berhasil");
-  
+
       // Simpan token ke localStorage
       localStorage.setItem("token", res.data.token);
-  
+
       // Navigasi berdasarkan level admin
       if (level === 1) {
         navigate("/pos");
@@ -45,7 +45,6 @@ function Login() {
       } else if (level === 4) {
         navigate("/pos/display");
       }
-  
     } catch (error) {
       console.error("Login failed:", error);
       toast.error(error.response?.data?.message || "Login Gagal");
@@ -53,9 +52,6 @@ function Login() {
       setLoading(false);
     }
   };
-  
-
-
 
   return (
     <main className="w-full h-screen bg-gradient-to-l from-[#c2a353] to-[#eac464] flex flex-col items-center justify-between">
@@ -75,8 +71,7 @@ function Login() {
           </h1>
           <form
             className="w-full flex flex-col items-start justify-center gap-4 mt-10"
-            onSubmit={handleSubmit}
-          >
+            onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-2">
               <label>
                 <p className="font-Inter text-xs font-normal capitalize text-text">
@@ -109,8 +104,7 @@ function Login() {
                 <button
                   type="button"
                   className="absolute right-3 top-3"
-                  onClick={() => setOpenPass(!openPass)}
-                >
+                  onClick={() => setOpenPass(!openPass)}>
                   {openPass ? "Hide" : "Show"}
                 </button>
               </div>
@@ -119,11 +113,13 @@ function Login() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full h-[40px] ${loading ? "bg-gray-400" : "bg-gradient-to-l from-[#c2a353] to-[#eac464]"} rounded-lg text-white font-semibold`}
-            >
+              className={`w-full h-[40px] ${
+                loading
+                  ? "bg-gray-400"
+                  : "bg-gradient-to-l from-[#c2a353] to-[#eac464]"
+              } rounded-lg text-white font-semibold`}>
               {loading ? "Loading..." : "Masuk"}
             </button>
-
           </form>
         </div>
       </section>
