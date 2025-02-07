@@ -91,24 +91,33 @@ const getTransaksiDraft = asyncHandler(async (req, res) => {
 
 const kalkulasiHarga = asyncHandler(async (req, res) => {
   try {
-    const {promo, produks} = req.body;
-    if(promo && promo.length>0 ){
+    const { promo, produks } = req.body;
+
+    if (promo && promo.length > 0) {
       const promoo = await promoModels.findById(promo).populate({
-        path: 'promoDetail',
+        path: "promoDetail",
         populate: {
-          path: 'produk',
-          model: 'produkPos',
+          path: "produk",
+          model: "produkPos",
         },
       });
-  
+
       let potongan = 0;
       let cashback = 0;
-      for(const detail of produks){
-        const produk = promoo.promoDetail.find((pd) => pd.produk._id.toString() === detail._id);
-        if(produk){
-        if (promoo.jenis === "Diskon") {
+
+      // ✅ Convert promoDetail to a Map for faster lookups
+      const promoMap = new Map(
+        promoo.promoDetail.map((pd) => [pd.produk._id.toString(), pd])
+      );
+
+      for (const detail of produks) {
+        const produk = promoMap.get(detail._id);
+
+        if (produk) {
+          if (promoo.jenis === "Diskon") {
             if (promoo.jenisPotongan === "persen") {
-              potongan += (produk.produk.hargaJual * promoo.potongan) / 100 * detail.jumlah;
+              potongan +=
+                (produk.produk.hargaJual * promoo.potongan) / 100 * detail.jumlah;
             } else if (promoo.jenisPotongan === "rupiah") {
               potongan += promoo.potongan * detail.jumlah;
             }
@@ -117,16 +126,19 @@ const kalkulasiHarga = asyncHandler(async (req, res) => {
           }
         }
       }
-    const kalkulasi = {
-      potongan: potongan,
-      cashback: cashback
-    }
-  res.send({kalkulasi});
+
+      res.send({
+        kalkulasi: {
+          potongan,
+          cashback,
+        },
+      });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
+
 
 const getTransaksiInvoice = asyncHandler(async (req, res) => {
   try {
