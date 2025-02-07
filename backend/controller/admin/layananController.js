@@ -107,10 +107,10 @@ const getLayanan = asyncHandler(async (req, res) => {
 const updateLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
-    jenisLayanan: req.body.jenisLayanan,
+    idJenis: req.body.idJenis,
     nama: req.body.nama,
     harga: req.body.harga,
-    foto: req.body.foto,
+    image: req.body.image,
     deskripsi: req.body.deskripsi,
     durasi: req.body.durasi,
     cardDeskripsi: req.body.cardDeskripsi,

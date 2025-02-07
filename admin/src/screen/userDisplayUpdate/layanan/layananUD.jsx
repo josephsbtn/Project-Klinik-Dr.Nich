@@ -57,6 +57,7 @@ function LayananUD() {
         setCardDeskripsi(response.data.cardDeskripsi);
         setIdJenis(response.data.idJenis);
         setImage(response.data.image);
+        console.log("dataa : ", response.data);
       } catch (error) {
         setError(error.response?.data?.message || "An error occurred");
       } finally {
@@ -68,21 +69,30 @@ function LayananUD() {
     fetchJenisLayanan();
   }, [id]);
 
+  useEffect(() => {
+    console.log("Jenis from API:", idJenis);
+    console.log(
+      "Available JenisLayanan:",
+      jenisLayanan.map((j) => j._id)
+    );
+  }, [idJenis, jenisLayanan]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      console.log("jenis update :", idJenis);
       const { data } = await axios.put(
         `${
           import.meta.env.VITE_BASE_URL_BACKEND
         }/api/layanan/updateLayanan/${id}`,
         {
-          jenisLayanan: idJenis,
+          idJenis: idJenis,
           durasi: durasi,
           harga: harga,
           deskripsi: deskripsi,
           cardDeskripsi: cardDeskripsi,
-          foto: image,
+          image: image,
           nama: nama,
         },
         {
@@ -237,15 +247,21 @@ function LayananUD() {
                       </label>
                       <select
                         className="w-full p-2 border font-montserrat rounded-md"
-                        value={idJenis}
+                        value={idJenis || ""}
                         onChange={(e) => setIdJenis(e.target.value)}
                         required>
-                        <option value="">Pilih Jenis Layanan</option>
-                        {jenisLayanan.map((jenis) => (
-                          <option key={jenis._id} value={jenis._id}>
-                            {jenis.nama}
-                          </option>
-                        ))}
+                        <option value="" disabled>
+                          Pilih Jenis Layanan
+                        </option>
+                        {jenisLayanan.length > 0 ? (
+                          jenisLayanan.map((jenis) => (
+                            <option key={jenis._id} value={jenis._id}>
+                              {jenis.nama}
+                            </option>
+                          ))
+                        ) : (
+                          <option disabled>Loading...</option>
+                        )}
                       </select>
                     </div>
                     <div className="w-1/2">
