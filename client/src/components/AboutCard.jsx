@@ -14,7 +14,7 @@ export default function AboutCard({ card }) {
         <img
             src={card.bg2}
             alt="Background"
-            className="absolute object-cover lg:object-fill z-0 w-full h-full block"
+            className="absolute object-cover lg:object-fill z-0 w-full h-full block lg:hidden"
         />
 
         <div className="relative z-20 px-[21px] text-left">
