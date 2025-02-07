@@ -28,7 +28,7 @@ const newproduk = asyncHandler(async (req, res) => {
 const getproduk = asyncHandler(async (req, res) => {
   try {
     const produk = await produkModels
-      .find().populate("kategori","kategori").populate("jenis", "jenis").populate("supplier", "supplier");
+      .find().populate("kategori","kategori").populate("jenis", "jenis").populate("supplier");
 
     res.send(produk);
   } catch (error) {
