@@ -112,7 +112,7 @@ export default function Navbar({ selected }) {
                 {[
                   { text: "Beranda", path: "/" },
                   { text: "Profile", path: "/profil" },
-                  { text: "Konsultasi", path: "/konsultasi" },
+                  { text: "Konsultasi", path: "/underdevelop" },
                   { text: "Produk", path: "/produk" },
                   { text: "Layanan", path: "/layanan" },
                   { text: "Reservasi", path: "/reservasi" },

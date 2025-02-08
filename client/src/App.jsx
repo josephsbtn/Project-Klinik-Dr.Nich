@@ -33,15 +33,16 @@ import Pencarian from "./screen/All/pencarian.jsx";
 import Debug from "./screen/All/debug.jsx";
 
 import SectionUlasan from "./components/SectionUlasan.jsx";
+import OnDeveloping from "./screen/All/OnDeveloping.jsx";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* <Route path="/" element={<Login />} /> */}
+        <Route path="/underdevelop" element={<OnDeveloping />} />
         <Route path="/testing" element={<SectionUlasan />} />
         <Route path="/" element={<Beranda />} />
-        <Route path="/" element={<carouselAbout />} />
         <Route path="/layanan" element={<ListLayanan />} />
         <Route
           path="/layanan/detail/:idJenis"
