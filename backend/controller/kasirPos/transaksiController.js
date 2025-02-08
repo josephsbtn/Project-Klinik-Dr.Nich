@@ -162,8 +162,12 @@ const getTransaksiInvoice = asyncHandler(async (req, res) => {
 
 const updateTransaksi = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
-
+  const { status, pembayaran, kembalian } = req.body;
+const newData = {
+  status: status,
+  pembayaran : pembayaran,
+  kembalian : kembalian
+}
   try {
     const transaksi = await TransaksiModels.findByIdAndUpdate(
       id,
