@@ -50,7 +50,7 @@ function LayananPopuler() {
         </h1>
         <h1
           className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer tracking-tight"
-          onClick={() => navigate("layanan/viewAllTreatment")}>
+          onClick={() => navigate("/layanan/viewAllTreatment")}>
           Lihat Semua
         </h1>
       </main>
