@@ -171,7 +171,7 @@ const newData = {
   try {
     const transaksi = await TransaksiModels.findByIdAndUpdate(
       id,
-      { $set: { status } },
+      { $set: { newData } },
       { new: true }
     );
     res.send(transaksi);
