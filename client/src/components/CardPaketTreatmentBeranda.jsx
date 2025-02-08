@@ -1,49 +1,74 @@
-import React, { useEffect, useState } from "react";
-import CardLayanan from "./CardLayanan";
+import React, { useEffect, useState, useCallback } from "react";
+import CardPaketLayananBeranda from "./CardPaketTreatment copy";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CardPaketLayananBeranda from "./CardPaketTreatment copy";
 
 function PaketTreatmentBeranda() {
   const navigate = useNavigate();
   const [layanan, setLayanan] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(6); // Default limit to 6
+  const [limit, setLimit] = useState(6);
 
-  const fetchData = async () => {
+  // Function untuk mengambil data
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
 
+      // Cek data di localStorage
+      const cachedLayanan = localStorage.getItem("paketlayananData");
+      const cacheTimestamp = localStorage.getItem("paketlayananTimestamp");
+      const cacheExpiry = 5 * 60 * 1000; // Cache berlaku 5 menit
+
+      if (
+        cachedLayanan &&
+        cacheTimestamp &&
+        Date.now() - cacheTimestamp < cacheExpiry
+      ) {
+        const parsedLayanan = JSON.parse(cachedLayanan);
+        setLayanan(parsedLayanan);
+        setLimit(Math.min(parsedLayanan.length, 6));
+        console.log("Loaded from localStorage:", parsedLayanan);
+        setLoading(false);
+        return;
+      }
+
+      // Ambil dari API jika cache tidak ditemukan atau expired
       const response = await axios.get(
         `${
           import.meta.env.VITE_BASE_URL_BACKEND
         }/api/paketLayanan/getAllpaketLayanan`,
-        { timeout: 1000000 } // 10 seconds timeout
+        { timeout: 10000 }
       );
 
+      // Urutkan berdasarkan jumlah reservasi
       const sortedLayanan = response.data.sort(
         (a, b) => b.reservedCount - a.reservedCount
       );
 
-      setLayanan(sortedLayanan);
-      setLimit(sortedLayanan.length > 6 ? 6 : sortedLayanan.length);
+      // Simpan ke localStorage dengan timestamp
+      localStorage.setItem("paketlayananData", JSON.stringify(sortedLayanan));
+      localStorage.setItem("paketlayananTimestamp", Date.now());
 
-      console.log("LAYANAN DATA :", sortedLayanan);
+      setLayanan(sortedLayanan);
+      setLimit(Math.min(sortedLayanan.length, 6));
+      console.log("Fetched from API:", sortedLayanan);
     } catch (error) {
-      if (error.code === "ECONNABORTED") {
-        setError("Request timed out. Please try again later.");
-      } else {
-        setError(error.response?.data?.message || "An error occurred");
-      }
+      setError(
+        error.code === "ECONNABORTED"
+          ? "Request timed out. Please try again later."
+          : error.response?.data?.message || "An error occurred"
+      );
+      console.error("Error fetching data:", error.response?.data?.message);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
+  // Ambil data saat komponen mount
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <section className="flex flex-col my-[15px] w-full items-center">
@@ -71,9 +96,9 @@ function PaketTreatmentBeranda() {
         </div>
       ) : (
         <div className="flex flex-col w-full lg:w-full lg:pt-[15px] ">
-          <div className="flex lg:justify-start justify-center items-center ">
-            <div className="carousel carousel-center w-full lg:w-full  ">
-              <div className="carousel-item gap-2 py-4  ">
+          <div className="flex lg:justify-start justify-center items-center">
+            <div className="carousel carousel-center w-full lg:w-full">
+              <div className="carousel-item gap-2 py-4">
                 {layanan.length > 0 ? (
                   layanan.slice(0, limit).map((item) => (
                     <div key={item._id}>
