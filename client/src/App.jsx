@@ -32,11 +32,14 @@ import DetailPromo from "./screen/All/detailPromo.jsx";
 import Pencarian from "./screen/All/pencarian.jsx";
 import Debug from "./screen/All/debug.jsx";
 
+import SectionUlasan from "./components/SectionUlasan.jsx";
+
 function App() {
   return (
     <Router>
       <Routes>
         {/* <Route path="/" element={<Login />} /> */}
+        <Route path="/testing" element={<SectionUlasan />} />
         <Route path="/" element={<Beranda />} />
         <Route path="/" element={<carouselAbout />} />
         <Route path="/layanan" element={<ListLayanan />} />

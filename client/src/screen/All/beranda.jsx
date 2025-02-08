@@ -48,6 +48,7 @@ import galeri1 from "../../assets/img-about/galeri1.png";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
+import useDeviceType from "../../components/CheckDevice.jsx";
 
 // Import Swiper styles
 import "swiper/css";
@@ -79,23 +80,6 @@ function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
 }
 
 // Custom Pagination Component
-function CustomPagination({ progress, length, setProgress }) {
-  return (
-    <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-      {new Array(length).fill("").map((_, i) => (
-        <span
-          key={i}
-          className={`block h-1 cursor-pointer rounded-2xl transition-all ${
-            progress === i
-              ? "w-[19px] h-2.5 bg-[#c2a353]"
-              : "w-2.5 h-2.5 bg-[#dcdcdc]"
-          }`}
-          onClick={() => setProgress(i)}
-        />
-      ))}
-    </div>
-  );
-}
 
 export default function Beranda() {
   const navigate = useNavigate();
@@ -111,7 +95,10 @@ export default function Beranda() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+
+  const [progress, setProgress] = useState(1);
+  const swiperRef = useRef(null);
+  const deviceType = useDeviceType();
 
   const fetchData = async () => {
     setLoading(true);
@@ -333,6 +320,33 @@ export default function Beranda() {
     }
   };
 
+  function CustomPagination({ progress, length, setProgress, itemsPerSlide }) {
+    const slides = Math.ceil(length / itemsPerSlide);
+
+    return (
+      <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+        {Array.from({ length: slides }).map((_, i) => (
+          <span
+            key={i}
+            className={`block cursor-pointer rounded-2xl transition-all ${
+              Math.ceil(progress / itemsPerSlide) === i
+                ? "w-[19px] h-2.5 bg-[#c2a353]"
+                : "w-2.5 h-2.5 bg-[#dcdcdc]"
+            }`}
+            onClick={() => {
+              if (swiperRef.current) {
+                swiperRef.current.slideTo(i * itemsPerSlide);
+              }
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  const itemsPerSlide =
+    deviceType === "mobile" ? 1 : deviceType === "tablet" ? 2 : 3;
+
   return (
     <div className="w-full flex flex-col items-center bg-white">
       <div className="fixed w-full z-30">
@@ -361,7 +375,7 @@ export default function Beranda() {
                 <img
                   src={item.fotoMobile}
                   alt={`Slide ${index + 1}`}
-                  className="h-[70vh] lg:h-[90vh] w-full object-cover relative lg:object-center"
+                  className="h-[70vh] lg:h-[80vh] w-full object-cover relative lg:object-center"
                 />
               </picture>
               {/* <div className="absolute lg:hidden bottom-5 left-5 flex items-center justify-center z-10 gap-4">
@@ -423,7 +437,7 @@ export default function Beranda() {
 
           {/* Carousel Container */}
           <div className="flex flex-col w-full lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4">
-            <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+            <div className="w-[325px] h-[283px]  lg:h-[437px] lg:w-[504px] bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
               <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-secondary lg:text-xl">
                 Berpengalaman dan Bersertifikat
               </h1>
@@ -465,7 +479,7 @@ export default function Beranda() {
             </div>
 
             {/* Teknologi */}
-            <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
+            <div className="w-[325px] h-[283px] lg:h-[437px] lg:w-[504px] bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
               <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-secondary lg:text-xl">
                 Teknologi Terkini & Produk Berkualitas
               </h1>
@@ -632,44 +646,57 @@ export default function Beranda() {
           </div>
 
           {/* ulasan */}
-          <main className="w-full flex lg:px-0 px-6 justify-between pt-[25px] pb-[25px]">
-            <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
-              Customer Punya Cerita
-            </h1>
+        </section>
+        <section className="relative  w-full py-10 mx-auto ">
+          <main className="w-full flex lg:px-0 px-6 justify-center pb-[25px]">
+            <div className="w-[90%] lg:w-[80%]">
+              <h1 className="text-[#464646]  text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
+                Customer Punya Cerita
+              </h1>
+            </div>
           </main>
-          {/* Carousel Component */}
-          <Swiper
-            className="py-10"
-            modules={[Autoplay, Navigation]}
-            swipeHandler={true}
-            autoplay={{ delay: 3000 }}
-            loop={true}
-            slidesPerView={window.innerWidth >= 1024 ? 1 : "auto"}
-            centeredSlides={true}
-            onSlideChange={(swiper) => setProgress(swiper.realIndex)} // Update active index
-            breakspoints={{
-              300: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              1040: {
-                slidesPerView: 1,
-                spaceBetween: 200,
-              },
-            }}>
-            {ulasan &&
-              ulasan.map((item) => (
+
+          <div className=" flex justify-start items-center ml-10 flex-shrink-0">
+            <Swiper
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              modules={[Autoplay, Navigation]}
+              autoplay={{ delay: 3000 }}
+              loop={true}
+              slidesPerView={deviceType === "mobile" ? "auto" : itemsPerSlide} // ✅ Mobile fix
+              slidesPerGroup={deviceType === "mobile" ? 1 : itemsPerSlide}
+              centeredSlides={deviceType === "mobile"}
+              spaceBetween={deviceType === "mobile" ? 10 : 20} // ✅ Reduced space for mobile
+              breakpoints={{
+                320: {
+                  slidesPerView: "auto",
+                  slidesPerGroup: 1,
+                  spaceBetween: 10,
+                }, // ✅ Fix mobile
+                768: {
+                  slidesPerView: 2,
+                  slidesPerGroup: 2,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  slidesPerGroup: 3,
+                  spaceBetween: 10,
+                },
+              }}
+              onSlideChange={(swiper) => setProgress(swiper.realIndex)}
+              className="py-10 w-full flex-shrink-0">
+              {ulasan.map((item) => (
                 <SwiperSlide
                   key={item.id}
-                  className="w-[265px] flex-shrink-0 max-w-[280px]" // Fixed card width
+                  className="flex justify-center flex-shrink-0 w-[265px] max-w-[280px] lg:max-w-screen-lg py-2 " // ✅ Fixed width
                 >
-                  <div className="bg-white w-[265px] rounded-lg shadow-md p-6 border border-gray-200">
+                  <div className="bg-white w-[265px] h-[188px] flex-shrink-0 lg:w-[341px] lg:h-[214px] rounded-xl shadow-md p-6 border border-gray-200">
                     {/* Header */}
                     <div className="flex items-center gap-4">
                       <img
                         src={item.foto}
                         alt={item.nama}
-                        className="w-12 h-12 rounded-full"
+                        className="!w-12 !h-12 rounded-full"
                       />
                       <div>
                         <p className="text-gray-800 text-sm font-medium">
@@ -680,29 +707,30 @@ export default function Beranda() {
                             <img
                               key={index}
                               src={StarIcon}
-                              className="min-w-2 min-h-2" // Adjust size
+                              className="!w-5 !h-5 flex-shrink-0 "
                             />
                           ))}
                         </div>
                       </div>
                     </div>
-
                     {/* Review Content */}
-                    <p className="mt-4 text-sm text-gray-600 line-clamp-5">
+                    <p className="mt-4 text-sm text-gray-600 line-clamp-4 lg:line-clamp-5">
                       {item.ulasan}
                     </p>
                   </div>
                 </SwiperSlide>
               ))}
-          </Swiper>
+            </Swiper>
+          </div>
 
+          {/* Swiper Carousel */}
+
+          {/* ✅ Fixed Pagination */}
           <CustomPagination
             progress={progress}
             length={ulasan.length}
-            setProgress={(dex) => {
-              setProgress(dex);
-              document.querySelector(".swiper").swiper.slideToLoop(dex); // Slide to the clicked pagination
-            }}
+            setProgress={setProgress}
+            itemsPerSlide={itemsPerSlide}
           />
         </section>
       </div>
