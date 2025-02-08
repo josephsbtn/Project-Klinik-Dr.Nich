@@ -1,23 +1,23 @@
 import React from "react";
-import {button} from "@material-tailwind/react";
+import { button } from "@material-tailwind/react";
 
 export default function AboutCard({ card }) {
   return (
     <div className="relative text-center h-[409px] w-full">
-        <img
-            src={card.bg}
-            alt="Background"
-            className="absolute object-cover lg:object-fill z-0 w-full h-full hidden sm:block"
-            style={{ '@media (max-width: 300px)': { display: 'none' } }} // Optional
-        />
+      <img
+        src={card.bg}
+        alt="Background"
+        className="absolute object-cover lg:object-fill z-0 w-full h-full hidden sm:block"
+        style={{ "@media (max-width: 300px)": { display: "none" } }} // Optional
+      />
 
-        <img
-            src={card.bg2}
-            alt="Background"
-            className="absolute object-cover lg:object-fill z-0 w-full h-full block lg:hidden"
-        />
+      <img
+        src={card.bg2}
+        alt="Background"
+        className="absolute object-cover lg:object-fill z-0 w-full h-full block lg:hidden"
+      />
 
-        <div className="relative z-20 px-[21px] text-left">
+      <div className="relative z-20 px-[21px] text-left">
         <h3 className="w-[218px] pt-[50px] text-xl lg:text-4xl lg:w-full font-Cabin lg:leading-[45px] italic text-white font-semibold leading-[25px] lg:tracking-wider tracking-tight">
           {card.title}
         </h3>
@@ -30,19 +30,18 @@ export default function AboutCard({ card }) {
           </p>
         )}
 
-            {card.button && (
-                <button className="bg-white hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base lg:translate-y-56 lg:translate-x-40 mobile-300:hidden">
-                    {card.button}
-                </button>
-            )}
+        {card.button && (
+          <button className="bg-white hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base lg:translate-y-56 lg:translate-x-40 mobile-300:hidden">
+            {card.button}
+          </button>
+        )}
 
-
-            {/*    button mobile*/}
-            {card.button && (
-                <button className="bg-white hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base translate-y-60 lg:translate-x-40">
-                    {card.button}
-                </button>
-            )}
+        {/*    button mobile*/}
+        {card.button && (
+          <button className="bg-white hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base translate-y-60 lg:translate-x-10">
+            {card.button}
+          </button>
+        )}
 
         {/* Benefits Icons */}
         {card.bene1 && (
@@ -63,13 +62,12 @@ export default function AboutCard({ card }) {
             <p className="text-white text-sm w-[108px]">{card.bene3}</p>
           </div>
         )}
-            {card.button2 && (
-                <button className="bg-white hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base translate-y-64 lg:translate-x-40">
-                    {card.button2}
-                </button>
-            )}
-
-        </div>
+        {card.button2 && (
+          <button className="bg-white hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base translate-y-56 lg:translate-x-10">
+            {card.button2}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

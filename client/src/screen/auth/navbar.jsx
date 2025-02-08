@@ -67,8 +67,8 @@ export default function Navbar({ selected }) {
   };
 
   return (
-    <div className="w-full h-[70px] shadow-sm bg-white flex items-center relative">
-      <div className="container mx-auto flex items-center justify-between px-6">
+    <div className="w-screen h-[70px] shadow-sm bg-white flex items-center relative">
+      <div className="mx-auto flex items-center justify-between w-[90%] lg:w-[80%] px-2">
         {/* Left Navigation */}
         <div className="flex items-center gap-4">
           <button
@@ -250,7 +250,11 @@ export default function Navbar({ selected }) {
         <div
           className="absolute left-1/2 transform -translate-x-1/2"
           onClick={() => navigate("/")}>
-          <img src={logo} className="w-[130px] h-[56.39px] " alt="Logo" />
+          <img
+            src={logo}
+            className=" w-[100px] h-[38.59px] lg:w-[130px] lg:h-[56.39px] "
+            alt="Logo"
+          />
         </div>
 
         {/* Right Navigation */}

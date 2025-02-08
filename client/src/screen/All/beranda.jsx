@@ -361,10 +361,10 @@ export default function Beranda() {
                 <img
                   src={item.fotoMobile}
                   alt={`Slide ${index + 1}`}
-                  className="h-screen lg:h-[80vh] w-full object-cover relative lg:object-center"
+                  className="h-[70vh] lg:h-[90vh] w-full object-cover relative lg:object-center"
                 />
               </picture>
-              <div className="absolute lg:hidden bottom-5 left-5 flex items-center justify-center z-10 gap-4">
+              {/* <div className="absolute lg:hidden bottom-5 left-5 flex items-center justify-center z-10 gap-4">
                 <button className="text-base font-SFPro tracking-tight text-white bg-secondary py-3 px-8 rounded-3xl">
                   Ambil Promo
                 </button>
@@ -373,9 +373,9 @@ export default function Beranda() {
                   onClick={() => navigate(`/promo/detail/${item._id}`)}>
                   Detail
                 </button>
-              </div>
+              </div> */}
 
-              <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100"></div>
+              <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100 translate-y-1"></div>
             </div>
           ))}
       </Carousel>
@@ -392,7 +392,7 @@ export default function Beranda() {
 
       {/* ABOUT Section */}
       <div
-        className="relative flex flex-col items-center  w-full  mx-auto mt-4"
+        className="relative flex flex-col items-center  w-full  mx-auto mt-8"
         {...handlers}>
         <div className="relative max-w-3xl w-full lg:max-w-full lg:w-[70%] lg:h-[410px]  mx-auto ">
           {/* Active Card */}
@@ -675,12 +675,12 @@ export default function Beranda() {
                         <p className="text-gray-800 text-sm font-medium">
                           {item.nama}
                         </p>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-0">
                           {Array.from({ length: item.rating }, (_, index) => (
                             <img
                               key={index}
                               src={StarIcon}
-                              className="min-w-5 min-h-5" // Adjust size
+                              className="min-w-2 min-h-2" // Adjust size
                             />
                           ))}
                         </div>

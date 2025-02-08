@@ -10,6 +10,7 @@ import DetailJenisLayanan from "./screen/Layanan/detailJenisLayanan.jsx";
 import DetailTreatment from "./screen/Layanan/DetailTreatment.jsx";
 import ViewAllTreatment from "./screen/Layanan/viewAllTreatment.jsx";
 import ListPaketLayanan from "./screen/Layanan/listPaketLayanan.jsx";
+import DetailPaketTreatment from "./screen/Layanan/detailPaketTreatment.jsx";
 // profil
 import Profil from "./screen/All/profile.jsx";
 // galeri
@@ -50,6 +51,10 @@ function App() {
         <Route
           path="/layanan/detailTreatment/:idTreatment"
           element={<DetailTreatment />}
+        />
+        <Route
+          path="/layanan/detailPaketTreatment/:idTreatment"
+          element={<DetailPaketTreatment />}
         />
         <Route
           path="/layanan/viewAllTreatment"
