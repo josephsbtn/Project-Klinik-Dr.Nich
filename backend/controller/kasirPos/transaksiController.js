@@ -6,7 +6,7 @@ import promoModels from "../../models/PromoPOS/promoPos.js";
 import pelangganModels from "../../models/User/pelangganPos.js";
 
 const newTransaksi = asyncHandler(async (req, res) => {
-  const { promo, total, poin, invoice, totalAkhir, potongan, transaksiDetail, pelanggan, status } = req.body;
+  const { promo, total, poin, invoice, totalAkhir, potongan, transaksiDetail, pelanggan, status, pembayaran, kembalian } = req.body;
 
   try {
     const transaksi = await TransaksiModels.create({
@@ -18,7 +18,9 @@ const newTransaksi = asyncHandler(async (req, res) => {
       potongan,
       pelanggan,
       transaksiDetail,
-      status
+      status,
+      pembayaran,
+      kembalian
     });
     const detailIDS = [];
     if (transaksiDetail && transaksiDetail.length > 0) {
