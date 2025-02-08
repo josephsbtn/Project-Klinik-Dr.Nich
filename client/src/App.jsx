@@ -10,7 +10,7 @@ import DetailJenisLayanan from "./screen/Layanan/detailJenisLayanan.jsx";
 import DetailTreatment from "./screen/Layanan/DetailTreatment.jsx";
 import ViewAllTreatment from "./screen/Layanan/viewAllTreatment.jsx";
 import ListPaketLayanan from "./screen/Layanan/listPaketLayanan.jsx";
-import DetailPaketTreatment from "./screen/Layanan/detailPaketTreatment.jsx";
+import DetailPaketTreatment from "./screen/Layanan/DetailPaketTreatment.jsx";
 // profil
 import Profil from "./screen/All/profile.jsx";
 // galeri
