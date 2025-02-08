@@ -100,7 +100,7 @@ function ViewAllTreatment() {
             <a
               onClick={() => navigate(`/layanan/viewAllTreatment`)}
               className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
-              Semua Produk
+              Semua Treatment
             </a>
           </div>
           <ConfirmPopUp
@@ -202,7 +202,7 @@ function ViewAllTreatment() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-[90%] lg:w-[80%] gap-4 mt-[18px]">
+          <div className="grid grid-cols-2   lg:grid-cols-2 xl:grid-cols-3 w-[90%] lg:w-[80%] gap-4 mt-[18px]">
             {loading ? (
               <div className="col-span-full text-center">
                 Loading products...

@@ -57,6 +57,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 
 import ulasan from "../../../../backend/models/ulasan/ulasanModels.js";
+import CardPaketTreatmentBeranda from "../../components/CardPaketTreatmentBeranda.jsx";
 
 // Carousel Navigation Component
 function CarouselNavigation({ setActiveIndex, activeIndex, length }) {
@@ -116,10 +117,52 @@ export default function Beranda() {
     setLoading(true);
 
     try {
-      // Fetch promo data
+      // Check localStorage for cached data
+      const cachedData = [
+        "promo",
+        "jenisLayanan",
+        "fotoMesin",
+        "fotoSertif",
+        "gallery",
+        "ulasan",
+      ].reduce((acc, key) => {
+        const item = localStorage.getItem(key);
+        if (item) {
+          const parsed = JSON.parse(item);
+          const currentTime = new Date().getTime();
+          if (currentTime - parsed.timestamp < 3600000) {
+            acc[key] = parsed.data;
+          }
+        }
+        return acc;
+      }, {});
+
+      // If all data is cached, use it and return early
+      if (Object.keys(cachedData).length === 7) {
+        setPromo(cachedData.promo);
+        setJenisLayanan(cachedData.jenisLayanan);
+        setFotoMesin(cachedData.fotoMesin);
+        setFotoSertif(cachedData.fotoSertif);
+        setGallery(cachedData.gallery);
+        setUlasan(cachedData.ulasan);
+        setLimitGallery(
+          cachedData.gallery.length > 5 ? 5 : cachedData.gallery.length + 1
+        );
+        setLimitCarousel(
+          cachedData.jenisLayanan.length > 3
+            ? 3
+            : cachedData.jenisLayanan.length + 1
+        );
+        setLimitUlasan(
+          cachedData.ulasan.length > 3 ? 3 : cachedData.ulasan.length + 1
+        );
+        setLoading(false);
+        return;
+      }
+
+      // Fetch fresh data if cache is expired or missing
       await fetchPromoData();
 
-      // Fetch other data in parallel
       const [
         jenisLayananResponse,
         fotoMesinResponse,
@@ -146,36 +189,44 @@ export default function Beranda() {
         ),
       ]);
 
+      const timestamp = new Date().getTime();
+
       // Process and set jenis layanan
       const sortedJenisLayanan = jenisLayananResponse.data.sort(
         (b, a) => new Date(a.createdAt) - new Date(b.createdAt)
       );
       setJenisLayanan(sortedJenisLayanan);
+      localStorage.setItem(
+        "jenisLayanan",
+        JSON.stringify({ data: sortedJenisLayanan, timestamp })
+      );
 
-      // Store in local storage with timestamp
-      const dataWithTimestamp = {
-        data: sortedJenisLayanan,
-        timestamp: new Date().getTime(),
+      // Save and set other data
+      const saveToLocalStorage = (key, data) => {
+        localStorage.setItem(key, JSON.stringify({ data, timestamp }));
       };
-      localStorage.setItem("jenisLayanan", JSON.stringify(dataWithTimestamp));
 
-      // Set other state
+      setFotoMesin(fotoMesinResponse.data);
+      saveToLocalStorage("fotoMesin", fotoMesinResponse.data);
+
+      setFotoSertif(fotoSertifResponse.data);
+      saveToLocalStorage("fotoSertif", fotoSertifResponse.data);
+
+      setGallery(galeriResponse.data);
+      saveToLocalStorage("gallery", galeriResponse.data);
+
       if (Array.isArray(ulasanResponse.data)) {
         setUlasan(ulasanResponse.data);
+        saveToLocalStorage("ulasan", ulasanResponse.data);
       }
-      setFotoMesin(fotoMesinResponse.data);
-      setFotoSertif(fotoSertifResponse.data);
-      setGallery(galeriResponse.data);
 
-      // Limit gallery and carousel based on data length
+      // Set UI limits
       setLimitGallery(
         galeriResponse.data.length > 5 ? 5 : galeriResponse.data.length + 1
       );
-      // setLimitCarousel(promo.length > 3 ? 3 : promo.length);
       setLimitCarousel(
         sortedJenisLayanan.length > 3 ? 3 : sortedJenisLayanan.length + 1
       );
-      //limit ulasan
       setLimitUlasan(
         ulasanResponse.data.length > 3 ? 3 : ulasanResponse.data.length + 1
       );
@@ -190,12 +241,29 @@ export default function Beranda() {
 
   const fetchPromoData = async () => {
     try {
+      const cachedPromo = localStorage.getItem("promo");
+
+      if (cachedPromo) {
+        const parsedPromo = JSON.parse(cachedPromo);
+        const currentTime = new Date().getTime();
+        if (currentTime - parsedPromo.timestamp < 3600000) {
+          setPromo(parsedPromo.data);
+          return;
+        }
+      }
+
       const promoResponse = await axios.get(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
       );
       if (Array.isArray(promoResponse.data)) {
         setPromo(promoResponse.data);
-        console.log("PROMO DATA : " + promoResponse.data);
+        localStorage.setItem(
+          "promo",
+          JSON.stringify({
+            data: promoResponse.data,
+            timestamp: new Date().getTime(),
+          })
+        );
         setError("");
       } else {
         throw new Error("Invalid response format for promo data");
@@ -207,21 +275,6 @@ export default function Beranda() {
   };
 
   useEffect(() => {
-    // const cachedDataLayanan = localStorage.getItem("jenisLayanan");
-
-    // if (!cachedDataLayanan) {
-    //   const parsedData = JSON.parse(cachedDataLayanan);
-    //   const currentTime = new Date().getTime();
-
-    //   if (currentTime - parsedData.timestamp < 3600000) {
-    //     setJenisLayanan(parsedData.data);
-    //   } else {
-    //     fetchData();
-    //   }
-    // } else {
-    //   fetchData();
-    // }
-
     fetchData();
   }, []);
 
@@ -289,7 +342,7 @@ export default function Beranda() {
 
       {/* Carousel Component */}
       <Carousel
-        className="pb-10 pt-16"
+        className="pb-10 pt-[70px]"
         autoplay={{
           delay: 3000,
           disableOnInteraction: true,
@@ -339,7 +392,7 @@ export default function Beranda() {
 
       {/* ABOUT Section */}
       <div
-        className="relative flex flex-col items-center  w-full  mx-auto"
+        className="relative flex flex-col items-center  w-full  mx-auto mt-4"
         {...handlers}>
         <div className="relative max-w-3xl w-full lg:max-w-full lg:w-[70%] lg:h-[410px]  mx-auto ">
           {/* Active Card */}
@@ -459,7 +512,7 @@ export default function Beranda() {
           <main className="w-[90%] flex flex-col items-center lg:w-[80%]   ">
             <div className="flex w-full justify-between items-center lg:py-6  ">
               <h1 className="font-SFPro font-normal text-base lg:text-xl leading-[25px] tracking-tight">
-                Layanan
+                Paket Treatment
               </h1>
               <button
                 className="font-SFPro text-xs text-secondary font-medium lg:text-base tracking-tight"
@@ -496,6 +549,9 @@ export default function Beranda() {
           </main>
         </section>
 
+        <section className="lg:w-[80%] w-[90%]">
+          <CardPaketTreatmentBeranda />
+        </section>
         <section className="lg:w-[80%] w-[90%]">
           <LayananPopuler />
         </section>
@@ -602,7 +658,7 @@ export default function Beranda() {
               },
             }}>
             {ulasan &&
-              ulasan.map((item, dex) => (
+              ulasan.map((item) => (
                 <SwiperSlide
                   key={item.id}
                   className="w-[265px] flex-shrink-0 max-w-[280px]" // Fixed card width
