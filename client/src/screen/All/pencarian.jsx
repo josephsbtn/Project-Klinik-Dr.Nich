@@ -36,6 +36,7 @@ import "swiper/css/navigation";
 import { useLocation, useParams } from "react-router-dom";
 import CardLayanan from "../../components/CardLayanan.jsx";
 import ProdukCard from "../../components/ProdukCard.jsx";
+import LoadingSpinner from "../../components/LoadingSpinner.jsx";
 
 function Pencarian() {
   const progressCircle = useRef(null);
@@ -45,7 +46,7 @@ function Pencarian() {
   //Paging
   const [indexlayanan, setIndexL] = useState(0);
   const [indexProduk, setIndexP] = useState(0);
-  const postPerPage = 4;
+  const postPerPage = 6;
   const firstIndexL = indexlayanan * postPerPage;
   const firstIndexP = indexProduk * postPerPage;
   const lastIndexL = firstIndexL + postPerPage;
@@ -94,22 +95,22 @@ function Pencarian() {
     return (
       <div className="flex gap-1 mt-4 justify-center text-gray-600">
         <button
-          className="border-2 border-gray-700 hover:bg-gray-500 hover:text-white rounded-l-lg w-10"
+          className="border-2 border-secondary hover:bg-secondary hover:text-white rounded-l-lg w-10"
           onClick={onPrev}>
           {"<"}
         </button>
         {pages.map((n, i) => (
           <button
             key={i}
-            className={`border-2 border-gray-700 h-10 w-10 hover:bg-gray-500 hover:text-white rounded-sm ${
-              currentIndex === n - 1 && "text-white bg-gray-700"
+            className={`border-2 border-secondary h-10 w-10 hover:bg-secondary hover:text-white rounded-sm ${
+              currentIndex === n - 1 && "text-white bg-secondary"
             }`}
             onClick={() => onPageClick(n)}>
             {n}
           </button>
         ))}
         <button
-          className="border-2 border-gray-700 hover:bg-gray-500 hover:text-white rounded-r-lg w-10"
+          className="border-2 border-secondary hover:bg-secondary hover:text-white rounded-r-lg w-10"
           onClick={onNext}>
           {">"}
         </button>
@@ -142,6 +143,7 @@ function Pencarian() {
       setLoading(false);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
+      setLoading(false);
     }
   };
 
@@ -165,74 +167,77 @@ function Pencarian() {
           </p>
         </div>
 
-        {/* Search Results */}
-        <div className="w-[90%] lg:w-[85%] flex flex-col items-center mt-8">
-          {/* If No Data Found, Show Only One Message */}
-          {recordLayanan.length === 0 && recordProduk.length === 0 ? (
-            <div className="w-full flex justify-center items-center mt-10">
-              <h3 className="text-lg font-medium">Tidak Ada Data</h3>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="w-[90%] lg:w-[85%] flex flex-col items-center mt-8">
+            {/* If No Data Found, Show Only One Message */}
+            {recordLayanan.length === 0 && recordProduk.length === 0 ? (
+              <div className="w-full flex justify-center items-center mt-10">
+                <h3 className="text-lg font-medium">Tidak Ada Data</h3>
+              </div>
+            ) : (
+              <>
+                {/* Layanan */}
+                {recordLayanan.length > 0 && (
+                  <section className="w-full text-center">
+                    <h3 className="font-bold text-lg lg:text-xl w-full text-left   text-[#c2a353]">
+                      Hasil Pencarian Layanan
+                    </h3>
+                    <div className="w-full mt-5 grid place-items-center gap-4 lg:grid-cols-3">
+                      {recordLayanan.map((item) => (
+                        <CardLayanan key={item._id} item={item} />
+                      ))}
+                    </div>
+
+                    {/* Pagination Layanan */}
+                    <Pagination
+                      pages={pageslayanan}
+                      currentIndex={indexlayanan}
+                      onPrev={prevL}
+                      onNext={nextL}
+                      onPageClick={topageL}
+                      color="#c2a353"
+                    />
+                  </section>
+                )}
+
+                {/* Produk */}
+                {recordProduk.length > 0 && (
+                  <section className="w-full text-center mt-6">
+                    <h3 className="font-bold text-lg lg:text-xl w-full text-left  text-[#c2a353]">
+                      Hasil Pencarian Produk
+                    </h3>
+                    <div className="w-full mt-5 grid place-items-center gap-4 lg:grid-cols-4">
+                      {recordProduk.map((item) => (
+                        <div key={item._id} className="rounded-lg p-3">
+                          <ProdukCard item={item} />
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Pagination Produk */}
+                    <Pagination
+                      pages={pagesproduk}
+                      currentIndex={indexProduk}
+                      onPrev={prevP}
+                      onNext={nextP}
+                      onPageClick={topageP}
+                      color="#c2a353"
+                    />
+                  </section>
+                )}
+              </>
+            )}
+
+            {/* Lihat Lainnya Button */}
+            <div className="mt-6">
+              <button className="w-28 h-8 text-[#c2a353] border border-[#c2a353] rounded-md text-sm font-medium transition-all hover:bg-[#c2a353] hover:text-white">
+                Lihat Lainnya
+              </button>
             </div>
-          ) : (
-            <>
-              {/* Layanan */}
-              {recordLayanan.length > 0 && (
-                <section className="w-full text-center">
-                  <h3 className="font-bold text-lg lg:text-xl text-[#c2a353]">
-                    Hasil Pencarian Layanan
-                  </h3>
-                  <div className="w-full mt-5 grid place-items-center gap-4 lg:grid-cols-3">
-                    {recordLayanan.map((item) => (
-                      <CardLayanan key={item._id} item={item} />
-                    ))}
-                  </div>
-
-                  {/* Pagination Layanan */}
-                  <Pagination
-                    pages={pageslayanan}
-                    currentIndex={indexlayanan}
-                    onPrev={prevL}
-                    onNext={nextL}
-                    onPageClick={topageL}
-                    color="#c2a353"
-                  />
-                </section>
-              )}
-
-              {/* Produk */}
-              {recordProduk.length > 0 && (
-                <section className="w-full text-center mt-6">
-                  <h3 className="font-bold text-lg lg:text-xl text-[#c2a353]">
-                    Hasil Pencarian Produk
-                  </h3>
-                  <div className="w-full mt-5 grid place-items-center gap-4 lg:grid-cols-4">
-                    {recordProduk.map((item) => (
-                      <div key={item._id} className="rounded-lg p-3">
-                        <ProdukCard item={item} />
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Pagination Produk */}
-                  <Pagination
-                    pages={pagesproduk}
-                    currentIndex={indexProduk}
-                    onPrev={prevP}
-                    onNext={nextP}
-                    onPageClick={topageP}
-                    color="#c2a353"
-                  />
-                </section>
-              )}
-            </>
-          )}
-
-          {/* Lihat Lainnya Button */}
-          <div className="mt-6">
-            <button className="w-28 h-8 text-[#c2a353] border border-[#c2a353] rounded-md text-sm font-medium transition-all hover:bg-[#c2a353] hover:text-white">
-              Lihat Lainnya
-            </button>
           </div>
-        </div>
+        )}
       </div>
 
       <section className="lg:w-[80%] w-[90%]">
