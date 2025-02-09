@@ -297,7 +297,14 @@ export default function Navbar({ selected }) {
           </div>
 
           {/* Bag Icon */}
-          <a href="" aria-label="Bag" className="flex items-center">
+          <a
+            href=""
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/underdevelop");
+            }}
+            aria-label="Bag"
+            className="flex items-center">
             {/* Icon untuk Mobile */}
             <img
               src={bag}
