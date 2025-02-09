@@ -39,9 +39,9 @@ export default function AboutCard({ card }) {
 
         {/*    button mobile*/}
         {card.button && (
-          <div className="w-full flex justify-start absolute bottom-16 items-center">
+          <div className="w-full flex justify-start absolute bottom-16 items-center lg: 2xl:left-14">
             <button
-              className="bg-white h-fit w-fit hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base "
+              className="bg-white h-fit w-fit hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base  "
               onClick={() => sendWhatsAppReservasiMessage()}>
               {card.button}
             </button>
@@ -68,7 +68,7 @@ export default function AboutCard({ card }) {
           </div>
         )}
         {card.button2 && (
-          <div className="w-full flex justify-start pt-[36vh] items-center ">
+          <div className="w-full flex justify-start pt-[37vh] items-center 2xl:ml-14 2xl:pt-[32vh] ">
             <button
               className="bg-white h-fit w-fit hover:shadow-lg text-[#c2a353] py-2.5 px-5 rounded-[10px] lg:mt-3 text-xs font-normal leading-tight tracking-tight lg:px-8 lg:py-3 lg:tracking-wide lg:text-base "
               onClick={() => sendWhatsAppReservasiMessage()}>
