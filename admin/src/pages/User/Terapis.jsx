@@ -66,7 +66,7 @@ export const Terapis = () => {
           placeholder="Cari..."
         ></input>
       </form>
-      <div className="flex flex-col justify-between w-full h-full py-3 px-3 text-[12px] overflow-auto">
+      <div className="flex flex-col justify-between w-full h-full py-3 px-3 text-[12px] overflow-y-auto ">
         {tampil.length === 0 ? (
           <div className="flex flex-col w-full h-full items-center justify-center text-[#454545]">
             Tidak Ada Data
