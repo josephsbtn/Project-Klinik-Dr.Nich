@@ -146,6 +146,8 @@ import { PembayaranBerhasil } from "./pages/Penjualan/PembayaranBerhasil";
 import { EditDiskon } from "./pages/Promo/EditDiskon";
 import { EditCashback } from "./pages/cashback/EditCashback";
 import { Transaksihapus } from "./pages/laporan/transaksihapus";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 // import DetailDiskon from "./pages/display/DetailDiskon";
 
@@ -454,18 +456,9 @@ function App2() {
                 path="/pembayaranBerhasil/:id"
                 element={<PembayaranBerhasil />}
               />
-              <Route
-                path="/EditDiskon/:id"
-                element={<EditDiskon />}
-              />
-              <Route
-                path="/EditCashback/:id"
-                element={<EditCashback />}
-              />
-              <Route
-                path="/transaksihapus"
-                element={<Transaksihapus />}
-              />
+              <Route path="/EditDiskon/:id" element={<EditDiskon />} />
+              <Route path="/EditCashback/:id" element={<EditCashback />} />
+              <Route path="/transaksihapus" element={<Transaksihapus />} />
             </Routes>
           </div>
         </div>

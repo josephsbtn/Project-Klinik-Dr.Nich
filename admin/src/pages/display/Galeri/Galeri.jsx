@@ -49,6 +49,7 @@ export const Galeri = () => {
     // ))
     fetchData();
     setNav("Galeri");
+    setLink("/pos");
   }, []);
 
   document.title = "Galeri";
@@ -64,7 +65,7 @@ export const Galeri = () => {
             {datax.map((data) => (
               <Link
                 to={{
-                  pathname: `/galeridetail/${data._id}`,
+                  pathname: `/pos/galeridetail/${data._id}`,
                 }}
                 state={data}
                 className="w-full border flex  justify-between items-center rounded-xl px-3 py-3"
