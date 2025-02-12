@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import TransaksiModels from "../../models/KasirPOS/transaksiPos.js";
+import TransaksiModels from "../../models/ProdukPOS/belanjaPos.js";
 import transaksiDetailModels from "../../models/KasirPOS/detailTransaksiPos.js";
 import ProdukModels from "../../models/ProdukPOS/produkPos.js";
 import promoModels from "../../models/PromoPOS/promoPos.js";
@@ -220,6 +221,33 @@ catch(error){
 
 });
 
+const laporanBelanja = asyncHandler(async(req,res)=>{
+  try{
+  const {dari, sampai} = req.body;
+  const from = new Date(dari)
+  const to = new Date(sampai)
+  const belanja = await belanjaModels.find({createdAt : {$gte : from, $lte : to}})
+  .populate({
+    path : "belanjaDetail",
+    populate : {
+      path : 'produk',
+      model : 'produkPos'
+    }
+  });
+
+  for (const item of transaksi){
+  }
+  const totalBelanja = belanja.length;
+  
+  res.status(200).json({belanja: belanja, totalTransaksi: totalBelanja})
+}
+catch(error){
+  res.status(400).json({ message: error.message });
+}
+
+});
+
 export {
- laporanPenjualan
+ laporanPenjualan,
+ laporanBelanja
 };
