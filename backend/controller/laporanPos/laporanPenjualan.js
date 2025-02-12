@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import TransaksiModels from "../../models/KasirPOS/transaksiPos.js";
-import TransaksiModels from "../../models/ProdukPOS/belanjaPos.js";
+import belanjaModels from "../../models/ProdukPOS/belanjaPos.js";
 import transaksiDetailModels from "../../models/KasirPOS/detailTransaksiPos.js";
 import ProdukModels from "../../models/ProdukPOS/produkPos.js";
 import promoModels from "../../models/PromoPOS/promoPos.js";
