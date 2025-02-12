@@ -34,6 +34,8 @@ import { Products } from "./screen/POS/Produk/products.jsx";
 import { Laporan } from "./screen/POS/Laporan/reports.jsx";
 import { Promo } from "./screen/POS/Promo/promo.jsx";
 import App2 from "./App2.jsx";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
