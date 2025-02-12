@@ -235,7 +235,7 @@ const laporanBelanja = asyncHandler(async(req,res)=>{
     }
   });
 
-  for (const item of transaksi){
+  for (const item of belanja){
   }
   const totalBelanja = belanja.length;
   
