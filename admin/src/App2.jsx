@@ -170,8 +170,7 @@ function App2() {
         setshowsort,
         link,
         setLink,
-      }}
-    >
+      }}>
       <div id="root2">
         <div id="root-container">
           <Navbar className="navbar" />
@@ -364,7 +363,10 @@ function App2() {
               <Route path="/DetailPelanggan/" element={<DetailPelanggan />} />
               <Route path="/PilihPromo/" element={<PilihPromo />} />
               <Route path="/KasirLengkap/" element={<KasirLengkap />} />
-              <Route path="/PilihPembayaran/:id" element={<PilihPembayaran />} />
+              <Route
+                path="/PilihPembayaran/:id"
+                element={<PilihPembayaran />}
+              />
               <Route path="/DrafTransaksi/" element={<DraftTransaksi />} />
               <Route path="/DrafTransaksi2/" element={<DraftTransaksi2 />} />
               <Route
@@ -451,14 +453,8 @@ function App2() {
                 path="/pembayaranBerhasil/:id"
                 element={<PembayaranBerhasil />}
               />
-              <Route
-                path="/EditDiskon/:id"
-                element={<EditDiskon />}
-              />
-              <Route
-                path="/EditCashback/:id"
-                element={<EditCashback />}
-              />
+              <Route path="/EditDiskon/:id" element={<EditDiskon />} />
+              <Route path="/EditCashback/:id" element={<EditCashback />} />
             </Routes>
           </div>
         </div>

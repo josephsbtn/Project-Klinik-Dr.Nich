@@ -70,7 +70,7 @@ function Profile() {
   }, []);
 
   return (
-    <>
+    <main className="w-full flex flex-col items-center overflow-x-hidden">
       <Navbar selected={"Galeri"} />
       <div className="mt-[18px] flex flex-col w-full items-center">
         <div className="flex items-center w-[90%] lg:w-4/5  mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
@@ -135,7 +135,7 @@ function Profile() {
         </div>
       </div>
       <Footer />
-    </>
+    </main>
   );
 }
 

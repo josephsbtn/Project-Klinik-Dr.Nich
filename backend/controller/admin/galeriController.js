@@ -31,6 +31,16 @@ const getGaleri = asyncHandler(async (req, res) => {
   }
 });
 
+const getGaleriById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const galeri = await Galeri.findById(id);
+    res.send(galeri);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 const deleteGaleri = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {
@@ -63,4 +73,4 @@ const editGaleri = asyncHandler(async (req, res) => {
   }
 });
 
-export { newGaleri, getGaleri, deleteGaleri, editGaleri };
+export { newGaleri, getGaleri, deleteGaleri, editGaleri, getGaleriById };
