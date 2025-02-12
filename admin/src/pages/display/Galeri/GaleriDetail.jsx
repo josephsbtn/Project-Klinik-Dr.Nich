@@ -60,7 +60,7 @@ export const GaleriDetail = () => {
         toast.success("Redirecting...");
         navigate("/pos/galeri");
       }, 3000);
-      navigate("/pos/galeri");
+      navigate(`/pos/galeridetail/${id}`);
     } catch (error) {
       toast.error("Failed to delete gallery. Please try again later.");
       console.error("Error deleting promo:", error.message);
