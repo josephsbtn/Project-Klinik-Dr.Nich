@@ -29,7 +29,7 @@ import {
   updatetipeKulit,
   deletetipeKulit,
 } from "../../controller/admin/tipeKulitController.js";
-import {protect} from "../../middleware/auth.js";
+import {protect} from "../../middleware/authMiddleware.js";
 const router = express.Router();
 
 //CAROUSEL PRODUCT
