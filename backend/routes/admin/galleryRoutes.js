@@ -6,13 +6,13 @@ import {
   deleteGaleri,
   getGaleriById,
 } from "../../controller/admin/galeriController.js";
-
+import { protect } from "../../middleware/authMiddleware.js";
 const router = express.Router();
 
-router.post("/createGaleri", newGaleri);
-router.get("/getAllGaleri", getGaleri);
-router.get("/getGaleriById/:id", getGaleriById);
-router.put("/editGaleri/:id", editGaleri);
-router.delete("/deleteGaleri/:id", deleteGaleri);
+router.post("/createGaleri",(protect([1]) || protect([4])), newGaleri);
+router.get("/getAllGaleri",(protect([1]) || protect([4])), getGaleri);
+router.get("/getGaleriById/:id",(protect([1]) || protect([4])), getGaleriById);
+router.put("/editGaleri/:id",(protect([1]) || protect([4])), editGaleri);
+router.delete("/deleteGaleri/:id",(protect([1]) || protect([4])), deleteGaleri);
 
 export default router;
