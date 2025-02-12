@@ -73,27 +73,36 @@ export default function Footer() {
               alt="LinkedIn"
               className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
-            <img
-              src={tt}
-              alt="TikTok"
-              onClick={handleSosmed(
-                "https://www.tiktok.com/@dr.nich_aesthetic"
-              )}
-              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
-            />
+
+            <a
+              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer flex items-center justify-center"
+              href="https://www.tiktok.com/@dr.nich_aesthetic">
+              <img
+                src={tt}
+                alt="TikTok"
+                onClick={handleSosmed(
+                  "https://www.tiktok.com/@dr.nich_aesthetic"
+                )}
+                className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
+              />
+            </a>
             <img
               src={fb}
               alt="Facebook"
               className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
-            <img
-              src={ig}
-              onClick={handleSosmed(
-                "https://www.instagram.com/dr.nich_beautyclinic/"
-              )}
-              alt="Instagram"
-              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
-            />
+            <a
+              className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer flex items-center justify-center"
+              href="https://www.instagram.com/dr.nich_beautyclinic/">
+              <img
+                src={ig}
+                onClick={handleSosmed(
+                  "https://www.instagram.com/dr.nich_beautyclinic/"
+                )}
+                alt="Instagram"
+                className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
+              />
+            </a>
           </div>
         </div>
 

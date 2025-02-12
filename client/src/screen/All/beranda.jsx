@@ -348,7 +348,7 @@ export default function Beranda() {
     deviceType === "mobile" ? 1 : deviceType === "tablet" ? 2 : 3;
 
   return (
-    <div className="w-full flex flex-col items-center bg-white">
+    <div className="w-full flex flex-col items-center bg-white overflow-x-hidden">
       <div className="fixed w-full z-30">
         {" "}
         <Navbar selected={"Beranda"} />

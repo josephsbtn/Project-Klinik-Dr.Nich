@@ -41,9 +41,9 @@ function App() {
       <Router>
         <Routes>
           {/* USER DISPLAY */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/registerAdmin" element={<RegisterAdmin />} />
-          <Route path="/" element={<Dasboard />} />
+          <Route path="/test" element={<Dasboard />} />
           <Route path="/layanan" element={<ListLayanan />} />
           <Route path="/layanan/updateLayanan/:id" element={<LayananUD />} />
           <Route
