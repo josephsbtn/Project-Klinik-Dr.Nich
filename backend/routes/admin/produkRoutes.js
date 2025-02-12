@@ -33,36 +33,36 @@ import {
 const router = express.Router();
 
 //CAROUSEL PRODUCT
-router.post("/newImage", newImage);
-router.get("/getImage", getImage);
-router.put("/updateImage/:id", updateImage);
-router.delete("/deleteImage/:id", deleteImage);
+router.post("/newImage",protect([1,4]), newImage);
+router.get("/getImage",protect([1,4]), getImage);
+router.put("/updateImage/:id",protect([1,4]), updateImage);
+router.delete("/deleteImage/:id",protect([1,4]), deleteImage);
 
 //PRODUCT
-router.post("/tambahproduk", newproduk);
-router.get("/getAllProduk", getproduk);
-router.put("/updateproduk/:id", updateproduk);
-router.delete("/deleteproduk/:id", deleteproduk);
-router.get("/getprodukbyId/:id", getprodukbyID);
-router.get("/getProductByCategory/:id", getprodukbycategory);
+router.post("/tambahproduk",protect([1,4]), newproduk);
+router.get("/getAllProduk",protect([1,4]), getproduk);
+router.put("/updateproduk/:id",protect([1,4]), updateproduk);
+router.delete("/deleteproduk/:id",protect([1,4]), deleteproduk);
+router.get("/getprodukbyId/:id",protect([1,4]), getprodukbyID);
+router.get("/getProductByCategory/:id",protect([1,4]), getprodukbycategory);
 
 //PRODUCT CATEGORY
-router.post("/tambahkategoriProduk", newCategoryProduct);
-router.get("/getAllkategoriProduk", getCategoryProduct);
-router.delete("/deletekategoriProduk/:id", deleteCategoryProduct);
-router.put("/editkategoriProduk/:id", editCategoryProduct);
-router.get("/getCategoryById/:id", getCategoryById);
+router.post("/tambahkategoriProduk",protect([1,4]), newCategoryProduct);
+router.get("/getAllkategoriProduk",protect([1,4]), getCategoryProduct);
+router.delete("/deletekategoriProduk/:id",protect([1,4]), deleteCategoryProduct);
+router.put("/editkategoriProduk/:id",protect([1,4]), editCategoryProduct);
+router.get("/getCategoryById/:id",protect([1,4]), getCategoryById);
 
 //PRODUCT TYPE
-router.post("/tambahproductType", newProductType);
-router.get("/getAllproductType", getProductType);
-router.put("/editproductType/:id", editProductType);
-router.delete("/deleteproductType/:id", deleteProductType);
+router.post("/tambahproductType",protect([1,4]), newProductType);
+router.get("/getAllproductType",protect([1,4]), getProductType);
+router.put("/editproductType/:id",protect([1,4]), editProductType);
+router.delete("/deleteproductType/:id",protect([1,4]), deleteProductType);
 
 //TIPE KULIT
-router.post("/createtipeKulit", newtipeKulit);
-router.get("/getAlltipeKulit", gettipeKulit);
-router.put("/edittipeKulit/:id", updatetipeKulit);
-router.delete("/deletetipeKulit/:id", deletetipeKulit);
+router.post("/createtipeKulit",protect([1,4]), newtipeKulit);
+router.get("/getAlltipeKulit",protect([1,4]), gettipeKulit);
+router.put("/edittipeKulit/:id",protect([1,4]), updatetipeKulit);
+router.delete("/deletetipeKulit/:id",protect([1,4]), deletetipeKulit);
 
 export default router;
