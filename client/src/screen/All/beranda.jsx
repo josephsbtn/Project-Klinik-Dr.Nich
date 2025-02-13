@@ -244,6 +244,7 @@ export default function Beranda() {
       );
       if (Array.isArray(promoResponse.data)) {
         setPromo(promoResponse.data);
+        console.log("data promo", promo);
         localStorage.setItem(
           "promo",
           JSON.stringify({
