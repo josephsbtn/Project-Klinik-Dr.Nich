@@ -140,4 +140,4 @@ const getBelanjaByID = asyncHandler(async (req, res) => {
   }
 });
 
-export { newBelanja, getBelanja, updateBelanja, deleteBelanja, getBelanjaByID };
+export { newBelanja, getBelanja, updateBelanja, deleteBelanja, getBelanjaByID, getBelanjaInvoice };
