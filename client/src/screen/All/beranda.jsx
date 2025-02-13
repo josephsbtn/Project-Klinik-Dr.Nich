@@ -229,6 +229,7 @@ export default function Beranda() {
   const fetchPromoData = async () => {
     try {
       const cachedPromo = localStorage.getItem("promo");
+      console.log(cachedPromo);
 
       if (cachedPromo) {
         console.log("using chaced....");
@@ -236,6 +237,7 @@ export default function Beranda() {
         const currentTime = new Date().getTime();
         if (currentTime - parsedPromo.timestamp < 3600000) {
           setPromo(parsedPromo.data);
+          console.log("data promo", promo);
           return;
         }
       }
