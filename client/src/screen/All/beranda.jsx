@@ -104,6 +104,7 @@ export default function Beranda() {
     setLoading(true);
 
     try {
+      localStorage.clear();
       // Check localStorage for cached data
       const cachedData = [
         "promo",
@@ -127,6 +128,7 @@ export default function Beranda() {
       // If all data is cached, use it and return early
       if (Object.keys(cachedData).length === 7) {
         setPromo(cachedData.promo);
+
         setJenisLayanan(cachedData.jenisLayanan);
         setFotoMesin(cachedData.fotoMesin);
         setFotoSertif(cachedData.fotoSertif);
