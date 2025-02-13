@@ -43,7 +43,7 @@ router.put(
 );
 router.put(
   "/updateJenisLayanan/:id",
-  upload.single("image"),
+  upload.single("foto"),
   protect([1, 4]),
   updateJenisLayanan
 );

@@ -8,7 +8,6 @@ export const KategoriAdd = () => {
   const { setNav, setLink } = useContext(navContext);
   const navigate = useNavigate();
 
-  const [gambar, setGambar] = useState(null);
   const [namaGambar, setNamaGambar] = useState("");
   const [previewURL, setPreviewURL] = useState(null);
 
@@ -21,7 +20,6 @@ export const KategoriAdd = () => {
     setLink("/pos/layananKategori");
   }, []);
 
-  // Cleanup object URL to prevent memory leaks
   useEffect(() => {
     return () => {
       if (previewURL) URL.revokeObjectURL(previewURL);
@@ -35,13 +33,10 @@ export const KategoriAdd = () => {
       const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
       if (!validImageTypes.includes(gambarData.type)) {
         toast.error("File bukan gambar yang valid!");
-        setGambar(null);
         setNamaGambar("");
         setPreviewURL(null);
         return;
       }
-
-      setGambar(gambarData);
       setNamaGambar(gambarData.name);
       setPreviewURL(URL.createObjectURL(gambarData)); // Generate preview
     }

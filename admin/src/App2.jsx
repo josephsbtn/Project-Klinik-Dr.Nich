@@ -434,9 +434,15 @@ function App2() {
               />
               {/* belum ada id */}
               <Route path="/UpdateSertifikat" element={<UpdateSertifikat />} />
-              <Route path="/UpdateKategoti" element={<UpdateKategoti />} />
+              <Route
+                path="/UpdateKategoriJenisProduct/:id"
+                element={<UpdateKategori />}
+              />
               <Route path="/UpdateLayanan" element={<UpdateLayanan />} />
-              <Route path="/UpdateKategori" element={<UpdateKategori />} />
+              <Route
+                path="/UpdateKategoriJenisTreatment/:id"
+                element={<UpdateKategoti />}
+              />
               <Route path="/UpdateTipeProduk" element={<UpdateTipeProduk />} />
               <Route
                 path="/UpdateDaftarProduk"
