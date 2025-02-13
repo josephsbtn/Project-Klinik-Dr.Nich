@@ -67,7 +67,7 @@ export default function Navbar({ selected }) {
   };
 
   return (
-    <div className="w-screen h-[70px] shadow-sm bg-white flex items-center relative">
+    <div className="w-full h-[70px] shadow-sm bg-white flex items-center relative">
       <div className="mx-auto flex items-center justify-between w-[90%] lg:w-[80%] px-2">
         {/* Left Navigation */}
         <div className="flex items-center gap-4">
