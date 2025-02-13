@@ -11,97 +11,95 @@ export const UpdateKategoti = () => {
 
   const [namaGambar, setNamaGambar] = useState("");
   const [previewURL, setPreviewURL] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const namaKategoriRef = useRef(null);
   const deskripsiRef = useRef(null);
   const gambarRef = useRef(null);
 
-  const [isLoading, setIsLoading] = useState(false);
-
+  // ✅ Fetch Data
   const fetchJenisLayanan = async () => {
     try {
       setIsLoading(true);
-      const response = (
-        await axios.get(
-          `${
-            import.meta.env.VITE_BASE_URL_BACKEND
-          }/api/layanan/getJenisLayananById/${id}`
-        )
-      ).data;
+      const { data } = await axios.get(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/getJenisLayananById/${id}`
+      );
 
-      // ✅ Update useRef values after fetching
-      if (namaKategoriRef.current) {
-        namaKategoriRef.current.value = response.nama;
-      }
-      if (deskripsiRef.current) {
-        deskripsiRef.current.value = response.deskripsi;
-      }
-      if (response.foto) {
-        gambarRef.current.files[0] = response.foto;
-        setPreviewURL(
-          `${import.meta.env.VITE_BASE_URL_BACKEND}/${response.foto}`
-        );
-        setNamaGambar(response.foto); // Optional: Save the image name
-      }
+      if (namaKategoriRef.current) namaKategoriRef.current.value = data.nama;
+      if (deskripsiRef.current) deskripsiRef.current.value = data.deskripsi;
 
-      console.log(response);
+      // ✅ Correct Image Handling
+      if (data.foto) {
+        setPreviewURL(`${import.meta.env.VITE_BASE_URL_BACKEND}/${data.foto}`);
+        setNamaGambar(data.foto);
+      } else {
+        setPreviewURL(null);
+        setNamaGambar("Belum ada gambar");
+      }
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      toast.error(error.response?.data?.message || "Gagal memuat data!");
     } finally {
       setIsLoading(false);
     }
   };
 
+  // ✅ Load Data on Mount
   useEffect(() => {
     setNav("Ubah Kategori");
     setLink(`/pos/kategoridetail/${id}`);
     fetchJenisLayanan();
   }, [id]);
 
+  // ✅ Cleanup Preview URL
   useEffect(() => {
     return () => {
       if (previewURL) URL.revokeObjectURL(previewURL);
     };
   }, [previewURL]);
 
+  // ✅ Handle Image Upload
   const handleGambar = () => {
-    const gambarData = gambarRef.current.files[0];
+    const file = gambarRef.current.files[0];
 
-    if (gambarData) {
-      const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
-      if (!validImageTypes.includes(gambarData.type)) {
-        toast.error("File bukan gambar yang valid!");
+    if (file) {
+      const validTypes = ["image/jpeg", "image/png", "image/gif"];
+      if (!validTypes.includes(file.type)) {
+        toast.error("Format gambar harus .jpg, .png, atau .gif!");
         setNamaGambar("");
         setPreviewURL(null);
         return;
       }
-      setNamaGambar(gambarData.name);
-      setPreviewURL(URL.createObjectURL(gambarData)); // Generate preview
+
+      setNamaGambar(file.name);
+      setPreviewURL(URL.createObjectURL(file));
     }
   };
 
+  // ✅ Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!gambarRef.current.files || gambarRef.current.files.length === 0) {
-      toast.error("Harap pilih gambar sebelum mengunggah!");
-      return;
-    }
 
     if (!namaKategoriRef.current.value || !deskripsiRef.current.value) {
       toast.error("Semua bidang harus diisi!");
       return;
     }
 
-    const fdata = new FormData();
-    fdata.append("nama", namaKategoriRef.current.value);
-    fdata.append("deskripsi", deskripsiRef.current.value);
-    fdata.append("foto", gambarRef.current.files[0]);
+    const formData = new FormData();
+    formData.append("nama", namaKategoriRef.current.value);
+    formData.append("deskripsi", deskripsiRef.current.value);
+
+    if (gambarRef.current.files.length > 0) {
+      formData.append("foto", gambarRef.current.files[0]);
+    }
+
     try {
       const response = await axios.put(
         `${
           import.meta.env.VITE_BASE_URL_BACKEND
         }/api/layanan/updateJenisLayanan/${id}`,
-        fdata,
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -112,24 +110,18 @@ export const UpdateKategoti = () => {
       );
 
       if (response.status === 200) {
-        toast.success("Berhasil mengedit data kategori treatment");
-        setTimeout(() => {
-          navigate("/pos/kategorilayanan");
-        }, 3000);
+        toast.success("Berhasil mengedit kategori!");
+        setTimeout(() => navigate("/pos/kategorilayanan"), 2000);
       }
     } catch (error) {
-      console.error(
-        error.response?.data?.message ||
-          "Gagal menambahkan kategori treatment, coba lagi!"
-      );
       toast.error(
-        error.response?.data?.message ||
-          "Gagal menambahkan kategori treatment, coba lagi!"
+        error.response?.data?.message || "Gagal memperbarui kategori!"
       );
     }
   };
 
-  document.title = "Ubah Ketegori";
+  document.title = "Ubah Kategori";
+
   return (
     <form
       className="flex flex-col justify-between bg-white min-h-screen px-3 py-3 gap-3 w-full"
@@ -137,6 +129,7 @@ export const UpdateKategoti = () => {
       <div className="flex flex-col gap-1 px-3">
         <ToastContainer />
         <div className="flex flex-col">
+          {/* ✅ Upload Foto */}
           <label className="text-start text-[12px] text-[#454545]">
             Upload Foto
           </label>
@@ -164,6 +157,8 @@ export const UpdateKategoti = () => {
               </p>
             </div>
           </div>
+
+          {/* ✅ Nama Kategori */}
           <label className="text-[#454545] text-start text-[12px] mt-2">
             Nama Kategori
           </label>
@@ -173,6 +168,8 @@ export const UpdateKategoti = () => {
             placeholder="Contoh: Facial Series"
             className="px-2 border text-[12px] border-black/30 rounded-lg h-[48px]"
           />
+
+          {/* ✅ Deskripsi */}
           <label className="text-[#454545] text-start text-[12px] mt-2">
             Deskripsi
           </label>
@@ -183,6 +180,8 @@ export const UpdateKategoti = () => {
             placeholder="Masukkan deskripsi"></textarea>
         </div>
       </div>
+
+      {/* ✅ Submit Button */}
       <button
         type="submit"
         className="bg-gradient-to-r from-[#EAC564] to-[#C2A353] hover:opacity-90 flex justify-center items-center h-[44px] text-white font-medium rounded-lg">
