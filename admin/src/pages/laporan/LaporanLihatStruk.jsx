@@ -7,7 +7,7 @@ import axios from "axios";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
-export const PembayaranBerhasil = () => {
+export const LaporanLihatStruk = () => {
   const { setNav, setLink } = useContext(navContext);
   const [datax, setDatax] = useState([]);
   const [dataDalam, setDataDalam] = useState([]);
@@ -33,7 +33,7 @@ export const PembayaranBerhasil = () => {
 
     fetchData();
     setNav("Pembayaran ");
-    setLink("/pos/kasir");
+    setLink("/pos/LaporanRingkasanPenjualan");
     setTimeout(() => {
       setFetched(true);
     }, 500);
@@ -159,7 +159,7 @@ export const PembayaranBerhasil = () => {
             <img src={iDown} alt="iDownload" />
           </button>
           <button
-            onClick={() => navigasi("/pos/Kasir")}
+            onClick={() => navigasi("/pos/LaporanRingkasanPenjualan")}
             className="border ml-2 border-[#C2A353] w-full rounded-xl flex justify-center items-center text-[#C2A353]"
           >
             Kembali

@@ -64,7 +64,7 @@ export const ModalsCashback = () => {
                     const filterproduk = produk.filter(item => item.kategori._id == kategoriRef?.current?.value)
                     setProdukM(filterproduk)
                 }
-              }, [jenisM])
+            }, [jenisM])
     useEffect(() => {
         produk.length > 0 && setProdukM(produk)
     }, [produk])
