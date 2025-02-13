@@ -104,7 +104,6 @@ export default function Beranda() {
     setLoading(true);
 
     try {
-      localStorage.clear();
       // Check localStorage for cached data
       const cachedData = [
         "promo",
