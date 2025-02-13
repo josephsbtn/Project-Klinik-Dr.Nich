@@ -8,19 +8,45 @@ import { data, Link } from "react-router-dom";
 import { navContext } from "../../../App2";
 import { useLocation } from "react-router-dom";
 import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const KategoriDetail = () => {
+  const { id } = useParams();
   const lokasi = useLocation();
   const dataDammy = lokasi.state;
   const { setNav, setLink } = useContext(navContext);
   const [datax, setdatax] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [nama, setNama] = useState("");
+  const [image, setImage] = useState("");
+  const [deskripsi, setDeskripsi] = useState("");
+
+  const fetchJenisLayanan = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/getJenisLayananById/${id}`
+      );
+      setNama(response.data.nama);
+      setImage(response.data.foto);
+      setDeskripsi(response.data.deskripsi);
+      console.log(response.data);
+    } catch (error) {
+      setError(error.response?.data?.message || "An error occurred");
+      toast.error(error.response?.data?.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    // fetch("/marketing.json").then(
-    //     (response) => response.json()
-    // ).then((data) => (setdatax(data)
-    // ))
+    fetchJenisLayanan();
     setNav("Detail");
-  }, []);
+  }, [id]);
 
   document.title = "Detail";
   return (
@@ -28,15 +54,15 @@ export const KategoriDetail = () => {
       <div className="flex flex-col justify-between w-full h-full py-3 px-3">
         <div className="flex flex-col w-full  border rounded-lg p-3 border-[#C2A353]">
           <div className="w-[115px] h-[115px] border rounded-lg ">
-            <img src={gkategori} alt="" />
+            <img src={image} alt="" />
           </div>
           <div className="text-[12px] text-start  mt-2">
             <p className="text-[#BDBDBD]">Nama Kategori</p>
-            <p className="text-[#454545]">{dataDammy.name}</p>
+            <p className="text-[#454545]">{nama}</p>
           </div>
           <div className="text-[12px] text-start  mt-2">
             <p className="text-[#BDBDBD]">Deskripsi</p>
-            <p className="text-[#454545]">{dataDammy.deskripsi}</p>
+            <p className="text-[#454545]">{deskripsi}</p>
           </div>
         </div>
 
@@ -59,14 +85,12 @@ export const KategoriDetail = () => {
         <div className="flex gap-1">
           <a
             href=""
-            className="flex justify-center items-center gap-2 h-[44px] w-full max-w-[115px]  border border-[#C2A353] font-medium rounded-lg text-[14px] bg-gradient-to-r from-[#C2A353] to-[#EAC564] text-transparent bg-clip-text"
-          >
+            className="flex justify-center items-center gap-2 h-[44px] w-full max-w-[115px]  border border-[#C2A353] font-medium rounded-lg text-[14px] bg-gradient-to-r from-[#C2A353] to-[#EAC564] text-transparent bg-clip-text">
             Hapus{" "}
           </a>
           <Link
             to={{ pathname: "/UpdateKategoti" }}
-            className="flex justify-center items-center gap-2 h-[44px] w-full min-m-[160px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] "
-          >
+            className="flex justify-center items-center gap-2 h-[44px] w-full min-m-[160px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] ">
             Edit
           </Link>
         </div>
@@ -75,8 +99,7 @@ export const KategoriDetail = () => {
         className="w-10 h-10 bg-black/300 text-white"
         onClick={() => {
           setdatax([]);
-        }}
-      >
+        }}>
         RESET
       </button>
     </div>

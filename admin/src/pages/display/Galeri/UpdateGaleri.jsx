@@ -132,7 +132,9 @@ export const UpdateGaleri = () => {
               />
             ) : (
               <div className="h-[115px] w-[115px] bg-white rounded shadow-lg border flex items-center justify-center">
-                <h1 className="w-full text-sm text-center">Masukan gambar</h1>
+                <h1 className="w-full text-sm text-center text-opacity-55">
+                  Masukan gambar
+                </h1>
               </div>
             )}
 

@@ -3,6 +3,7 @@ import { navContext } from "../../../App2";
 import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 export const KategoriAdd = () => {
   const { setNav, setLink } = useContext(navContext);
@@ -33,13 +34,14 @@ export const KategoriAdd = () => {
 
   useEffect(() => {
     setNav("Tambah Kategori");
+    setLink("/pos/layananKategori");
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const datadata = {
-      namaKategori: namaKategoriRef.current.value,
+      nama: namaKategoriRef.current.value,
       deskripsi: deskripsiRef.current.value,
-      gambar: gambar,
+      foto: gambar,
     };
     // memasukan kedalam database
     // axios
@@ -47,6 +49,32 @@ export const KategoriAdd = () => {
     //   .then(
     //     (response) => response.status == 200 && navigate("../kategorilayanan")
     //   );
+
+    try {
+      const response = await axios.post(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/tambahJenisLayanan`,
+        datadata,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Berhasil menambahkan kategori treatment");
+        setTimeout(() => {
+          navigate("../kategorilayanan");
+        }, 3000);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Gagal menambahkan kategori treatment, Coba Lagi!");
+    }
 
     const handlenavigasi = window.confirm(
       `nama kategori : ${datadata.namaKategori} anda yakin ?`
@@ -66,8 +94,7 @@ export const KategoriAdd = () => {
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit();
-      }}
-    >
+      }}>
       <div className="flex flex-col gap-1 px-3">
         <div className="flex flex-col">
           <label className="text-start text-[454545] text-[12px]">
@@ -121,8 +148,7 @@ export const KategoriAdd = () => {
             cols="auto"
             rows="5"
             className="border rounded-lg text-[12px] p-2"
-            placeholder="Masukan Deskripsi"
-          ></textarea>
+            placeholder="Masukan Deskripsi"></textarea>
         </div>
       </div>
       <button
@@ -134,8 +160,7 @@ export const KategoriAdd = () => {
             ? "bg-[#DCDCDC] border-2 "
             : "bg-gradient-to-r from-[#EAC564] to-[#C2A353]"
         }
-        flex justify-center items-center h-[44px] text-white font-medium rounded-lg`}
-      >
+        flex justify-center items-center h-[44px] text-white font-medium rounded-lg`}>
         Simpan
       </button>
     </form>
