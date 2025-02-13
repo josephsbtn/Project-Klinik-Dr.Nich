@@ -8,14 +8,15 @@ import { data, Link } from "react-router-dom";
 import { navContext } from "../../../App2";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { set } from "date-fns";
 export const KategoriLayanan = () => {
   const { setNav, setLink } = useContext(navContext);
   const [datax, setdatax] = useState([]);
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllLayanan`
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/getAllJenisLayanan`
       );
       const data = response.data;
       setdatax(data);

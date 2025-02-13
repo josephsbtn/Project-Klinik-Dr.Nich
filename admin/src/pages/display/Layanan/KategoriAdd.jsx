@@ -62,7 +62,7 @@ export const KategoriAdd = () => {
     const fdata = new FormData();
     fdata.append("nama", namaKategoriRef.current.value);
     fdata.append("deskripsi", deskripsiRef.current.value);
-    fdata.append("foto", gambar); // Directly append state `gambar`
+    fdata.append("foto", gambarRef.current.files[0]); // Directly append state `gambar`
 
     try {
       const response = await axios.post(
@@ -147,18 +147,7 @@ export const KategoriAdd = () => {
       </div>
       <button
         type="submit"
-        disabled={
-          !gambar ||
-          !namaKategoriRef.current?.value ||
-          !deskripsiRef.current?.value
-        }
-        className={`${
-          !gambar ||
-          !namaKategoriRef.current?.value ||
-          !deskripsiRef.current?.value
-            ? "bg-[#DCDCDC] border-2 cursor-not-allowed"
-            : "bg-gradient-to-r from-[#EAC564] to-[#C2A353] hover:opacity-90"
-        } flex justify-center items-center h-[44px] text-white font-medium rounded-lg`}>
+        className="bg-gradient-to-r from-[#EAC564] to-[#C2A353] hover:opacity-90 flex justify-center items-center h-[44px] text-white font-medium rounded-lg">
         Simpan
       </button>
     </form>

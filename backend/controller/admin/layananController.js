@@ -3,13 +3,17 @@ import JenisLayanan from "../../models/layanan/jenisLayanan.js";
 import layananModels from "../../models/layanan/layanan.js";
 
 const newJenisLayanan = asyncHandler(async (req, res) => {
-  const { nama, foto, deskripsi } = req.body; // Destructure the request body
+  const data = {
+    nama: req.body.nama,
+    foto: req.file ? req.file.path : "No Image",
+    deskripsi: req.body.deskripsi,
+  }; // Destructure the request body
   try {
-    const isExist = await JenisLayanan.findOne({ nama });
+    const isExist = await JenisLayanan.findOne({ nama: req.body.nama });
     if (isExist) {
       throw new Error("Jenis Layanan Sudah Ada");
     }
-    const jenisLayanan = await JenisLayanan.create({ nama, foto, deskripsi });
+    const jenisLayanan = await JenisLayanan.create(data);
     res.send(jenisLayanan);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -58,10 +62,14 @@ const updateJenisLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
     nama: req.body.nama,
-    foto: req.body.foto,
+    foto: req.file ? req.file.path : "No Image",
     deskripsi: req.body.deskripsi,
   };
   try {
+    const isExist = await JenisLayanan.findOne({ nama: req.body.nama });
+    if (isExist) {
+      throw new Error("Jenis Layanan Sudah Ada");
+    }
     const jenisLayanan = await JenisLayanan.findByIdAndUpdate(
       id,
       { $set: newData },
@@ -79,7 +87,7 @@ const newLayanan = asyncHandler(async (req, res) => {
     durasi: req.body.durasi,
     harga: req.body.harga,
     deskripsi: req.body.deskripsi,
-    image: req.body.image,
+    image: req.file ? req.file.path : "No Image",
     cardDeskripsi: req.body.cardDeskripsi,
     idJenis: req.body.idJenis,
   };
@@ -110,7 +118,7 @@ const updateLayanan = asyncHandler(async (req, res) => {
     idJenis: req.body.idJenis,
     nama: req.body.nama,
     harga: req.body.harga,
-    image: req.body.image,
+    image: req.file ? req.file.path : "No Image",
     deskripsi: req.body.deskripsi,
     durasi: req.body.durasi,
     cardDeskripsi: req.body.cardDeskripsi,
