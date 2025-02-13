@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.post(
   "/tambahJenisLayanan",
-  upload.single("image"),
+  upload.single("foto"),
   protect([1, 4]),
   newJenisLayanan
 );

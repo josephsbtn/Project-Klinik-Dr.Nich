@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { navContext } from "../../../App2";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 export const KategoriAdd = () => {
   const { setNav, setLink } = useContext(navContext);
@@ -50,11 +50,7 @@ export const KategoriAdd = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !namaKategoriRef.current.value ||
-      !deskripsiRef.current.value ||
-      !gambar
-    ) {
+    if (!namaKategoriRef.current.value || !deskripsiRef.current.value) {
       toast.error("Semua bidang harus diisi!");
       return;
     }
@@ -62,7 +58,12 @@ export const KategoriAdd = () => {
     const fdata = new FormData();
     fdata.append("nama", namaKategoriRef.current.value);
     fdata.append("deskripsi", deskripsiRef.current.value);
-    fdata.append("foto", gambarRef.current.files[0]); // Directly append state `gambar`
+    if (gambarRef.current.files.length > 0) {
+      fdata.append("foto", gambarRef.current.files[0]);
+    } else {
+      toast.error("Harap pilih gambar sebelum mengunggah!");
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -86,8 +87,14 @@ export const KategoriAdd = () => {
         }, 3000);
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Gagal menambahkan kategori treatment, coba lagi!");
+      console.error(
+        error.response?.data?.message ||
+          "Gagal menambahkan kategori treatment, coba lagi!"
+      );
+      toast.error(
+        error.response?.data?.message ||
+          "Gagal menambahkan kategori treatment, coba lagi!"
+      );
     }
   };
 
@@ -98,6 +105,7 @@ export const KategoriAdd = () => {
       className="flex flex-col justify-between bg-white min-h-screen px-3 py-3 gap-3 w-full"
       onSubmit={handleSubmit}>
       <div className="flex flex-col gap-1 px-3">
+        <ToastContainer />
         <div className="flex flex-col">
           <label className="text-start text-[12px] text-[#454545]">
             Upload Foto
