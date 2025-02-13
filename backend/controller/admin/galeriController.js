@@ -4,7 +4,7 @@ import Galeri from "../../models/Gallery/galery.js";
 const newGaleri = asyncHandler(async (req, res) => {
   const newGaleri = {
     judul: req.body.judul,
-    thumbnail: req.body.thumbnail,
+    thumbnail: req.file ? req.file.path : "No Image",
     link: req.body.link,
     channel: req.body.channel,
     sosmed: req.body.sosmed,

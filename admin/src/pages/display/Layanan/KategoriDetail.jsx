@@ -89,7 +89,7 @@ export const KategoriDetail = () => {
             Hapus{" "}
           </a>
           <Link
-            to={{ pathname: "/UpdateKategoti" }}
+            to={{ pathname: "/pos/UpdateKategoti" }}
             className="flex justify-center items-center gap-2 h-[44px] w-full min-m-[160px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] ">
             Edit
           </Link>

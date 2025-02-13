@@ -61,18 +61,18 @@ export const GaleriAdd = () => {
   const convertBase64 = (e) => {
     const file = e.target.files[0];
     if (!file) {
-      setError("No image selected");
+      toast.error("No image selected");
       return;
     }
     const validImageTypes = ["image/jpeg", "image/png", "image/jpg"];
     if (!validImageTypes.includes(file.type)) {
-      setError("Invalid file type. Only JPEG and PNG files are allowed.");
+      toast.error("Invalid file type. Only JPEG and PNG files are allowed.");
       return;
     }
 
     const maxSize = 5 * 1024 * 1024; // 5MB size limit
     if (file.size > maxSize) {
-      setError("File is too large. Maximum file size is 5MB.");
+      toast.error("File is too large. Maximum file size is 5MB.");
       return;
     }
 
