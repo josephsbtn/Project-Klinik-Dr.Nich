@@ -370,10 +370,10 @@ export default function Beranda() {
             <div key={item._id} className="relative">
               <picture>
                 {/* Show fotoDesktop on screens larger than 1024px */}
-                <source media="(min-width: 1024px)" srcSet={item.foto} />
+                <source media="(min-width: 1024px)" srcSet={item.fotoDesktop} />
                 {/* Default to fotoMobile for smaller screens */}
                 <img
-                  src={item.foto}
+                  src={item.fotoMobile}
                   alt={`Slide ${index + 1}`}
                   className="h-[70vh] lg:h-[80vh] w-full object-cover relative lg:object-center"
                 />
