@@ -231,6 +231,7 @@ export default function Beranda() {
       const cachedPromo = localStorage.getItem("promo");
 
       if (cachedPromo) {
+        console.log("using chaced....");
         const parsedPromo = JSON.parse(cachedPromo);
         const currentTime = new Date().getTime();
         if (currentTime - parsedPromo.timestamp < 3600000) {
@@ -238,6 +239,8 @@ export default function Beranda() {
           return;
         }
       }
+
+      console.log("Fetching promo...");
 
       const promoResponse = await axios.get(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/getAllPromo`
@@ -264,6 +267,7 @@ export default function Beranda() {
 
   useEffect(() => {
     fetchData();
+    fetchPromoData();
   }, []);
 
   const aboutCards = [
