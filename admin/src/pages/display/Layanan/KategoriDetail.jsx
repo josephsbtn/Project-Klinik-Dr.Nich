@@ -27,15 +27,18 @@ export const KategoriDetail = () => {
   const fetchJenisLayanan = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_BASE_URL_BACKEND
-        }/api/layanan/getJenisLayananById/${id}`
-      );
-      setNama(response.data.nama);
-      setImage(response.data.foto);
-      setDeskripsi(response.data.deskripsi);
-      console.log(response.data);
+      const response = (
+        await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/getJenisLayananById/${id}`
+        )
+      ).data;
+      setNama(response.nama);
+      setImage(`/${response.foto}`);
+      setDeskripsi(response.deskripsi);
+
+      console.log(response);
     } catch (error) {
       setError(error.response?.data?.message || "An error occurred");
       toast.error(error.response?.data?.message || "An error occurred");
@@ -47,6 +50,9 @@ export const KategoriDetail = () => {
     fetchJenisLayanan();
     setNav("Detail");
   }, [id]);
+  useEffect(() => {
+    console.log("Updated image:", image);
+  }, [image]);
 
   document.title = "Detail";
   return (
@@ -54,7 +60,7 @@ export const KategoriDetail = () => {
       <div className="flex flex-col justify-between w-full h-full py-3 px-3">
         <div className="flex flex-col w-full  border rounded-lg p-3 border-[#C2A353]">
           <div className="w-[115px] h-[115px] border rounded-lg ">
-            <img src={image} alt="" />
+            <img src={image} alt={image} />
           </div>
           <div className="text-[12px] text-start  mt-2">
             <p className="text-[#BDBDBD]">Nama Kategori</p>

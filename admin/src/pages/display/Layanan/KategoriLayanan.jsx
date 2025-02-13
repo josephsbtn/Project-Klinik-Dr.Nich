@@ -54,6 +54,7 @@ export const KategoriLayanan = () => {
   document.title = "Layanan Kategori";
   return (
     <div className="flex flex-col px-5 py-3 gap-1 bg-white w-full h-full">
+      <ToastContainer />
       <div className="flex flex-col justify-between w-full h-full py-3 px-3">
         {datax.length === 0 ? (
           <div className="flex flex-col w-full h-full items-center justify-center text-black/40">
