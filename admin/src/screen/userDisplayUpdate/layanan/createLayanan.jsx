@@ -104,7 +104,13 @@ function CreateLayanan() {
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/tambahLayanan`,
         formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }
       );
   
       toast.success("Layanan successfully created!");

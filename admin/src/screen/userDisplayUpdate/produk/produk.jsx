@@ -238,7 +238,9 @@ function ListProduct() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
+          withCredentials: true,
         }
       );
   
@@ -311,8 +313,10 @@ function ListProduct() {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Necessary for file uploads
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
+          withCredentials: true,
         }
       );
 
@@ -440,7 +444,9 @@ function ListProduct() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
+          withCredentials: true,
         }
       );
   
@@ -473,7 +479,9 @@ function ListProduct() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
+          withCredentials: true,
         }
       );
   

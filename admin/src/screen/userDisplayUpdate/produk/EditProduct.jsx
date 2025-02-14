@@ -134,8 +134,10 @@ function EditProduct() {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Required for file upload
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
+          withCredentials: true,
         }
       );
   
