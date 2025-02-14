@@ -10,7 +10,7 @@ const newPromo = asyncHandler(async (req, res) => {
   const fotoMobile = req.files.fotoMobile ? req.files.fotoMobile[0] : null;
 
   const fotoDesktopUrl = fotoDesktop ? `${BASE_URL}${fotoDesktop.filename}` : null;
-  const fotoMobileUrl = fotoMobile ? `${BASE_URL}` : null;
+  const fotoMobileUrl = fotoMobile ? `abc` : null;
 
   console.log("Foto Desktop URL:", fotoDesktopUrl); // Debugging URL
   console.log("Foto Mobile URL:", fotoMobileUrl);
