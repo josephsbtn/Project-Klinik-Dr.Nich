@@ -1,10 +1,11 @@
 import asyncHandler from "express-async-handler";
 import Galeri from "../../models/Gallery/galery.js";
 
+const BASE_URL = "https://api.drnich.co.id/uploads/";
 const newGaleri = asyncHandler(async (req, res) => {
   const newGaleri = {
     judul: req.body.judul,
-    thumbnail: req.file ? req.file.path : "No Image",
+    thumbnail: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     link: req.body.link,
     channel: req.body.channel,
     sosmed: req.body.sosmed,
@@ -55,7 +56,7 @@ const editGaleri = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
     judul: req.body.judul,
-    thumbnail: req.file ? req.file.path : "No Image",
+    thumbnail: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     link: req.body.link,
     channel: req.body.channel,
     sosmed: req.body.sosmed,

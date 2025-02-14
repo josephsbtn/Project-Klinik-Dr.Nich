@@ -4,10 +4,10 @@ import carouselProducts from "../../models/produk/carouselProducts.js";
 import tipeKulit from "../../models/produk/tipeKulit.js";
 
 /*CAROUSEL PRODUCT*/
-
+const BASE_URL = "https://api.drnich.co.id/uploads/";
 const newImage = asyncHandler(async (req, res) => {
   const newImage = {
-    image: req.file ? req.file.path : "No Image",
+    image: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
   };
   try {
     const isExist = await carouselProducts.findOne({ image: newImage.image });
@@ -43,7 +43,7 @@ const deleteImage = asyncHandler(async (req, res) => {
 const updateImage = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
-    image: req.file ? req.file.path : "No Image",
+    image: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
   };
   try {
     const image = await carouselProducts.findByIdAndUpdate(
@@ -62,7 +62,7 @@ const newproduk = asyncHandler(async (req, res) => {
   const newproduk = {
     nama: req.body.nama,
     deskripsi: req.body.deskripsi,
-    foto: req.file ? req.file.path : "No Image",
+    foto: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     manfaat: req.body.manfaat,
     cara_pakai: req.body.cara_pakai,
     harga: req.body.harga,
@@ -115,7 +115,7 @@ const updateproduk = asyncHandler(async (req, res) => {
   const newData = {
     nama: req.body.nama,
     deskripsi: req.body.deskripsi,
-    foto: req.file ? req.file.path : "No Image",
+    foto: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     manfaat: req.body.manfaat,
     cara_pakai: req.body.cara_pakai,
     harga: req.body.harga,

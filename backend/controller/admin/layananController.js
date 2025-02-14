@@ -2,10 +2,11 @@ import asyncHandler from "express-async-handler";
 import JenisLayanan from "../../models/layanan/jenisLayanan.js";
 import layananModels from "../../models/layanan/layanan.js";
 
+const BASE_URL = "https://api.drnich.co.id/uploads/";
 const newJenisLayanan = asyncHandler(async (req, res) => {
   const data = {
     nama: req.body.nama,
-    foto: req.file ? req.file.path : "No Image",
+    foto: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     deskripsi: req.body.deskripsi,
   }; // Destructure the request body
   try {
@@ -62,7 +63,7 @@ const updateJenisLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
     nama: req.body.nama,
-    foto: req.file ? req.file.path : "No Image",
+    foto: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     deskripsi: req.body.deskripsi,
   };
   try {
