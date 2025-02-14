@@ -4,15 +4,23 @@ import promoModels from "../../models/promo/promo.js";
 const BASE_URL = "https://api.drnich.co.id/uploads/";
 
 const newPromo = asyncHandler(async (req, res) => {
+  console.log("Request Files:", req.files); // Debug uploaded files
+
   const fotoDesktop = req.files.fotoDesktop ? req.files.fotoDesktop[0] : null;
   const fotoMobile = req.files.fotoMobile ? req.files.fotoMobile[0] : null;
+
+  const fotoDesktopUrl = fotoDesktop ? `${BASE_URL}${fotoDesktop.filename}` : null;
+  const fotoMobileUrl = fotoMobile ? `${BASE_URL}${fotoMobile.filename}` : null;
+
+  console.log("Foto Desktop URL:", fotoDesktopUrl); // Debugging URL
+  console.log("Foto Mobile URL:", fotoMobileUrl);
 
   const newPromoData = {
     nama: req.body.nama,
     detail: req.body.detail,
     syarat: req.body.syarat,
-    fotoDesktop: fotoDesktop ? `${BASE_URL}${fotoDesktop.filename}` : null,
-    fotoMobile: fotoMobile ? `${BASE_URL}${fotoMobile.filename}` : null,
+    fotoDesktop: fotoDesktopUrl,
+    fotoMobile: fotoMobileUrl,
   };
 
   try {
@@ -22,11 +30,14 @@ const newPromo = asyncHandler(async (req, res) => {
     }
 
     const promo = await promoModels.create(newPromoData);
+    console.log("Saved Promo Data:", promo); // Ensure data is stored correctly
     res.send(promo);
   } catch (error) {
+    console.error("Error saving promo:", error);
     res.status(400).json({ message: error.message });
   }
 });
+
 
 const getPromo = asyncHandler(async (req, res) => {
   try {
