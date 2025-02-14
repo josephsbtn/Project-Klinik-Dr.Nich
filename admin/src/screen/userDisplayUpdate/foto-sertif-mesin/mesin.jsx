@@ -98,7 +98,8 @@ function ListMesin() {
     }
   };
 
-  const editGaleri = async () => {
+  const editGaleri = async (e) => {
+    e.preventDefault()
     try {
       if (!imageRef2.current.files[0]) {
         toast.error("Please select an image before updating.");

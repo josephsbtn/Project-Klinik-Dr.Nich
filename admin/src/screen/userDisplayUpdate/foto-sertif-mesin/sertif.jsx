@@ -53,7 +53,7 @@ function ListSertif() {
       
       // Append image only if selected
       if (imgaeRef.current.files[0]) {
-        formData.append("foto", imageRef.current.files[0]);
+        formData.append("foto", imgaeRef.current.files[0]);
       } else {
         setError("Please select an image.");
         return;
@@ -100,7 +100,9 @@ function ListSertif() {
     console.log("Delete promo with id:", selectedContent._id);
   };
 
-  const editGaleri = async () => {
+  const editGaleri =  async (e) => {
+    e.preventDefault()
+    console.log('abc')
     try {
       if (!imgaeRef2.current.files[0]) {
         setError("Please select an image to update.");
@@ -109,8 +111,11 @@ function ListSertif() {
   
       // Create FormData for file upload
       const formData = new FormData();
-      formData.append("foto", imageRef2.current.files[0]);
-  
+      formData.append("foto", imgaeRef2.current.files[0]);
+      
+      formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+      });
       // Send the PUT request
       await axios.put(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/editSertif/${selectedContent._id}`,
@@ -123,7 +128,6 @@ function ListSertif() {
           withCredentials: true,
         }
       );
-  
       fetchSertif(); // Refresh data after update
       console.log("Edited promo with ID:", selectedContent._id);
     } catch (error) {
