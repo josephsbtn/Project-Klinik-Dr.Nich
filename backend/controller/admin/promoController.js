@@ -9,7 +9,7 @@ const newPromo = asyncHandler(async (req, res) => {
     nama: req.body.nama,
     detail: req.body.detail,
     syarat: req.body.syarat,
-    fotoDesktop: `${BASE_URL}${fotoMobile.filename}`,
+    fotoDesktop: `${BASE_URL}${fotoDesktop.filename}`,
     fotoMobile: `${BASE_URL}${fotoMobile.filename}`,
   };
   try {
@@ -51,7 +51,7 @@ const updatePromo = asyncHandler(async (req, res) => {
    nama: req.body.nama,
    detail: req.body.detail,
    syarat: req.body.syarat,
-   fotoDesktop: `${BASE_URL}${fotoMobile.filename}`,
+   fotoDesktop: `${BASE_URL}${fotoDesktop.filename}`,
    fotoMobile: `${BASE_URL}${fotoMobile.filename}`,
  };
   try {
