@@ -7,7 +7,7 @@ import productType from "../../models/produk/productType.js";
 const newCategoryProduct = asyncHandler(async (req, res) => {
   const newCategoryProduct = {
     name: req.body.name,
-    image: req.body.image,
+    image: req.file ? req.file.path : "No Image",
   };
   try {
     const isExist = await kategoriProduct.findOne({
@@ -39,7 +39,7 @@ const editCategoryProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
     name: req.body.name,
-    image: req.body.image,
+    image: req.file ? req.file.path : "No Image",
   };
   try {
     const categoryProduct = await kategoriProduct.findByIdAndUpdate(

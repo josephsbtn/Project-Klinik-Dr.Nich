@@ -7,7 +7,7 @@ import tipeKulit from "../../models/produk/tipeKulit.js";
 
 const newImage = asyncHandler(async (req, res) => {
   const newImage = {
-    image: req.body.image,
+    image: req.file ? req.file.path : "No Image",
   };
   try {
     const isExist = await carouselProducts.findOne({ image: newImage.image });
@@ -43,7 +43,7 @@ const deleteImage = asyncHandler(async (req, res) => {
 const updateImage = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
-    image: req.body.image,
+    image: req.file ? req.file.path : "No Image",
   };
   try {
     const image = await carouselProducts.findByIdAndUpdate(
@@ -62,7 +62,7 @@ const newproduk = asyncHandler(async (req, res) => {
   const newproduk = {
     nama: req.body.nama,
     deskripsi: req.body.deskripsi,
-    foto: req.body.foto,
+    foto: req.file ? req.file.path : "No Image",
     manfaat: req.body.manfaat,
     cara_pakai: req.body.cara_pakai,
     harga: req.body.harga,
@@ -115,7 +115,7 @@ const updateproduk = asyncHandler(async (req, res) => {
   const newData = {
     nama: req.body.nama,
     deskripsi: req.body.deskripsi,
-    foto: req.body.foto,
+    foto: req.file ? req.file.path : "No Image",
     manfaat: req.body.manfaat,
     cara_pakai: req.body.cara_pakai,
     harga: req.body.harga,

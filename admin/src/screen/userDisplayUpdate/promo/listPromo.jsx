@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
@@ -27,6 +27,8 @@ function ListPromo() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
+  const imgaeRef1 = useRef(null)
+  const imgaeRef2 = useRef(null)
 
   const fetchPromo = async () => {
     try {
@@ -77,8 +79,8 @@ function ListPromo() {
           nama: name,
           detail: deskripsi,
           syarat: syarat,
-          fotoDesktop: imageDesktop,
-          fotoMobile: imageMobile,
+          fotoDesktop: imgaeRef1.current.files[0],
+          fotoMobile: imgaeRef2.current.files[0],
         },
         {
           headers: {
@@ -105,8 +107,7 @@ function ListPromo() {
     try {
       setLoading(true);
       await axios.delete(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/deletePromo/${
-          selectedPromo._id
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/deletePromo/${selectedPromo._id
         }`
       );
       setPromo((prev) => prev.filter((item) => item._id !== selectedPromo._id));
@@ -129,20 +130,19 @@ function ListPromo() {
     }
     try {
       setLoading(true);
+      const formData = new FormData();
+      formData.append("nama", editName);
+      formData.append("detail", editDeskripsi);
+      formData.append("syarat", editSyarat);
+      formData.append("fotoDesktop", imgaeRef1.current.files[0]); // File input
+      formData.append("fotoMobile", imgaeRef2.current.files[0]); // File input
       const { data: updatedPromo } = await axios.put(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/updatepromo/${
-          selectedPromo._id
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/updatepromo/${selectedPromo._id
         }`,
-        {
-          nama: editName,
-          detail: editDeskripsi,
-          syarat: editSyarat,
-          fotoDesktop: editimageDesktop,
-          fotoMobile: editimageMobile,
-        },
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -242,6 +242,7 @@ function ListPromo() {
                     Add
                     <input
                       type="file"
+                      ref={imgaeRef1}
                       accept="image/*"
                       className="hidden"
                       onChange={(e) => convertBase64(e, setimageDesktop)}
@@ -278,6 +279,7 @@ function ListPromo() {
                     Add
                     <input
                       type="file"
+                      ref={imgaeRef2}
                       accept="image/*"
                       className="hidden"
                       onChange={(e) => convertBase64(e, setimageMobile)}
@@ -500,31 +502,31 @@ function ListPromo() {
           <div className="grid grid-cols-1 gap-4 w-full max-w-4xl mt-5">
             {promo.length > 0
               ? promo.map((item) => (
-                  <div
-                    key={item._id}
-                    className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
-                    <span className="font-SFPro font-normal text-base text-text">
-                      {item.nama}
-                    </span>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={(e) => handleEdit(item, e)}
-                        className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
-                        Edit
-                      </button>
-                      <button
-                        onClick={(e) => handleDelete(item, e)}
-                        className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
-                        Delete
-                      </button>
-                    </div>
+                <div
+                  key={item._id}
+                  className="flex justify-between h-fit p-4 items-center border border-disable-line rounded-lg shadow-md">
+                  <span className="font-SFPro font-normal text-base text-text">
+                    {item.nama}
+                  </span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={(e) => handleEdit(item, e)}
+                      className="bg-blue-500 text-sm text-white px-4 py-2 rounded-md">
+                      Edit
+                    </button>
+                    <button
+                      onClick={(e) => handleDelete(item, e)}
+                      className="bg-red-500 text-sm text-white px-4 py-2 rounded-md">
+                      Delete
+                    </button>
                   </div>
-                ))
+                </div>
+              ))
               : !error && (
-                  <div className="text-gray-500 mt-8">
-                    No promotions available
-                  </div>
-                )}
+                <div className="text-gray-500 mt-8">
+                  No promotions available
+                </div>
+              )}
           </div>
 
           <div className="absolute right-0 bottom-0 p-4 z-0">

@@ -55,7 +55,7 @@ const editGaleri = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
     judul: req.body.judul,
-    thumbnail: req.body.thumbnail,
+    thumbnail: req.file ? req.file.path : "No Image",
     link: req.body.link,
     channel: req.body.channel,
     sosmed: req.body.sosmed,

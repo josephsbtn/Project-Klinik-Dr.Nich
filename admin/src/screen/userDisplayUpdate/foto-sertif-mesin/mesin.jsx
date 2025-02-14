@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../../../assets/component/navbar";
 import ConfirmPopup from "../../../assets/component/confirmPopUp.jsx";
 import axios from "axios";
@@ -16,6 +16,8 @@ function ListMesin() {
   const [open, setOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState(false);
+  const imageRef = useRef(null)
+  const imageRef2 = useRef(null)
 
   const fetchSertif = async () => {
     try {
@@ -44,21 +46,30 @@ function ListMesin() {
 
   const handleAddContent = async (e) => {
     e.preventDefault();
+  
     try {
+      if (!imageRef.current.files[0]) {
+        toast.error("Please select an image before submitting.");
+        return;
+      }
+  
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append("foto", imageRef.current.files[0]);
+  
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/createMesin`,
-        {
-          foto: image,
-        },
+        formData,
         {
           headers: {
-            "Content-Type": "application/json", // Correct for JSON data
+            "Content-Type": "multipart/form-data", // Required for file uploads
           },
         }
       );
+  
       if (response.status === 200) {
         setOpen(false);
-        fetchSertif();
+        fetchSertif(); // Refresh data
         toast.success("Image added successfully.");
       } else {
         toast.error("Failed to add image. Please try again later.");
@@ -68,6 +79,7 @@ function ListMesin() {
       toast.error("Failed to add image. Please try again later.");
     }
   };
+  
 
   const deleteGaleri = async () => {
     try {
@@ -86,21 +98,33 @@ function ListMesin() {
 
   const editGaleri = async () => {
     try {
+      if (!imageRef2.current.files[0]) {
+        toast.error("Please select an image before updating.");
+        return;
+      }
+  
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append("foto", imageRef2.current.files[0]);
+  
       await axios.put(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/editMesin/${
-          selectedContent._id
-        }`,
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/editMesin/${selectedContent._id}`,
+        formData,
         {
-          foto: editImage,
+          headers: {
+            "Content-Type": "multipart/form-data", // Required for file uploads
+          },
         }
       );
-      fetchSertif();
+  
+      fetchSertif(); // Refresh data
       toast.success("Image updated successfully.");
     } catch (error) {
       console.error("Error editing mesin:", error.message);
       toast.error("Failed to update image. Please try again later.");
     }
   };
+  
 
   const handleEdit = (item, e) => {
     e.preventDefault();
@@ -175,6 +199,7 @@ function ListMesin() {
                   Add
                   <input
                     type="file"
+                    ref={imageRef}
                     accept="image/*"
                     className="hidden"
                     onChange={convertBase64}
@@ -222,6 +247,7 @@ function ListMesin() {
                   Add
                   <input
                     type="file"
+                    ref={imageRef2}
                     accept="image/*"
                     className="hidden"
                     onChange={convertBase64}
