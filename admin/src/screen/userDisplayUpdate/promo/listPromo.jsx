@@ -29,6 +29,8 @@ function ListPromo() {
   const [error, setError] = useState("");
   const imgaeRef1 = useRef(null)
   const imgaeRef2 = useRef(null)
+  const imgaeRef1e = useRef(null)
+  const imgaeRef2e = useRef(null)
 
   const fetchPromo = async () => {
     try {
@@ -131,11 +133,19 @@ function ListPromo() {
     try {
       setLoading(true);
       const formData = new FormData();
+      // formData.append("nama", "nama");
+      // formData.append("detail", "nama");
+      // formData.append("syarat", "nama");
+      // formData.append("fotoDesktop", "nama"); // File input
+      // formData.append("fotoMobile", "nama"); // File input
       formData.append("nama", editName);
       formData.append("detail", editDeskripsi);
       formData.append("syarat", editSyarat);
-      formData.append("fotoDesktop", imgaeRef1.current.files[0]); // File input
-      formData.append("fotoMobile", imgaeRef2.current.files[0]); // File input
+      formData.append("fotoDesktop", imgaeRef1e.current.files[0]); // File input
+      formData.append("fotoMobile", imgaeRef2e.current.files[0]); // File input
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+      }
       const { data: updatedPromo } = await axios.put(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/updatepromo/${selectedPromo._id
         }`,
@@ -143,9 +153,11 @@ function ListPromo() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
+          withCredentials: true,
         }
-      );
+      )
       setPromo((prev) =>
         prev.map((item) =>
           item._id === selectedPromo._id ? { ...item, ...updatedPromo } : item
@@ -376,6 +388,7 @@ function ListPromo() {
                     Add
                     <input
                       type="file"
+                      ref={imgaeRef1e}
                       accept="image/*"
                       className="hidden"
                       onChange={(e) => convertBase64(e, setEditimageDesktop)}
@@ -412,6 +425,7 @@ function ListPromo() {
                     Add
                     <input
                       type="file"
+                      ref={imgaeRef2e}
                       accept="image/*"
                       className="hidden"
                       onChange={(e) => convertBase64(e, setEditimageMobile)}

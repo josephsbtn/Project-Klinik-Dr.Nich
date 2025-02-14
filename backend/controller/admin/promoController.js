@@ -2,22 +2,26 @@ import asyncHandler from "express-async-handler";
 import promoModels from "../../models/promo/promo.js";
 
 const BASE_URL = "https://api.drnich.co.id/uploads/";
+
 const newPromo = asyncHandler(async (req, res) => {
   const fotoDesktop = req.files.fotoDesktop ? req.files.fotoDesktop[0] : null;
   const fotoMobile = req.files.fotoMobile ? req.files.fotoMobile[0] : null;
-  const newPromo = {
+
+  const newPromoData = {
     nama: req.body.nama,
     detail: req.body.detail,
     syarat: req.body.syarat,
-    fotoDesktop: `${BASE_URL}${fotoDesktop.filename}`,
-    fotoMobile: `${BASE_URL}${fotoMobile.filename}`,
+    fotoDesktop: fotoDesktop ? `${BASE_URL}${fotoDesktop.filename}` : null,
+    fotoMobile: fotoMobile ? `${BASE_URL}${fotoMobile.filename}` : null,
   };
+
   try {
-    const isExist = await promoModels.findOne({ nama: newPromo.nama });
+    const isExist = await promoModels.findOne({ nama: newPromoData.nama });
     if (isExist) {
       throw new Error("Promo Sudah Ada");
     }
-    const promo = await promoModels.create(newPromo);
+
+    const promo = await promoModels.create(newPromoData);
     res.send(promo);
   } catch (error) {
     res.status(400).json({ message: error.message });
