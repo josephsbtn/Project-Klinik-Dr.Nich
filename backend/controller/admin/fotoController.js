@@ -2,7 +2,7 @@ import Sertif from "../../models/sertif&mesin/sertif.js";
 import Mesin from "../../models/sertif&mesin/mesin.js";
 import asyncHandler from "express-async-handler";
 
-const BASE_URL = "https://api.drnich.co.id/uploads/";
+const BASE_URL = "https://api.drnich.co.id/";
 const newSertif = asyncHandler(async (req, res) => {
   const newSertif = {
     foto: req.file ? `${BASE_URL}${req.file.path}` : "No Image",

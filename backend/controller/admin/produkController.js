@@ -4,7 +4,7 @@ import carouselProducts from "../../models/produk/carouselProducts.js";
 import tipeKulit from "../../models/produk/tipeKulit.js";
 
 /*CAROUSEL PRODUCT*/
-const BASE_URL = "https://api.drnich.co.id/uploads/";
+const BASE_URL = "https://api.drnich.co.id/";
 const newImage = asyncHandler(async (req, res) => {
   const newImage = {
     image: req.file ? `${BASE_URL}${req.file.path}` : "No Image",

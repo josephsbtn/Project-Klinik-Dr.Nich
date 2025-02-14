@@ -3,7 +3,7 @@ import kategoriProduct from "../../models/produk/kategoriProduct.js";
 import productType from "../../models/produk/productType.js";
 
 //PRODUCT CATEGORY HANDLER
-const BASE_URL = "https://api.drnich.co.id/uploads/";
+const BASE_URL = "https://api.drnich.co.id/";
 const newCategoryProduct = asyncHandler(async (req, res) => {
   const newCategoryProduct = {
     name: req.body.name,

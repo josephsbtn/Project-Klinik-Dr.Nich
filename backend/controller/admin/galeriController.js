@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Galeri from "../../models/Gallery/galery.js";
 
-const BASE_URL = "https://api.drnich.co.id/uploads/";
+const BASE_URL = "https://api.drnich.co.id/";
 const newGaleri = asyncHandler(async (req, res) => {
   const newGaleri = {
     judul: req.body.judul,
