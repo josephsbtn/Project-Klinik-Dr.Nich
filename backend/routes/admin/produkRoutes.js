@@ -47,14 +47,14 @@ router.delete("/deleteImage/:id", protect([1, 4]), deleteImage);
 //PRODUCT
 router.post(
   "/tambahproduk",
-  upload.single("image"),
+  upload.single("foto"),
   protect([1, 4]),
   newproduk
 );
 router.get("/getAllProduk", getproduk);
 router.put(
   "/updateproduk/:id",
-  upload.single("image"),
+  upload.single("foto"),
   protect([1, 4]),
   updateproduk
 );

@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post(
   "/createGaleri",
-  upload.single("image"),
+  upload.single("thumbnail"),
   protect([1, 4]),
   newGaleri
 );
@@ -20,7 +20,7 @@ router.get("/getAllGaleri", getGaleri);
 router.get("/getGaleriById/:id", getGaleriById);
 router.put(
   "/editGaleri/:id",
-  upload.single("image"),
+  upload.single("thumbnail"),
   protect([1, 4]),
   editGaleri
 );
