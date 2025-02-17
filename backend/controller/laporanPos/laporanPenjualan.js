@@ -277,5 +277,6 @@ catch(error){
 
 export {
  laporanPenjualan,
+ laporanPenjualanProduk,
  laporanBelanja
 };
