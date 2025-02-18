@@ -139,7 +139,11 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
     path : 'transaksiDetail', 
     populate : {
       path:'produk',
-      model:'produkPos'
+      model:'produkPos',
+      populate: {
+        path: 'kategori',
+        model: 'kategoriProdukPos'
+      }
     }
   });
   let produklist = [];
@@ -150,6 +154,16 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
       
       if(produklist.some(item => item.namaProduk == citem.produk.namaProduk)){
        produklist = produklist.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
+      if(kategorilist.some(item => item.kategori == citem.produk.kategori)){
+        kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
+      }
+      else{
+        const isi = {
+          kategori : citem.produk.kategori.kategori,
+          jumlah : citem.jumlah
+        }
+        kategorilist.push(isi)
+      }
       }
       else{
         const isi = {
@@ -157,6 +171,16 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
           jumlah : citem.jumlah
         }
         produklist.push(isi)
+        if(kategorilist.some(item => item.kategori == citem.produk.kategori)){
+          kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
+        }
+        else{
+          const isi = {
+            kategori : citem.produk.kategori.kategori,
+            jumlah : citem.jumlah
+          }
+          kategorilist.push(isi)
+        }
       }
       
     }
