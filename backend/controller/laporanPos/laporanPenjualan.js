@@ -275,8 +275,28 @@ catch(error){
 
 });
 
+const laporanPersediaan = asyncHandler(async(req,res)=>{
+  const {id} = req.params;
+  try{
+  const produks = await ProdukModels.find({kategori : id});
+  let produkRes = [];
+  for (const item of produks){
+    const res = {
+      namaProduk : item.namaProduk,
+      stok : item.stok
+    }
+    produkRes.push(res)
+  }
+  res.status(200).json({produkRes})
+}
+catch(error){
+  res.status(400).json({ message: error.message });
+}
+
+});
 export {
  laporanPenjualan,
  laporanPenjualanProduk,
- laporanBelanja
+ laporanBelanja,
+ laporanPersediaan
 };
