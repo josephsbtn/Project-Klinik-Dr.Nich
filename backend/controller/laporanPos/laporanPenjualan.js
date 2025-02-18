@@ -154,7 +154,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
       
       if(produklist.some(item => item.namaProduk == citem.produk.namaProduk)){
        produklist = produklist.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
-      if(kategorilist.some(item => item.kategori == citem.produk.kategori)){
+      if(kategorilist.some(item => item.kategori == citem.produk.kategori.kategori)){
         kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
       }
       else{
@@ -171,7 +171,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
           jumlah : citem.jumlah
         }
         produklist.push(isi)
-        if(kategorilist.some(item => item.kategori == citem.produk.kategori)){
+        if(kategorilist.some(item => item.kategori == citem.produk.kategori.kategori)){
           kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
         }
         else{
