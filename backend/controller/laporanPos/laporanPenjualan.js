@@ -294,9 +294,35 @@ catch(error){
 }
 
 });
+
+const laporanLimit = asyncHandler(async(req,res)=>{
+  try{
+  const produks = await ProdukModels.find();
+  let produkRes = [];
+  for (const item of produks){
+    if(item.stok<item.minStok){
+      const res = {
+        namaProduk : item.namaProduk,
+        stok : item.stok,
+        minStok : item.minStok
+      }
+      produkRes.push(res)
+    }
+    
+  }
+  res.status(200).json(produkRes)
+}
+catch(error){
+  res.status(400).json({ message: error.message });
+}
+
+});
+
+
 export {
  laporanPenjualan,
  laporanPenjualanProduk,
  laporanBelanja,
- laporanPersediaan
+ laporanPersediaan,
+ laporanLimit
 };
