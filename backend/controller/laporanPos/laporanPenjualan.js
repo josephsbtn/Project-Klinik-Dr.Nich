@@ -149,7 +149,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
     for(const citem of det){
       
       if(produklist.some(item => item.namaProduk == citem.produk.namaProduk)){
-       produklist.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
+       produklist = produklist.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
       }
       else{
         const isi = {
