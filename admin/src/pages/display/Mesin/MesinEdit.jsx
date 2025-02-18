@@ -1,22 +1,26 @@
 import { useRef, useState } from "react";
-import { AiFillPlusCircle, AiOutlineSearch } from "react-icons/ai";
 import { useContext, useEffect } from "react";
 import { navContext } from "../../../App2";
-import gserti from "../../../assets/iconDisplay/Sertifikat/gserti.svg";
-
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
-export const DisplaySertifikat = () => {
-  const { setNav, setLink } = useContext(navContext);
+export const MesinEdit = () => {
+    const {id} = useParams()
+    const { setNav, setLink } = useContext(navContext);
   const navigate = useNavigate();
   const imageRef = useRef(null);
   const [gambarname, setGambarName] = useState("");
   const [gambar, setgambar] = useState(null);
 
   useEffect(() => {
-    setNav("Tambah Sertifikat");
+    const fachingData = async() => {
+        await axios.get(`${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/getmesinbyid/${id}`).then(
+          (response)=>setgambar(response.data.foto)
+        )
+      }
+      fachingData()
+    setNav("Ubah Mesin");
   }, []);
 
   const handleImg = (e) => {
@@ -35,7 +39,7 @@ export const DisplaySertifikat = () => {
     setGambarName(fileImage.name);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const fdata = new FormData();
     if (imageRef.current.files.length > 0) {
@@ -46,8 +50,10 @@ export const DisplaySertifikat = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/foto/createSertif`,
+      const response = await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/foto//editSertif/:id`,
         fdata,
         {
           headers: {
@@ -59,24 +65,24 @@ export const DisplaySertifikat = () => {
       );
 
       if (response.status === 200) {
-        toast.success("Berhasil menambahkan Sertifikat");
+        toast.success("Berhasil Memperbarui Mesin");
         setTimeout(() => {
-          navigate("/pos/sertifikat");
+          navigate("/pos/Mesin");
         }, 3000);
       }
     } catch (error) {
       console.error(
         error.response?.data?.message ||
-          "Gagal menambahkan Sertifikat, coba lagi!"
+          "Gagal menambahkan Mesin, coba lagi!"
       );
       toast.error(
         error.response?.data?.message ||
-          "Gagal menambahkan Sertifikat, coba lagi!"
+          "Gagal menambahkan Mesin, coba lagi!"
       );
     }
   };
 
-  document.title = "Tambah Sertifikat";
+  document.title = "Ubah Mesin";
   const [supstat, setsupstat] = useState(false);
   return (
     <form
@@ -87,7 +93,7 @@ export const DisplaySertifikat = () => {
       <div className="flex flex-col gap-1 px-3 flex-grow">
         <div className="flex flex-col gap-2">
           <label className="text-start text-[#454545] text-[12px]">
-            Upload foto sertikat
+            Upload foto Mesin
           </label>
           <div className="flex gap-6">
             <img
@@ -133,6 +139,5 @@ export const DisplaySertifikat = () => {
       </div>
     </form>
   );
-};
+}
 
-export default DisplaySertifikat;
