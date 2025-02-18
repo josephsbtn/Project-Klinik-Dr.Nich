@@ -134,7 +134,14 @@ catch(error){
 
 const laporanTerlaris = asyncHandler(async(req,res)=>{
   try{
-  const transaksi = await TransaksiModels.find();
+  const transaksi = await TransaksiModels.find()
+  .populate({
+    path : 'transaksiDetail', 
+    populate : {
+      path:'produk',
+      model:'produkPos'
+    }
+  });
   let produklist = [];
   let kategorilist = [];
   for (const item of transaksi){
