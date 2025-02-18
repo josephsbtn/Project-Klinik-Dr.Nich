@@ -153,14 +153,15 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
     for(const citem of det){
       
       if(produklist.some(item => item.namaProduk == citem.produk.namaProduk)){
-       produklist = produklist.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah}: item) 
+       produklist = produklist.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah, pendapatan: item.pendapatan + (citem.jumlah*citem.produk.hargaJual)}: item) 
       if(kategorilist.some(item => item.kategori == citem.produk.kategori.kategori)){
-        kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+(citem.jumlah*citem.produk.hargaJual)}: item) 
+        kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+citem.jumlah, pendapatan: item.pendapatan + (citem.jumlah*citem.produk.hargaJual)}: item) 
       }
       else{
         const isi = {
           kategori : citem.produk.kategori.kategori,
-          jumlah : (citem.jumlah*citem.produk.hargaJual)
+          jumlah : citem.jumlah,
+          pendapatan : (citem.jumlah*citem.produk.hargaJual)
         }
         kategorilist.push(isi)
       }
@@ -168,16 +169,18 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
       else{
         const isi = {
           namaProduk : citem.produk.namaProduk,
-          jumlah : citem.jumlah
+          jumlah : citem.jumlah,
+          pendapatan : (citem.jumlah*citem.produk.hargaJual)
         }
         produklist.push(isi)
         if(kategorilist.some(item => item.kategori == citem.produk.kategori.kategori)){
-          kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+(citem.jumlah*citem.produk.hargaJual)}: item) 
+          kategorilist = kategorilist.map(item=>item.kategori == citem.produk.kategori.kategori ? {...item, jumlah: item.jumlah+citem.jumlah, pendapatan: item.pendapatan + (citem.jumlah*citem.produk.hargaJual)}: item) 
         }
         else{
           const isi = {
             kategori : citem.produk.kategori.kategori,
-            jumlah : (citem.jumlah*citem.produk.hargaJual)
+            jumlah : citem.jumlah,
+            pendapatan : (citem.jumlah*citem.produk.hargaJual)
           }
           kategorilist.push(isi)
         }
