@@ -1,12 +1,10 @@
 import { useRef, useState } from "react";
-import { AiFillPlusCircle, AiOutlineSearch } from "react-icons/ai";
 import { useContext, useEffect } from "react";
 import { navContext } from "../../../../App2";
-
 import gkt from "../../../../assets/iconDisplay/produk/gkt.svg";
-// import gkt from "../../../../assets/iconDisplay/produk/gkt.svg";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 export const UpdateKategori = () => {
   const { setNav, setLink } = useContext(navContext);
@@ -34,7 +32,7 @@ export const UpdateKategori = () => {
       }
     };
     FetchData();
-
+    setLink('/pos/produk')
     setNav("Ubah Kategori Produk");
   }, []);
 
@@ -74,10 +72,10 @@ export const UpdateKategori = () => {
     }
 
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${
           import.meta.env.VITE_BASE_URL_BACKEND
-        }/api/produk/tambahkategoriProduk`,
+        }/api/produk/editkategoriProduk/`+ id,
         fdata,
         {
           headers: {
@@ -89,7 +87,7 @@ export const UpdateKategori = () => {
       );
 
       if (response.status === 200) {
-        toast.success("Berhasil menambahkan kategori treatment");
+        toast.success("Berhasil memperbarui kategori treatment");
         setTimeout(() => {
           navigate("/pos/kategoriproduk2");
         }, 3000);
@@ -115,6 +113,7 @@ export const UpdateKategori = () => {
     >
       {/* Konten Utama */}
       <div className="flex flex-col gap-4 px-3">
+        <ToastContainer/>
         <div className="flex flex-col">
           <label className="text-start text-[#454545] text-[12px]">
             Upload Foto
@@ -151,7 +150,7 @@ export const UpdateKategori = () => {
           Nama Kategori
         </label>
         <input
-          value={nama}
+          defaultValue={nama}
           ref={namaKategoriRef}
           type="text"
           placeholder="Contoh : Facial fals"

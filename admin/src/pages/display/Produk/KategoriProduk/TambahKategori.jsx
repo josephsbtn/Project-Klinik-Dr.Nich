@@ -7,6 +7,7 @@ import gkt from "../../../../assets/iconDisplay/produk/gkt.svg?url";
 // import gkt from "../../../../assets/iconDisplay/produk/gkt.svg?url";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 export const TambahKategori = () => {
   const { setNav, setLink } = useContext(navContext);
@@ -96,8 +97,8 @@ export const TambahKategori = () => {
       className="flex flex-col justify-between px-0 py-3 gap-1 bg-white w-full min-h-screen"
       onSubmit={handleSubmit}
     >
-      {/* Konten Utama */}
       <div className="flex flex-col gap-4 px-3">
+      <ToastContainer/>
         <div className="flex flex-col">
           <label className="text-start text-[#454545] text-[12px]">
             Upload Foto
@@ -114,7 +115,6 @@ export const TambahKategori = () => {
               ) : (
                 <p className="text-[#454545] mb-3">{gambarname}</p>
               )}
-
               <div className="flex justify-star text-[#C2A353] pt-2 mb-2">
                 <input
                   onChange={handleGambar}
@@ -141,6 +141,7 @@ export const TambahKategori = () => {
         />
       </div>
       {/* Tombol Simpan */}
+      
       <button
         disabled={!gambarx}
         type="submit"
@@ -154,6 +155,7 @@ export const TambahKategori = () => {
       >
         Simpan
       </button>
+      
     </form>
   );
 };
