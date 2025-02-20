@@ -315,8 +315,8 @@ const laporanGrafikProduk = async (req, res) => {
               const det = transaction.transaksiDetail;
     for(const citem of det){
       
-      if(day.penjualan.some(item => item.namaProduk == citem.produk.namaProduk)){
-       day.penjualan = day.penjualan.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah, pendapatan: item.pendapatan + (citem.jumlah*citem.produk.hargaJual)}: item) 
+      if(dayData.penjualan.some(item => item.namaProduk == citem.produk.namaProduk)){
+       dayData.penjualan = dayData.penjualan.map(item=>item.namaProduk == citem.produk.namaProduk ? {...item, jumlah: item.jumlah+citem.jumlah, pendapatan: item.pendapatan + (citem.jumlah*citem.produk.hargaJual)}: item) 
       }
       else{
         const isi = {
@@ -324,7 +324,7 @@ const laporanGrafikProduk = async (req, res) => {
           jumlah : citem.jumlah,
           pendapatan : (citem.jumlah*citem.produk.hargaJual)
         }
-        day.penjualan.push(isi)
+        dayData.penjualan.push(isi)
       }
     }
 
