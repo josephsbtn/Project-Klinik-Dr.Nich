@@ -61,16 +61,6 @@ const getSertifbyID = asyncHandler(async (req, res) => {
   }
 });
 
-const getMesinbyID = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  try {
-    const mesin = await Mesin.findById(id);
-    res.send(mesin);
-  } catch (error) {
-    res.status(400).json({ message: "Gagal mengambil data" + error.message });
-  }
-});
-
 const newMesin = asyncHandler(async (req, res) => {
   const newMesin = {
     foto: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
@@ -131,5 +121,4 @@ export {
   editMesin,
   getMesin,
   getSertifbyID,
-  getMesinbyID,
 };
