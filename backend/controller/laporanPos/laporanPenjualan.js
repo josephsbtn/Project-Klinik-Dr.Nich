@@ -219,7 +219,7 @@ const laporanGrafik = async (req, res) => {
 
       // Compute the end of the week
       const endOfWeek = new Date(startDate);
-      endOfWeek.setDate(startDate.getDate() + 6); // 6 days ahead to complete the week
+      endOfWeek.setDate(startDate.getDate() - 6); // 6 days ahead to complete the week
       endOfWeek.setHours(23, 59, 59, 999);
 
       // Fetch transactions within the given range
