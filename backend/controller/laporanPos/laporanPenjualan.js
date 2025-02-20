@@ -241,7 +241,7 @@ const laporanGrafik = async (req, res) => {
           const total = transactionsByDay[adjustedDayName].total;
           const plus = transaction.totalAkhir;
           const newTotal  = total + plus
-          transactionsByDay[adjustedDayName].push({total: newTotal});
+          transactionsByDay[adjustedDayName].total= newTotal;
       });
 
       res.json({ success: true, transactions: transactionsByDay });
