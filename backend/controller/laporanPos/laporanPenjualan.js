@@ -227,7 +227,7 @@ const laporanGrafik = async (req, res) => {
           createdAt: { $gte: startDate, $lte: endOfWeek }
       });
 
-      // Initialize the week structure
+      // Initialize the week structure as an ARRAY
       const transactionsByDay = orderedWeekDays.map(day => ({ name: day, penjualan: 0 }));
 
       // Group transactions by day
@@ -237,11 +237,12 @@ const laporanGrafik = async (req, res) => {
           
           // Adjust day name to match the custom order
           const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
-          const total = transactionsByDay[adjustedDayName].penjualan;
-          const plus = transaction.totalAkhir;
-          const newTotal  = total + plus
-          transactionsByDay[adjustedDayName].penjualan= newTotal;
-          transactionsByDay[adjustedDayName].name= adjustedDayName;
+
+          // Find the correct day in the array and update "penjualan"
+          const dayData = transactionsByDay.find(day => day.name === adjustedDayName);
+          if (dayData) {
+              dayData.penjualan += transaction.totalAkhir;
+          }
       });
 
       res.json({ success: true, transactions: transactionsByDay });
@@ -249,6 +250,7 @@ const laporanGrafik = async (req, res) => {
       res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 
 
