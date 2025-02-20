@@ -328,7 +328,7 @@ const laporanGrafikProduk = async (req, res) => {
                   const existproduklist = produklist.find(item => item.namaProduk == citem.produk.namaProduk);
                   if(!existproduklist){
                     produklist.push({
-                      namaProduk : citem.namaProduk
+                      namaProduk : citem.produk.namaProduk
                     })}
                 
               } else {
@@ -340,7 +340,7 @@ const laporanGrafikProduk = async (req, res) => {
                   const existproduklist = produklist.find(item => item.namaProduk == citem.produk.namaProduk);
                   if(!existproduklist){
                     produklist.push({
-                      namaProduk : citem.namaProduk
+                      namaProduk : citem.produk.namaProduk
                     })}
               }
           }
