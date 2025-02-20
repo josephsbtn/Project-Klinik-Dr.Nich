@@ -238,7 +238,7 @@ const laporanGrafik = async (req, res) => {
           
           // Adjust day name to match the custom order
           const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
-          const total = transactionsByDay[adjustedDayName].total;
+          const total = transactionsByDay[adjustedDayName].penjualan;
           const plus = transaction.totalAkhir;
           const newTotal  = total + plus
           transactionsByDay[transactionDayIndex].penjualan= newTotal;
