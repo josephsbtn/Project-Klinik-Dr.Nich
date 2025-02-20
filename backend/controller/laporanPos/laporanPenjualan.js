@@ -337,7 +337,7 @@ const laporanGrafikProduk = async (req, res) => {
 
       // Konversi Map kembali ke array
       // res.json({ success: true, penjualan: Array.from(transactionsByDay.values()) });
-      res.json({ success: true, penjualan: transactions });
+      res.json({ success: true, penjualan: transactionsByDay });
   } catch (error) {
       res.status(500).json({ success: false, message: error.message });
   }
