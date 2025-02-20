@@ -200,16 +200,24 @@ catch(error){
 
 const laporanGrafik = async (req, res) => {
   try {
-      const { startOfWeek } = req.body; // Only provide startOfWeek
+      const { endOfWeek } = req.body; // Only provide endOfWeek
 
-      if (!startOfWeek) {
-          return res.status(400).json({ success: false, message: "startOfWeek is required" });
+      if (!endOfWeek) {
+          return res.status(400).json({ success: false, message: "endOfWeek is required" });
       }
 
       const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
 
-      // Detect the start day from startOfWeek
-      const startDate = new Date(startOfWeek);
+      // Convert endOfWeek to Date object
+      const endDate = new Date(endOfWeek);
+      endDate.setHours(23, 59, 59, 999); // Ensure it's the end of the day
+
+      // Compute startOfWeek by subtracting 6 days
+      const startDate = new Date(endDate);
+      startDate.setDate(endDate.getDate() - 6);
+      startDate.setHours(0, 0, 0, 0); // Ensure it's the start of the day
+
+      // Detect the start day from startDate
       const detectedDayIndex = startDate.getDay(); // 0 (Sunday) to 6 (Saturday)
       const detectedStartDay = detectedDayIndex === 0 ? "Minggu" : weekDays[detectedDayIndex - 1];
 
@@ -217,14 +225,9 @@ const laporanGrafik = async (req, res) => {
       const startIndex = weekDays.indexOf(detectedStartDay);
       const orderedWeekDays = [...weekDays.slice(startIndex), ...weekDays.slice(0, startIndex)];
 
-      // Compute the end of the week
-      const endOfWeek = new Date(startDate);
-      endOfWeek.setDate(startDate.getDate() - 6); // 6 days ahead to complete the week
-      endOfWeek.setHours(23, 59, 59, 999);
-
       // Fetch transactions within the given range
       const transactions = await TransaksiModels.find({
-          createdAt: { $gte: startDate, $lte: endOfWeek }
+          createdAt: { $gte: startDate, $lte: endDate }
       });
 
       // Initialize the week structure as an ARRAY
@@ -250,6 +253,7 @@ const laporanGrafik = async (req, res) => {
       res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 
 
