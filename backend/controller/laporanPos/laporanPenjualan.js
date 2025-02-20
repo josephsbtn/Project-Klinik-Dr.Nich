@@ -307,7 +307,7 @@ const laporanGrafikProduk = async (req, res) => {
       // Struktur data menggunakan Map untuk akses cepat
       const transactionsByDay = new Map();
       orderedWeekDays.forEach(day => transactionsByDay.set(day, { name: day, penjualan: [] }));
-
+      let produklist = []
       // Kelompokkan transaksi berdasarkan hari
       transactions.forEach(transaction => {
           const transactionDate = new Date(transaction.createdAt);
@@ -325,18 +325,29 @@ const laporanGrafikProduk = async (req, res) => {
               if (existingProduct) {
                   existingProduct.jumlah += citem.jumlah;
                   existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+                  const existproduklist = produklist.find(item => item.namaProduk == citem.produk.namaProduk);
+                  if(!existproduklist){
+                    produklist.push({
+                      namaProduk : citem.namaProduk
+                    })}
+                
               } else {
                   dayData.penjualan.push({
                       namaProduk: citem.produk.namaProduk,
                       jumlah: citem.jumlah,
                       pendapatan: citem.jumlah * citem.produk.hargaJual
                   });
+                  const existproduklist = produklist.find(item => item.namaProduk == citem.produk.namaProduk);
+                  if(!existproduklist){
+                    produklist.push({
+                      namaProduk : citem.namaProduk
+                    })}
               }
           }
       });
 
       // Konversi Map kembali ke array
-      res.json({ success: true, penjualan: Array.from(transactionsByDay.values()) });
+      res.json({ success: true, penjualan: Array.from(transactionsByDay.values()), produklist: produklist });
   } catch (error) {
       res.status(500).json({ success: false, message: error.message });
   }
