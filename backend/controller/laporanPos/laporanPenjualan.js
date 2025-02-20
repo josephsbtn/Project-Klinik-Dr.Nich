@@ -241,7 +241,7 @@ const laporanGrafik = async (req, res) => {
           const total = transactionsByDay[adjustedDayName].total;
           const plus = transaction.totalAkhir;
           const newTotal  = total + plus
-          transactionsByDay[transactionDayIndex].total= newTotal;
+          transactionsByDay[transactionDayIndex].penjualan= newTotal;
           transactionsByDay[transactionDayIndex].name= adjustedDayName;
       });
 
