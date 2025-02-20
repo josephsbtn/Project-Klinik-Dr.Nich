@@ -229,7 +229,7 @@ const laporanGrafik = async (req, res) => {
 
       // Initialize the week structure
       const transactionsByDay = {};
-      orderedWeekDays.forEach(day => transactionsByDay[day] = [{total:0}]);
+      orderedWeekDays.forEach(day => transactionsByDay[day] = {total:0});
 
       // Group transactions by day
       transactions.forEach(transaction => {
