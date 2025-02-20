@@ -296,7 +296,13 @@ const laporanGrafikProduk = async (req, res) => {
       // Ambil transaksi dalam rentang tanggal yang diberikan
       const transactions = await TransaksiModels.find({
           createdAt: { $gte: startDate, $lte: endDate }
-      }).populate("transaksiDetail.produk");
+      }).populate({
+        path : 'transaksiDetail', 
+        populate : {
+          path:'produk',
+          model:'produkPos'
+        }
+      });
 
       // Struktur data menggunakan Map untuk akses cepat
       const transactionsByDay = new Map();
