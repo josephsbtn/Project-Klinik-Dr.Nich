@@ -49,13 +49,25 @@ const laporanPenjualanProduk = asyncHandler(async(req,res)=>{
     }
   });
   let totalProduk = 0;
+  let produklist = [];
   for (const item of penjualan){
     for (const items of item.transaksiDetail){
       totalProduk += items.jumlah;
+      if(produklist.some(item => item.namaProduk == items.produk.namaProduk)){
+        produklist = produklist.map(item=>item.namaProduk == items.produk.namaProduk ? {...item, jumlah: item.jumlah+items.jumlah, pendapatan: item.pendapatan + (items.jumlah*items.produk.hargaJual)}: item) 
+       }
+       else{
+         const isi = {
+           namaProduk : items.produk.namaProduk,
+           jumlah : items.jumlah,
+           pendapatan : (items.jumlah*items.produk.hargaJual)
+         }
+         produklist.push(isi)
+       }
     }
   }
   
-  res.status(200).json({totalProduk: totalProduk})
+  res.status(200).json({totalProduk: totalProduk, penjualanProduk: produklist})
 }
 catch(error){
   res.status(400).json({ message: error.message });
