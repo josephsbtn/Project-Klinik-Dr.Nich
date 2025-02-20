@@ -229,7 +229,7 @@ const laporanGrafik = async (req, res) => {
 
       // Initialize the week structure
       const transactionsByDay = {};
-      orderedWeekDays.forEach(day => transactionsByDay[day] = []);
+      orderedWeekDays.forEach(day => transactionsByDay[day] = [{total:0}]);
 
       // Group transactions by day
       transactions.forEach(transaction => {
@@ -238,7 +238,10 @@ const laporanGrafik = async (req, res) => {
           
           // Adjust day name to match the custom order
           const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
-          transactionsByDay[adjustedDayName].push(transaction);
+          const total = transactionsByDay[adjustedDayName].total;
+          const plus = transaction.totalAkhir;
+          const newTotal  = total + plus
+          transactionsByDay[adjustedDayName].push({total: newTotal});
       });
 
       res.json({ success: true, transactions: transactionsByDay });
