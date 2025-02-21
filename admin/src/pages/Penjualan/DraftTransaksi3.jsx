@@ -17,6 +17,8 @@ export const DraftTransaksi3 = () => {
             )
         }
         fetch()
+        setNav('Detail Draft Transaksi')
+        setLink('/pos/draftTransaksi2') 
     },[])
 
     const handleBuy = (e) => {
@@ -35,7 +37,7 @@ export const DraftTransaksi3 = () => {
     useEffect(()=>{
         console.log(transaksi.status)
     },[transaksi.status])
-setNav('Detail')   
+  
 document.title = 'Detail'
 return (
     <div className='flex flex-col px-5 py-8 gap-1 bg-white w-full h-full pt-8 text-[#454545] text-[12px]'>
