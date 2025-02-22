@@ -401,7 +401,7 @@ const laporanLogProduk = async (req, res) => {
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
             jumlah: citem.jumlah,
-            waktu: transaction.updateAt,
+            waktu: transaction.updatedAt,
             jenis : 'transaksi',
             id : transaction._id
           })
@@ -430,7 +430,7 @@ const laporanLogProduk = async (req, res) => {
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
             jumlah: citem.jumlah,
-            waktu: beli.updateAt,
+            waktu: beli.updatedAt,
             jenis : 'belanja',
             id : belanja._id
           })
@@ -451,7 +451,7 @@ const laporanLogProduk = async (req, res) => {
           logProduk.push({
             namaProduk: beli.produk.namaProduk,
             jumlah: beli.jumlah,
-            waktu: kurangStok.updateAt,
+            waktu: kurangStok.updatedAt,
             jenis : 'minStok',
             id : beli._id
           })
