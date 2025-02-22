@@ -461,7 +461,7 @@ const laporanLogProduk = async (req, res) => {
 
       
     });
-    logProduk = logProduk.sort((a, b) => new Date(b.waktu) - new Date(a.waktu));
+    logProduk = logProduk.sort((a, b) => new Date(a.waktu) - new Date(b.waktu));
 
 
     // Konversi Map kembali ke array
