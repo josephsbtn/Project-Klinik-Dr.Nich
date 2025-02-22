@@ -443,7 +443,7 @@ const laporanLogProduk = async (req, res) => {
       }
     });
 
-    const kurangStok = kurangStokModels.find()
+    const kurangStok = kurangStokModels.find().populate('produk')
 
     kurangStok.length>0 && kurangStok.forEach(beli => {
 
