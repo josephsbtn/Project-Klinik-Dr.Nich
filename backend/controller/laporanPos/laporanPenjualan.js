@@ -176,6 +176,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
       },
       populate: {
         path: 'jenis',
+        model: 'jenisProdukPos'
       }
     }
   });
