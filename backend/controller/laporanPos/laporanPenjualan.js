@@ -173,9 +173,6 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
       populate: {
         path: 'kategori',
         model: 'kategoriProdukPos'
-      },
-      populate: {
-        path: 'jenis',
       }
     }
   });
@@ -194,8 +191,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
         const isi = {
           kategori : citem.produk.kategori.kategori,
           jumlah : citem.jumlah,
-          pendapatan : (citem.jumlah*citem.produk.hargaJual),
-          jenis : citem.produk.jenis
+          pendapatan : (citem.jumlah*citem.produk.hargaJual)
         }
         kategorilist.push(isi)
       }
@@ -204,8 +200,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
         const isi = {
           namaProduk : citem.produk.namaProduk,
           jumlah : citem.jumlah,
-          pendapatan : (citem.jumlah*citem.produk.hargaJual),
-          jenis : citem.produk.jenis
+          pendapatan : (citem.jumlah*citem.produk.hargaJual)
         }
         produklist.push(isi)
         if(kategorilist.some(item => item.kategori == citem.produk.kategori.kategori)){
@@ -215,8 +210,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
           const isi = {
             kategori : citem.produk.kategori.kategori,
             jumlah : citem.jumlah,
-            pendapatan : (citem.jumlah*citem.produk.hargaJual),
-            jenis : citem.produk.jenis
+            pendapatan : (citem.jumlah*citem.produk.hargaJual)
           }
           kategorilist.push(isi)
         }
