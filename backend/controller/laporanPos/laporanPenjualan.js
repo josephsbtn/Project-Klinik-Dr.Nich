@@ -395,9 +395,8 @@ const laporanLogProduk = async (req, res) => {
 
       const det = transaction.transaksiDetail;
       for (const citem of det) {
-        const existingProduct = citem.find(item => item.produk._id == id);
 
-        if (existingProduct) {
+        if (citem.produk._id == id) {
 
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
@@ -425,9 +424,7 @@ const laporanLogProduk = async (req, res) => {
 
       const det = beli.belanjaDetail;
       for (const citem of det) {
-        const existingProduct = citem.find(item => item.produk._id == id);
-
-        if (existingProduct) {
+        if (citem.produk._id == id) {
 
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
@@ -447,9 +444,7 @@ const laporanLogProduk = async (req, res) => {
     kurangStok.forEach(beli => {
 
       
-        const existingProduct = beli.find(item => item.produk._id == id);
-
-        if (existingProduct) {
+      if (beli.produk._id == id) {
 
           logProduk.push({
             namaProduk: beli.produk.namaProduk,
