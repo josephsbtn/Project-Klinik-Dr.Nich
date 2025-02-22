@@ -381,6 +381,8 @@ const laporanGrafikProduk = async (req, res) => {
 const laporanLogProduk = async (req, res) => {
   try {
     const { id } = req.params;
+    const produk = await ProdukModels.findById(id)
+    const namaPerusahaan = produk.supplier.namaPerusahaan
     let logProduk = []
     const transactions = await TransaksiModels.find().populate({
       path: 'transaksiDetail',
@@ -465,7 +467,7 @@ const laporanLogProduk = async (req, res) => {
 
 
     // Konversi Map kembali ke array
-    res.json({ success: true, logProduk: logProduk });
+    res.json({ success: true, logProduk: logProduk, supplier : namaPerusahaan });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
