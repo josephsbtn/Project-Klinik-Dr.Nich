@@ -391,7 +391,7 @@ const laporanLogProduk = async (req, res) => {
     });
     
     // Kelompokkan transaksi berdasarkan hari
-    transactions.forEach(transaction => {
+    transactions.length>0 && transactions.forEach(transaction => {
 
       const det = transaction.transaksiDetail;
       for (const citem of det) {
