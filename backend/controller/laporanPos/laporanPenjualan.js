@@ -192,6 +192,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
           kategori : citem.produk.kategori.kategori,
           jumlah : citem.jumlah,
           pendapatan : (citem.jumlah*citem.produk.hargaJual),
+          jenis: citem.produk.jenis.jenis
         }
         kategorilist.push(isi)
       }
@@ -201,6 +202,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
           namaProduk : citem.produk.namaProduk,
           jumlah : citem.jumlah,
           pendapatan : (citem.jumlah*citem.produk.hargaJual),
+          jenis: citem.produk.jenis.jenis
         }
         produklist.push(isi)
         if(kategorilist.some(item => item.kategori == citem.produk.kategori.kategori)){
@@ -211,6 +213,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
             kategori : citem.produk.kategori.kategori,
             jumlah : citem.jumlah,
             pendapatan : (citem.jumlah*citem.produk.hargaJual),
+            jenis: citem.produk.jenis.jenis
           }
           kategorilist.push(isi)
         }
