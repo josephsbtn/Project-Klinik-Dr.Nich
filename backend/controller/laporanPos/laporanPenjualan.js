@@ -146,6 +146,7 @@ const laporanLimit = asyncHandler(async(req,res)=>{
   for (const item of produks){
     if(item.stok<item.minStok){
       const res = {
+        id : item.id,
         namaProduk : item.namaProduk,
         stok : item.stok,
         minStok : item.minStok
