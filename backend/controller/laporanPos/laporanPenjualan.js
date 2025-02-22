@@ -406,6 +406,12 @@ const laporanLogProduk = async (req, res) => {
           })
 
         } else {
+          logProduk.push({
+            namaProduk: citem.produk.namaProduk,
+            status: 'minus',
+            jumlah: citem.jumlah,
+            waktu: transaction.updateAt
+          })
         }
 
       }
@@ -434,6 +440,12 @@ const laporanLogProduk = async (req, res) => {
           })
 
         } else {
+          logProduk.push({
+            namaProduk: citem.produk.namaProduk,
+            status: 'plus',
+            jumlah: citem.jumlah,
+            waktu: beli.updateAt
+          })
         }
 
       }
@@ -454,6 +466,12 @@ const laporanLogProduk = async (req, res) => {
           })
 
         } else {
+          logProduk.push({
+            namaProduk: beli.produk.namaProduk,
+            status: 'plus',
+            jumlah: beli.jumlah,
+            waktu: kurangStok.updateAt
+          })
         }
 
       
