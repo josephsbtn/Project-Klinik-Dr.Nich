@@ -170,12 +170,10 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
     populate : {
       path:'produk',
       model:'produkPos',
-      populate: {
+      populate: [{
         path: 'kategori'
       },
-      populate: {
-        path: 'jenis'
-      }
+      {path: 'jenis'}],
     }
   });
   let produklist = [];
