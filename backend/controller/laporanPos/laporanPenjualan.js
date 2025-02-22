@@ -380,7 +380,7 @@ const laporanGrafikProduk = async (req, res) => {
 
 const laporanLogProduk = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     let logProduk = []
     const transactions = await TransaksiModels.find().populate({
       path: 'transaksiDetail',
@@ -406,12 +406,6 @@ const laporanLogProduk = async (req, res) => {
           })
 
         } else {
-          logProduk.push({
-            namaProduk: citem.produk.namaProduk,
-            status: 'minus',
-            jumlah: citem.jumlah,
-            waktu: transaction.updateAt
-          })
         }
 
       }
@@ -440,12 +434,6 @@ const laporanLogProduk = async (req, res) => {
           })
 
         } else {
-          logProduk.push({
-            namaProduk: citem.produk.namaProduk,
-            status: 'plus',
-            jumlah: citem.jumlah,
-            waktu: beli.updateAt
-          })
         }
 
       }
@@ -466,12 +454,6 @@ const laporanLogProduk = async (req, res) => {
           })
 
         } else {
-          logProduk.push({
-            namaProduk: beli.produk.namaProduk,
-            status: 'plus',
-            jumlah: beli.jumlah,
-            waktu: kurangStok.updateAt
-          })
         }
 
       
