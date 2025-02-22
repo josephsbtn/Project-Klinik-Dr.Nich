@@ -381,7 +381,7 @@ const laporanGrafikProduk = async (req, res) => {
 const laporanLogProduk = async (req, res) => {
   try {
     const { id } = req.params;
-    const produk = await ProdukModels.findById(id)
+    const produk = await ProdukModels.findById(id).populate('supplier')
     const namaPerusahaan = produk.supplier.namaPerusahaan
     let logProduk = []
     const transactions = await TransaksiModels.find().populate({
