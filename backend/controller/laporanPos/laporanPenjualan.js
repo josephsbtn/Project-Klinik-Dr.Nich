@@ -402,7 +402,9 @@ const laporanLogProduk = async (req, res) => {
             namaProduk: citem.produk.namaProduk,
             status: 'minus',
             jumlah: citem.jumlah,
-            waktu: transaction.updateAt
+            waktu: transaction.updateAt,
+            jenis : 'transaksi',
+            id : transaksi._id
           })
 
         } else {
@@ -430,7 +432,9 @@ const laporanLogProduk = async (req, res) => {
             namaProduk: citem.produk.namaProduk,
             status: 'plus',
             jumlah: citem.jumlah,
-            waktu: beli.updateAt
+            waktu: beli.updateAt,
+            jenis : 'belanja',
+            id : belanja._id
           })
 
         } else {
@@ -450,7 +454,9 @@ const laporanLogProduk = async (req, res) => {
             namaProduk: beli.produk.namaProduk,
             status: 'plus',
             jumlah: beli.jumlah,
-            waktu: kurangStok.updateAt
+            waktu: kurangStok.updateAt,
+            jenis : 'minStok',
+            id : beli._id
           })
 
         } else {
