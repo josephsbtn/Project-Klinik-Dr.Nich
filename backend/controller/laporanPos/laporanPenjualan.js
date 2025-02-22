@@ -445,7 +445,7 @@ const laporanLogProduk = async (req, res) => {
 
     const kurangStok = kurangStokModels.find().populate('produk')
 
-    kurangStok.length>0 && kurangStok.forEach(beli => {
+    kurangStok.forEach(beli => {
 
       
       if (beli.produk._id == id) {
