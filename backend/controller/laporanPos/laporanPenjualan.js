@@ -422,7 +422,7 @@ const laporanLogProduk = async (req, res) => {
         }
       });
 
-      belanja.forEach(beli => {
+      belanja.length>0 && belanja.forEach(beli => {
 
       const det = beli.belanjaDetail;
       for (const citem of det) {
@@ -445,7 +445,7 @@ const laporanLogProduk = async (req, res) => {
 
     const kurangStok = kurangStokModels.find().populate('produk')
 
-    kurangStok.forEach(beli => {
+    kurangStok.length>0 && kurangStok.forEach(beli => {
 
       
       if (beli.produk._id == id) {
