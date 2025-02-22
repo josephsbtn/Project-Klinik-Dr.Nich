@@ -223,7 +223,7 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
 
     
   }
-  res.status(200).json({produklist: produklist, kategorilist: kategorilist, transaksi: transaksi})
+  res.status(200).json({produklist: produklist, kategorilist: kategorilist})
 }
 catch(error){
   res.status(400).json({ message: error.message });
