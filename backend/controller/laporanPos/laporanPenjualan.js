@@ -174,10 +174,6 @@ const laporanTerlaris = asyncHandler(async(req,res)=>{
         path: 'kategori',
         model: 'kategoriProdukPos'
       },
-      populate: {
-        path: 'jenis',
-        model: 'jenisProdukPos'
-      }
     }
   });
   let produklist = [];
