@@ -234,89 +234,130 @@ const laporanTerlaris = asyncHandler(async (req, res) => {
 });
 
 const laporanGrafik = async (req, res) => {
+  const { menu, tanggal } = req.body;
+
+  if (!tanggal) {
+    return res.status(400).json({ success: false, message: "tanggal is required" });
+  }
+
   try {
-    const { endOfWeek } = req.body; // Only provide endOfWeek
+    let startDate, endDate, groupBy;
+    
+    const dateObj = new Date(tanggal);
+    dateObj.setHours(23, 59, 59, 999); // Normalize to end of the day
 
-    if (!endOfWeek) {
-      return res.status(400).json({ success: false, message: "endOfWeek is required" });
+    if (menu === "mingguan") {
+      startDate = new Date(dateObj);
+      startDate.setDate(dateObj.getDate() - 6);
+      startDate.setHours(0, 0, 0, 0);
+      endDate = dateObj;
+      groupBy = "day";
+    } 
+    else if (menu === "bulanan") {
+      startDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), 1);
+      endDate = new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0);
+      endDate.setHours(23, 59, 59, 999);
+      groupBy = "date";
+    } 
+    else if (menu === "tahunan") {
+      startDate = new Date(dateObj.getFullYear(), 0, 1);
+      endDate = new Date(dateObj.getFullYear(), 11, 31);
+      endDate.setHours(23, 59, 59, 999);
+      groupBy = "month";
+    } 
+    else {
+      return res.status(400).json({ success: false, message: "Invalid menu option" });
     }
-
-    const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
-
-    // Convert endOfWeek to Date object
-    const endDate = new Date(endOfWeek);
-    endDate.setHours(23, 59, 59, 999); // Ensure it's the end of the day
-
-    // Compute startOfWeek by subtracting 6 days
-    const startDate = new Date(endDate);
-    startDate.setDate(endDate.getDate() - 6);
-    startDate.setHours(0, 0, 0, 0); // Ensure it's the start of the day
-
-    // Detect the start day from startDate
-    const detectedDayIndex = startDate.getDay(); // 0 (Sunday) to 6 (Saturday)
-    const detectedStartDay = detectedDayIndex === 0 ? "Minggu" : weekDays[detectedDayIndex - 1];
-
-    // Generate the ordered days of the week based on the detected start day
-    const startIndex = weekDays.indexOf(detectedStartDay);
-    const orderedWeekDays = [...weekDays.slice(startIndex), ...weekDays.slice(0, startIndex)];
 
     // Fetch transactions within the given range
     const transactions = await TransaksiModels.find({
       createdAt: { $gte: startDate, $lte: endDate }
     });
 
-    // Initialize the week structure as an ARRAY
-    const transactionsByDay = orderedWeekDays.map(day => ({ name: day, penjualan: 0 }));
+    let reportData = [];
 
-    // Group transactions by day
-    transactions.forEach(transaction => {
-      const transactionDate = new Date(transaction.createdAt);
-      const transactionDayIndex = transactionDate.getDay();
+    if (groupBy === "day") {
+      const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+      const startDayIndex = startDate.getDay();
+      const orderedWeekDays = [...weekDays.slice(startDayIndex), ...weekDays.slice(0, startDayIndex)];
 
-      // Adjust day name to match the custom order
-      const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
+      reportData = orderedWeekDays.map(day => ({ name: day, penjualan: 0 }));
 
-      // Find the correct day in the array and update "penjualan"
-      const dayData = transactionsByDay.find(day => day.name === adjustedDayName);
-      if (dayData) {
-        dayData.penjualan += transaction.totalAkhir;
-      }
-    });
+      transactions.forEach(transaction => {
+        const transactionDayIndex = new Date(transaction.createdAt).getDay();
+        const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
+        const dayData = reportData.find(day => day.name === adjustedDayName);
+        if (dayData) dayData.penjualan += transaction.totalAkhir;
+      });
+    } 
+    else if (groupBy === "date") {
+      const totalDays = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0).getDate();
+      reportData = Array.from({ length: totalDays }, (_, i) => ({ name: (i + 1).toString(), penjualan: 0 }));
 
-    res.json({ success: true, transactions: transactionsByDay });
+      transactions.forEach(transaction => {
+        const transactionDate = new Date(transaction.createdAt).getDate();
+        const dayData = reportData.find(day => day.name === transactionDate.toString());
+        if (dayData) dayData.penjualan += transaction.totalAkhir;
+      });
+    } 
+    else if (groupBy === "month") {
+      const monthNames = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+
+      reportData = monthNames.map(month => ({ name: month, penjualan: 0 }));
+
+      transactions.forEach(transaction => {
+        const transactionMonth = new Date(transaction.createdAt).getMonth();
+        reportData[transactionMonth].penjualan += transaction.totalAkhir;
+      });
+    }
+
+    res.json({ success: true, transactions: reportData });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
+
 const laporanGrafikProduk = async (req, res) => {
   try {
-    const { endOfWeek } = req.body;
+    const { menu, tanggal } = req.body;
 
-    if (!endOfWeek) {
-      return res.status(400).json({ success: false, message: "endOfWeek is required" });
+    if (!tanggal) {
+      return res.status(400).json({ success: false, message: "tanggal is required" });
     }
 
-    const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+    let startDate, endDate, groupBy;
 
-    // Konversi endOfWeek ke Date object
-    const endDate = new Date(endOfWeek);
-    endDate.setHours(23, 59, 59, 999);
+    const dateObj = new Date(tanggal);
+    dateObj.setHours(23, 59, 59, 999); // Normalize to end of the day
 
-    // Hitung startOfWeek (6 hari sebelumnya)
-    const startDate = new Date(endDate);
-    startDate.setDate(endDate.getDate() - 6);
-    startDate.setHours(0, 0, 0, 0);
+    if (menu === "mingguan") {
+      startDate = new Date(dateObj);
+      startDate.setDate(dateObj.getDate() - 6);
+      startDate.setHours(0, 0, 0, 0);
+      endDate = dateObj;
+      groupBy = "day";
+    } 
+    else if (menu === "bulanan") {
+      startDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), 1);
+      endDate = new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0);
+      endDate.setHours(23, 59, 59, 999);
+      groupBy = "date";
+    } 
+    else if (menu === "tahunan") {
+      startDate = new Date(dateObj.getFullYear(), 0, 1);
+      endDate = new Date(dateObj.getFullYear(), 11, 31);
+      endDate.setHours(23, 59, 59, 999);
+      groupBy = "month";
+    } 
+    else {
+      return res.status(400).json({ success: false, message: "Invalid menu option" });
+    }
 
-    // Tentukan indeks hari mulai
-    const detectedDayIndex = startDate.getDay();
-    const detectedStartDay = detectedDayIndex === 0 ? "Minggu" : weekDays[detectedDayIndex - 1];
-
-    // Susun ulang hari dalam urutan yang sesuai
-    const startIndex = weekDays.indexOf(detectedStartDay);
-    const orderedWeekDays = [...weekDays.slice(startIndex), ...weekDays.slice(0, startIndex)];
-
-    // Ambil transaksi dalam rentang tanggal yang diberikan
+    // Fetch transactions within the given range
     const transactions = await TransaksiModels.find({
       createdAt: { $gte: startDate, $lte: endDate }
     }).populate({
@@ -327,56 +368,112 @@ const laporanGrafikProduk = async (req, res) => {
       }
     });
 
-    // Struktur data menggunakan Map untuk akses cepat
-    const transactionsByDay = new Map();
-    orderedWeekDays.forEach(day => transactionsByDay.set(day, { name: day, penjualan: [] }));
-    let produklist = []
-    // Kelompokkan transaksi berdasarkan hari
-    transactions.forEach(transaction => {
-      const transactionDate = new Date(transaction.createdAt);
-      const transactionDayIndex = transactionDate.getDay();
-      const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
+    let reportData = [];
+    let produklist = [];
 
-      // Ambil referensi objek hari
-      const dayData = transactionsByDay.get(adjustedDayName);
-      if (!dayData) return;
+    if (groupBy === "day") {
+      const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+      const startDayIndex = startDate.getDay();
+      const orderedWeekDays = [...weekDays.slice(startDayIndex), ...weekDays.slice(0, startDayIndex)];
 
-      const det = transaction.transaksiDetail;
-      for (const citem of det) {
-        const existingProduct = dayData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+      const transactionsByDay = new Map();
+      orderedWeekDays.forEach(day => transactionsByDay.set(day, { name: day, penjualan: [] }));
 
-        if (existingProduct) {
-          existingProduct.jumlah += citem.jumlah;
-          existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
-          const existproduklist = produklist.find(item => item.namaProduk == citem.produk.namaProduk);
-          if (!existproduklist) {
-            produklist.push({
-              namaProduk: citem.produk.namaProduk
-            })
+      transactions.forEach(transaction => {
+        const transactionDate = new Date(transaction.createdAt);
+        const transactionDayIndex = transactionDate.getDay();
+        const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
+
+        const dayData = transactionsByDay.get(adjustedDayName);
+        if (!dayData) return;
+
+        transaction.transaksiDetail.forEach(citem => {
+          const existingProduct = dayData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          if (existingProduct) {
+            existingProduct.jumlah += citem.jumlah;
+            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+          } else {
+            dayData.penjualan.push({
+              namaProduk: citem.produk.namaProduk,
+              jumlah: citem.jumlah,
+              pendapatan: citem.jumlah * citem.produk.hargaJual
+            });
           }
 
-        } else {
-          dayData.penjualan.push({
-            namaProduk: citem.produk.namaProduk,
-            jumlah: citem.jumlah,
-            pendapatan: citem.jumlah * citem.produk.hargaJual
-          });
-          const existproduklist = produklist.find(item => item.namaProduk == citem.produk.namaProduk);
-          if (!existproduklist) {
-            produklist.push({
-              namaProduk: citem.produk.namaProduk
-            })
+          if (!produklist.find(item => item.namaProduk === citem.produk.namaProduk)) {
+            produklist.push({ namaProduk: citem.produk.namaProduk });
           }
-        }
-      }
-    });
+        });
+      });
 
-    // Konversi Map kembali ke array
-    res.json({ success: true, penjualan: Array.from(transactionsByDay.values()), produklist: produklist });
+      reportData = Array.from(transactionsByDay.values());
+    } 
+    else if (groupBy === "date") {
+      const totalDays = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0).getDate();
+      reportData = Array.from({ length: totalDays }, (_, i) => ({ name: (i + 1).toString(), penjualan: [] }));
+
+      transactions.forEach(transaction => {
+        const transactionDate = new Date(transaction.createdAt).getDate();
+        const dayData = reportData.find(day => day.name === transactionDate.toString());
+        if (!dayData) return;
+
+        transaction.transaksiDetail.forEach(citem => {
+          const existingProduct = dayData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          if (existingProduct) {
+            existingProduct.jumlah += citem.jumlah;
+            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+          } else {
+            dayData.penjualan.push({
+              namaProduk: citem.produk.namaProduk,
+              jumlah: citem.jumlah,
+              pendapatan: citem.jumlah * citem.produk.hargaJual
+            });
+          }
+
+          if (!produklist.find(item => item.namaProduk === citem.produk.namaProduk)) {
+            produklist.push({ namaProduk: citem.produk.namaProduk });
+          }
+        });
+      });
+    } 
+    else if (groupBy === "month") {
+      const monthNames = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+
+      reportData = monthNames.map(month => ({ name: month, penjualan: [] }));
+
+      transactions.forEach(transaction => {
+        const transactionMonth = new Date(transaction.createdAt).getMonth();
+        const monthData = reportData[transactionMonth];
+
+        transaction.transaksiDetail.forEach(citem => {
+          const existingProduct = monthData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          if (existingProduct) {
+            existingProduct.jumlah += citem.jumlah;
+            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+          } else {
+            monthData.penjualan.push({
+              namaProduk: citem.produk.namaProduk,
+              jumlah: citem.jumlah,
+              pendapatan: citem.jumlah * citem.produk.hargaJual
+            });
+          }
+
+          if (!produklist.find(item => item.namaProduk === citem.produk.namaProduk)) {
+            produklist.push({ namaProduk: citem.produk.namaProduk });
+          }
+        });
+      });
+    }
+
+    res.json({ success: true, penjualan: reportData, produklist: produklist });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 const laporanLogProduk = async (req, res) => {
   try {
