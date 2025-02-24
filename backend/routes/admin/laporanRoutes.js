@@ -20,7 +20,7 @@ router.post("/laporanGrafik", laporanGrafik)
 router.post("/laporanGrafikProduk", laporanGrafikProduk)
 router.get("/laporanPersediaan/:id", laporanPersediaan)
 router.get("/laporanLimit/", laporanLimit)
-router.get("/laporanTerlaris/", laporanTerlaris)
-router.get("/laporanLogProduk/:id", laporanLogProduk)
+router.get("/laporanTerlaris", laporanTerlaris)
+router.post("/laporanLogProduk", laporanLogProduk)
 
 export default router;
