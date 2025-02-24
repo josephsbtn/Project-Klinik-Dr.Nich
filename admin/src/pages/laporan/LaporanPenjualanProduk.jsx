@@ -38,6 +38,7 @@ export const LaporanPenjualanProduk = () => {
   const pilihProdukRef = useRef([])
   // State untuk visibilitas bar (legend interaktif)
   const [visibleBars, setVisibleBars] = useState([]);
+  const [pilihMinggu, setPilihMinggu] = useState("mingguan")
 
   const datePickerRef = useRef(null);
   const datePickerRef2 = useRef(null);
@@ -85,7 +86,7 @@ export const LaporanPenjualanProduk = () => {
 
   // Fetch data grafik penjualan produk
   useEffect(() => {
-    const tanggal = { endOfWeek: new Date().toISOString().split('.')[0] + 'Z' };
+    const tanggal = { tanggal: new Date().toISOString().split('.')[0] + 'Z', menu : pilihMinggu }
     // const tanggal = {endOfWeek : '2025-02-09'};
     axios
       .post("https://api.drnich.co.id/api/pos/laporan/laporangrafikproduk", tanggal)
@@ -99,7 +100,7 @@ export const LaporanPenjualanProduk = () => {
         setProdukList(response.data.produklist || []);
       })
       .catch(error => console.error("Error Saat Fetching Chart data:", error));
-  }, []);
+  }, [pilihMinggu]);
 
   // Ambil 3 produk pertama dari produkList untuk ditampilkan
   useEffect(() => {
@@ -162,12 +163,12 @@ export const LaporanPenjualanProduk = () => {
     // ;
 
     return (
-      <div className='w-full flex justify-center items-center my-1 '>
+      <div className='w-full flex justify-center items-center my-1'>
         <ul style={{ listStyle: 'none', display: 'flex', padding: 0, cursor: 'pointer' }}>
-          {payload.map((entry, index) => (
+          {tampil && tampil.map((entry, index) => (
           <>
             <svg width={20} height={20} className='rounded-md'>
-              <rect x={0} y={0} width={20} height={20} fill={entry.color} />
+              <rect x={0} y={0} width={20} height={20} fill={`url(#colorGradient${index})`} />
             </svg>
             <select
               onChange={gantiTampil}
@@ -176,13 +177,18 @@ export const LaporanPenjualanProduk = () => {
               ref={(el) => (pilihProdukRef.current[index] = el)} // Assign dynamically
               style={{
                 marginRight: 10,
-                color: visibleBars[index] ? entry.color : '#ccc',
+                color: visibleBars[index] ? `url(#colorGradient${index})` : '#ccc',
                 appearance: 'none',
               }}
             >
-              <option value={tampil[index].namaProduk}>{tampil[index].namaProduk}</option>
               {produkList.map((item, i) => (
-                <option key={i} value={item.namaProduk}>{item.namaProduk}</option>
+                <>
+                {item.namaProduk == entry.namaProduk ? 
+                  <option selected disabled key={i} value={item.namaProduk}>{entry.namaProduk}</option>
+                  :
+                  <option key={i} value={item.namaProduk}>{item.namaProduk}</option>
+                }
+                </>
               ))}
             </select>
           </>
@@ -238,7 +244,13 @@ export const LaporanPenjualanProduk = () => {
       });
     });
     setDataProduk(isi);
-}, [chartTampil, tampil]);
+  }, [chartTampil, tampil]);
+  
+  const Minggu = useRef(null)
+  const MBT = () => {
+    setPilihMinggu(Minggu.current.value)
+    // console.log(Minggu.current.value)
+  }
 
 
   // Set judul halaman dan link navigasi
@@ -294,20 +306,7 @@ export const LaporanPenjualanProduk = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col my-[10px]">
-        <select
-          name="options"
-          className="border border-[#BDBDBD] rounded-xl w-full h-[45px] py-[13px] px-[20px]"
-          id="Gender"
-          defaultValue=""
-        >
-          <option value="" className="text-gray-300" disabled>
-            Minggu ini
-          </option>
-          <option value="bulanini">Bulan Ini</option>
-          <option value="tahunini">Tahun Ini</option>
-        </select>
-      </div>
+      
       <div>
         <div className='flex justify-between gap-[5px] text-start items-center border rounded-xl border-[#C2A353] px-[20px] py-[15px] my-[10px]'>
           <div className='flex gap-2 w-full '>
@@ -336,14 +335,33 @@ export const LaporanPenjualanProduk = () => {
           </div>
           <img src={iPan} alt="" />
         </div>
+
+        <div className="flex flex-col my-[10px]">
+          <select
+            name="options"
+            className="border border-[#BDBDBD] rounded-xl w-full h-[45px] py-[13px] px-[20px]"
+            id="Gender"
+            defaultValue=""
+            ref={Minggu}
+            onChange={MBT}
+          >
+            <option value="mingguan">
+              Minggu ini
+            </option>
+            <option value="bulanan">Bulan Ini</option>
+            <option value="tahunan">Tahun Ini</option>
+          </select>
+        </div>
+
         {/* Grafik Penjualan */}
         <div className='grid place-items-center'>
           <div className="text-[12px] font-semibold bg-[#F6F6F6] text-[#BDBDBD] text-start my-[17px] w-full">
             <p>Grafik Penjualan Seminggu Terakhir</p>
           </div>
           {tampil.length > 0 && chartTampil.length > 0 && (
-            <div style={{ width: '100%', height: 400 }}>
-              <ResponsiveContainer width="100%" height={400}>
+            <div style={{ width: '100%', height: 400, overflowX: 'auto' }}> {/* Scrollable container */}
+            <div className='relative' style={{ width: 'max-content', minWidth: '100%' }}> {/* Ensures BarChart does not shrink */}
+              <ResponsiveContainer width={chartTampil.length * 80} height={400}>
                 <BarChart
                   data={chartTampil}
                   margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
@@ -351,13 +369,17 @@ export const LaporanPenjualanProduk = () => {
                   barGap={-5}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" tick={{ fontSize: 12, dy: 2 }} textAnchor="middle" />
-                  <YAxis tickFormatter={(val) => {
-                    if (val >= 1000000) return `${(val / 1000000).toLocaleString("id-ID")}jt`;
-                    return val.toLocaleString('id-ID');
-                  }} />
+                  <XAxis 
+                    dataKey="name" 
+                    tick={{ fontSize: 12, dy: 2 }} 
+                    textAnchor="middle" 
+                  />
+                  <YAxis 
+                    tickFormatter={(val) => val >= 1000000 
+                      ? `${(val / 1000000).toLocaleString("id-ID")}jt` 
+                      : val.toLocaleString('id-ID')} 
+                  />
                   <Tooltip />
-                  <Legend content={<CustomLegend />} />
                   {tampil.map((produk, i) => (
                     <Bar
                       key={i}
@@ -385,7 +407,11 @@ export const LaporanPenjualanProduk = () => {
                 </BarChart>
               </ResponsiveContainer>
             </div>
+          </div>
+          
+          
           )}
+          <CustomLegend/>
         </div>
         <div className="text-[12px] bg-[#F6F6F6] text-[#BDBDBD] text-start my-[17px] w-full">
           <p>Data Penjualan Produk</p>
