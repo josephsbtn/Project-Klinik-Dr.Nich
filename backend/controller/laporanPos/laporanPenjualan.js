@@ -380,11 +380,13 @@ const laporanGrafikProduk = async (req, res) => {
 
 const laporanLogProduk = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { dari, sampai, id } = req.body;
+    const from = new Date(dari)
+    const to = new Date(sampai)
     const produk = await ProdukModels.findById(id).populate('supplier')
     const namaPerusahaan = produk.supplier.namaPerusahaan
     let logProduk = []
-    const transactions = await TransaksiModels.find().populate({
+    const transactions = await TransaksiModels.find({ updatedAt: { $gte: from, $lte: to } }).populate({
       path: 'transaksiDetail',
       populate: {
         path: 'produk',
@@ -414,7 +416,7 @@ const laporanLogProduk = async (req, res) => {
       }
     });
 
-    const belanja = await belanjaModels.find()
+    const belanja = await belanjaModels.find({ updatedAt: { $gte: from, $lte: to } })
       .populate({
         path: "belanjaDetail",
         populate: {
@@ -443,7 +445,7 @@ const laporanLogProduk = async (req, res) => {
       }
     });
 
-    const kurangStok = await kurangStokModels.find().populate('produk')
+    const kurangStok = await kurangStokModels.find({ updatedAt: { $gte: from, $lte: to } }).populate('produk')
 
     kurangStok.length>0 && kurangStok.forEach(beli => {
 
