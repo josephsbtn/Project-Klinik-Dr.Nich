@@ -87,12 +87,12 @@ function Profile() {
           </a>
         </div>
 
-        <div className="w-[90%] lg:w-4/5  h-full flex flex-col mt-[30px]">
+        <div className="w-screen lg:w-4/5  h-full flex flex-col mt-[30px]">
           {loading ? (
             <LoadingSpinner />
           ) : (
             <>
-              <div className="h-auto  flex flex-col items-start">
+              <div className="h-auto flex flex-col items-start">
                 <div className="w-fit h-full grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
                   {content &&
                     content.slice(0, max).map((item) => (
@@ -125,10 +125,10 @@ function Profile() {
 
           <div className="flex flex-col gap-4 z-0 items-center">
             {/* Layanan */}
-            <section className="w-full">
+            <section className="w-[90%] lg:w-4/5">
               <LayananPopuler />
             </section>
-            <section className="w-full">
+            <section className="w-[90%] lg:w-4/5">
               <ProdukTerbaru />
             </section>
           </div>
