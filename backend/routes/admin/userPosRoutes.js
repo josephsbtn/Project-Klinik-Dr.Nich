@@ -5,6 +5,7 @@ import {
   getpelangganbyID,
   updatepelanggan,
   deletepelanggan,
+  getLogPelanggan
 } from "../../controller/userPos/pelangganPosController.js";
 import {
   newmarketing,
@@ -36,6 +37,7 @@ const router = express.Router();
 
 router.get("/pelanggan", getpelanggan);
 router.post("/pelanggan", newpelanggan);
+router.post("/pelanggan/transaksi", getLogPelanggan);
 router.get("/pelanggan/:id", getpelangganbyID);
 router.put("/updatepelanggan/:id", updatepelanggan);
 router.delete("/deletepelanggan/:id", deletepelanggan);
