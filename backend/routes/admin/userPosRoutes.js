@@ -18,6 +18,7 @@ import {
   getsupplier,
   updatesupplier,
   deletesupplier,
+  riwayattransaksi
 } from "../../controller/userPos/supplierPosController.js";
 import {
   newterapis,
@@ -41,6 +42,7 @@ router.delete("/deletepelanggan/:id", deletepelanggan);
 router.get("/supplier", getsupplier);
 router.get("/supplier/:id", getsupplierbyID);
 router.post("/supplier", newsupplier);
+router.post("/supplier/riwayattransaksi", riwayattransaksi);
 router.put("/updatesupplier/:id", updatesupplier);
 router.delete("/deletesupplier/:id", deletesupplier);
 

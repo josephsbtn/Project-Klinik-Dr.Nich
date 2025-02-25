@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import supplierPosModels from "../../models/User/supplierPos.js";
+import belanjaModels from "../../models/ProdukPOS/belanjaPos.js";
 
 const newsupplier = asyncHandler(async (req, res) => {
   const newsupplier = {
@@ -89,4 +90,19 @@ const getsupplierbyID = asyncHandler(async (req, res) => {
   }
 });
 
-export { newsupplier, getsupplier, updatesupplier, deletesupplier, getsupplierbyID };
+const riwayattransaksi = asyncHandler(async (req, res) => {
+  const { id, dari, sampai } = req.body;
+  try {
+    const belanja = await belanjaModels.find({supplier : id}).sort({updatedAt : -1})
+
+    if (!belanja) {
+      return res.status(404).json({ message: "Transaction not found" });
+    }
+
+    res.json(belanja);
+  } catch (error) {
+    res.status(500).json({ message: "Server error: " + error.message });
+  }
+});
+
+export { newsupplier, getsupplier, updatesupplier, deletesupplier, getsupplierbyID, riwayattransaksi };
