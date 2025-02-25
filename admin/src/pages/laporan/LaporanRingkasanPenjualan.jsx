@@ -152,9 +152,9 @@ export const LaporanRingkasanPenjualan = () => {
                 placeholder="Cari..."
             ></input>
         </form> */}
-            <ToastContainer />
+            {/* <ToastContainer /> */}
             <div className='flex flex-col'>
-                <div className='flex flex-col h-full'>
+                <div className='flex flex-col h-fit'>
                     <p>Masa Berlaku</p>
                     <div className='flex flex-col gap-2 justify-between w-full mt-[5px]'>
                         <p>Dari :</p>
@@ -286,8 +286,8 @@ export const LaporanRingkasanPenjualan = () => {
                 </div>
                 {
                     chartData.length>0 && 
-                    <div style={{ width: '100%', height: 400, overflowX: 'auto' }}> {/* Scrollable container */}
-                            <div className='relative' style={{ width: 'max-content', minWidth: '100%' }}> {/* Ensures BarChart does not shrink */}
+                    <div className='scrollvisible mb-[10px]' style={{ width: '100%', height: 400, overflowX: 'auto' }}> {/* Scrollable container */}
+                            <div className='relative flex justify-center' style={{ width: 'max-content', minWidth: '100%' }}> {/* Ensures BarChart does not shrink */}
                               <ResponsiveContainer width={chartData.length * 80} height={400}>
                     <BarChart
                         data={chartData}
@@ -333,6 +333,7 @@ export const LaporanRingkasanPenjualan = () => {
                 </div>
 
 
+                
                 <div className="text-[12px] bg-[#F6F6F6] text-[#BDBDBD] text-start my-[17px] w-full">
                     <p className="">Laporan Promo</p>
                 </div>
