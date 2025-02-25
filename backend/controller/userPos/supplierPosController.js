@@ -96,7 +96,13 @@ const riwayattransaksi = asyncHandler(async (req, res) => {
     const belanja = await belanjaModels
     .find({supplier : id})
     .sort({updatedAt : -1})
-    .populate('belanjaDetail')
+    .populate({
+      path : 'belanjaDetail',
+      populate : {
+        path : 'produk',
+        model : 'produkPos'
+      }
+  })
 
     if (!belanja) {
       return res.status(404).json({ message: "Transaction not found" });
