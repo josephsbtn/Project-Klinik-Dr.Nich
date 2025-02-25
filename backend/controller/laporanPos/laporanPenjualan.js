@@ -68,7 +68,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     const totalTransaksi = transaksi.length;
 
 
-    res.status(200).json({ transaksi: transaksi, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan })
+    res.status(200).json({ transaksi: transaksi, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan, promo: dataPromo, })
   }
   catch (error) {
     res.status(400).json({ message: error.message });
