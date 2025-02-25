@@ -13,6 +13,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     const from = new Date(dari)
     const to = new Date(sampai)
     let dataPelanggan = []
+    let dataPromo = []
     const transaksi = await TransaksiModels.find({ createdAt: { $gte: from, $lte: to } }).populate("promo")
       .populate("pelanggan")
       .populate({
