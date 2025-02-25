@@ -42,6 +42,27 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
           dataPelanggan.push(isiDataPelanggan);
         }
       }
+      if (item.promo && item.promo.namaPromo) {
+        if (
+          dataPromo.some((promo) => promo.namaPromo == item.promo.namaPromo)
+        ) {
+          dataPromo = dataPromo.map((promo) =>
+            promo.namaPromo == item.promo.namaPromo
+              ? {
+                  ...promo,
+                  totalPenggunaan: promo.totalPenggunaan + 1,
+                  totalPotongan: promo.totalPotongan + item.promo.potongan,
+                }
+              : promo
+          );
+        } else {
+          dataPromo.push({
+            namaPromo: item.promo.namaPromo,
+            totalPenggunaan: 1,
+            totalPotongan: item.promo.potongan,
+          });
+        }
+      }
     }
     const totalTransaksi = transaksi.length;
 
