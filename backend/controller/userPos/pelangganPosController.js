@@ -85,7 +85,7 @@ const getpelangganbyID = asyncHandler(async (req, res) => {
 const getLogPelanggan = asyncHandler(async (req, res) => {
   const { id, dari ,sampai } = req.body;
   try {
-    const transaksi = await transaksiModels.find({pelanggan : id}).sort({updatedAt : -1})
+    const transaksi = await transaksiModels.find({pelanggan : id, updatedAt : {$gte: dari, $lte : sampai}}).sort({updatedAt : -1})
     .populate({
       path : 'transaksiDetail',
       populate : {
