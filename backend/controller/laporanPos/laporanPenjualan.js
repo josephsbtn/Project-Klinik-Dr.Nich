@@ -52,7 +52,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
               ? {
                   ...promo,
                   totalPenggunaan: promo.totalPenggunaan + 1,
-                  totalPotongan: promo.totalPotongan + item.promo.potongan,
+                  totalPendapatan: promo.totalPendamatan + item.totalAkhir,
                 }
               : promo
           );
@@ -60,7 +60,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
           dataPromo.push({
             namaPromo: item.promo.namaPromo,
             totalPenggunaan: 1,
-            totalPotongan: item.promo.potongan,
+            totalPendapatan: item.totalAkhir
           });
         }
       }
