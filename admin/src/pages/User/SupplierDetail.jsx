@@ -104,16 +104,16 @@ export const SupplierDetail = () => {
         </p>
       </div>
       <div className="mx-1 flex flex-col gap-3">
-        <a href="#" className=" w-full h-[50px]">
-          <span className="hover:scale-105 w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-semibold px-5 mt-2">
+        <a href={`/pos/DaftarProdukSupp/${id}`} className=" w-full h-[50px]">
+          <span className="w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-semibold px-5 mt-2">
             Lihat Daftar Produk
             <div className="flex ms-auto">
               <img src={iNext} alt="" />
             </div>
           </span>
         </a>
-        <a href="../riwayatsupplier" className=" w-full h-[50px]">
-          <span className="hover:scale-105 w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-semibold px-5">
+        <a href={`/pos/riwayatsupplier/${id}`} className=" w-full h-[50px]">
+          <span className="w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-semibold px-5">
             Lihat Riwayat Terakhir
             <div className="flex ms-auto">
               <img src={iNext} alt="" />
