@@ -32,13 +32,14 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
         if (dataPelanggan.some(data => data.namaPelanggan == item.pelanggan.namaPelanggan)) {
           dataPelanggan = dataPelanggan.map(isi =>
             isi.namaPelanggan == item.pelanggan.namaPelanggan
-              ? { ...isi, totalPembelian: isi.totalPembelian + item.totalAkhir }
+              ? { ...isi, totalPembelian: isi.totalPembelian + item.totalAkhir, jumlahPembelian: jumlahPembelian+1 }
               : isi
           );
         } else {
           const isiDataPelanggan = {
             namaPelanggan: item.pelanggan.namaPelanggan,
-            totalPembelian: item.totalAkhir
+            totalPembelian: item.totalAkhir,
+            jumlahPembelian : 1
           };
           dataPelanggan.push(isiDataPelanggan);
         }
