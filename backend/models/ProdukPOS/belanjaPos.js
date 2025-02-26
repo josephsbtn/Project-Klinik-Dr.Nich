@@ -11,8 +11,12 @@ const BelanjaPosSchema = mongoose.Schema(
       ref: "supplierPos", 
   },
     invoice: {},
-    pembayaran: {},
-    kembalian: {},
+    pembayaran: {
+      type : Number
+    },
+    kembalian: {
+      type : Number
+    },
     belanjaDetail: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "detailBelanjaPos",
