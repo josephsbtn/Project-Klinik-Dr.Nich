@@ -6,7 +6,7 @@ const BASE_URL = "https://api.drnich.co.id/";
 const newJenisLayanan = asyncHandler(async (req, res) => {
   const data = {
     nama: req.body.nama,
-    foto: req.file ? `${req.file.path}` : "No Image",
+    foto: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     deskripsi: req.body.deskripsi,
   }; // Destructure the request body
   try {
@@ -65,7 +65,7 @@ const updateJenisLayanan = asyncHandler(async (req, res) => {
     nama: req.body.nama,
     deskripsi: req.body.deskripsi,
   };
-  let foto = req.file ? `${req.file.path}` : null;
+  let foto = req.file ? `${BASE_URL}${req.file.path}` : null;
   if (foto) {newData.foto = foto}
   try {
     const jenisLayanan = await JenisLayanan.findByIdAndUpdate(
