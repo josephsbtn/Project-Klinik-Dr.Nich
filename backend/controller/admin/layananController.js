@@ -65,7 +65,7 @@ const updateJenisLayanan = asyncHandler(async (req, res) => {
     nama: req.body.nama,
     deskripsi: req.body.deskripsi,
   };
-  let foto = req.file ? `${BASE_URL}${req.file.path}` : null;
+  let foto = req.file ? BASE_URL+req.file.path : null;
   if (foto) {newData.foto = foto}
   try {
     const jenisLayanan = await JenisLayanan.findByIdAndUpdate(
