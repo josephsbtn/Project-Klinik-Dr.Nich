@@ -36,7 +36,7 @@ export const Layanan = () => {
   return (
     <div className="flex flex-col px-5 py-3 gap-1 bg-white w-full h-full">
       <ToastContainer />
-      <div className="flex flex-col justify-between w-full h-full py-3 px-3">
+      <div className="flex flex-col justify-between w-full  h-full py-3 px-3 overflow-auto">
         {/* Jika data kosong */}
         {datax.length === 0 ? (
           <div className="flex flex-col w-full h-full items-center justify-center text-black/40">
@@ -44,7 +44,7 @@ export const Layanan = () => {
           </div>
         ) : (
           /* Jika data ada */
-          <div className="flex flex-col gap-2 w-full h-full items-center justify-start">
+          <div className="flex flex-col gap-2 w-full h-fit items-center justify-start pb-10 ">
             {datax.map((data) => (
               <Link
                 to={{
@@ -61,15 +61,15 @@ export const Layanan = () => {
                 <AiOutlineRightCircle size={20} />
               </Link>
             ))}
+            <Link
+              to={{ pathname: "/pos/layananadd" }}
+              className="flex justify-center items-center cursor-pointer gap-2 h-[44px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] absolute w-[90%] bottom-2">
+              <AiFillPlusCircle size={20} /> Tambah Layanan
+            </Link>
           </div>
         )}
 
         {/* Tombol Tambah Layanan */}
-        <Link
-          to={{ pathname: "/pos/layananadd" }}
-          className="flex justify-center items-center cursor-pointer gap-2 h-[44px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px]">
-          <AiFillPlusCircle size={20} /> Tambah Layanan
-        </Link>
       </div>
     </div>
   );
