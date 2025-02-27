@@ -12,7 +12,6 @@ export const GaleriDetail = () => {
   const lokasi = useLocation();
   const dummyData = lokasi.state;
   const { setNav, setLink } = useContext(navContext);
-
   const [judul, setJudul] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [linkSosmed, setLinkSosmed] = useState("");

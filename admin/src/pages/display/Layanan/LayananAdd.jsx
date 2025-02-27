@@ -6,6 +6,7 @@ import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
 import axios from "axios";
 import { data, useNavigate } from "react-router-dom";
 import { set } from "date-fns";
+import { toast } from "react-toastify";
 
 export const LayananAdd = () => {
   const { setNav, setLink } = useContext(navContext);
@@ -31,6 +32,7 @@ export const LayananAdd = () => {
     ];
     setdatax(dataDummy);
     setNav("Tambah Layanan");
+    setLink(-1)
   }, []);
 
   const handleFile = (e) => {
@@ -55,22 +57,45 @@ export const LayananAdd = () => {
     e.preventDefault();
     const data = {
       kategoriProduk: kateforiRef.current.value,
-      namaLayanan: namaLayananRef.current.value.trim(),
+      nama: namaLayananRef.current.value,
       harga: hargaRef.current.value.trim(),
       durasi: durasiRef.current.value,
       deskripsiDetail: deskripsiDetailRef.current.value,
       deskripsiKartu: deskripsikartuRef.current.value,
       filesGambar: gambarx,
     };
-    if (!data.namaLayanan || !data.harga) {
+    if (!data.nama || !data.harga) {
       alert("tidak boleh kosong");
     } else {
       console.log(data);
     }
+    const postData = async () => {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/layanan/tambahLayanan`, data,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            withCredentials: true,
+          }
+        );
+        if (response.status === 200) {
+          toast.success("Berhasil menambahkan Layanan");
+          setTimeout(() => navigate("/pos/Layanan"), 2000);
+        }
+        } catch (error) {
+            console.log(error.response?.data?.message || "An error occurred");
+            toast.error("Ada masalah. Silahkan coba lagi!");
+        }
+    };
+    postData()
   };
+  
 
   document.title = "Tambah Layanan";
-  const [supstat, setsupstat] = useState(false);
   return (
     <form
       className="flex flex-col px-0 p-3 gap-1 bg-white w-full h-full"
