@@ -47,13 +47,13 @@ const updatePromo = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const fotoDesktop = req.files.fotoDesktop ? req.files.fotoDesktop[0] : null;
   const fotoMobile = req.files.fotoMobile ? req.files.fotoMobile[0] : null;
- const newData = {
-   nama: req.body.nama,
-   detail: req.body.detail,
-   syarat: req.body.syarat,
-   fotoDesktop: `${BASE_URL}${fotoDesktop.filename}`,
-   fotoMobile: `${BASE_URL}${fotoMobile.filename}`,
- };
+  const newData = {
+    nama: req.body.nama,
+    detail: req.body.detail,
+    syarat: req.body.syarat,
+    fotoDesktop: `${BASE_URL}${fotoDesktop.filename}`,
+    fotoMobile: `${BASE_URL}${fotoMobile.filename}`,
+  };
   try {
     const promo = await promoModels.findByIdAndUpdate(
       id,
