@@ -1,56 +1,63 @@
-import { useRef, useState } from "react";
-import { AiFillPlusCircle, AiOutlineSearch } from "react-icons/ai";
-import { useContext, useEffect } from "react";
-import { navContext } from "../../../App2";
-import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
-
-import axios from "axios";
+import { useRef, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
+import { navContext } from "../../../App2";
 
-export const PromoAdd = () => {
-  const { setNav, setLink } = useContext(navContext);
+const PromoAdd = () => {
+  const { setNav } = useContext(navContext);
   const navigate = useNavigate();
-  const [promo, setPromo] = useState([]);
+
+  // State untuk menyimpan data
   const [name, setName] = useState("");
   const [syarat, setSyarat] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
-  const [imageDesktop, setimageDesktop] = useState();
-  const [imageMobile, setimageMobile] = useState();
-  const [gambar1, setGambar1] = useState();
-  const [gambar2, setGambar2] = useState();
   const [namaGambar1, setNamaGambar1] = useState("");
   const [namaGambar2, setNamaGambar2] = useState("");
+  const [imagePreview1, setImagePreview1] = useState(null);
+  const [imagePreview2, setImagePreview2] = useState(null);
+
+  // Refs untuk input file
+  const imageDesktopRef = useRef(null);
+  const imageMobileRef = useRef(null);
+  const namaRef = useRef(null);
+  const syaratRef = useRef(null);
+  const DeskripsiRef = useRef(null);
+
   useEffect(() => {
-    setNav("Tambah Reting");
+    setNav("Tambah Promo");
+    document.title = "Tambah Promo";
   }, []);
 
-  const handleGambar = (setFoto, setNamaGambar, image) => {
-    const file = image.current.files[0];
+  // Handle pemilihan gambar
+  const handleGambar = (event, setPreview, setNamaGambar) => {
+    const file = event.target.files[0];
     if (file) {
-      const validImage = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
-      if (!validImage.includes(file.type)) {
-        alert("bukan gambar");
-        setFoto(null);
+      const validImageTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/jpg",
+      ];
+      if (!validImageTypes.includes(file.type)) {
+        toast.error("File harus berupa gambar (JPG, PNG, GIF)");
         return;
       }
-      setFoto(URL.createObjectURL(file));
+      setPreview(URL.createObjectURL(file));
       setNamaGambar(file.name);
     }
   };
 
+  // Handle submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (
       !name ||
       !syarat ||
       !deskripsi ||
-      !imageDesktop ||
-      !imageMobile ||
-      !gambar1 ||
-      !gambar2 ||
-      !namaGambar1 ||
-      !namaGambar2
+      !imageDesktopRef.current.files[0] ||
+      !imageMobileRef.current.files[0]
     ) {
       toast.error("Semua bidang harus diisi!");
       return;
@@ -58,16 +65,11 @@ export const PromoAdd = () => {
 
     const fdata = new FormData();
     fdata.append("nama", name);
-    if (imageDesktop.current.files.length > 0) {
-      fdata.append("fotoDesktop", imageDesktop.current.files[0]);
-    }
-    if (imageMobile.current.files.length > 0) {
-      fdata.append("fotoMobile", imageMobile.current.files[0]);
-    } else {
-      toast.error("Harap pilih gambar sebelum mengunggah!");
-      return;
-    }
-    // fdata.append("ulasan", ulasanRef.current.value);
+    fdata.append("syarat", syarat);
+    fdata.append("deskripsi", deskripsi);
+    fdata.append("fotoDesktop", imageDesktopRef.current.files[0]);
+    fdata.append("fotoMobile", imageMobileRef.current.files[0]);
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/tambahulasan`,
@@ -80,133 +82,127 @@ export const PromoAdd = () => {
           withCredentials: true,
         }
       );
+
       if (response.status === 200) {
         toast.success("Berhasil menambahkan Promo");
         setTimeout(() => {
           navigate("/pos/promo");
-        }, 3000);
+        }, 2000);
       }
     } catch (error) {
-      console.error(
-        error.response?.data?.message || "Gagal menambahkan Rating, coba lagi!"
-      );
       toast.error(
-        error.response?.data?.message || "Gagal menambahkan Rating, coba lagi!"
+        error.response?.data?.message || "Gagal menambahkan Promo, coba lagi!"
       );
     }
   };
 
-  document.title = "Tambah Reting";
-  const [supstat, setsupstat] = useState(false);
   return (
     <form
-      className="flex flex-col px-0 p-3 gap-2 bg-white w-full min-h-screen justify-between"
+      className="flex flex-col px-3 py-4 gap-4 bg-white w-full min-h-screen"
       onSubmit={handleSubmit}>
       <ToastContainer />
-      <div className="flex flex-col gap-1 px-3 flex-grow">
-        <div className="flex items-center gap-2">
-          <div className="flex flex-col">
-            <label className="text-start text-[#454545] text-[12px]">
-              Upload Foto Desktop
-            </label>
-            <div className="flex gap-6">
-              <img
-                src={imageDesktop}
-                alt=" "
-                className="h-[115px] w-[115px] rounded shadow-lg border"
+      <div className="flex flex-col gap-3">
+        {/* Upload Foto Desktop */}
+        <div>
+          <label className="text-[#454545] text-[14px]">
+            Upload Foto Desktop
+          </label>
+          <div className="flex items-center gap-4">
+            <img
+              src={imagePreview1}
+              alt=""
+              className="h-[115px] w-[115px] rounded shadow-lg border"
+            />
+            <div>
+              <p className="text-[#454545] text-[12px]">
+                {namaGambar1 || "Belum Ada Gambar"}
+              </p>
+              <input
+                type="file"
+                accept="image/*"
+                ref={imageDesktopRef}
+                className="border border-[#C2A353] h-[30px] w-[100px] rounded shadow-sm text-[12px]"
+                onChange={(e) =>
+                  handleGambar(e, setImagePreview1, setNamaGambar1)
+                }
               />
-              <div className="flex flex-col items-start text-[10px]">
-                {!namaGambar1 ? (
-                  <p className="text-[#454545] mb-3">Belum Ada Gambar</p>
-                ) : (
-                  <p className="text-[#454545] mb-3">{namaGambar1}</p>
-                )}
-
-                <div className="flex justify-star text-[#C2A353] pt-2 mb-2">
-                  <input
-                    accept="image/*"
-                    onChange={handleGambar(
-                      setimageDesktop,
-                      setNamaGambar1,
-                      imageDesktop
-                    )}
-                    ref={imageDesktop}
-                    type="File"
-                    className="border border-[#C2A353] h-[25px] w-[78px] rounded shadow-sm text-[12px]"
-                  />
-                </div>
-                <p className="text-start text-[10px] text-[#BDBDBD]">
-                  *Upload foto dengan format .jpg .png maksimal ukuran 100mb
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <label className="text-start text-[#454545] text-[12px]">
-              Upload Foto Mobile
-            </label>
-            <div className="flex gap-6">
-              <img
-                src={imageMobile}
-                alt=" "
-                className="h-[115px] w-[115px] rounded shadow-lg border"
-              />
-              <div className="flex flex-col items-start text-[10px]">
-                {!namaGambar2 ? (
-                  <p className="text-[#454545] mb-3">Belum Ada Gambar</p>
-                ) : (
-                  <p className="text-[#454545] mb-3">{namaGambar2}</p>
-                )}
-
-                <div className="flex justify-star text-[#C2A353] pt-2 mb-2">
-                  <input
-                    accept="image/*"
-                    onChange={handleGambar(
-                      setimageMobile,
-                      setNamaGambar2,
-                      imageMobile
-                    )}
-                    ref={imageMobile}
-                    type="File"
-                    className="border border-[#C2A353] h-[25px] w-[78px] rounded shadow-sm text-[12px]"
-                  />
-                </div>
-                <p className="text-start text-[10px] text-[#BDBDBD]">
-                  *Upload foto dengan format .jpg .png maksimal ukuran 100mb
-                </p>
-              </div>
+              <p className="text-[10px] text-[#BDBDBD]">
+                *Upload foto dengan format .jpg .png maksimal 100MB
+              </p>
             </div>
           </div>
         </div>
 
-        <label className="text-[#454545] text-start text-[12px]">
-          Nama Ketegori
-        </label>
+        {/* Upload Foto Mobile */}
+        <div>
+          <label className="text-[#454545] text-[14px]">
+            Upload Foto Mobile
+          </label>
+          <div className="flex items-center gap-4">
+            <img
+              src={imagePreview2}
+              alt=""
+              className="h-[115px] w-[115px] rounded shadow-lg border"
+            />
+            <div>
+              <p className="text-[#454545] text-[12px]">
+                {namaGambar2 || "Belum Ada Gambar"}
+              </p>
+              <input
+                type="file"
+                accept="image/*"
+                ref={imageMobileRef}
+                className="border border-[#C2A353] h-[30px] w-[100px] rounded shadow-sm text-[12px]"
+                onChange={(e) =>
+                  handleGambar(e, setImagePreview2, setNamaGambar2)
+                }
+              />
+              <p className="text-[10px] text-[#BDBDBD]">
+                *Upload foto dengan format .jpg .png maksimal 100MB
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Input Nama Kategori */}
+        <label className="text-[#454545] text-[14px]">Judul Promo</label>
         <input
           ref={namaRef}
           type="text"
-          placeholder="Contoh: diana"
-          className="px-2 border text-[12px] border-black/30 rounded-lg h-[48px]"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Contoh: Promo Akhir Tahun"
+          className="px-3 py-2 border text-[14px] border-black/30 rounded-lg"
         />
-        <label className="text-[#454545] text-start text-[12px]">Review</label>
+
+        {/* Input Review */}
+        <label className="text-[#454545] text-[14px]">Syarat</label>
         <textarea
-          ref={ulasanRef}
-          name=""
-          id=""
-          cols="auto"
-          rows="5"
-          className=" border rounded-lg text-[12px] p-2"
-          placeholder="Review"></textarea>
+          ref={syaratRef}
+          value={deskripsi}
+          onChange={(e) => setDeskripsi(e.target.value)}
+          className="border rounded-lg text-[14px] p-2"
+          placeholder="Tulis review di sini..."
+          rows="4"></textarea>
+
+        <label className="text-[#454545] text-[14px]">Deskripsi</label>
+        <textarea
+          ref={DeskripsiRef}
+          value={deskripsi}
+          onChange={(e) => setDeskripsi(e.target.value)}
+          className="border rounded-lg text-[14px] p-2"
+          placeholder="Tulis review di sini..."
+          rows="4"></textarea>
       </div>
-      <div className="mt-auto w-full ">
-        <button
-          type="submit"
-          className="flex justify-center items-center w-full h-[44px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg">
-          Simpan
-        </button>
-      </div>
+
+      {/* Tombol Submit */}
+      <button
+        type="submit"
+        className="mt-4 w-full h-[44px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg">
+        Simpan
+      </button>
     </form>
   );
 };
 
-export default PromoAdd;
+export { PromoAdd };
