@@ -723,7 +723,7 @@ export default function Beranda() {
                     </div>
                     {/* Review Content */}
                     <div className="overflow-auto">
-                    <p className="mt-4 text-sm text-gray-600 line-clamp-none lg:line-clamp-5">
+                    <p className="mt-4 text-sm text-gray-600 line-clamp-none">
                       {item.ulasan}
                     </p>
                     </div>
