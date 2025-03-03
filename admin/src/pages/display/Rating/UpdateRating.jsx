@@ -6,6 +6,7 @@ import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
 
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const UpdateRating = () => {
   const { setNav, setLink } = useContext(navContext);
@@ -67,16 +68,13 @@ export const UpdateRating = () => {
     fdata.append("rating", ratingRef.current.value)
     if (fotoRef.current.files.length > 0) {
       fdata.append("foto", fotoRef.current.files[0]);
-    } else {
-      toast.error("Harap pilih gambar sebelum mengunggah!");
-      return;
     }
     // fdata.append("ulasan", ulasanRef.current.value);
     try {
       const response = await axios.put(
         `${
           import.meta.env.VITE_BASE_URL_BACKEND
-        }/api/ulasan//updateulasan${id}`,
+        }/api/ulasan//updateulasan/${id}`,
         fdata,
         {
           headers: {
@@ -87,7 +85,7 @@ export const UpdateRating = () => {
         }
       );
       if (response.status === 200) {
-        toast.success("Berhasil menambahkan Rating");
+        toast.success("Berhasil mengupdate Rating");
         setTimeout(() => {
           navigate("/pos/rating");
         }, 3000);
@@ -103,7 +101,7 @@ export const UpdateRating = () => {
   };
 
   setNav("Edit Rating")
-  setLink("/pos/rating")
+  setLink(-1)
   document.title = "Ubah Rating";
   const [supstat, setsupstat] = useState(false);
   return (
@@ -155,7 +153,7 @@ export const UpdateRating = () => {
           className="px-2 border text-[12px] border-black/30 rounded-lg h-[48px]"
         />
         <label htmlFor=""  className="text-[#454545] text-start text-[12px]">Rating</label>
-        <select className="text-[#454545] text-start text-[12px] border-2 p-2 rounded-xl outline-none" name="" ref={ratingRef} onChange={changeRating} id="">
+        <select className="text-[#454545] text-start text-[12px] border-2 p-2 rounded-xl outline-none" name="" ref={ratingRef} id="">
           <option selected value={datax.rating}>{datax.rating}</option>
           <option value="1">1</option>
           <option value="2">2</option>
