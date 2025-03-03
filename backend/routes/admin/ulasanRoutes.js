@@ -9,9 +9,9 @@ import {
 import { upload } from "../../middleware/uploadMiddleware.js";
 
 const router = express.Router();
-router.post("/tambahulasan", upload.single("image"), newulasan);
+router.post("/tambahulasan", upload.single("foto"), newulasan);
 router.get("/getAllulasan", getulasan);
-router.put("/updateulasan/:id", upload.single("image"), updateulasan);
+router.put("/updateulasan/:id", upload.single("foto"), updateulasan);
 router.delete("/deleteulasan/:id", deleteulasan);
 router.get("/getUlasanById/:id", getUlasanById);
 

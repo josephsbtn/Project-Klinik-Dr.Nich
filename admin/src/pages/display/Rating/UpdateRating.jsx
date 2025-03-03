@@ -156,7 +156,7 @@ export const UpdateRating = () => {
         />
         <label htmlFor=""  className="text-[#454545] text-start text-[12px]">Rating</label>
         <select className="text-[#454545] text-start text-[12px] border-2 p-2 rounded-xl outline-none" name="" ref={ratingRef} onChange={changeRating} id="">
-          <option value={datax.rating}>{datax.rating}</option>
+          <option selected value={datax.rating}>{datax.rating}</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

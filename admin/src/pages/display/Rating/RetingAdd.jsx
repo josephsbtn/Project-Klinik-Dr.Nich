@@ -142,7 +142,7 @@ export const RetingAdd = () => {
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5">5</option>
+          <option selected value="5">5</option>
         </select>
         <label className="text-[#454545] text-start text-[12px]">Review</label>
         <textarea
