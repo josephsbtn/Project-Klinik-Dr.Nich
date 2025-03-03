@@ -36,6 +36,8 @@ export const RatingDetail = () => {
 
   useEffect(() => {
     fetchData();
+    setLink(-1);
+    setNav('Detail Rating')
   }, []);
 
   document.title = "Detail";

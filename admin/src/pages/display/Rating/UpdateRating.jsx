@@ -36,6 +36,7 @@ export const UpdateRating = () => {
   useEffect(() => {
     fetchData();
     setNav("Ubah Rating");
+    setLink(-1)
   }, []);
   const handleGambar = (e) => {
     e.preventDefault();

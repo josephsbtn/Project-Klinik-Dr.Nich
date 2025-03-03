@@ -2,10 +2,11 @@ import asyncHandler from "express-async-handler";
 import ulasanModels from "../../models/ulasan/ulasanModels.js";
 import tipeKulit from "../../models/produk/tipeKulit.js";
 
+const BASE_URL = "https://api.drnich.co.id/uploads/";
 const newulasan = asyncHandler(async (req, res) => {
   const newulasan = {
     nama: req.body.nama,
-    foto: req.body.foto,
+    foto: `${BASE_URL}${req.file.path}`,
     ulasan: req.body.ulasan,
     rating: req.body.rating,
   };
@@ -34,11 +35,11 @@ const updateulasan = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const newData = {
     nama: req.body.nama,
-    foto: req.body.foto,
     ulasan: req.body.ulasan,
     rating: req.body.rating,
-    to,
   };
+  let foto = req.file ? `${BASE_URL}${req.file.path}` : null;
+  if(foto){newData.foto = foto}
   try {
     const ulasan = await ulasanModels.findByIdAndUpdate(
       id,
