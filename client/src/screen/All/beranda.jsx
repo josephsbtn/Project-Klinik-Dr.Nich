@@ -95,14 +95,14 @@ export default function Beranda() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const [fetch, setFetch] = useState(false)
   const [progress, setProgress] = useState(1);
   const swiperRef = useRef(null);
   const deviceType = useDeviceType();
 
   const fetchData = async () => {
     setLoading(true);
-
+    setFetch(true)
     try {
       // Check localStorage for cached data
       const cachedData = [
@@ -272,6 +272,23 @@ export default function Beranda() {
     fetchData();
     fetchPromoData();
   }, []);
+
+  useEffect(() => {
+    if (!fetch && swiperRef.current) {
+        setFetch(true);
+
+        setTimeout(() => {
+            if (swiperRef.current && swiperRef.current.slideTo) {
+                swiperRef.current.slideTo(4);
+                swiperRef.current.update();
+                console.log("Swiper slideTo(0) executed");
+            }
+        }, 100); // Ensure swiper is initialized
+    }
+}, [progress]);
+
+  // Remove `fetch` from the dependency array
+
 
   const aboutCards = [
     {
@@ -666,6 +683,7 @@ export default function Beranda() {
 
           <div className=" flex justify-start items-center ml-10 flex-shrink-0">
             <Swiper
+              ref={swiperRef}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
               modules={[Autoplay, Navigation]}
               autoplay={{ delay: 3000 }}
