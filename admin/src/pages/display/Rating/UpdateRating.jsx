@@ -145,7 +145,7 @@ export const UpdateRating = () => {
           </div>
         </div>
         <label className="text-[#454545] text-start text-[12px]">
-          Nama Ketegori
+          Nama Reviewer
         </label>
         <input
           defaultValue={datax.nama}

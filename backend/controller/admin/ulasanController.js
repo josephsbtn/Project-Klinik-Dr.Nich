@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import ulasanModels from "../../models/ulasan/ulasanModels.js";
 import tipeKulit from "../../models/produk/tipeKulit.js";
 
-const BASE_URL = "https://api.drnich.co.id/uploads/";
+const BASE_URL = "https://api.drnich.co.id/";
 const newulasan = asyncHandler(async (req, res) => {
   const newulasan = {
     nama: req.body.nama,
