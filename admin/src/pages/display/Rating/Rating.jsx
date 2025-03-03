@@ -52,7 +52,7 @@ export const Rating = () => {
 
   document.title = "Rating";
   return (
-    <div className="flex flex-col px-5 py-3 gap-1 bg-white w-full h-full">
+    <div className="flex flex-col px-5 py-3 gap-1 bg-white w-full min-h-full h-fit">
       <div className="flex flex-col justify-between w-full h-full py-3 px-3">
         {datax.length === 0 ? (
           <div className="flex flex-col w-full h-full items-center justify-center text-black/40">
@@ -81,11 +81,12 @@ export const Rating = () => {
         )}
         <Link
           to={{ pathname: "/pos/retingAdd" }}
-          className="flex justify-center items-center gap-2 h-[44px]  bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] "
+          className="mt-auto flex justify-center items-center gap-2 h-[44px]  bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] "
         >
           <AiFillPlusCircle size={20} />
           Tambah Rating
         </Link>
+        
       </div>
     </div>
   );

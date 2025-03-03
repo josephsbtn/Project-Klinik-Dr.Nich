@@ -698,7 +698,7 @@ export default function Beranda() {
                   key={item.id}
                   className="flex justify-center flex-shrink-0 w-[265px] max-w-[280px] lg:max-w-screen-lg py-2 " // ✅ Fixed width
                 >
-                  <div className="bg-white w-[265px] h-[188px] flex-shrink-0 lg:w-[341px] lg:h-[214px] rounded-xl shadow-md p-6 border border-gray-200">
+                  <div className="bg-white w-[265px] h-[188px] flex-shrink-0 lg:w-[341px] lg:h-[214px] rounded-xl shadow-md p-6 border border-gray-200 overflow-y-auto">
                     {/* Header */}
                     <div className="flex items-center gap-4">
                       <img
@@ -722,9 +722,11 @@ export default function Beranda() {
                       </div>
                     </div>
                     {/* Review Content */}
-                    <p className="mt-4 text-sm text-gray-600 line-clamp-4 lg:line-clamp-5">
+                    <div className="overflow-auto">
+                    <p className="mt-4 text-sm text-gray-600 line-clamp-none lg:line-clamp-5">
                       {item.ulasan}
                     </p>
+                    </div>
                   </div>
                 </SwiperSlide>
               ))}
