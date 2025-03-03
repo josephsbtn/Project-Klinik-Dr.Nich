@@ -133,7 +133,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center space-x-3">
               <img src={clock} alt="Jam Operasional" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">10.00 - 18.00</p>
+              <p className="text-sm text-[#e8ebe0]">09.00 - 17.00</p>
             </div>
           </div>
 
