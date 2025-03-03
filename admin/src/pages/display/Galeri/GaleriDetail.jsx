@@ -77,12 +77,12 @@ const handleHapus = () => {
     try{
     axios.delete(`${
           import.meta.env.VITE_BASE_URL_BACKEND
-        }/api/foto/deleteMesin/${id}`).then(
+        }/api/gallery/deletegaleri/${id}`).then(
       response =>{
-        response.status==200 && toast.success("Berhasil Menghapus Sertifikat")
+        response.status==200 && toast.success("Berhasil Menghapus Galeri")
         setTimeout(()=>{
-          toast.success('Kembali ke halaman Sertifikat')
-          navigate('/pos/sertifikat')
+          toast.success('Kembali ke halaman Galeri')
+          navigate('/pos/galeri')
         },1000)
       }
     )
