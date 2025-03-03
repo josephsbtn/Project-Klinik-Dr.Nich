@@ -85,7 +85,7 @@ const newLayanan = asyncHandler(async (req, res) => {
     durasi: req.body.durasi,
     harga: req.body.harga,
     deskripsi: req.body.deskripsi,
-    image: req.file ? req.file.path : "No Image",
+    image: req.file ? `${BASE_URL}${req.file.path}` : "No Image",
     cardDeskripsi: req.body.cardDeskripsi,
     idJenis: req.body.idJenis,
   };
@@ -116,11 +116,12 @@ const updateLayanan = asyncHandler(async (req, res) => {
     idJenis: req.body.idJenis,
     nama: req.body.nama,
     harga: req.body.harga,
-    image: req.file ? req.file.path : "No Image",
     deskripsi: req.body.deskripsi,
     durasi: req.body.durasi,
     cardDeskripsi: req.body.cardDeskripsi,
   };
+  let image = req.file ? `${BASE_URL}${req.file.path}` : null;
+  if (image) {newData.image = image}
   try {
     const layanan = await layananModels.findByIdAndUpdate(
       id,

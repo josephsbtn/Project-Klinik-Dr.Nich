@@ -28,7 +28,7 @@ export const LayananAdd = () => {
   const fetchCategory = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/layanan/getAllJenisLayanan`
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/layanan/getAllJenisLayanan`
       );
       const data = response.data;
       setdatax(data);
@@ -69,9 +69,9 @@ export const LayananAdd = () => {
       nama: namaLayananRef.current.value,
       harga: hargaRef.current.value.trim(),
       durasi: durasiRef.current.value,
-      deskripsiDetail: deskripsiDetailRef.current.value,
-      deskripsiKartu: deskripsikartuRef.current.value,
-      filesGambar: gambarx,
+      deskripsi: deskripsiDetailRef.current.value,
+      cardDeskripsi: deskripsikartuRef.current.value,
+      image: fileGambarRef.current.files[0],
     };
     if (!data.nama || !data.harga) {
       alert("tidak boleh kosong");
@@ -145,7 +145,7 @@ export const LayananAdd = () => {
         </div>
 
         <label className="text-start text-[#454545]  text-[12px]">
-          Kategori Produk
+          Kategori Layanan
         </label>
         <select
           ref={kateforiRef}

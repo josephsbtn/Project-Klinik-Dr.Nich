@@ -4,8 +4,9 @@ import { useContext, useEffect } from "react";
 import { navContext } from "../../../App2";
 import gkategori from "../../../assets/iconDisplay/Layanan/gkategori.svg";
 import axios from "axios";
-import { data, useNavigate } from "react-router-dom";
+import { data, useNavigate, useParams } from "react-router-dom";
 import { set } from "date-fns";
+import { toast } from "react-toastify";
 
 export const UpdateLayanan = () => {
   const { setNav, setLink } = useContext(navContext);
@@ -23,13 +24,16 @@ export const UpdateLayanan = () => {
   // useState
   const [gambarx, setGambarx] = useState(null);
   const [namaGambarx, setNamaGambarx] = useState("");
-
+  const {id} = useParams()
   useEffect(() => {
-    const dataDummy = () => [
-      { id: 1, nama: "fecial Wols" },
-      { id: 2, nama: "fecial series" },
-    ];
-    setdatax(dataDummy);
+    const fetch = async () => {
+      await axios.get(`${
+        import.meta.env.VITE_BASE_URL_BACKEND
+      }/api/layanan/getlayananbyid/${id}`).then(response =>
+        response == 200 && setdatax(response.data)
+      )
+    }
+    
     setNav("Ubah Layanan");
     setLink("/pos/layanan")
   }, []);
@@ -52,22 +56,53 @@ export const UpdateLayanan = () => {
     // console.log(fileGambar);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const data = {
+    let data = {
       kategoriProduk: kateforiRef.current.value,
       namaLayanan: namaLayananRef.current.value.trim(),
       harga: hargaRef.current.value.trim(),
       durasi: durasiRef.current.value,
       deskripsiDetail: deskripsiDetailRef.current.value,
       deskripsiKartu: deskripsikartuRef.current.value,
-      filesGambar: gambarx,
     };
+
+    if (fileGambarRef.current.files.length > 0) {
+      data.image = fileGambarRef.current.files[0]
+    }
+
     if (!data.namaLayanan || !data.harga) {
       alert("tidak boleh kosong");
     } else {
       console.log(data);
     }
+
+    try {
+      const response = await axios.put(
+        `${
+          import.meta.env.VITE_BASE_URL_BACKEND
+        }/api/layanan/updatelayanan/${id}`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Berhasil mengedit kategori!");
+        setTimeout(() => navigate("/pos/layanan/"+id), 2000);
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(
+        error.response?.data?.message || "Gagal memperbarui kategori!"
+      );
+    }
+
   };
 
   document.title = "Ubah layanan";
@@ -182,7 +217,6 @@ export const UpdateLayanan = () => {
           placeholder="Contoh : Masukan deskripsi kartu"
         ></textarea>
         <button
-          disabled={!gambarx}
           type="submit"
           className={`
           ${
