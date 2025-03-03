@@ -95,14 +95,14 @@ export default function Beranda() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [fetch, setFetch] = useState(false)
+  const [fetch, setFetch] = useState(false);
   const [progress, setProgress] = useState(1);
   const swiperRef = useRef(null);
   const deviceType = useDeviceType();
 
   const fetchData = async () => {
     setLoading(true);
-    setFetch(true)
+    setFetch(true);
     try {
       // Check localStorage for cached data
       const cachedData = [
@@ -275,20 +275,19 @@ export default function Beranda() {
 
   useEffect(() => {
     if (!fetch && swiperRef.current) {
-        setFetch(true);
+      setFetch(true);
 
-        setTimeout(() => {
-            if (swiperRef.current && swiperRef.current.slideTo) {
-                swiperRef.current.slideTo(4);
-                swiperRef.current.update();
-                console.log("Swiper slideTo(0) executed");
-            }
-        }, 100); // Ensure swiper is initialized
+      setTimeout(() => {
+        if (swiperRef.current && swiperRef.current.slideTo) {
+          swiperRef.current.slideTo(4);
+          swiperRef.current.update();
+          console.log("Swiper slideTo(0) executed");
+        }
+      }, 100); // Ensure swiper is initialized
     }
-}, [progress]);
+  }, [progress]);
 
   // Remove `fetch` from the dependency array
-
 
   const aboutCards = [
     {
@@ -462,47 +461,6 @@ export default function Beranda() {
 
           {/* Carousel Container */}
           <div className="flex flex-col w-full lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4">
-            <div className="w-[325px] h-[283px]  lg:h-[437px] lg:w-[504px] bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-secondary lg:text-xl">
-                Berpengalaman dan Bersertifikat
-              </h1>
-              <Carousel
-                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg overflow-hidden "
-                autoplay={{
-                  delay: 3000,
-                  disableOnInteraction: false,
-                }}
-                nextArrow={false}
-                prevArrow={false}
-                autoplayDelay={2000}
-                slidesPerView={1}
-                spaceBetween={20}
-                loop={true} // Enable looping
-                navigation={false}>
-                {fotoSertif && fotoSertif.length > 0 ? (
-                  fotoSertif.map((item) => (
-                    <div key={item._id} className="relative px-2">
-                      <div className="h-[250px] lg:h-[350px] w-full">
-                        <img
-                          className="object-cover bg-yellow-200"
-                          src={item.foto}
-                          alt={item.nama}
-                        />
-                      </div>
-                    </div>
-                  ))
-                ) : loading ? (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <h1>loading . . .</h1>
-                  </div>
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <h1>No data found</h1>
-                  </div>
-                )}
-              </Carousel>
-            </div>
-
             {/* Teknologi */}
             <div className="w-[325px] h-[283px] lg:h-[437px] lg:w-[504px] bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
               <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-secondary lg:text-xl">
@@ -741,9 +699,9 @@ export default function Beranda() {
                     </div>
                     {/* Review Content */}
                     <div className="overflow-auto">
-                    <p className="mt-4 text-sm text-gray-600 line-clamp-none">
-                      {item.ulasan}
-                    </p>
+                      <p className="mt-4 text-sm text-gray-600 line-clamp-none">
+                        {item.ulasan}
+                      </p>
                     </div>
                   </div>
                 </SwiperSlide>

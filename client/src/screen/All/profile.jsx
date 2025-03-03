@@ -112,15 +112,13 @@ function Profile() {
       <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
-        >
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/promo")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
-        >
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
           Promo
         </a>
       </div>
@@ -145,11 +143,10 @@ function Profile() {
           <div className="flex flex-col items-center lg:items-start lg:justify-start">
             <img
               src={visi}
-
               className="w-[326px] h-[244px] -translate-y-3 lg:w-16 lg:h-16"
               alt="Visi Icon"
             />
-            </div>
+          </div>
           {/* <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
             <img
               src={bgVM}
@@ -178,11 +175,10 @@ function Profile() {
           <div className="flex flex-col items-center lg:items-start lg:justify-start">
             <img
               src={misi}
-
               className="w-[326px] h-[244px] -translate-y-3 lg:w-16 lg:h-16"
               alt="Visi Icon"
             />
-            </div>
+          </div>
           {/* <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
             <img
               src={bgVM}
@@ -218,48 +214,6 @@ function Profile() {
 
           {/* Carousel Container */}
           <div className="flex flex-col lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4 ">
-            <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
-                Berpengalaman dan Bersertifikat
-              </h1>
-              <Carousel
-                className="lg:w-[400px] lg:h-[283px] w-full rounded-lg overflow-hidden "
-                autoplay={{
-                  delay: 3000,
-                  disableOnInteraction: false,
-                }}
-                autoplayDelay={2000}
-                slidesPerView={1}
-                spaceBetween={20}
-                nextArrow={false}
-                prevArrow={false}
-                loop={true} // Enable looping
-                navigation={false}
-              >
-                {fotoSertif && fotoSertif.length > 0 ? (
-                  fotoSertif.map((item) => (
-                    <div key={item._id} className="relative px-2">
-                      <div className="h-[250px] lg:h-[350px] w-full">
-                        <img
-                          className="object-cover bg-yellow-200"
-                          src={item.foto}
-                          alt={item.nama}
-                        />
-                      </div>
-                    </div>
-                  ))
-                ) : loading ? (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <h1>loading . . .</h1>
-                  </div>
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <h1>No data found</h1>
-                  </div>
-                )}
-              </Carousel>
-            </div>
-
             {/* Teknologi */}
             <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
               <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
