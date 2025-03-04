@@ -112,13 +112,15 @@ function Profile() {
       <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
+        >
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/promo")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
+        >
           Promo
         </a>
       </div>
@@ -138,71 +140,24 @@ function Profile() {
         </div>
 
         {/* Visi & Misi Section */}
-        <div className="w-[326px] flex flex-col mt-[30px] lg:flex-row lg:justify-center lg:gap-8">
+        <div className="w-full flex flex-col mt-[30px] lg:flex-row lg:justify-center">
           {/* Visi */}
-          <div className="flex flex-col items-center lg:items-start lg:justify-start">
+          <div className="w-full flex flex-col items-center lg:items-start lg:justify-start">
             <img
               src={visi}
-              className="w-[326px] h-[244px] -translate-y-3 lg:w-16 lg:h-16"
+              className="w-full h-auto lg:w-full lg:h-auto"
               alt="Visi Icon"
             />
           </div>
-          {/* <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
-            <img
-              src={bgVM}
-              className="absolute w-full h-full rounded-[10px] z-0"
-              alt="Background VM"
-            />
-            <div className="flex flex-col justify-center items-center z-10">
-              <img
-                src={bunga}
-                className="w-[30px] h-full -translate-y-3 lg:w-16 lg:h-16"
-                alt="Bunga"
-              />
-              <h1 className="text-white text-base font-medium font-SFPro leading-tight tracking-tight">Visi Dr. Nich Beauty Aesthetic
-              </h1>
-              <p className="w-[284px] text-justify text-white text-xs font-normal font-SFPro leading-tight tracking-tight">
-                Visi kami adalah untuk memimpin industri estetika dengan menjadi
-                klinik terdepan yang dikenal karena inovasi, kualitas, dan
-                layanan pelanggan yang luar biasa. Kami berupaya untuk terus
-                berkembang dan beradaptasi dengan kemajuan teknologi untuk
-                memberikan perawatan terbaik bagi setiap pasien.
-              </p>
-            </div>
-          </div> */}
 
           {/* Misi */}
-          <div className="flex flex-col items-center lg:items-start lg:justify-start">
+          <div className="w-full flex flex-col items-center lg:items-start lg:justify-start">
             <img
               src={misi}
-              className="w-[326px] h-[244px] -translate-y-3 lg:w-16 lg:h-16"
-              alt="Visi Icon"
+              className="w-full h-auto lg:w-full lg:h-auto"
+              alt="Misi Icon"
             />
           </div>
-          {/* <div className="relative w-[326px] h-[244px] lg:w-[504px] lg:h-[340px] flex justify-center items-center">
-            <img
-              src={bgVM}
-              className="absolute w-full h-full rounded-[10px] z-0"
-              alt="Background VM"
-            />
-            <div className="flex flex-col justify-center items-center z-10">
-              <img
-                src={misiIcon}
-                className="w-[30px] h-auto -translate-y-3 lg:w-16 lg:h-16"
-                alt="Misi Icon"
-              />
-              <h1 className="text-white text-base font-medium text-center font-SFPro leading-tight tracking-tight pb-[15px] lg:text-lg">
-                Misi Dr. Nich Beauty Aesthetic
-              </h1>
-              <p className="w-[250px] text-justify font-SFPro text-white text-xs font-normal leading-tight tracking-tight lg:w-[443px]">
-                Misi kami adalah membantu setiap pasien mencapai kepercayaan
-                diri dan kecantikan alami mereka melalui perawatan yang inovatif
-                dan aman. Kami berkomitmen untuk menjadi klinik kecantikan
-                pilihan utama dengan menyediakan layanan yang unggul dan hasil
-                yang nyata.
-              </p>
-            </div>
-          </div> */}
         </div>
 
         {/* Sertifikasi Section */}
