@@ -18,7 +18,7 @@ import axios from "axios";
 
 // Swiper Components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Carousel } from "@material-tailwind/react";
 
 // Swiper Styles
@@ -125,6 +125,27 @@ function Produk() {
                 </div>
               )}
             </Carousel>
+            {/* <Swiper>
+              {carousel.length > 0 ? (
+                carousel.map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <div key={index} className="w-full">
+                      <img
+                        className="h-[158px] w-full lg:h-[528.36px] rounded-[10px] object-cover"
+                        src={item.image}
+                        alt={`Carousel Image ${index + 1}`}
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))
+              ) : (
+                <SwiperSlide>
+                  <div className="flex items-center justify-center w-full">
+                    <p>No images available</p>
+                  </div>
+                </SwiperSlide>
+              )}
+            </Swiper> */}
           </div>
 
           <div className=" items-center w-[90%] lg:w-[80%] justify-center mt-10 mx-auto lg:mt-28 lg:mx-auto gap-8   lg:gap-20 grid grid-cols-2 lg:grid-cols-3">

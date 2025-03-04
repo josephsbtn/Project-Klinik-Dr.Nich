@@ -24,27 +24,12 @@ import StarIcon from "../../assets/star.svg";
 import YTicon from "../../assets/logos_youtube-icon.svg";
 
 // IMAGES & ICONS ABOUT
-import img1 from "../../assets/img-carousel/img1.png";
-import img2 from "../../assets/img-carousel/img2.png";
 import waBtn from "../../assets/whatsappBtn.svg";
-import logo from "../../assets/logodrnich-white.svg";
-import bgAbout from "../../assets/img-about/4.png";
-import bgAbout2 from "../../assets/img-about/5.png";
-import acneFace from "../../assets/img-about/A Lifetime In 60 Seconds-Photoroom 1.png";
-import muka2 from "../../assets/img-about/gambar2.png";
-import masker from "../../assets/img-about/masker.svg";
-import pori from "../../assets/img-about/pori.svg";
-import air from "../../assets/img-about/air.svg";
 import banner1bg from "../../assets/img-carousel/banner1bg.svg";
 import bannerMobile1 from "../../assets/img-about/bannerMobile1.svg";
 import bannerMobile2 from "../../assets/img-about/bannerMobile2.svg";
 
 import banner2bg from "../../assets/img-carousel/banner2bg.svg";
-//  IMAGE & ICONS SERTIFKAT
-import sertifikat1 from "../../assets/img-about/sertifikat1.png";
-
-// IMAGE GALERI
-import galeri1 from "../../assets/img-about/galeri1.png";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
