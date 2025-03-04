@@ -440,7 +440,7 @@ export default function Beranda() {
         {/* Sertifikasi Section */}
         <div className="flex flex-col w-[90%] lg:w-[80%] items-center justify-center pt-10 lg:mt-12 ">
           {/* Section Title */}
-          <div className="w-full mx-auto text-left text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-tight">
+          <div className=" w-full mx-auto text-left text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-wide">
             Mengapa memilih Dr. Nich?
           </div>
 
@@ -448,7 +448,7 @@ export default function Beranda() {
           <div className="flex flex-col w-full lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4">
             {/* Teknologi */}
             <div className="w-[325px] h-[283px] lg:h-[437px] lg:w-[504px] bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] tracking-tight lg:text-secondary lg:text-xl">
+              <h1 className=" tracking-wide pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] lg:text-secondary lg:text-xl">
                 Teknologi Terkini & Produk Berkualitas
               </h1>
               <Carousel
@@ -476,11 +476,11 @@ export default function Beranda() {
                     </div>
                   ))
                 ) : loading ? (
-                  <div className="w-full h-full flex items-center justify-center">
+                  <div className="w-full h-full flex items-center justify-center tracking-wide">
                     <h1>loading . . .</h1>
                   </div>
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center">
+                  <div className="w-full h-full flex items-center justify-center tracking-wide">
                     <h1>No data found</h1>
                   </div>
                 )}
@@ -493,18 +493,18 @@ export default function Beranda() {
         <section className="flex flex-col my-8 w-full items-center">
           <main className="w-[90%] flex flex-col items-center lg:w-[80%]   ">
             <div className="flex w-full justify-between items-center lg:py-6  ">
-              <h1 className="font-SFPro font-normal text-base lg:text-xl leading-[25px] tracking-tight">
+              <h1 className="font-SFPro font-normal text-base lg:text-xl leading-[25px] tracking-wide">
                 Paket Treatment
               </h1>
               <button
-                className="font-SFPro text-xs text-secondary font-medium lg:text-base tracking-tight"
+                className="font-SFPro text-xs text-secondary font-medium lg:text-base tracking-wide"
                 onClick={() => navigate("/layanan")}>
                 Lihat semua
               </button>
             </div>
             {loading ? (
               <div className="h-full w-full flex items-center justify-center">
-                <h1 className="font-SFPro text-base text-secondary font-medium">
+                <h1 className="font-SFPro text-base text-secondary font-medium tracking-wide">
                   Loading..
                 </h1>
               </div>
@@ -517,11 +517,13 @@ export default function Beranda() {
                     </div>
                   ))
                 ) : (
-                  <p className="text-center col-span-2">No data available</p>
+                  <p className="text-center col-span-2 tracking-wide">
+                    No data available
+                  </p>
                 )}
                 {loading && (
                   <div className="h-full w-full flex items-center justify-center">
-                    <h1 className="font-SFPro text-base text-secondary font-medium">
+                    <h1 className="font-SFPro text-base text-secondary font-medium tracking-wide">
                       Loading..
                     </h1>
                   </div>
@@ -545,11 +547,11 @@ export default function Beranda() {
         <section className="lg:w-[80%] flex flex-col my-[26px] w-full items-center">
           {/* Header */}
           <main className="w-full flex lg:px-0 px-6 justify-between">
-            <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-tight">
+            <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-wide">
               Galeri
             </h1>
             <h1
-              className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer  tracking-tight"
+              className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer  tracking-wide"
               onClick={() => navigate("/galeri")}>
               Lihat Semua
             </h1>
@@ -576,7 +578,7 @@ export default function Beranda() {
                         window.location.href = item.link; // Consider using `useNavigate`
                       }}>
                       <div className="w-72 h-auto relative flex flex-col items-start justify-start">
-                        <div className="absolute rounded-[10px] h-[74%] top-0 left-0 right-0 bottom-0 bg-black/50 flex items-center justify-center">
+                        <div className="absolute rounded-[10px] h-[66%] top-0 left-0 right-0 bottom-0 bg-black/50 flex items-center justify-center">
                           <img
                             src={YTicon}
                             className="w-[30px] h-[21px]"
@@ -591,14 +593,14 @@ export default function Beranda() {
                         />
 
                         {/* Dynamic Product Name */}
-                        <p className="w-full hover:text-secondary mt-2 transition-all duration-150 text-text text-left text-sm font-normal font-SFPro leading-[25px] tracking-tight">
+                        <p className="w-full hover:text-secondary mt-2 transition-all duration-150 text-text text-left text-sm font-normal font-SFPro leading-[25px] tracking-wide">
                           {item.judul}
                         </p>
 
                         {/* Dynamic Product Type */}
-                        <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-[25px] tracking-tight">
+                        <div className="flex items-center gap-2 text-[#bdbdbd] text-xs font-medium font-SFPro leading-[25px] tracking-wide">
                           <p>{item.sosmed}</p>
-                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
+                          <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full " />
                           <p>{item.channel}</p>
                         </div>
                       </div>
