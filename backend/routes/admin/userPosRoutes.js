@@ -5,7 +5,6 @@ import {
   getpelangganbyID,
   updatepelanggan,
   deletepelanggan,
-  getLogPelanggan
 } from "../../controller/userPos/pelangganPosController.js";
 import {
   newmarketing,
@@ -19,8 +18,6 @@ import {
   getsupplier,
   updatesupplier,
   deletesupplier,
-  riwayattransaksi,
-  getProdukSupplier
 } from "../../controller/userPos/supplierPosController.js";
 import {
   newterapis,
@@ -30,36 +27,33 @@ import {
 } from "../../controller/userPos/terapisPosController.js";
 import { getsupplierbyID } from "../../controller/userPos/supplierPosController.js";
 import { getterapisbyID } from "../../controller/userPos/terapisPosController.js";
-
+import { protect } from "../../middleware/authMiddleware.js";
 import {upload} from "../../middleware/uploadMiddleware.js";
 
 const router = express.Router();
 
 router.get("/pelanggan", getpelanggan);
-router.post("/pelanggan", newpelanggan);
-router.post("/pelanggan/transaksi", getLogPelanggan);
+router.post("/pelanggan", protect([1,2]), newpelanggan);
 router.get("/pelanggan/:id", getpelangganbyID);
-router.put("/updatepelanggan/:id", updatepelanggan);
+router.put("/updatepelanggan/:id", protect([1,2]), updatepelanggan);
 router.delete("/deletepelanggan/:id", deletepelanggan);
 
 router.get("/supplier", getsupplier);
-router.get("/supplier/produk/:id", getProdukSupplier);
 router.get("/supplier/:id", getsupplierbyID);
-router.post("/supplier", newsupplier);
-router.post("/supplier/riwayattransaksi", riwayattransaksi);
-router.put("/updatesupplier/:id", updatesupplier);
+router.post("/supplier", protect([1,2]), newsupplier);
+router.put("/updatesupplier/:id", protect([1,2]), updatesupplier);
 router.delete("/deletesupplier/:id", deletesupplier);
 
 router.get("/terapis", getterapis);
 router.get("/terapis/:id", getterapisbyID);
-router.post("/terapis", upload.single("image"), newterapis);
-router.put("/updateterapis/:id",  upload.single("image"), updateterapis);
+router.post("/terapis", protect([1,2]), upload.single("image"), newterapis);
+router.put("/updateterapis/:id", protect([1,2]),  upload.single("image"), updateterapis);
 router.delete("/deleteterapis/:id", deleteterapis);
 
 router.get("/marketing", getmarketing);
 router.get("/marketing/:id", getmarketingbyID);
-router.post("/marketing", upload.single("image"), newmarketing);
-router.put("/updatemarketing/:id",  upload.single("image"), updatemarketing);
+router.post("/marketing", protect([1,2]), upload.single("image"), newmarketing);
+router.put("/updatemarketing/:id", protect([1,2]),  upload.single("image"), updatemarketing);
 router.delete("/deletemarketing/:id", deletemarketing);
 
 export default router;

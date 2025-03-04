@@ -236,7 +236,15 @@ export const Kasir = () => {
                 kembalian: 0,
             }
             console.log(data)
-            axios.post('https://api.drnich.co.id/api/pos/kasir/transaksi', data).then(response =>{
+            axios.post('https://api.drnich.co.id/api/pos/kasir/transaksi', data, 
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    withCredentials: true,
+                    }
+            ).then(response =>{
                 response.status==200 && navigate(0)
             })
         }

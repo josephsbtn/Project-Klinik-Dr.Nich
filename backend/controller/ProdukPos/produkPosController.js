@@ -10,6 +10,8 @@ const newproduk = asyncHandler(async (req, res) => {
     kategori: req.body.kategori,
     bonusTerapis: req.body.bonusTerapis,
     stok: req.body.stok,
+    hpp: req.body.hpp,
+    sku: req.body.sku,
     minStok: req.body.minStok,
     supplier: req.body.supplier
   };
@@ -45,6 +47,8 @@ const updateproduk = asyncHandler(async (req, res) => {
     hargaJual: req.body.hargaJual,
     hargaBeli: req.body.hargaBeli,
     kategori: req.body.kategori,
+    hpp: req.body.hpp,
+    sku: req.body.sku,
     bonusTerapis: req.body.bonusTerapis,
     stok: req.body.stok,
     minStok: req.body.minStok
