@@ -13,7 +13,7 @@ import {
   updatePromoDetail,
   deletePromoDetail,
 } from "../../controller/promoPos/promoPosDetailController.js";
-
+import { protect } from "../../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.get("/promo", getPromo);

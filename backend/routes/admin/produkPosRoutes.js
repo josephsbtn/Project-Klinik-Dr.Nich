@@ -42,7 +42,7 @@ import {
   updatekurangStok,
   deletekurangStok,
 } from "../../controller/ProdukPos/kurangStokController.js";
-
+import { protect } from "../../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.get("/jenisProduk", getjenisProdukPos);
