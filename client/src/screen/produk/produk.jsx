@@ -71,24 +71,33 @@ function Produk() {
       <div className="w-full fixed top-0 z-30 ">
         <Navbar selected={"Produk"} />
       </div>
+      <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
+        <a
+          onClick={() => navigate("/")}
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          Beranda
+        </a>
+        <ArrowRightDisable />
+        <a
+          onClick={() => navigate("/produk")}
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          Produk
+        </a>
+      </div>
       {loading ? (
         <LoadingSpinner />
+      ) : content.length <= 0 && carousel.length <= 0 ? (
+        <div className="h-[80vh] w-full flex flex-col items-center justify-center">
+          <h1 className="font-SFPro text-base text-red-800 font-medium">
+            Produk Belum Tersedia!🛒
+          </h1>
+          <p className="text-gray-500 text-sm mt-2">
+            Please check back later or contact support.🙏
+          </p>
+        </div>
       ) : (
         <>
           {/* Navigation */}
-          <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
-            <a
-              onClick={() => navigate("/")}
-              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
-              Beranda
-            </a>
-            <ArrowRightDisable />
-            <a
-              onClick={() => navigate("/produk")}
-              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
-              Produk
-            </a>
-          </div>
 
           <div className="flex items-center w-[90%]  justify-center space-x-2 mx-auto mt-[18px] lg:w-[80%] lg:h-full">
             <Carousel

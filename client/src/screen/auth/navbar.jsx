@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController";
+import {
+  sendWhatsAppReservasiMessage,
+  sendWhatsAppKonsultasi,
+} from "../../../../backend/controller/whatsappController";
 
 // Logo & images
 import logo from "../../assets/logodrnich.svg";
@@ -60,6 +63,8 @@ export default function Navbar({ selected }) {
   const handleNavigation = (path, text) => {
     if (path === "/reservasi") {
       sendWhatsAppReservasiMessage();
+    } else if (path === "/konsultasi") {
+      sendWhatsAppKonsultasi();
     } else {
       navigate(path);
       setIsNavOpen(false);

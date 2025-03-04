@@ -98,6 +98,15 @@ function ViewAllProduct() {
 
       {loading ? (
         <LoadingSpinner />
+      ) : content.length <= 0 ? (
+        <div className="h-[80vh] bg-red-300 w-full flex flex-col items-center justify-center">
+          <h1 className="font-SFPro text-base text-red-800 font-medium">
+            Produk Belum Tersedia!🛒
+          </h1>
+          <p className="text-gray-500 text-sm mt-2">
+            Please check back later or contact support.🙏
+          </p>
+        </div>
       ) : error ? (
         <div className="text-center text-red-500">{error}</div>
       ) : (

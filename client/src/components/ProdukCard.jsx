@@ -18,19 +18,19 @@ function ProdukCard({ item }) {
 
         <div className="flex flex-col justify-start items-start lg:mt-2 space-y-1 w-full h-24 px-2">
           <div className="flex items-center w-full justify-between pt-1 lg:pt-0">
-            <h1 className="text-sm font-normal text-text font-SFPro  leading-tight tracking-tight">
+            <h1 className="text-sm font-normal text-text font-SFPro  leading-tight tracking-wide">
               {item.nama}
             </h1>
           </div>
 
           {/* Apply 2-line clamp */}
-          <p className="flex items-center space-x-2 text-xs lg:text-sm text-disable-text font-light leading-[17px] tracking-tight font-SFPro">
+          <p className="flex items-center space-x-2 text-xs lg:text-sm text-disable-text font-light leading-[17px] tracking-wide font-SFPro">
             <p>{item.kategori?.name}</p>
             <div className="w-[5px] h-[5px] bg-[#efefef] rounded-full" />
             <p>{item.tipeProduk?.name}</p>
           </p>
 
-          <h1 className="text-gold pt-2 lg:pt-0 text-sm lg:text-base font-semibold text-secondary font-SFPro leading-tight tracking-tight">
+          <h1 className="text-gold pt-2 lg:pt-0 text-sm lg:text-base font-semibold text-secondary font-SFPro leading-tight tracking-wide">
             Rp {item.harga?.toLocaleString("id-ID")}
           </h1>
         </div>

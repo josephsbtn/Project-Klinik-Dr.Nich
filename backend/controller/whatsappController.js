@@ -87,8 +87,38 @@ function sendWhatsAppProdukMessage(nama) {
   }
 }
 
+function sendWhatsAppKonsultasi() {
+  const message = `Halo, Dr. Nich. Saya ingin melakukan konsultasi.
+  
+  Berikut adalah detail saya:
+  - Nama: [Nama Lengkap Anda]
+  - Keluhan : [Keluhan yang dialami]
+  
+  Terima kasih atas perhatian dan bantuannya. Saya menunggu informasi dari Dr. Nich.`;
+
+  // Encode pesan agar sesuai dengan format URL
+  const encodedMessage = encodeURIComponent(message);
+
+  // Buat URL WhatsApp dengan nomor telepon dan pesan
+  const url = `https://wa.me/${phone}?text=${encodedMessage}`;
+
+  // Periksa perangkat dan buka URL sesuai
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    // Jika perangkat adalah ponsel, buka URL langsung
+    window.location.href = url;
+  } else {
+    // Jika perangkat adalah desktop, buka URL di tab baru
+    window.open(url, "_blank");
+  }
+}
+
 export {
   sendWhatsAppReservasiMessage,
   sendWhatsAppProdukMessage,
   sendWhatsAppReservasiLayananMessage,
+  sendWhatsAppKonsultasi,
 };

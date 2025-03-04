@@ -16,7 +16,7 @@ function CardJenisLayanan({ item }) {
         className="w-[127px] h-[141px] lg:w-[200px] lg:h-[222px] object-cover rounded-md"
       />
       <div className="flex w-[127px] lg:w-[200px] justify-between items-center mt-2 lg:mt-2">
-        <h1 className="font-normal text-sm lg:text-base font-SFPro text-gray-700 truncate group-hover:text-white leading-tight tracking-tight">
+        <h1 className="font-normal text-sm lg:text-base font-SFPro text-gray-700 truncate group-hover:text-white leading-tight tracking-wide">
           {item.nama}
         </h1>
         <ArrowRight />
