@@ -8,6 +8,7 @@ import iPan  from "../../assets/iconproduk/iPan.svg";
 import axios from 'axios'
 import { Kasir4 } from './Kasir4'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 export const kasirContext = createContext()
 export const Kasir = () => {
@@ -250,11 +251,7 @@ export const Kasir = () => {
                 );
               
                 if (response.status === 200) {
-                  toast.success("Lanjut Ke Pembayaran");
-                  setTimeout(() => {
-                    toast.success("Redirecting...");
-                    window.location.href = `/pos/pilihPembayaran/${response.data._id}`;
-                  }, 1500);
+                  toast.success("Berhasil menyimpan draft");
                 } else {
                   toast.error("Terjadi kesalahan dalam transaksi");
                   console.log(response);
