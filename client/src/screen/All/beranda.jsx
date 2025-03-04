@@ -670,7 +670,7 @@ export default function Beranda() {
                         className="!w-12 !h-12 rounded-full"
                       />
                       <div>
-                        <p className="text-gray-800 text-sm font-medium">
+                        <p className="text-gray-800 text-sm font-medium tracking-wide ">
                           {item.nama}
                         </p>
                         <div className="flex items-center gap-0">
@@ -686,7 +686,7 @@ export default function Beranda() {
                     </div>
                     {/* Review Content */}
                     <div className="overflow-auto">
-                      <p className="mt-4 text-sm text-gray-600 line-clamp-none">
+                      <p className="mt-4 text-sm text-gray-600 line-clamp-none tracking-wide">
                         {item.ulasan}
                       </p>
                     </div>

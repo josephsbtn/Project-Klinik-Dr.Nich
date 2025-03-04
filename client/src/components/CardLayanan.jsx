@@ -23,11 +23,11 @@ function CardLayanan({ item, path }) {
         </div>
 
         {/* Apply 2-line clamp */}
-        <p className="text-xs lg:text-sm text-disable-text font-light line-clamp-2 lg:line-clamp-1 leading-[17px] tracking-wide font-SFPro">
+        <p className="text-xs lg:text-sm text-disable-text font-light line-clamp-2 lg:line-clamp-1 leading-[17px] tracking-wider font-SFPro">
           {item.cardDeskripsi}
         </p>
 
-        <h1 className="text-gold pt-2 lg:pt-1 text-sm lg:text-base font-semibold text-secondary font-SFPro leading-tight tracking-wide">
+        <h1 className="text-gold pt-2 lg:pt-1 text-sm lg:text-base font-semibold text-secondary font-SFPro leading-tight tracking-wider">
           Rp {item.harga?.toLocaleString("id-ID")}
         </h1>
       </div>
