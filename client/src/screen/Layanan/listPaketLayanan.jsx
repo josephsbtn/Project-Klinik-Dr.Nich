@@ -45,14 +45,14 @@ function ListPaketLayanan() {
           <Navbar selected={"Layanan"} />
         </div>
 
-        <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
+        <div className="flex items-center w-[90%] lg:w-[85%]  justify-start space-x-2 mt-4 pt-20 ">
           <a
             onClick={() => navigate("/")}
-            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
             Beranda
           </a>
           <ArrowRightDisable />
-          <a className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          <a className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
             Paket Treatment
           </a>
         </div>
@@ -68,7 +68,7 @@ function ListPaketLayanan() {
             <p className="text-text text-sm font-SFPro text-center">{error}</p>
           </div>
         ) : (
-          <main className="w-[90%] lg:w-4/5 flex flex-col items-center lg:items-start space-y-4">
+          <main className="w-[90%] lg:w-[85%] flex flex-col items-center lg:items-start space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-fit justify-center mt-4">
               {jenisLayanan && jenisLayanan.length > 0 ? (
                 jenisLayanan.map((item) => (

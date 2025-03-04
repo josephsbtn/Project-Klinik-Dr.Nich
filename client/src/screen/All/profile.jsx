@@ -112,15 +112,13 @@ function Profile() {
       <div className="flex items-center w-[90%]  lg:w-4/5 justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
-        >
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-wide">
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/promo")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-tight"
-        >
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal font-SFPro leading-tight tracking-wide">
           Promo
         </a>
       </div>
@@ -131,7 +129,7 @@ function Profile() {
             className="mt-[30px] lg:w-[1040px] lg:h-[719px] lg:mx-auto"
             alt="Klinik"
           />
-          <p className=" mt-[24px] text-xs font-normal font-SFPro leading-tight tracking-tight lg:mx-auto lg:text-base">
+          <p className=" mt-[24px] text-xs font-normal font-SFPro leading-tight tracking-wide lg:mx-auto lg:text-base">
             Dr. Nick Aesthetic Clinic merupakan klinik kecantikan yg didirikan
             pada tahun 2024. Dengan dedikasi penuh terhadap keunggulan dan
             inovasi, kami membawa teknologi terbaru dan metode perawatan yang
@@ -163,7 +161,7 @@ function Profile() {
         {/* Sertifikasi Section */}
         <div className="flex flex-col pt-10 w-full mx-auto ">
           {/* Section Title */}
-          <div className="w-full mx-auto text-left text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-tight">
+          <div className="w-full mx-auto text-left text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-wide">
             Mengapa memilih Dr. Nich?
           </div>
 
@@ -171,7 +169,7 @@ function Profile() {
           <div className="flex flex-col lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4 ">
             {/* Teknologi */}
             <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
-              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-tight lg:text-secondary lg:text-xl">
+              <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-wide lg:text-secondary lg:text-xl">
                 Teknologi Terkini & Produk Berkualitas
               </h1>
               <Carousel

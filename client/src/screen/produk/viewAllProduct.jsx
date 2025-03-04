@@ -148,7 +148,7 @@ function ViewAllProduct() {
                   </div>
                   {/* Skin Type Filter */}
                   <div className="flex flex-col items-center  lg:items-start space-y-2 w-[85%]">
-                    <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary leading-snug tracking-normal">
+                    <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary leading-snug tracking-wide">
                       Jenis Kulit
                     </h1>
                     <div className="grid grid-cols-2 w-[90%] gap-4">
@@ -171,7 +171,7 @@ function ViewAllProduct() {
                             <div className="w-3 h-3 rounded-full bg-[#B2955B]"></div>
                           )}
                         </div>
-                        <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tight">
+                        <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-wide">
                           All
                         </span>
                       </label>
@@ -200,7 +200,7 @@ function ViewAllProduct() {
                               <div className="w-3 h-3 rounded-full bg-[#B2955B]"></div>
                             )}
                           </div>
-                          <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-tight">
+                          <span className="text-sm lg:text-base font-normal font-SFPro text-text leading-tight tracking-wide">
                             {item.name}
                           </span>
                         </label>
@@ -209,7 +209,7 @@ function ViewAllProduct() {
                   </div>
                   {/* Category Filter */}
                   <div className="flex flex-col items-start space-y-2 w-[85%] mt-12">
-                    <h1 className="text-base lg:text-lg  font-medium font-SFPro text-secondary leading-snug tracking-normal">
+                    <h1 className="text-base lg:text-lg  font-medium font-SFPro text-secondary leading-snug tracking-wide">
                       Kategori
                     </h1>
                     <div className="grid grid-cols-2 w-[90%]  gap-4">
@@ -299,7 +299,7 @@ function ViewAllProduct() {
 
           <div className="flex items-center justify-between w-[80%] mt-4">
             <h1
-              className="font-SFPro font-medium text-base tracking-tight leading-tight text-secondary
+              className="font-SFPro font-medium text-base tracking-wide leading-tight text-secondary
             lg:text-2xl lg:leading-[30px] lg:tracking-wide">
               Semua Produk
             </h1>

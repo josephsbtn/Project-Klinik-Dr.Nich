@@ -29,7 +29,7 @@ function OnDeveloping() {
       <main className="w-[90%] lg:w-[80%] flex flex-col mt-6 space-y-6">
         {/* Page Title with Subtle Animation */}
         <section className="w-full">
-          <h1 className="text-lg lg:text-2xl font-semibold text-secondary font-SFPro leading-tight tracking-tight animate-fadeIn">
+          <h1 className="text-lg lg:text-2xl font-semibold text-secondary font-SFPro leading-tight tracking-wide animate-fadeIn">
             🚀 Under Developing
           </h1>
           <p className="text-sm lg:text-base text-gray-500 mt-1">

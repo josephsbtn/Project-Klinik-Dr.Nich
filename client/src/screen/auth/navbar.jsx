@@ -117,7 +117,7 @@ export default function Navbar({ selected }) {
                 {[
                   { text: "Beranda", path: "/" },
                   { text: "Profile", path: "/profil" },
-                  { text: "Konsultasi", path: "/underdevelop" },
+                  { text: "Konsultasi", path: "/konsultasi" },
                   { text: "Produk", path: "/produk" },
                   { text: "Layanan", path: "/layanan" },
                   { text: "Reservasi", path: "/reservasi" },
@@ -129,7 +129,7 @@ export default function Navbar({ selected }) {
                     className="flex items-center justify-between w-full cursor-pointer hover:bg-primary hover:bg-opacity-30  p-2 rounded-xl transition-all duration-300"
                     onClick={() => handleNavigation(item.path, item.text)}>
                     <span
-                      className={`font-SFPro font-medium text-sm ${
+                      className={`font-SFPro font-medium text-sm tracking-wide ${
                         selected === item.text ? "text-primary" : "text-white"
                       }`}>
                       {item.text}

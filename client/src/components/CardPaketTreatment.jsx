@@ -13,10 +13,10 @@ function CardPaketLayanan({ item, path }) {
         className="w-full h-[150px] object-cover aspect-square rounded-[10px]"
       />
       <div className="w-full flex flex-col items-start">
-        <h1 className="text-sm lg:text-base font-normal font-SFPro leading-tight tracking-tight text-text">
+        <h1 className="text-sm lg:text-base font-normal font-SFPro leading-tight tracking-wide text-text">
           {item.nama}
         </h1>
-        <h1 className="text-gold pt-2 lg:pt-1 text-sm lg:text-base font-semibold text-secondary font-SFPro leading-tight tracking-tight">
+        <h1 className="text-gold pt-2 lg:pt-1 text-sm lg:text-base font-semibold text-secondary font-SFPro leading-tight tracking-wide">
           {item.harga?.toLocaleString("id-ID")}
         </h1>
       </div>

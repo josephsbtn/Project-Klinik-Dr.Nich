@@ -491,7 +491,7 @@ export default function Beranda() {
 
         {/* Jenis Layanan Section */}
         <section className="flex flex-col my-8 w-full items-center">
-          <main className="w-[90%] flex flex-col items-center lg:w-[80%]   ">
+          <main className="w-[90%] flex flex-col items-center lg:w-[85%]   ">
             <div className="flex w-full justify-between items-center lg:py-6  ">
               <h1 className="font-SFPro font-normal text-base lg:text-xl leading-[25px] tracking-wide">
                 Paket Treatment
@@ -533,18 +533,18 @@ export default function Beranda() {
           </main>
         </section>
 
-        <section className="lg:w-[80%] w-[90%]">
+        <section className="lg:w-[85%] w-[90%]">
           <CardPaketTreatmentBeranda />
         </section>
-        <section className="lg:w-[80%] w-[90%]">
+        <section className="lg:w-[85%] w-[90%]">
           <LayananPopuler />
         </section>
-        <section className="lg:w-[80%] w-[90%]">
+        <section className="lg:w-[85%] w-[90%]">
           <ProdukTerbaru />
         </section>
 
         {/* Galeri Section */}
-        <section className="lg:w-[80%] flex flex-col my-[26px] w-full items-center">
+        <section className="lg:w-[85%] flex flex-col my-[26px] w-full items-center">
           {/* Header */}
           <main className="w-full flex lg:px-0 px-6 justify-between">
             <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-wide">
@@ -619,7 +619,7 @@ export default function Beranda() {
         </section>
         <section className="relative  w-full py-10 mx-auto ">
           <main className="w-full flex lg:px-0 px-6 justify-center pb-[25px]">
-            <div className="w-[90%] lg:w-[80%]">
+            <div className="w-[90%] lg:w-[85%]">
               <h1 className="text-[#464646]  text-base lg:text-xl font-medium font-SFPro leading-tight tracking-tight">
                 Customer Punya Cerita
               </h1>
