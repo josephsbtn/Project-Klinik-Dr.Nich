@@ -73,18 +73,18 @@ function PaketTreatmentBeranda() {
   return (
     <section className="flex flex-col my-[15px] w-full items-center">
       <main className="w-full flex justify-between">
-        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-tight">
+        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-wide">
           Paket Treatment
         </h1>
         <h1
-          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer tracking-tight"
+          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer tracking-wide"
           onClick={() => navigate("/layanan/paketTreatment")}>
           Lihat Semua
         </h1>
       </main>
       {loading ? (
         <div className="h-full w-full flex items-center justify-center">
-          <h1 className="font-SFPro text-base text-secondary font-medium">
+          <h1 className="font-SFPro text-base text-secondary font-medium tracking-wide">
             Loading..
           </h1>
         </div>
@@ -107,7 +107,7 @@ function PaketTreatmentBeranda() {
                   ))
                 ) : (
                   <div className="h-full w-full flex items-center justify-center">
-                    <h1 className="font-SFPro text-base text-secondary font-medium">
+                    <h1 className="font-SFPro text-base text-secondary font-medium tracking-wide">
                       Layanan Tidak Ditemukan
                     </h1>
                   </div>

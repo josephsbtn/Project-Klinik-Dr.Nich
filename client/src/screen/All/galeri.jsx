@@ -73,21 +73,21 @@ function Profile() {
     <main className="w-full flex flex-col items-center overflow-x-hidden">
       <Navbar selected={"Galeri"} />
       <div className="mt-[18px] flex flex-col w-full items-center">
-        <div className="flex items-center w-[90%] lg:w-4/5  mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
+        <div className="flex items-center w-[90%] lg:w-[85%]  mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
           <a
             onClick={() => navigate("/")}
-            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
             Beranda
           </a>
           <ArrowRightDisable />
           <a
             onClick={() => navigate("/galeri")}
-            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
             Galeri
           </a>
         </div>
 
-        <div className="w-screen lg:w-4/5  h-full flex flex-col mt-[30px]">
+        <div className="w-screen lg:w-[85%] h-full flex flex-col mt-[30px]">
           {loading ? (
             <LoadingSpinner />
           ) : (
@@ -123,12 +123,12 @@ function Profile() {
 
           {/* Galeri */}
 
-          <div className="flex flex-col gap-4 z-0 items-center">
+          <div className="flex flex-col gap-4 z-0 items-center lg:items-start ">
             {/* Layanan */}
-            <section className="w-[90%] lg:w-4/5">
+            <section className="w-[90%] lg:w-full">
               <LayananPopuler />
             </section>
-            <section className="w-[90%] lg:w-4/5">
+            <section className="w-[90%] lg:w-full">
               <ProdukTerbaru />
             </section>
           </div>

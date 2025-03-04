@@ -7,6 +7,7 @@ import axios from "axios";
 import SecondCardLayanan from "../../components/SecondCardLayanan";
 import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
+import LoadingSpinner from "../../components/LoadingSpinner";
 function DetailJenisLayanan() {
   const navigate = useNavigate();
   const { idJenis } = useParams();
@@ -54,47 +55,47 @@ function DetailJenisLayanan() {
         <div className="fixed w-full z-30">
           <Navbar selected={"Layanan"} />
         </div>
-        <div className="flex items-center w-[90%] lg:w-4/5  justify-start space-x-2 mt-4 pt-20 ">
+        <div className="flex items-center w-[90%] lg:w-[85%]  justify-start space-x-2 mt-4 pt-20 ">
           <a
             onClick={() => navigate("/")}
-            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normaltracking-wide">
             Beranda
           </a>
           <ArrowRightDisable />
           <a
             onClick={() => navigate("/layanan")}
-            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
             Layanan
           </a>
           <ArrowRightDisable />
           <a
             onClick={() => navigate("/layanan")}
-            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+            className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
             {judul}
           </a>
         </div>
         {loading ? (
           <>
-            <h1>Loading..</h1>
+            <LoadingSpinner />
           </>
         ) : error ? (
           <>
             <h1>{error}</h1>
           </>
         ) : (
-          <main className="w-[90%] lg:w-[80%] flex flex-col mt-6 space-y-3">
-            <h1 className="text-base font-medium font-SFPro text-secondary lg:text-2xl leading-5">
+          <main className="w-[90%] lg:w-[85%] flex flex-col mt-6 space-y-3">
+            <h1 className="text-base font-medium font-SFPro text-secondary lg:text-2xl leading-5 tracking-wide">
               {judul}
             </h1>
-            <p className="max-w-full text-start font-SFPro text-text text-xs lg:text-lg">
+            <p className="max-w-full text-start font-SFPro text-text text-xs lg:text-lg tracking-wide">
               {deskripsi}
             </p>
 
-            <h1 className="font-SFPro font-medium pt-4 lg:text-xl text-text text-sm">
+            <h1 className="font-SFPro font-medium pt-4 lg:text-xl text-text text-sm tracking-wide">
               Daftar Treatment
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  items-center space-y-3 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3  items-center w-full">
               {listLayanan?.map((item) => (
                 <div
                   key={item._id}

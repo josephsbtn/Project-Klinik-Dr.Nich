@@ -14,19 +14,19 @@ function SecondCardLayanan({ item }) {
       <div className="flex flex-col justify-between items-start space-y-1  w-full h-24 lg:h-40 ">
         <div className="w-full ">
           <div className="flex items-center w-full justify-between">
-            <h1 className="text-sm lg:text-base font-medium font-SFPro text-secondary leading-5 group-hover:text-white  transition-all duration-300 ease-in-out">
+            <h1 className="text-sm lg:text-base font-medium font-SFPro text-secondary leading-5 group-hover:text-white  transition-all duration-300 ease-in-out tracking-wide">
               {item.nama}
             </h1>
             <ArrowRight className="w-4 h-4 text-gold" />
           </div>
 
           {/* Apply 2-line clamp */}
-          <p className="text-xs lg:text-sm text-text mt-1 font-normal leading-4 line-clamp-2 lg:line-clamp-4 group-hover:text-white  transition-all duration-300 ease-in-out">
+          <p className="text-xs lg:text-sm text-text mt-1 font-normal leading-4 line-clamp-2 lg:line-clamp-4 group-hover:text-white  transition-all duration-300 ease-in-out tracking-wide">
             {item.deskripsi}
           </p>
         </div>
 
-        <h1 className="text-gold mt-4 text-base lg:text-base font-medium text-secondary font-SFPro group-hover:text-white  transition-all duration-300 ease-in-out">
+        <h1 className="text-gold mt-4 text-base lg:text-base font-medium text-secondary font-SFPro group-hover:text-white  transition-all duration-300 ease-in-out tracking-wider">
           Rp {item.harga?.toLocaleString("id-ID")}
         </h1>
       </div>

@@ -87,19 +87,19 @@ function ViewAllTreatment() {
           <div className="flex items-center w-[90%] lg:w-[85%] justify-start space-x-2 mt-4 pt-20 ">
             <a
               onClick={() => navigate("/")}
-              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
               Beranda
             </a>
             <ArrowRightDisable />
             <a
               onClick={() => navigate("/layanan")}
-              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
               layanan
             </a>
             <ArrowRightDisable />
             <a
               onClick={() => navigate(`/layanan/viewAllTreatment`)}
-              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+              className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
               Semua Treatment
             </a>
           </div>
@@ -125,7 +125,7 @@ function ViewAllTreatment() {
                   </h1>
 
                   <div className="grid grid-cols-2 w-[90%]">
-                    <label className="flex items-center space-x-2 cursor-pointer">
+                    <label className="flex items-center space-x-2 cursor-pointer tracking-wide">
                       <input
                         type="radio"
                         name="filterSkin"
@@ -135,7 +135,7 @@ function ViewAllTreatment() {
                         className="hidden"
                       />
                       <div
-                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all tracking-wide 
               ${
                 filterCategory === "all"
                   ? "border-[#B2955B]"
@@ -145,7 +145,7 @@ function ViewAllTreatment() {
                           <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
                         )}
                       </div>
-                      <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                      <span className="text-sm lg:text-base font-normal font-SFPro text-text tracking-wide">
                         Semua
                       </span>
                     </label>
@@ -153,7 +153,7 @@ function ViewAllTreatment() {
                     {productType ? (
                       productType.map((item) => (
                         <label
-                          className="flex items-center space-x-2 cursor-pointer"
+                          className="flex items-center space-x-2 cursor-pointer tracking-wide"
                           key={item._id}>
                           <input
                             type="radio"
@@ -164,7 +164,7 @@ function ViewAllTreatment() {
                             className="hidden"
                           />
                           <div
-                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all 
+                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all tracking-wide
                   ${
                     filterCategory === item.nama
                       ? "border-[#B2955B]"
@@ -174,7 +174,7 @@ function ViewAllTreatment() {
                               <div className="w-4 h-4 rounded-full bg-[#B2955B]"></div>
                             )}
                           </div>
-                          <span className="text-sm lg:text-base font-normal font-SFPro text-text">
+                          <span className="text-sm lg:text-base font-normal font-SFPro text-text tracking-wide">
                             {item.nama}
                           </span>
                         </label>
@@ -187,7 +187,7 @@ function ViewAllTreatment() {
 
                 <button
                   onClick={() => setIsFilterOpen(false)}
-                  className="mt-2 w-[80%] lg:w-fit bg-secondary text-white rounded-md p-2">
+                  className="mt-2 w-[80%] lg:w-fit bg-secondary text-white rounded-md p-2 tracking-wide">
                   Terapkan
                 </button>
               </div>
@@ -195,7 +195,7 @@ function ViewAllTreatment() {
           </ConfirmPopUp>
 
           <div className="flex justify-between items-center w-[90%] lg:w-[85%] mt-4">
-            <h1 className="font-SFPro w-full text-start lg:text-2xl text-secondary font-medium text-base">
+            <h1 className="font-SFPro w-full text-start lg:text-2xl text-secondary font-medium text-base tracking-wide">
               Semua Treatment
             </h1>
             <button
@@ -227,7 +227,7 @@ function ViewAllTreatment() {
             )}
           </div>
 
-          <div className="flex flex-col gap-4 items-center w-[90%] lg:w-[80%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">
+          <div className="flex flex-col gap-4 items-center w-[90%] lg:w-[85%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">
             {/* Popular Services */}
             <section className="lg:w-full w-full">
               <LayananPopuler />

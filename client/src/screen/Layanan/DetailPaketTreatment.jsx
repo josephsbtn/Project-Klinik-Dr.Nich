@@ -59,16 +59,16 @@ function DetailPaketTreatment() {
       <div className="fixed w-full z-30">
         <Navbar selected={"Layanan"} />
       </div>
-      <div className="flex items-center w-[90%] justify-start space-x-2 mt-4 pt-20">
+      <div className="flex items-center w-[90%] lg:w-[85%] justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
           Beranda
         </a>
         <ArrowRightDisable />
         <a
           onClick={() => navigate("/layanan")}
-          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal">
+          className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
           Layanan
         </a>
         <ArrowRightDisable />
@@ -76,7 +76,7 @@ function DetailPaketTreatment() {
           onClick={() =>
             navigate(`/layanan/detailPaketTreatment/${idTreatment}`)
           }
-          className="cursor-pointer text-xs text-disable-text  lg:text-sm font-normal">
+          className="cursor-pointer text-xs text-disable-text  lg:text-sm font-normal tracking-wide">
           {judul}
         </a>
       </div>
@@ -89,7 +89,7 @@ function DetailPaketTreatment() {
           <h1>{error}</h1>
         </>
       ) : (
-        <main className="w-[90%] lg:[80%] flex flex-col space-y-3 items-center">
+        <main className="w-[90%] lg:[85%] flex flex-col space-y-3 items-center">
           <h1 className="text-secondary  lg:text-2xl  font-SFPro font-medium text-base w-full text-start leading-5 tracking-wide">
             {judul}
           </h1>
@@ -100,15 +100,15 @@ function DetailPaketTreatment() {
               alt={judul}
             />
             <div className="w-full space-y-2 lg:max-w-[60%]">
-              <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:-tracking-tight">
+              <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:tracking-wide">
                 {deskripsi}
               </p>
               {listTreatment ? (
                 <>
-                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:-tracking-tight pt-2">
+                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:tracking-wide pt-2">
                     Treatment
                   </p>
-                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:-tracking-tight">
+                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:tracking-wide">
                     {listTreatment}
                   </p>
                 </>
@@ -116,16 +116,16 @@ function DetailPaketTreatment() {
 
               {manfaat ? (
                 <>
-                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:-tracking-tight pt-2">
+                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:tracking-wide pt-2">
                     Manfaat
                   </p>
-                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:-tracking-tight">
+                  <p className="whitespace-pre-line text-xs lg:text-base font-SFPro font-normal text-text leading-4 lg:leading-5 tracking-normal lg:tracking-wide">
                     {manfaat}
                   </p>
                 </>
               ) : null}
 
-              <p className="w-full text-start text-xs lg:text-base  font-SFPro font-normal text-text leading-4 lg:leading-5  tracking-normal lg:-tracking-tight pt-2">
+              <p className="w-full text-start text-xs lg:text-base  font-SFPro font-normal text-text leading-4 lg:leading-5  tracking-normal lg:tracking-wide pt-2">
                 Durasi Treatment: {durasi}
               </p>
               <button

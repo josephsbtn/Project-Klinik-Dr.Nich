@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { sendWhatsAppReservasiMessage } from "../../../../backend/controller/whatsappController";
+import {
+  sendWhatsAppReservasiMessage,
+  sendWhatsAppKonsultasi,
+} from "../../../../backend/controller/whatsappController";
 
 // Logo & images
 import logo from "../../assets/logodrnich.svg";
@@ -60,6 +63,8 @@ export default function Navbar({ selected }) {
   const handleNavigation = (path, text) => {
     if (path === "/reservasi") {
       sendWhatsAppReservasiMessage();
+    } else if (path === "/konsultasi") {
+      sendWhatsAppKonsultasi();
     } else {
       navigate(path);
       setIsNavOpen(false);
@@ -112,7 +117,7 @@ export default function Navbar({ selected }) {
                 {[
                   { text: "Beranda", path: "/" },
                   { text: "Profile", path: "/profil" },
-                  { text: "Konsultasi", path: "/underdevelop" },
+                  { text: "Konsultasi", path: "/konsultasi" },
                   { text: "Produk", path: "/produk" },
                   { text: "Layanan", path: "/layanan" },
                   { text: "Reservasi", path: "/reservasi" },
@@ -124,7 +129,7 @@ export default function Navbar({ selected }) {
                     className="flex items-center justify-between w-full cursor-pointer hover:bg-primary hover:bg-opacity-30  p-2 rounded-xl transition-all duration-300"
                     onClick={() => handleNavigation(item.path, item.text)}>
                     <span
-                      className={`font-SFPro font-medium text-sm ${
+                      className={`font-SFPro font-medium text-sm tracking-wide ${
                         selected === item.text ? "text-primary" : "text-white"
                       }`}>
                       {item.text}
