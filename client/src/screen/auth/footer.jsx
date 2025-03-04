@@ -50,7 +50,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-footer-pattern bg-cover py-8 px-6 lg:px-24 lg:bg-footer-pattern-desktop">
+    <footer className="w-full bg-footer-pattern tracking-wide lg:tracking-wide bg-cover py-8 px-6 lg:px-24 lg:bg-footer-pattern-desktop">
       {/* Main Container */}
       <div className="flex flex-col w-full h-full lg:justify-between lg:items-start">
         {/* <img src={footerbaru} alt="" className="absolute z-0" /> */}
@@ -60,7 +60,7 @@ export default function Footer() {
             onClick={handleNavigation("/")}
             src={logoPutih}
             alt="Logo Dr. Nich"
-            className="w-[150px] h-auto"
+            className="w-[150px] h-auto cursor-pointer"
           />
           <div className="flex space-x-4 mt-4 lg:mt-0">
             <img
@@ -73,10 +73,10 @@ export default function Footer() {
               alt="LinkedIn"
               className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer"
             />
-
             <a
               className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer flex items-center justify-center"
-              href="https://www.tiktok.com/@dr.nich_aesthetic">
+              href="https://www.tiktok.com/@dr.nich_aesthetic"
+            >
               <img
                 src={tt}
                 alt="TikTok"
@@ -93,7 +93,8 @@ export default function Footer() {
             />
             <a
               className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer flex items-center justify-center"
-              href="https://www.instagram.com/dr.nich_beautyclinic/">
+              href="https://www.instagram.com/dr.nich_beautyclinic/"
+            >
               <img
                 src={ig}
                 onClick={handleSosmed(
@@ -107,27 +108,32 @@ export default function Footer() {
         </div>
 
         {/* Contact Information and Navigation Links */}
-        <div className="flex gap-11 lg:gap-0 lg:flex-row lg:justify-between lg:w-full z-10">
-          <div className="w-[147px] grid gap-4 lg:gap-6 lg:w-full">
+        <div className="flex mt-10 gap-20 lg:gap-10 lg:flex-row lg:justify-between lg:w-full z-10">
+          <div className="w-full lg:w-auto lg:mr-4">
             <a
               href="https://maps.app.goo.gl/benokSLZCgXfyL5C9"
               className="flex items-start space-x-3 cursor-pointer clickable"
               onClick={() =>
                 handleSosmed("https://maps.app.goo.gl/benokSLZCgXfyL5C9")
-              }>
+              }
+            >
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
-              <p className="text-sm leading-tight text-[#e8ebe0] lg:max-w-[60%]">
-                Jl. Pringgodani Gg. Buntu No.4, Tegalrejo, Kec. Argomulyo, Kota
-                Salatiga, Jawa Tengah 50733
+              <p className="text-sm text-justify leading-tight text-[#e8ebe0] w-24 lg:text-sm lg:tracking-wide">
+                Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec.
+                Argomulyo, Kota Salatiga, Jawa Tengah 50733
               </p>
             </a>
+          </div>
+
+          <div className="w-[147px] grid gap-10 lg:gap-6 lg:w-full lg:ml-4">
             <div className="flex items-center space-x-3">
               <img src={email} alt="Email" className="w-5 h-5" />
               <p className="text-sm text-[#e8ebe0]">drnichofficial@gmail.com</p>
             </div>
             <div
               className="flex items-center space-x-3 cursor-pointer"
-              onClick={handleWhatsApp}>
+              onClick={handleWhatsApp}
+            >
               <img src={kontak} alt="Kontak" className="w-5 h-5" />
               <p className="text-sm text-[#e8ebe0]">+6285700525830</p>
             </div>
@@ -138,13 +144,14 @@ export default function Footer() {
           </div>
 
           {/* Navigation Links */}
-          <div className="w-[126px] h-[101px] grid grid-cols-2 gap-[15px] lg:h-full lg:w-full">
+          <div className="w-full h-[101px] grid grid-cols-2 gap-[15px] lg:grid-cols-4 lg:h-full lg:w-full">
             {footerLinks.map((item) => (
               <a
                 key={item.judul}
                 href="#"
                 onClick={item.onClick}
-                className="text-sm text-[#e8ebe0] hover:underline">
+                className="text-sm text-[#e8ebe0] hover:underline"
+              >
                 {item.judul}
               </a>
             ))}
