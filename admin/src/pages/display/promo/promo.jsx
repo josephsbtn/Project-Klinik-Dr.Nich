@@ -31,10 +31,10 @@ export const DisplayPromo = () => {
   }, []);
 
   return (
-    <div className="flex flex-col px-5 py-3 gap-1 bg-white w-full min-h-full h-fit">
+    <div className="flex flex-col px-5 py-3 gap-1 bg-white w-full h-full ">
       <ToastContainer />
 
-      <div className="flex flex-col justify-between w-full h-full py-3 px-3">
+      <div className="flex flex-col justify-between w-full overflow-auto h-full py-3 px-3">
         {/* Jika data kosong */}
         {datax.length === 0 ? (
           <div className="flex flex-col w-full h-full items-center justify-center text-black/40">
@@ -61,13 +61,13 @@ export const DisplayPromo = () => {
           </div>
         )}
 
+      </div>
         {/* Tombol Tambah Layanan */}
         <Link
           to="/pos/promoadd"
           className="flex justify-center items-center cursor-pointer gap-2 h-[44px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px]">
           <AiFillPlusCircle size={20} /> Tambah Promo
         </Link>
-      </div>
     </div>
   );
 };

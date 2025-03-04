@@ -263,8 +263,9 @@ export const Kasir = () => {
         }
 
     return (
-        <kasirContext.Provider value={{totalAkhir, handleDraft, potongan, cashback, total, promo, invoice, cart, setCart, pelanggan, setPelangganTerpilih, pelangganTerpilih, promoTerpilih, setPromoTerpilih, modal, setModal}}>
-        <div className='flex flex-col px-10 py-8 gap-1 bg-white w-full h-fit min-h-full pt-8 text-[#454545] text-[12px]'>
+        <kasirContext.Provider value={{totalAkhir, handleDraft, potongan, cashback, total, promo, invoice, cart, setCart, pelanggan, setPelangganTerpilih, pelangganTerpilih, promoTerpilih, setPromoTerpilih, modal, setModal}}>    
+        <div className='flex flex-col px-10 py-8 gap-1 bg-white w-full h-full min-h-full pt-8 text-[#454545] text-[12px]'>
+        <div className='max-h-[90%] overflow-auto w-full flex flex-col'>
             <button className='flex justify-between'>
                 <button className='border-b-2 border-[#C2A353] text-[#C2A353] w-[50%] shadow-md'>  
                     <p>Transaksi</p>
@@ -350,7 +351,8 @@ export const Kasir = () => {
 
                 </button>
             ))}
-            <div className='flex justify-between text-center text-[14px] mt-auto'>
+            </div>
+            <div className=' flex justify-between text-center text-[14px] mt-auto'>
                     <button 
                     onClick={handleDraft}
                     className='border border-[#C2A353] text-[#C2A353] w-[39%] p-4 rounded-xl'>
