@@ -220,7 +220,7 @@ export const Kasir = () => {
     
         kalkulasi();
     }, [ promoTerpilih]);
-    const handleDraft =(e)=>{
+    const handleDraft =async(e)=>{
             e.preventDefault()
             const data = {
                 pelanggan : pelangganTerpilih._id,
@@ -236,17 +236,33 @@ export const Kasir = () => {
                 kembalian: 0,
             }
             console.log(data)
-            axios.post('https://api.drnich.co.id/api/pos/kasir/transaksi', data, 
-                {
+            try {
+                const response = await axios.post(
+                  "https://api.drnich.co.id/api/pos/kasir/transaksi",
+                  data,
+                  {
                     headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                     withCredentials: true,
-                    }
-            ).then(response =>{
-                response.status==200 && navigate(0)
-            })
+                  }
+                );
+              
+                if (response.status === 200) {
+                  toast.success("Lanjut Ke Pembayaran");
+                  setTimeout(() => {
+                    toast.success("Redirecting...");
+                    window.location.href = `/pos/pilihPembayaran/${response.data._id}`;
+                  }, 1500);
+                } else {
+                  toast.error("Terjadi kesalahan dalam transaksi");
+                  console.log(response);
+                }
+              } catch (error) {
+                console.error("Error dalam transaksi:", error);
+                toast.error("Terjadi kesalahan saat memproses transaksi");
+              }
         }
 
     return (
