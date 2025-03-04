@@ -372,7 +372,8 @@ export default function Beranda() {
         }}
         autoplayDelay={3000}
         loop={true} // Enable looping
-        navigation={CarouselNavigation} // Use the CarouselNavigation component
+        navigation={CarouselNavigation}
+        grabcursor={true} // Use the CarouselNavigation component
       >
         {promo &&
           promo.map((item, index) => (
