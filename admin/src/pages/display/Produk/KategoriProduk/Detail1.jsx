@@ -37,30 +37,30 @@ export const Detail1 = () => {
     };
     FetchData();
     setNav("Detail");
-    setLink("/pos/kategoriproduk2")
+    setLink("/pos/kategoriproduk2");
   }, []);
 
-  const navigate = useNavigate()
-const handleHapus = () => {
-    try{
-    axios.delete(`${
-          import.meta.env.VITE_BASE_URL_BACKEND
-        }/api/foto/deleteMesin/${id}`).then(
-      response =>{
-        response.status==200 && toast.success("Berhasil Menghapus Sertifikat")
-        setTimeout(()=>{
-          toast.success('Kembali ke halaman Sertifikat')
-          navigate('/pos/sertifikat')
-        },1000)
-      }
-    )
-  }
-    catch{
-      toast.error("Gagal menghapus Sertifikat")
+  const navigate = useNavigate();
+  const handleHapus = () => {
+    try {
+      axios
+        .delete(
+          `${
+            import.meta.env.VITE_BASE_URL_BACKEND
+          }/api/produk/deletekategoriProduk/${id}`
+        )
+        .then((response) => {
+          response.status == 200 &&
+            toast.success("Berhasil Menghapus Kategori Produk");
+          setTimeout(() => {
+            toast.success("Kembali ke halaman Produk");
+            navigate("/pos/produk");
+          }, 1000);
+        });
+    } catch {
+      toast.error("Gagal menghapus Kategori Produk");
     }
-  }
-
-
+  };
 
   document.title = "Detail";
   return (
@@ -76,16 +76,14 @@ const handleHapus = () => {
           </div>
         </div>
         <div className="flex gap-1">
-        <button
+          <button
             onClick={handleHapus}
-            className="flex justify-center items-center gap-2 h-[44px] w-full max-w-[115px]  border border-[#C2A353] font-medium rounded-lg text-[14px] bg-gradient-to-r from-[#C2A353] to-[#EAC564] text-transparent bg-clip-text"
-          >
+            className="flex justify-center items-center gap-2 h-[44px] w-full max-w-[115px]  border border-[#C2A353] font-medium rounded-lg text-[14px] bg-gradient-to-r from-[#C2A353] to-[#EAC564] text-transparent bg-clip-text">
             Hapus{" "}
           </button>
           <Link
             to={{ pathname: `/pos/UpdateKategoriJenisProduct/${id}` }}
-            className="flex justify-center items-center gap-2 h-[44px] w-full min-m-[160px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] "
-          >
+            className="flex justify-center items-center gap-2 h-[44px] w-full min-m-[160px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px] ">
             Edit
           </Link>
         </div>
