@@ -61,23 +61,23 @@ return (
            <div key={i} className='flex justify-between w-full mt-2'>
            <div className='grid place-items-start w-fitt font-semibold'>
                <p>{item?.produk?.namaProduk}</p>
-               <p>{item?.jumlah} x Rp {item?.produk?.hargaJual}</p>
+               <p>{item?.jumlah} x Rp {item?.produk?.hargaJual?.toLocaleString('id-ID')}</p>
            </div>
-           <p className='font-semibold'>Rp {item?.jumlah * item?.produk?.hargaJual}</p>
+           <p className='font-semibold'>Rp {(item?.jumlah * item?.produk?.hargaJual).toLocaleString('id-ID')}</p>
        </div>
         ))}
         <div className='border border-dashed border-[#BDBDBD] my-5'></div>
         <div className='flex justify-between w-full'>
             <p>Total</p>
-            <p className='font-semibold'>Rp {transaksi?.total}</p>
+            <p className='font-semibold'>Rp {transaksi?.total?.toLocaleString('id-ID')}</p>
         </div>
         <div className='flex justify-between w-full'>
             <p>Potongan</p>
-            <p className='font-semibold'>Rp {transaksi?.potongan}</p>
+            <p className='font-semibold'>Rp {transaksi?.potongan?.toLocaleString('id-ID')}</p>
         </div>
         <div className='flex justify-between w-full'>
             <p>Total Akhir</p>
-            <p className='font-semibold'>Rp {transaksi?.totalAkhir}</p>
+            <p className='font-semibold'>Rp {transaksi?.totalAkhir?.toLocaleString('id-ID')}</p>
         </div>
         <div className='flex justify-between items-end mt-[20px] text-[14px] font-semibold'>
             <button

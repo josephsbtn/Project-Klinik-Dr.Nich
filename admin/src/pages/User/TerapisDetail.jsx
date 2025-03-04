@@ -93,7 +93,7 @@ export const TerapisDetail = () => {
       </div>
       <div className="mx-1 flex flex-col gap-3">
         <a href="#" className=" w-full h-[50px] mt-2">
-          <span className="hover:scale-105 w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-semibold px-5">
+          <span className=" w-full  h-full border rounded-xl text-[#C2A353] border-[#C2A353] flex items-center font-semibold px-5">
             Lihat Foto KTP
             <div className="flex ms-auto">
               <AiOutlineRight className="text-yellow-300" size={15} />

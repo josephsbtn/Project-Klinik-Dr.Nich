@@ -305,6 +305,7 @@ export const DaftarProdukUpdate = () => {
           Nominal Keuntngan
         </label>
         <input
+          disabled
           value={`Rp ${hargaJR - hargaBR}`}
           type="text"
           placeholder=""

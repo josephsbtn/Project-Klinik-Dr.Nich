@@ -34,6 +34,7 @@ export const Kasir = () => {
     const [kategoriTerpilih, setKategoriTerpilih] = useState('')
     const [jenisTerpilih, setJenisTerpilih] = useState('')
     const [produkTampil, setProdukTampil] = useState([])
+    const [simpanDraft, setSimpanDraft] = useState(false)
     const [cart, setCart] = useState([])
     const jenisRef = useRef(null)
     const kategoriRef = useRef(null)
@@ -179,6 +180,48 @@ export const Kasir = () => {
                 console.error("Error fetching calculation:", error);
             }
     }
+    const kalkulasi2 = async() => {
+        
+        setTotal(0);
+        setTotalAkhir(0);
+    
+        // Calculate total price
+        const totalHarga = cart.reduce((acc, item) => acc + item.jumlah * item.hargaJual, 0);
+        setTotal(totalHarga);
+        setTotalAkhir(totalHarga);
+    
+        const datax = {
+            promo: promoTerpilih._id,
+            produks: cart,
+        };
+    
+    
+        
+            try {
+                const response = await axios.post(
+                    "https://api.drnich.co.id/api/pos/kasir/kalkulasiharga/",
+                    datax,
+                    {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    withCredentials: true,
+                    }
+                );
+                if (response.status === 200) {
+                    setPotongan(response.data.kalkulasi.potongan);
+                    setCashback(response.data.kalkulasi.cashback);
+                    setTotalAkhir(totalHarga - response.data.kalkulasi.potongan);
+                }
+            } catch (error) {
+                console.error("Error fetching calculation:", error);
+            }
+            
+    }
+    useEffect(()=>{
+        simpanDraft == true && handleDraft()
+    },[simpanDraft])
     useEffect(() => {
         setTotal(0);
         setTotalAkhir(0);
@@ -221,8 +264,8 @@ export const Kasir = () => {
     
         kalkulasi();
     }, [ promoTerpilih]);
-    const handleDraft =async(e)=>{
-            e.preventDefault()
+    const handleDraft =async()=>{
+            
             const data = {
                 pelanggan : pelangganTerpilih._id,
                 promo : promoTerpilih._id,
@@ -354,7 +397,11 @@ export const Kasir = () => {
             </div>
             <div className=' flex justify-between text-center text-[14px] mt-auto'>
                     <button 
-                    onClick={handleDraft}
+                    onClick={(e)=>{
+                        e.preventDefault()
+                        kalkulasi2()
+                        setSimpanDraft(true)
+                    }}
                     className='border border-[#C2A353] text-[#C2A353] w-[39%] p-4 rounded-xl'>
                         <p>Simpan Draft</p>
                     </button>

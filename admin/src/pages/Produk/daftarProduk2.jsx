@@ -94,13 +94,13 @@ export const DaftarProduk2 = () => {
           <a
             // href="/pos/adddaftarproduk"
             href=""
-            className="flex justify-center items-center border-[#C2A353] text-[#C2A353] border rounded-lg w-[30%] p-3 text-[14px] hover:scale-105 gap-1"
+            className="flex justify-center items-center border-[#C2A353] text-[#C2A353] border rounded-lg w-[30%] p-3 text-[14px]  gap-1"
           >
             <img src={iBar} /> Scan
           </a>
           <a
             href="/pos/adddaftarproduk"
-            className="flex justify-center items-center bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white rounded-lg w-[70%] p-3 text-[14px] hover:scale-105 gap-1"
+            className="flex justify-center items-center bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white rounded-lg w-[70%] p-3 text-[14px]  gap-1"
           >
             <AiFillPlusCircle size={20} /> Tambah Manual
           </a>
