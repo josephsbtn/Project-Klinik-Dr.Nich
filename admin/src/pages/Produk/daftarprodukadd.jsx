@@ -299,7 +299,7 @@ export const DaftarProdukAdd = () => {
           className="border border-[#BDBDBD] rounded-xl w-full h-[45px] py-[15px] px-[20px] mb-[20px]"
         />
         <label className="text-start font-semibold mb-[5px]">
-          Nominal Keuntngan
+          Nominal Keuntungan
         </label>
         <input
           type="text"

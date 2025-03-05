@@ -159,7 +159,8 @@ export const DaftarBelanja = () => {
         setCart,
       }}
     >
-      <form className="flex flex-col px-7 py-3 gap-1 bg-white w-full min-h-screen h-fit text-[12px] text-[#454545] overflow-auto overflow-y-scroll scrollbar-hide">
+      <form className="flex flex-col px-7 py-3 gap-1 bg-white w-full h-full text-[12px] text-[#454545] overflow-auto overflow-y-scroll scrollbar-hide">
+        <div className="w-full h-full overflow-y-auto flex flex-col">
         <form className="my-5 flex gap-2 mx-3 border border-[#BDBDBD] rounded-xl items-center p-3">
           <AiOutlineSearch size={20} />
           <input
@@ -236,7 +237,8 @@ export const DaftarBelanja = () => {
             </div>
           ))}
         </div>
-        <div className="flex w-full h-full justify-end px-3 mt-auto">
+        </div>
+        <div className="flex w-full justify-end px-3 mt-auto">
           <div className="flex flex-col justify-end w-full md:w-[50%]">
             <button
               onClick={handleSubmit}
