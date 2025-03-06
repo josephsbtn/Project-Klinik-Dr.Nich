@@ -29,11 +29,19 @@ export const UpdateLayanan = () => {
     const fetch = async () => {
       await axios.get(`${
         import.meta.env.VITE_BASE_URL_BACKEND
+      }/api/layanan/getlayananbyid/${id}`).then(response =>{
+        console.log(response.data)
+        setGambarx(response.data.image)
+        response.status == 200 && setdatax(response.data) 
+      }
+      )
+      await axios.get(`${
+        import.meta.env.VITE_BASE_URL_BACKEND
       }/api/layanan/getlayananbyid/${id}`).then(response =>
-        response == 200 && setdatax(response.data)
+        response.status == 200 && setdatax(response.data)
       )
     }
-    
+    fetch()
     setNav("Ubah Layanan");
     setLink("/pos/layanan")
   }, []);
@@ -59,19 +67,19 @@ export const UpdateLayanan = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     let data = {
-      kategoriProduk: kateforiRef.current.value,
-      namaLayanan: namaLayananRef.current.value.trim(),
+      // kategoriProduk: kateforiRef.current.value,
+      nama: namaLayananRef.current.value.trim(),
       harga: hargaRef.current.value.trim(),
       durasi: durasiRef.current.value,
-      deskripsiDetail: deskripsiDetailRef.current.value,
-      deskripsiKartu: deskripsikartuRef.current.value,
+      deskripsi: deskripsiDetailRef.current.value,
+      cardDeskripsi: deskripsikartuRef.current.value,
     };
 
     if (fileGambarRef.current.files.length > 0) {
       data.image = fileGambarRef.current.files[0]
     }
 
-    if (!data.namaLayanan || !data.harga) {
+    if (!data.nama || !data.harga) {
       alert("tidak boleh kosong");
     } else {
       console.log(data);
@@ -148,7 +156,7 @@ export const UpdateLayanan = () => {
           </div>
         </div>
 
-        <label className="text-start text-[#454545]  text-[12px]">
+        {/* <label className="text-start text-[#454545]  text-[12px]">
           Kategori Produk
         </label>
         <select
@@ -157,9 +165,12 @@ export const UpdateLayanan = () => {
           className="px-4 border text-black text-[12px] border-[#DCDCDC] rounded-lg h-[48px]"
           id=""
         >
-          {datax.length === 0 ? (
-            <option value="" className="text-white-300 " disabled>
-              Pilih kategori
+          <option value={datax?.kategoriProduk} className="text-white-300 " disabled>
+              {datax?.kategoriProduk}
+            </option>
+          {/* {datax.length === 0 ? (
+            <option value={datax?.kategoriProduk} className="text-white-300 " disabled>
+              {datax?.kategoriProduk}
             </option>
           ) : (
             datax.map((data, i) => (
@@ -167,13 +178,14 @@ export const UpdateLayanan = () => {
                 {data.nama}
               </option>
             ))
-          )}
-        </select>
+          )} 
+        </select> */}
         <label className="text-[#454545] text-start  text-[12px]">
           Nama Layanan
         </label>
         <input
           ref={namaLayananRef}
+          defaultValue={datax?.nama}
           type="text"
           placeholder="Contoh : Facial Gold acne"
           className="px-2 border text-[12px] border-black/30 rounded-lg h-[48px]"
@@ -181,6 +193,7 @@ export const UpdateLayanan = () => {
         <label className="text-[#454545] text-start  text-[12px]">Harga</label>
         <input
           ref={hargaRef}
+          defaultValue={datax?.harga}
           type="number"
           placeholder="Contoh : 70.000"
           className="px-2 border text-[12px] border-black/30 rounded-lg h-[48px]"
@@ -188,6 +201,7 @@ export const UpdateLayanan = () => {
         <label className="text-[#454545] text-start  text-[12px]">Durasi</label>
         <input
           ref={durasiRef}
+          defaultValue={datax?.durasi}
           type="text"
           placeholder="Contoh : 1 jam 20 menit"
           className="px-2 border text-[12px] border-black/30 rounded-lg h-[48px]"
@@ -197,6 +211,7 @@ export const UpdateLayanan = () => {
         </label>
         <textarea
           ref={deskripsiDetailRef}
+          defaultValue={datax?.deskripsi}
           name=""
           id=""
           cols="auto"
@@ -209,6 +224,7 @@ export const UpdateLayanan = () => {
         </label>
         <textarea
           ref={deskripsikartuRef}
+          defaultValue={datax?.cardDeskripsi}
           name=""
           id=""
           cols="auto"

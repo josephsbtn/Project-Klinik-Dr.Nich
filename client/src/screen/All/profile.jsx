@@ -7,7 +7,7 @@ import LayananPopuler from "../../components/layananPopuler";
 import ProdukTerbaru from "../../components/ProdukTerbaru";
 
 // IMAGE AND ICON
-import klinik from "../../assets/img-profil/klinik.png";
+import klinik from "../../assets/img-profil/klinik.jpg";
 import bgVM from "../../assets/img-profil/bgVisiMisi.png";
 import bunga from "../../assets/img-profil/bungaIcon.svg";
 import misiIcon from "../../assets/img-profil/misiIcon.svg";
@@ -126,7 +126,7 @@ function Profile() {
         <div className="flex-col items-center lg:items-center lg:justify-center">
           <img
             src={klinik}
-            className="mt-[30px] lg:w-[1040px] lg:h-[719px] lg:mx-auto"
+            className="mt-[30px] lg:w-[1040px] lg:h-[719px] lg:mx-auto object-fit"
             alt="Klinik"
           />
           <p className=" mt-[24px] text-xs font-normal font-SFPro leading-tight tracking-wide lg:mx-auto lg:text-base">
