@@ -72,7 +72,7 @@ const PromoAdd = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/ulasan/tambahulasan`,
+        `${import.meta.env.VITE_BASE_URL_BACKEND}/api/promo/tambahpromo`,
         fdata,
         {
           headers: {

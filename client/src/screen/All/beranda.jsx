@@ -261,6 +261,12 @@ export default function Beranda() {
     slides: { perView: 1, spacing: 20 },
   });
 
+  const [carouselRef, carouselInstance] = useKeenSlider({
+    loop: true,
+    mode: "snap",
+    slides: { perView: 1, spacing: 20 },
+  });
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Auto-slide setiap 3 detik
@@ -271,16 +277,24 @@ export default function Beranda() {
       sliderInstance.current?.next();
     }, 3000);
 
-    return () => clearInterval(interval);
+    if (!carouselInstance) return;
+    const interval2 = setInterval(() => {
+      carouselInstance.current?.next();
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(interval2);
+    };
   }, [sliderInstance]);
 
   // Update progress untuk pagination
   useEffect(() => {
-    if (!sliderInstance) return;
-    sliderInstance.current?.on("slideChanged", (s) => {
+    if (!carouselInstance) return;
+    carouselInstance.current?.on("slideChanged", (s) => {
       setCurrentSlide(s.track.details.rel);
     });
-  }, [sliderInstance]);
+  }, [carouselInstance]);
 
   useEffect(() => {
     fetchData();
@@ -392,10 +406,10 @@ export default function Beranda() {
         <Navbar selected={"Beranda"} />
       </div>
 
-      <div className="relative">
+      <div className="relative w-full">
         {/* Carousel */}
         <div
-          ref={sliderRef}
+          ref={carouselRef}
           className="keen-slider w-screen rounded-lg overflow-hidden pt-10">
           {promo &&
             promo.map((item, index) => (
@@ -426,7 +440,7 @@ export default function Beranda() {
                   ? "w-[19px] h-2.5 bg-[#c2a353]"
                   : "w-2.5 h-2.5 bg-[#dcdcdc]"
               }`}
-              onClick={() => sliderInstance.current?.moveToIdx(i)}
+              onClick={() => carouselInstance.current?.moveToIdx(i)}
             />
           ))}
         </div>
@@ -434,13 +448,13 @@ export default function Beranda() {
         {/* Navigation Arrows */}
         <button
           className="absolute left-4 top-1/2 z-10 -translate-y-1/2 bg-white/70 px-3 py-2 rounded-full shadow-md"
-          onClick={() => sliderInstance.current?.prev()}>
-          ◀
+          onClick={() => carouselInstance.current?.prev()}>
+          {"<"}
         </button>
         <button
           className="absolute right-4 top-1/2 z-10 -translate-y-1/2 bg-white/70 px-3 py-2 rounded-full shadow-md"
-          onClick={() => sliderInstance.current?.next()}>
-          ▶
+          onClick={() => carouselInstance.current?.next()}>
+          {">"}
         </button>
       </div>
 
