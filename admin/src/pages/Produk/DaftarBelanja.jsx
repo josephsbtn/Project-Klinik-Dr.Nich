@@ -49,6 +49,14 @@ export const DaftarBelanja = () => {
       )
     );
   };
+
+  const updateJml = (id, value) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item._id === id ? { ...item, jumlah: parseInt(value) || 0 } : item
+      )
+    );
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setTombol(false)
@@ -210,18 +218,18 @@ export const DaftarBelanja = () => {
                   <p>({item.stok})</p>
                 </div>
                 <div className="flex items-center justify-start w-full gap-10 text-[#454545] border-b-2 pb-4 text-[12px] mt-2">
-                  <div className="">
-                    <img src={iCen} alt="kocen" />
+                  <div className="font-bold">
+                    -
                   </div>
                   <div className="text-start">
                     <p>{item.namaProduk}</p>
                     <p>Rp. {item.hargaBeli.toLocaleString("id-ID")}</p>
                   </div>
-                  <div className="flex gap-4 ms-auto">
+                  <div className="flex gap-4 ms-auto justify-end">
                     <button onClick={() => min(item._id)}>
                       <img src={iMin} alt="minus" />
                     </button>
-                    <p>{item.jumlah}</p>
+                    <input className="w-12 text-center appearance-none outline-none " value={item.jumlah} onChange={(e)=>updateJml(item._id, e.target.value)} type="text" />
                     <button onClick={() => plus(item._id)}>
                       <img src={iPlus} alt="plus" />
                     </button>

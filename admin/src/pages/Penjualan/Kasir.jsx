@@ -304,6 +304,13 @@ export const Kasir = () => {
                 toast.error("Terjadi kesalahan saat memproses transaksi");
               }
         }
+        const updateJml = (id, value) => {
+            setCart((prevCart) =>
+              prevCart.map((item) =>
+                item._id === id ? { ...item, jumlah: parseInt(value) || 0 } : item
+              )
+            );
+          };
 
     return (
         <kasirContext.Provider value={{totalAkhir, handleDraft, potongan, cashback, total, promo, invoice, cart, setCart, pelanggan, setPelangganTerpilih, pelangganTerpilih, promoTerpilih, setPromoTerpilih, modal, setModal}}>    
@@ -360,8 +367,8 @@ export const Kasir = () => {
                             <button onClick={() => min(item._id)}>
                                 <img src={iMin} alt="minus" />
                             </button>
-                            <p>{item.jumlah}</p>
-                            <button onClick={() => plus(item._id)}>
+                            <input className="w-12 text-center appearance-none outline-none" value={item.jumlah} onChange={(e)=>updateJml(item._id, e.target.value)} type="text" />
+                    <button onClick={() => plus(item._id)}>
                                 <img src={iPlus} alt="plus" />
                             </button>
                             <button onClick={

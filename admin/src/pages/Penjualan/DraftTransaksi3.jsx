@@ -36,7 +36,17 @@ export const DraftTransaksi3 = () => {
         console.log(transaksi.status)
     },[transaksi.status])
 
-return (
+    const handleDelete = (e) => {
+        e.preventDefault()
+        axios.delete('https://api.drnich.co.id/api/pos/kasir/deletetransaksi/'+id).then(response => 
+            response.status==200 ? toast.success('Berhasil Menghapus Draft Transaksi') : toast.error("Gagal Menghapus Draft Transaksi")
+        )
+        setTimeout(() => {
+                  
+            window.location.href = `/pos/kasir`;
+          }, 1500);
+    }   
+    return (
     <div className='flex flex-col px-5 py-8 gap-1 bg-white w-full min-h-full pt-8 text-[#454545] text-[12px] onverflow-y-auto'>
         <div className='flex justify-between text-[#BDBDBD]'>
             <p>ID Transaksi</p>
@@ -79,11 +89,17 @@ return (
             <p>Total Akhir</p>
             <p className='font-semibold'>Rp {transaksi?.totalAkhir?.toLocaleString('id-ID')}</p>
         </div>
-        <div className='flex justify-between items-end mt-[20px] text-[14px] font-semibold'>
+        <div className='flex flex-col gap-[10px] items-end mt-[20px] text-[14px] font-semibold'>
             <button
             onClick={handleBuy}
             className='mt-auto flex justify-between bg-gradient-to-r from-[#C2A353] to-[#EAC564] w-[100%] p-4 rounded-xl text-white'>
                 Bayar
+                <img src={iPan} alt="" />
+            </button>
+            <button
+            onClick={handleDelete}
+            className='mt-auto flex justify-between bg-[#BDBDBD] w-[100%] p-4 rounded-xl text-white'>
+                Hapus
                 <img src={iPan} alt="" />
             </button>
         </div>

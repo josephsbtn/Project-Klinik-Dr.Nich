@@ -123,7 +123,7 @@ export const ModalsCashback = () => {
 
                     </div>
                     <div className='h-full flex flex-col gap-[10px]'>
-                        {kategoriname == "Produk" && produkM.map((item, i) => (
+                        {produkM.map((item, i) => (
                             <button key={i}
                                 onClick={(e) => {
                                     e.preventDefault()

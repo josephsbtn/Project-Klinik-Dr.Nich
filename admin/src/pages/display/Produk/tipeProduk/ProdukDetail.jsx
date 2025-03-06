@@ -7,8 +7,9 @@ import {
 import { data, Link, useParams } from "react-router-dom";
 import { navContext } from "../../../../App2";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const ProdukDetail = () => {
   const lokasi = useLocation();
@@ -49,18 +50,23 @@ const handleHapus = () => {
     try{
     axios.delete(`${
           import.meta.env.VITE_BASE_URL_BACKEND
-        }/api/foto/deleteMesin/${id}`).then(
+        }/api/produk/deleteproducttype/${id}`,  {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }).then(
       response =>{
-        response.status==200 && toast.success("Berhasil Menghapus Sertifikat")
+        response.status==200 && toast.success("Berhasil Menghapus Tipe Produk")
         setTimeout(()=>{
-          toast.success('Kembali ke halaman Sertifikat')
-          navigate('/pos/sertifikat')
+          toast.success('Kembali ke halaman Tipe Produk')
+          navigate('/pos/produktipe')
         },1000)
       }
     )
   }
     catch{
-      toast.error("Gagal menghapus Sertifikat")
+      toast.error("Gagal menghapus Tipe Produk")
     }
   }
 

@@ -143,7 +143,7 @@ export const ModalEditCashback = () => {
 
                     </div>
 
-                    {kategoriname == 'Produk' && produkM.map((item, i) => (
+                    {produkM.map((item, i) => (
                         <button
                             onClick={(e) => {
                                 e.preventDefault();
