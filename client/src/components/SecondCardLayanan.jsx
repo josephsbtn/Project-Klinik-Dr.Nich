@@ -7,6 +7,7 @@ function SecondCardLayanan({ item }) {
     <div className="group hover:bg-primary w-full h-32 lg:w-[504px] lg:h-[217px] flex space-x-2 justify-start cursor-pointer items-center border border-disable-line rounded-lg p-3 shadow-sm bg-white transition-all duration-300 ease-in-out">
       <img
         src={item.image}
+        loading="lazy"
         alt={item.nama}
         className="w-20 h-28 lg:w-[150px] lg:h-[187px] object-cover rounded-md py-1"
       />
