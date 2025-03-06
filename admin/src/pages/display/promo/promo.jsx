@@ -45,7 +45,7 @@ export const DisplayPromo = () => {
           <div className="flex flex-col gap-2 w-full h-full items-center justify-start">
             {datax.map((data) => (
               <Link
-                to={`/pos/layanandetail/${data._id}`}
+                to={`/pos/detailpromo/${data._id}`}
                 state={data}
                 className="w-full border flex justify-between items-center rounded-xl px-3 py-3"
                 key={data._id} // Fixed key issue
@@ -60,14 +60,13 @@ export const DisplayPromo = () => {
             ))}
           </div>
         )}
-
       </div>
-        {/* Tombol Tambah Layanan */}
-        <Link
-          to="/pos/promoadd"
-          className="flex justify-center items-center cursor-pointer gap-2 h-[44px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px]">
-          <AiFillPlusCircle size={20} /> Tambah Promo
-        </Link>
+      {/* Tombol Tambah Layanan */}
+      <Link
+        to="/pos/promoadd"
+        className="flex justify-center items-center cursor-pointer gap-2 h-[44px] bg-gradient-to-r from-[#EAC564] to-[#C2A353] text-white font-medium rounded-lg text-[14px]">
+        <AiFillPlusCircle size={20} /> Tambah Promo
+      </Link>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { Products } from "./pages/Produk/products";
 import { Laporan } from "./pages/laporan/reports";
 import { Promo } from "./pages/Promo/promo";
 import { DisplayPromo } from "./pages/display/promo/promo";
+import { PromoDetail } from "./pages/display/promo/promoDetail";
 import { PromoAdd } from "./pages/display/promo/PromoAdd";
 import { USer } from "./pages/User/users";
 import { Supplier } from "./pages/User/Supplier";
@@ -441,6 +442,8 @@ function App2() {
                   <Route path="/display" element={<Display />} />
                   <Route path="/displayPromo" element={<DisplayPromo />} />
                   <Route path="/promoadd" element={<PromoAdd />} />
+                  <Route path="/detailpromo/:id" element={<PromoDetail />} />
+
                   <Route path="/sertifikat" element={<Sertifikat />} />
                   <Route
                     path="/sertifikatdetail/:id"
@@ -496,7 +499,10 @@ function App2() {
                     path="/UpdateKategoriJenisProduct/:id"
                     element={<UpdateKategori />}
                   />
-                  <Route path="/UpdateLayanan/:id" element={<UpdateLayanan />} />
+                  <Route
+                    path="/UpdateLayanan/:id"
+                    element={<UpdateLayanan />}
+                  />
                   <Route
                     path="/UpdateKategoriJenisTreatment/:id"
                     element={<UpdateKategoti />}
@@ -511,8 +517,14 @@ function App2() {
                   />
                   <Route path="/UpdateGaleri/:id" element={<UpdateGaleri />} />
                   <Route path="/UpdateRating/:id" element={<UpdateRating />} />
-                  <Route path="/KategoriProdukUpdate/:id" element={<KategoriProdukUpdate />} />
-                  <Route path="/DaftarProdukUpdate/:id" element={<DaftarProdukUpdate />} />
+                  <Route
+                    path="/KategoriProdukUpdate/:id"
+                    element={<KategoriProdukUpdate />}
+                  />
+                  <Route
+                    path="/DaftarProdukUpdate/:id"
+                    element={<DaftarProdukUpdate />}
+                  />
                   <Route path="/Mesin" element={<Mesin />} />
                   <Route path="/MesinTambah" element={<MesinTambah />} />
                   <Route path="/MesinDetail/:id" element={<MesinDetail />} />

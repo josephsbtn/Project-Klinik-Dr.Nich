@@ -5,7 +5,7 @@ import axios from "axios";
 import { navContext } from "../../../App2";
 
 const PromoAdd = () => {
-  const { setNav } = useContext(navContext);
+  const { setNav, setLink } = useContext(navContext);
   const navigate = useNavigate();
 
   // State untuk menyimpan data
@@ -26,6 +26,7 @@ const PromoAdd = () => {
 
   useEffect(() => {
     setNav("Tambah Promo");
+    setLink("/pos/displayPromo");
     document.title = "Tambah Promo";
   }, []);
 
@@ -66,7 +67,7 @@ const PromoAdd = () => {
     const fdata = new FormData();
     fdata.append("nama", name);
     fdata.append("syarat", syarat);
-    fdata.append("deskripsi", deskripsi);
+    fdata.append("detail", deskripsi);
     fdata.append("fotoDesktop", imageDesktopRef.current.files[0]);
     fdata.append("fotoMobile", imageMobileRef.current.files[0]);
 

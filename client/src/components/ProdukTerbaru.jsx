@@ -8,7 +8,7 @@ import ProdukCard from "./ProdukCard";
 
 function ProdukTerbaru() {
   const navigate = useNavigate();
-  const [produk, setProduk] = useState();
+  const [produk, setProduk] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(0);
@@ -71,6 +71,12 @@ function ProdukTerbaru() {
             </h1>{" "}
           </div>
         </>
+      ) : produk.length <= 0 ? (
+        <div className="h-full w-full flex items-center justify-center py-4">
+          <h1 className="font-SFPro text-base text-secondary font-medium">
+            Produk Belum Tersedia🛒
+          </h1>
+        </div>
       ) : (
         <div className="flex flex-col w-full lg:w-full lg:pt-[15px] ">
           <div className="flex lg:justify-start justify-center items-center ">
