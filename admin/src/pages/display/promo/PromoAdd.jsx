@@ -179,8 +179,8 @@ const PromoAdd = () => {
         <label className="text-[#454545] text-[14px]">Syarat</label>
         <textarea
           ref={syaratRef}
-          value={deskripsi}
-          onChange={(e) => setDeskripsi(e.target.value)}
+          value={syarat}
+          onChange={(e) => setSyarat(e.target.value)}
           className="border rounded-lg text-[14px] p-2"
           placeholder="Tulis review di sini..."
           rows="4"></textarea>

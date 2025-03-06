@@ -35,6 +35,9 @@ import banner2bg from "../../assets/img-carousel/banner2bg.svg";
 import { Pagination, Navigation } from "swiper/modules";
 import useDeviceType from "../../components/CheckDevice.jsx";
 
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -252,6 +255,32 @@ export default function Beranda() {
       setError("Failed to fetch promo. Please try again later.");
     }
   };
+  const [sliderRef, sliderInstance] = useKeenSlider({
+    loop: true,
+    mode: "snap",
+    slides: { perView: 1, spacing: 20 },
+  });
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto-slide setiap 3 detik
+  useEffect(() => {
+    if (!sliderInstance) return;
+
+    const interval = setInterval(() => {
+      sliderInstance.current?.next();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [sliderInstance]);
+
+  // Update progress untuk pagination
+  useEffect(() => {
+    if (!sliderInstance) return;
+    sliderInstance.current?.on("slideChanged", (s) => {
+      setCurrentSlide(s.track.details.rel);
+    });
+  }, [sliderInstance]);
 
   useEffect(() => {
     fetchData();
@@ -363,46 +392,57 @@ export default function Beranda() {
         <Navbar selected={"Beranda"} />
       </div>
 
-      {/* Carousel Component */}
-      <Carousel
-        className="pb-10 pt-[70px]"
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: true,
-        }}
-        autoplayDelay={3000}
-        loop={true} // Enable looping
-        navigation={CarouselNavigation}
-        grabcursor={true} // Use the CarouselNavigation component
-      >
-        {promo &&
-          promo.map((item, index) => (
-            <div key={item._id} className="relative">
-              <picture>
-                {/* Show fotoDesktop on screens larger than 1024px */}
-                <source media="(min-width: 1024px)" srcSet={item.fotoDesktop} />
-                {/* Default to fotoMobile for smaller screens */}
-                <img
-                  src={item.fotoMobile}
-                  alt={`Slide ${index + 1}`}
-                  className="h-[70vh] lg:h-[80vh] w-full object-cover relative lg:object-center"
-                />
-              </picture>
-              {/* <div className="absolute lg:hidden bottom-5 left-5 flex items-center justify-center z-10 gap-4">
-                <button className="text-base font-SFPro tracking-tight text-white bg-secondary py-3 px-8 rounded-3xl">
-                  Ambil Promo
-                </button>
-                <button
-                  className="text-base font-SFPro tracking-tight text-secondary bg-transparent border border-secondary py-3 px-6 rounded-3xl"
-                  onClick={() => navigate(`/promo/detail/${item._id}`)}>
-                  Detail
-                </button>
-              </div> */}
+      <div className="relative">
+        {/* Carousel */}
+        <div
+          ref={sliderRef}
+          className="keen-slider w-screen rounded-lg overflow-hidden pt-10">
+          {promo &&
+            promo.map((item, index) => (
+              <div key={item._id} className="keen-slider__slide relative">
+                <picture>
+                  <source
+                    media="(min-width: 1024px)"
+                    srcSet={item.fotoDesktop}
+                  />
+                  <img
+                    src={item.fotoMobile}
+                    alt={`Slide ${index + 1}`}
+                    className="h-[70vh] lg:h-[80vh] w-full object-cover relative lg:object-center"
+                  />
+                </picture>
+                <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100 translate-y-1"></div>
+              </div>
+            ))}
+        </div>
 
-              <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-[#ffffff] via-transparent to-transparent opacity-100 translate-y-1"></div>
-            </div>
+        {/* Pagination */}
+        <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          {promo.map((_, i) => (
+            <span
+              key={i}
+              className={`block cursor-pointer rounded-2xl transition-all ${
+                currentSlide === i
+                  ? "w-[19px] h-2.5 bg-[#c2a353]"
+                  : "w-2.5 h-2.5 bg-[#dcdcdc]"
+              }`}
+              onClick={() => sliderInstance.current?.moveToIdx(i)}
+            />
           ))}
-      </Carousel>
+        </div>
+
+        {/* Navigation Arrows */}
+        <button
+          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 bg-white/70 px-3 py-2 rounded-full shadow-md"
+          onClick={() => sliderInstance.current?.prev()}>
+          ◀
+        </button>
+        <button
+          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 bg-white/70 px-3 py-2 rounded-full shadow-md"
+          onClick={() => sliderInstance.current?.next()}>
+          ▶
+        </button>
+      </div>
 
       {/* WhatsApp Button */}
       <div>
@@ -452,7 +492,7 @@ export default function Beranda() {
               <h1 className=" tracking-wide pb-4 text-[#464646] text-sm font-medium font-SFPro leading-[25px] lg:text-secondary lg:text-xl">
                 Teknologi Terkini & Produk Berkualitas
               </h1>
-              <Carousel
+              {/* <Carousel
                 className="lg:w-[400px] lg:h-[283px] w-full rounded-lg [&_.carousel-navigation]:hidden overflow-hidden"
                 autoplay={{
                   delay: 3000,
@@ -485,7 +525,32 @@ export default function Beranda() {
                     <h1>No data found</h1>
                   </div>
                 )}
-              </Carousel>
+              </Carousel> */}
+              <div
+                ref={sliderRef}
+                className="keen-slider lg:w-[400px] lg:h-[283px] w-full rounded-lg overflow-hidden">
+                {fotoMesin && fotoMesin.length > 0 ? (
+                  fotoMesin.map((item) => (
+                    <div
+                      key={item._id}
+                      className="keen-slider__slide relative px-2">
+                      <img
+                        className="h-[198px] lg:h-full w-full object-cover bg-blue-500 text-white text-lg font-semibold"
+                        src={item.foto}
+                        alt={item.nama}
+                      />
+                    </div>
+                  ))
+                ) : loading ? (
+                  <div className="keen-slider__slide w-full h-full flex items-center justify-center tracking-wide">
+                    <h1>loading . . .</h1>
+                  </div>
+                ) : (
+                  <div className="keen-slider__slide w-full h-full flex items-center justify-center tracking-wide">
+                    <h1>No data found</h1>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
