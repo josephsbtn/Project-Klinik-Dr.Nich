@@ -74,7 +74,7 @@ function DetailPromo() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <main className="flex flex-col items-start w-[90%] lg:w-[85%] md:w-[80%] lg:mb-20 lg:flex-row lg:justify-between lg:gap-6">
+        <main className="flex flex-col items-start w-[90%] lg:w-[80%] md:w-[80%] lg:mb-20 lg:flex-row lg:justify-between lg:gap-6">
           <img
             className="h-[457px] w-[325px] object-cover opacity-90 lg:w-[450px] lg:h-[632.77px] flex flex-col mx-auto items-center border border-[#efefef] rounded-lg shadow-sm my-8"
             src={image || "https://via.placeholder.com/80"} // Fallback if foto is unavailable
@@ -115,7 +115,7 @@ function DetailPromo() {
       )}
       {/* MAIN CONTENT */}
 
-      <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%] lg:w-[85%] md:w-[80%] items-center">
+      <div className="flex flex-col gap-4 z-0 mx-auto lg:mx-[120px] w-[90%] lg:w-[80%] md:w-[80%] items-center">
         {/* Layanan */}
         <section className="w-full">
           <PromoLainnya />

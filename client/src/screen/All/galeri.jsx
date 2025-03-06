@@ -73,7 +73,7 @@ function Profile() {
     <main className="w-full flex flex-col items-center overflow-x-hidden">
       <Navbar selected={"Galeri"} />
       <div className="mt-[18px] flex flex-col w-full items-center">
-        <div className="flex items-center w-[90%] lg:w-[85%]  mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
+        <div className="flex items-center w-[90%] lg:w-[80%]  mx-auto justify-start space-x-2 mt-[18px] lg:mx-[120px]">
           <a
             onClick={() => navigate("/")}
             className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
@@ -87,7 +87,7 @@ function Profile() {
           </a>
         </div>
 
-        <div className="w-screen lg:w-[85%] h-full flex flex-col mt-[30px]">
+        <div className="w-screen lg:w-[80%] h-full flex flex-col mt-[30px]">
           {loading ? (
             <LoadingSpinner />
           ) : (

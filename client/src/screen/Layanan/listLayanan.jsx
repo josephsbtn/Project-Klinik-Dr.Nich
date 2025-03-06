@@ -45,7 +45,7 @@ function ListLayanan() {
           <Navbar selected={"Layanan"} />
         </div>
 
-        <div className="flex items-center w-[90%] lg:w-[85%]  justify-start space-x-2 mt-4 pt-20 ">
+        <div className="flex items-center w-[90%] lg:w-[80%]  justify-start space-x-2 mt-4 pt-20 ">
           <a
             onClick={() => navigate("/")}
             className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
@@ -68,7 +68,7 @@ function ListLayanan() {
             <p className="text-text text-sm font-SFPro text-center">{error}</p>
           </div>
         ) : (
-          <main className="w-[90%] lg:w-[85%] flex flex-col items-center lg:items-start space-y-4">
+          <main className="w-[90%] lg:w-[80%] flex flex-col items-center lg:items-start space-y-4">
             <h1 className="font-SFPro w-full text-start lg:text-2xl text-secondary font-medium text-base tracking-wide">
               Layanan
             </h1>

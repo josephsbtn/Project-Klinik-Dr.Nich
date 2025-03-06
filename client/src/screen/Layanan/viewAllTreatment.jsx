@@ -84,7 +84,7 @@ function ViewAllTreatment() {
         <div className="text-center text-red-500">{error}</div>
       ) : (
         <>
-          <div className="flex items-center w-[90%] lg:w-[85%] justify-start space-x-2 mt-4 pt-20 ">
+          <div className="flex items-center w-[90%] lg:w-[80%] justify-start space-x-2 mt-4 pt-20 ">
             <a
               onClick={() => navigate("/")}
               className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
@@ -119,7 +119,7 @@ function ViewAllTreatment() {
                   </button>
                 </div>
 
-                <div className="flex flex-col items-start space-y-2 w-[85%]">
+                <div className="flex flex-col items-start space-y-2 w-[80%]">
                   <h1 className="text-base lg:text-lg font-medium font-SFPro text-secondary">
                     Kategori
                   </h1>
@@ -194,7 +194,7 @@ function ViewAllTreatment() {
             </div>
           </ConfirmPopUp>
 
-          <div className="flex justify-between items-center w-[90%] lg:w-[85%] mt-4">
+          <div className="flex justify-between items-center w-[90%] lg:w-[80%] mt-4">
             <h1 className="font-SFPro w-full text-start lg:text-2xl text-secondary font-medium text-base tracking-wide">
               Semua Treatment
             </h1>
@@ -205,7 +205,7 @@ function ViewAllTreatment() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 w-[90%] lg:w-[85%] gap-4 mt-[18px]">
+          <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 w-[90%] lg:w-[80%] gap-4 mt-[18px]">
             {loading ? (
               <div className="col-span-full text-center">
                 Loading products...
@@ -227,7 +227,7 @@ function ViewAllTreatment() {
             )}
           </div>
 
-          <div className="flex flex-col gap-4 items-center w-[90%] lg:w-[85%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">
+          <div className="flex flex-col gap-4 items-center w-[90%] lg:w-[80%] mx-auto justify-center space-x-2 mt-28 lg:mx-[120px]">
             {/* Popular Services */}
             <section className="lg:w-full w-full">
               <LayananPopuler />

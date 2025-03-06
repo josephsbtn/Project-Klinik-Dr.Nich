@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../auth/navbar";
 import Footer from "../auth/footer";
 import ArrowRightDisable from "../../components/ArrowRight-Disable";
@@ -95,7 +95,7 @@ function DetailJenisLayanan() {
               Daftar Treatment
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3  items-center w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 items-center w-full">
               {listLayanan?.map((item) => (
                 <div
                   key={item._id}

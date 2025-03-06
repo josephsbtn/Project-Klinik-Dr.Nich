@@ -59,7 +59,7 @@ function DetailPaketTreatment() {
       <div className="fixed w-full z-30">
         <Navbar selected={"Layanan"} />
       </div>
-      <div className="flex items-center w-[90%] lg:w-[85%] justify-start space-x-2 mt-4 pt-20">
+      <div className="flex items-center w-[90%] lg:w-[80%] justify-start space-x-2 mt-4 pt-20">
         <a
           onClick={() => navigate("/")}
           className="cursor-pointer text-xs lg:text-sm text-disable-text font-normal tracking-wide">
@@ -89,7 +89,7 @@ function DetailPaketTreatment() {
           <h1>{error}</h1>
         </>
       ) : (
-        <main className="w-[90%] lg:[85%] flex flex-col space-y-3 items-center">
+        <main className="w-[90%] lg:[80%] flex flex-col space-y-3 items-center">
           <h1 className="text-secondary  lg:text-2xl  font-SFPro font-medium text-base w-full text-start leading-5 tracking-wide">
             {judul}
           </h1>
