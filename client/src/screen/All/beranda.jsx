@@ -87,6 +87,7 @@ export default function Beranda() {
   const [progress, setProgress] = useState(1);
   const swiperRef = useRef(null);
   const deviceType = useDeviceType();
+  const [slider, setslider] = useState(false)
 
   const fetchData = async () => {
     setLoading(true);
@@ -313,6 +314,7 @@ export default function Beranda() {
         }
       }, 100); // Ensure swiper is initialized
     }
+    setTimeout(()=>{setslider(true)},5000)
   }, [progress]);
 
   // Remove `fetch` from the dependency array
@@ -540,31 +542,34 @@ export default function Beranda() {
                   </div>
                 )}
               </Carousel> */}
+              {slider && 
               <div
-                ref={sliderRef}
-                className="keen-slider lg:w-[400px] lg:h-[283px] w-full rounded-lg overflow-hidden">
-                {fotoMesin && fotoMesin.length > 0 ? (
-                  fotoMesin.map((item) => (
-                    <div
-                      key={item._id}
-                      className="keen-slider__slide relative px-2">
-                      <img
-                        className="h-[198px] lg:h-full w-full object-cover bg-blue-500 text-white text-lg font-semibold"
-                        src={item.foto}
-                        alt={item.nama}
-                      />
-                    </div>
-                  ))
-                ) : loading ? (
-                  <div className="keen-slider__slide w-full h-full flex items-center justify-center tracking-wide">
-                    <h1>loading . . .</h1>
+              ref={sliderRef}
+              className="keen-slider lg:w-[400px] lg:h-[283px] w-full rounded-lg overflow-hidden">
+              {fotoMesin && fotoMesin.length > 0 ? (
+                fotoMesin.map((item) => (
+                  <div
+                    key={item._id}
+                    className="keen-slider__slide relative px-2">
+                    <img
+                      className="h-[198px] lg:h-full w-full object-cover bg-blue-500 text-white text-lg font-semibold"
+                      src={item.foto}
+                      alt={item.nama}
+                    />
                   </div>
-                ) : (
-                  <div className="keen-slider__slide w-full h-full flex items-center justify-center tracking-wide">
-                    <h1>No data found</h1>
-                  </div>
-                )}
-              </div>
+                ))
+              ) : loading ? (
+                <div className="keen-slider__slide w-full h-full flex items-center justify-center tracking-wide">
+                  <h1>loading . . .</h1>
+                </div>
+              ) : (
+                <div className="keen-slider__slide w-full h-full flex items-center justify-center tracking-wide">
+                  <h1>No data found</h1>
+                </div>
+              )}
+            </div>
+              }
+              
             </div>
           </div>
         </div>
