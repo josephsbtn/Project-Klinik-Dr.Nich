@@ -464,7 +464,7 @@ export default function Beranda() {
       <div>
         <img
           src={waBtn}
-          className="fixed z-50 right-0 px-[18px] bottom-[21.71px]"
+          className="fixed w-[126.5px] z-50 right-16 px-[18px] bottom-[7px]"
           alt="WhatsApp Button"
           onClick={sendWhatsAppReservasiMessage}
         />
