@@ -13,6 +13,8 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "axios": "^1.7.9",
     "daisyui": "^4.12.23",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
     "react": "^18.3.1",

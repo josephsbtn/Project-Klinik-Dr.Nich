@@ -4,6 +4,7 @@ import {
   getJenisLayanan,
   newLayanan,
   getLayanan,
+  getLayananAi,
   getLayananById,
   getJenisLayananById,
   getLayananByJenisLayanan,
@@ -32,6 +33,7 @@ router.post(
   newLayanan
 );
 router.get("/getAllLayanan", getLayanan);
+router.get("/getAllLayananAi", getLayananAi);
 router.get("/getLayananById/:id", getLayananById);
 router.get("/getJenisLayananById/:id", getJenisLayananById);
 router.get("/getLayananByJenisLayanan/:id", getLayananByJenisLayanan);

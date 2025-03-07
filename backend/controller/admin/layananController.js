@@ -109,6 +109,14 @@ const getLayanan = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+const getLayananAi = asyncHandler(async (req, res) => {
+  try {
+    const layanan = await layananModels.find().select("nama durasi harga deskripsi");
+    res.send(layanan);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 const updateLayanan = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -169,4 +177,5 @@ export {
   updateJenisLayanan,
   deleteLayanan,
   deleteJenisLayanan,
+  getLayananAi
 };
