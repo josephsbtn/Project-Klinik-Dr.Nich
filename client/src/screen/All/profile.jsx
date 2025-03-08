@@ -161,12 +161,12 @@ function Profile() {
         {/* Sertifikasi Section */}
         <div className="flex flex-col pt-10 w-full mx-auto ">
           {/* Section Title */}
-          <div className="w-full mx-auto text-left text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-wide">
+          <div className="w-full mx-auto text-center text-[#464646] lg:text-2xl text-base font-medium font-SFPro leading-tight tracking-wide">
             Mengapa memilih Dr. Nich?
           </div>
 
           {/* Carousel Container */}
-          <div className="flex flex-col lg:flex-row lg:space-x-8 lg:justify-between  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4 ">
+          <div className="flex flex-col lg:flex-row lg:space-x-8 lg:justify-center  mt-4 lg:mt-0  gap-[15px] justify-center items-center pt-4 pb-4 ">
             {/* Teknologi */}
             <div className="w-[325px] lg:h-[437px] lg:w-[504px] h-auto bg-white rounded-lg border border-gray-200 p-[22px] flex flex-col justify-center items-center shadow-md">
               <h1 className="pb-4 text-[#464646] text-sm font-medium font-SFPro leading-tight tracking-wide lg:text-secondary lg:text-xl">

@@ -16,10 +16,10 @@ export default function PromoCard({ item }) {
         alt={item.nama || "Thumbnail"}
       />
       <div className="flex flex-col bg-red w-full items-center justify-start mt-4">
-        <span className="text-secondary lg:text-text text-base w-[90%] font-medium font-SFPro lg:text-lg leading-tight tracking-tight line-clamp-1">
+        <span className="text-secondary lg:text-text text-base w-[90%] font-medium font-SFPro lg:text-lg leading-tight  line-clamp-1 tracking-wide">
           {item.nama || "Nama Promo"}
         </span>
-        <p className=" text-text  text-xs w-[90%] text-ellipsis font-normal font-SFPro leading-[20px] tracking-tight mt-1 line-clamp-3 lg:text-base">
+        <p className=" text-text  text-xs w-[90%] text-ellipsis font-normal font-SFPro leading-[20px] mt-1 line-clamp-3 lg:text-base tracking-wider">
           {item.detail || "Detail promo tidak tersedia"}
         </p>
       </div>

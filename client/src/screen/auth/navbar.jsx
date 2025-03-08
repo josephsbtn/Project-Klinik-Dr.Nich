@@ -103,7 +103,7 @@ export default function Navbar({ selected }) {
               className="absolute bottom-0 w-full h-auto object-cover"
               alt="Background"
             />
-            <div className="flex flex-col relative top-0 items-start px-[25px] pt-8 lg:pt-11 justify-start h-full gap-4">
+            <div className="flex flex-col relative top-0 items-start px-[25px] pt-6 lg:pt-8 justify-start h-full gap-4">
               <div>
                 <img
                   src={logo2}
@@ -147,10 +147,10 @@ export default function Navbar({ selected }) {
 
               {/* Contact Information */}
               <div className="flex flex-col pt-2 lg:pt-0">
-                <h1 className="text-white font-SFPro text-base font-medium tracking-tight lg:text-xl">
+                <h1 className="text-white font-SFPro text-base font-medium tracking-wide lg:text-xl">
                   Kontak Kami
                 </h1>
-                <div className="flex flex-col w-[173px] space-y-4 pt-[26.59px] lg:w-[358px] lg:text-base">
+                <div className="flex flex-col w-[173px] space-y-4 pt-4 lg:w-[358px] lg:text-base">
                   <div className="flex items-center space-x-2">
                     <img
                       src={alamat}
@@ -159,7 +159,7 @@ export default function Navbar({ selected }) {
                     />
                     <a
                       href=""
-                      className="text-left font-SFPro text-[#e8ebe0] text-xs font-normal leading-tight">
+                      className="text-left font-SFPro text-[#e8ebe0] text-xs lg:text-sm font-normal leading-tight tracking-wide">
                       Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec.
                       Argomulyo, Kota Salatiga, Jawa Tengah 50733
                     </a>
@@ -168,7 +168,7 @@ export default function Navbar({ selected }) {
                     <img src={email} className="w-[15px] h-[15px]" alt="Icon" />
                     <a
                       href="#"
-                      className="text-left font-SFPro text-[#e8ebe0] text-xs font-normal leading-tight">
+                      className="text-left font-SFPro text-[#e8ebe0] text-xs lg:text-sm font-normal leading-tight tracking-wide">
                       drnich@email.com
                     </a>
                   </div>
@@ -180,7 +180,7 @@ export default function Navbar({ selected }) {
                     />
                     <a
                       href="#"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
+                      className="text-left text-[#e8ebe0] text-xs font-normal lg:text-sm leading-tight tracking-wide">
                       +6289632517280
                     </a>
                   </div>
@@ -188,7 +188,7 @@ export default function Navbar({ selected }) {
                     <img src={clock} className="w-[15px] h-[15px]" alt="Icon" />
                     <a
                       href="#"
-                      className="text-left text-[#e8ebe0] text-xs font-normal leading-tight">
+                      className="text-left text-[#e8ebe0] text-xs font-normal lg:text-sm leading-tight tracking-wide">
                       10.00 - 19.00
                     </a>
                   </div>
@@ -207,7 +207,7 @@ export default function Navbar({ selected }) {
                     />
                   ))}
                 </div>
-                <p className="text-white text-xs mt-[19px]">
+                <p className="text-white text-xs lg:text-sm mt-[19px] tracking-wide">
                   ©2024 | Dr. Nich Beauty Aesthetic
                 </p>
               </div>

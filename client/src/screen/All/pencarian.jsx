@@ -95,14 +95,14 @@ function Pencarian() {
     return (
       <div className="flex gap-1 mt-4 justify-center text-gray-600">
         <button
-          className="border-2 border-secondary hover:bg-secondary hover:text-white rounded-l-lg w-10"
+          className="border border-secondary hover:bg-secondary hover:text-white rounded-l-lg w-7 h-7 text-secondary font-semibold "
           onClick={onPrev}>
           {"<"}
         </button>
         {pages.map((n, i) => (
           <button
             key={i}
-            className={`border-2 border-secondary h-10 w-10 hover:bg-secondary hover:text-white rounded-sm ${
+            className={`border border-secondary h-7 w-7 hover:bg-secondary text-secondary font-semibold hover:text-white rounded-sm ${
               currentIndex === n - 1 && "text-white bg-secondary"
             }`}
             onClick={() => onPageClick(n)}>
@@ -110,7 +110,7 @@ function Pencarian() {
           </button>
         ))}
         <button
-          className="border-2 border-secondary hover:bg-secondary hover:text-white rounded-r-lg w-10"
+          className="border border-secondary hover:bg-secondary hover:text-white text-secondary font-semibold rounded-r-lg w-7"
           onClick={onNext}>
           {">"}
         </button>
@@ -186,7 +186,9 @@ function Pencarian() {
                     </h3>
                     <div className="w-full mt-5 grid place-items-center gap-4 lg:grid-cols-3">
                       {recordLayanan.map((item) => (
-                        <CardLayanan key={item._id} item={item} />
+                        <div key={item._id} className="rounded-lg p-3 scale-95">
+                          <CardLayanan key={item._id} item={item} />
+                        </div>
                       ))}
                     </div>
 
@@ -240,10 +242,10 @@ function Pencarian() {
         )}
       </div>
 
-      <section className="lg:w-[80%] w-[90%]">
+      <section className="lg:w-[85%] w-[90%]">
         <LayananPopuler />
       </section>
-      <section className="lg:w-[80%] w-[90%]">
+      <section className="lg:w-[85%] w-[90%]">
         <ProdukTerbaru />
       </section>
       <Footer />

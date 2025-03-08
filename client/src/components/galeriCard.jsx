@@ -21,13 +21,13 @@ function galeriCard({ item }) {
       </div>
 
       <div className="ml-5 flex flex-col">
-        <span className="text-[#464646] text-sm lg:text-lg font-normal font-SFPro tracking-tight leading-none">
+        <span className="text-[#464646] text-sm lg:text-lg font-normal font-SFPro leading-none tracking-wide">
           {item.judul}
         </span>
-        <div className="flex items-center mt-2 text-[#bdbdbd] text-sm font-normal font-SFPro leading-[25px] tracking-tight">
-          <span>{item.deskripsi}</span>
+        <div className="flex items-center mt-2 text-[#bdbdbd] text-sm font-normal font-SFPro leading-[25px] tracking-wide">
+          {item.deskripsi}
         </div>
-        <div className="flex items-center mt-2 text-[#bdbdbd] text-sm lg:text-base font-normal font-SFPro leading-[25px] tracking-tight">
+        <div className="flex items-center mt-2 text-[#bdbdbd] text-sm lg:text-base font-normal font-SFPro leading-[25px] tracking-wide">
           <span>{item.sosmed}</span>
           <div className="w-[5px] h-[5px] mx-2 bg-[#efefef] lg:text-base rounded-full"></div>
           <span>{item.channel}</span>

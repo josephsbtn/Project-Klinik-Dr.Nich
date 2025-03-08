@@ -45,11 +45,11 @@ function PromoLainnya() {
   return (
     <section className="flex flex-col my-[26px] w-full items-center">
       <main className="w-full flex justify-between">
-        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-tight">
+        <h1 className="text-[#464646] text-base lg:text-xl font-medium font-SFPro leading-[25px] tracking-wide">
           Promo Lainnya
         </h1>
         <h1
-          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer  tracking-tight"
+          className="font-SFPro text-xs text-secondary font-medium lg:text-base cursor-pointer  tracking-wide"
           onClick={() => navigate("/promo")}>
           Lihat Semua
         </h1>
@@ -86,7 +86,7 @@ function PromoLainnya() {
                         className="w-[207px] h-[151px] object-cover rounded-t-[10px]"
                       />
                       <div className="w-full h-full flex items-center justify-center">
-                        <h1 className=" px-[12px] text-left font-SFPro font-medium text-xs leading-[25px] line-clamp-2 tracking-tight ">
+                        <h1 className=" px-[12px] text-left font-SFPro font-medium text-xs lg:text-sm leading-[25px] line-clamp-2 tracking-wide ">
                           {item.nama}
                         </h1>
                       </div>
@@ -94,7 +94,7 @@ function PromoLainnya() {
                   ))
                 ) : (
                   <div className="h-full w-full flex items-center justify-center">
-                    <h1 className="font-SFPro text-base text-secondary font-medium">
+                    <h1 className="font-SFPro text-base text-secondary font-medium tracking-wide">
                       Promo Tidak Ditemukan
                     </h1>
                   </div>
