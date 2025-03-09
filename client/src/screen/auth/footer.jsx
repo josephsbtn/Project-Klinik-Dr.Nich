@@ -75,8 +75,7 @@ export default function Footer() {
             />
             <a
               className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer flex items-center justify-center"
-              href="https://www.tiktok.com/@dr.nich_aesthetic"
-            >
+              href="https://www.tiktok.com/@dr.nich_aesthetic">
               <img
                 src={tt}
                 alt="TikTok"
@@ -93,8 +92,7 @@ export default function Footer() {
             />
             <a
               className="w-[20px] h-[20px] lg:w-[35px] lg:h-[35px] cursor-pointer flex items-center justify-center"
-              href="https://www.instagram.com/dr.nich_beautyclinic/"
-            >
+              href="https://www.instagram.com/dr.nich_beautyclinic/">
               <img
                 src={ig}
                 onClick={handleSosmed(
@@ -115,11 +113,11 @@ export default function Footer() {
               className="flex items-start space-x-3 cursor-pointer clickable"
               onClick={() =>
                 handleSosmed("https://maps.app.goo.gl/benokSLZCgXfyL5C9")
-              }
-            >
+              }>
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
-              <p className="text-sm text-left leading-tight text-[#e8ebe0] w-full lg:text-sm lg:tracking-wide">
-              Jl. Pringgodani Jl. Saparua Gg. Buntu,Tegalrejo,Kec.Argomulyo, Kota Salatiga, Jawa Tengah 50733
+              <p className="text-sm text-left leading-tight text-[#e8ebe0] w-full lg:text-sm lg:tracking-wider">
+                Jl. Pringgodani Jl. Saparua Gg. Buntu,Tegalrejo,Kec.Argomulyo,
+                Kota Salatiga, Jawa Tengah 50733
               </p>
             </a>
           </div>
@@ -127,30 +125,34 @@ export default function Footer() {
           <div className="w-[147px] grid gap-10 lg:gap-6 lg:w-full lg:ml-4">
             <div className="flex items-center space-x-3">
               <img src={email} alt="Email" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">drnichofficial@gmail.com</p>
+              <p className="text-sm text-[#e8ebe0] tracking-wider">
+                drnichofficial@gmail.com
+              </p>
             </div>
             <div
               className="flex items-center space-x-3 cursor-pointer"
-              onClick={handleWhatsApp}
-            >
+              onClick={handleWhatsApp}>
               <img src={kontak} alt="Kontak" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">+6285700525830</p>
+              <p className="text-sm text-[#e8ebe0] tracking-wider">
+                +6285700525830
+              </p>
             </div>
             <div className="flex items-center space-x-3">
               <img src={clock} alt="Jam Operasional" className="w-5 h-5" />
-              <p className="text-sm text-[#e8ebe0]">09.00 - 17.00</p>
+              <p className="text-sm text-[#e8ebe0] tracking-wider">
+                09.00 - 17.00
+              </p>
             </div>
           </div>
 
           {/* Navigation Links */}
-          <div className="w-full h-[101px] grid grid-cols-2 gap-[15px] lg:grid-cols-4 lg:h-full lg:w-full">
+          <div className="w-full h-[101px] grid grid-cols-2 gap-4 lg:grid-cols-4 lg:h-full lg:w-full">
             {footerLinks.map((item) => (
               <a
                 key={item.judul}
                 href="#"
                 onClick={item.onClick}
-                className="text-sm text-[#e8ebe0] hover:underline"
-              >
+                className="text-sm text-[#e8ebe0] hover:underline tracking-wide cursor-pointer">
                 {item.judul}
               </a>
             ))}
