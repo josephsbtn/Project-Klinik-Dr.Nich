@@ -118,9 +118,8 @@ export default function Footer() {
               }
             >
               <img src={alamat} alt="Alamat" className="w-5 h-5" />
-              <p className="text-sm text-justify leading-tight text-[#e8ebe0] w-24 lg:text-sm lg:tracking-wide">
-                Jl. Pringgodani Jl. Saparua Gg. Buntu, Tegalrejo, Kec.
-                Argomulyo, Kota Salatiga, Jawa Tengah 50733
+              <p className="text-sm text-left leading-tight text-[#e8ebe0] w-full lg:text-sm lg:tracking-wide">
+              Jl. Pringgodani Jl. Saparua Gg. Buntu,Tegalrejo,Kec.Argomulyo, Kota Salatiga, Jawa Tengah 50733
               </p>
             </a>
           </div>
