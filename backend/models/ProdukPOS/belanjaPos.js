@@ -14,6 +14,9 @@ const BelanjaPosSchema = mongoose.Schema(
     pembayaran: {
       type : Number
     },
+    metode: {
+      type : String
+    },
     kembalian: {
       type : Number
     },

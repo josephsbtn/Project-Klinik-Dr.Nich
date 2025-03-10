@@ -10,6 +10,7 @@ export const PilihPembayaran = () => {
     const { id } = useParams()
     const [tunai, setTunai] = useState('')
     const [tunaiR, setTunaiR] = useState(0)
+    const [metode, setmetode] = useState("Tunai")
     const tunaiRef = useRef(null)
     useEffect(() => {
         const fetch = async () => {
@@ -35,7 +36,7 @@ export const PilihPembayaran = () => {
         else {
             const kembalian = tunaiR - transaksi.totalAkhir
             try {
-                await axios.put('https://api.drnich.co.id/api/pos/kasir/updatetransaksi/' + id, { status: 'Done', pembayaran: tunaiR, kembalian: kembalian }, 
+                await axios.put('https://api.drnich.co.id/api/pos/kasir/updatetransaksi/' + id, { status: 'Done', pembayaran: tunaiR, kembalian: kembalian, metode: metode }, 
                     {
                     headers: {
                         "Content-Type": "application/json",
@@ -84,16 +85,31 @@ export const PilihPembayaran = () => {
                     className='w-full outline-none'
                 />
             </div>
-            <div className='flex justify-between my-2 w-full text-[#C2A353]'>
-                <div className='border border-[#C2A353] rounded-xl p-2 w-[35%]'>
+            <div className='flex justify-between items-center text-center my-2 w-full text-[#C2A353] gap-2'>
+                <button onClick={(e)=>{
+                    e.preventDefault()
+                    setmetode('Tunai')
+                }} className={`border border-[#C2A353] rounded-xl p-2 w-[20%] duration-500 ${metode=='Tunai' && 'scale-105'}`}>
+                    <p>Tunai</p>
+                </button>
+                <button onClick={(e)=>{
+                    e.preventDefault()
+                    setmetode('Debit')
+                }} className={`border border-[#C2A353] rounded-xl p-2 w-[35%] duration-500 ${metode=='Debit' && 'scale-105'}`}>
                     <p>Kartu Debit</p>
-                </div>
-                <div className='border border-[#C2A353] rounded-xl p-2 w-[26%]'>
+                </button>
+                <button onClick={(e)=>{
+                    e.preventDefault()
+                    setmetode('QRIS')
+                }} className={`border border-[#C2A353] rounded-xl p-2 w-[20%] duration-500 ${metode=='QRIS' && 'scale-105'}`}>
                     <p>QRIS</p>
-                </div>
-                <div className='border border-[#C2A353] rounded-xl p-2 w-[35%]'>
+                </button>
+                <button onClick={(e)=>{
+                    e.preventDefault()
+                    setmetode('Transfer')
+                }} className={`border border-[#C2A353] rounded-xl p-2 w-[35%] duration-500 ${metode=='Transfer' && 'scale-105'}`}>
                     <p>Transfer</p>
-                </div>
+                </button>
             </div>
             <div className='flex justify-end items-end text-[14px] mt-4 w-full h-full'>
                 <button

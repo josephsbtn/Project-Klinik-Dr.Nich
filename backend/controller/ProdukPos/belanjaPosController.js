@@ -90,9 +90,9 @@ const getBelanja = asyncHandler(async (req, res) => {
 
 const updateBelanja = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { pembayaran, kembalian } = req.body;
+  const { pembayaran, kembalian, metode } = req.body;
 
-  const data = {pembayaran : pembayaran, kembalian : kembalian}
+  const data = {pembayaran : pembayaran, kembalian : kembalian, metode : metode}
 
   try {
     const belanja = await BelanjaModels.findByIdAndUpdate(

@@ -14,6 +14,8 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     const to = new Date(sampai)
     let dataPelanggan = []
     let dataPromo = []
+    let laporan = []
+    let detailProduk = []
     const transaksi = await TransaksiModels.find({ createdAt: { $gte: from, $lte: to } }).populate("promo")
       .populate("pelanggan")
       .populate({
@@ -27,8 +29,9 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     let total = 0;
     for (const item of transaksi) {
       total += item.totalAkhir;
-
+      let isilaporan = {invoice: item.invoice, total: item.total, potongan: item.potongan, totalAkhir: item.totalAkhir, poin: item.poin, metodePembayaran: item.metode || "" }
       if (item.pelanggan && item.pelanggan.namaPelanggan) {  // Check if pelanggan exists
+        isilaporan.pelanggan = item.pelanggan.namaPelanggan
         if (dataPelanggan.some(data => data.namaPelanggan == item.pelanggan.namaPelanggan)) {
           dataPelanggan = dataPelanggan.map(isi =>
             isi.namaPelanggan == item.pelanggan.namaPelanggan
@@ -45,6 +48,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
         }
       }
       if (item.promo && item.promo.namaPromo) {
+        isilaporan.promo = item.promo.namaPromo
         if (
           dataPromo.some((promo) => promo.namaPromo == item.promo.namaPromo)
         ) {
@@ -66,11 +70,16 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
           });
         }
       }
+      
+    for(const det of item.transaksiDetail){
+      detailProduk.push({invoice: item.invoice, produk : det.produk.namaProduk, harga : det.produk.hargaJual, jumlah: det.jumlah, SubTotal: det.produk.hargaJual * det.jumlah})
+     }
+     laporan.push(isilaporan)
     }
     const totalTransaksi = transaksi.length;
 
 
-    res.status(200).json({ transaksi: transaksi, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan, promo: dataPromo, })
+    res.status(200).json({ transaksi: transaksi, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan, promo: dataPromo, laporan: laporan, detailLaporan: detailProduk})
   }
   catch (error) {
     res.status(400).json({ message: error.message });
