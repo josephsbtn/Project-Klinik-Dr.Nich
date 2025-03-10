@@ -216,7 +216,7 @@ function ViewAllTreatment() {
               </div>
             ) : filteredContent.length > 0 ? (
               filteredContent.map((item) => (
-                <div key={item._id}>
+                <div key={item._id} className=" scale-95">
                   <CardLayanan item={item} />
                 </div>
               ))
