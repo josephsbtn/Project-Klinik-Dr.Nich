@@ -157,7 +157,7 @@ export const LaporanRingkasanPenjualan = () => {
                     const sortedCustomers = [...response.data.pelanggan].sort((a, b) => b.totalPembelian - a.totalPembelian);
                     const sort = sortedCustomers.slice(0, 4)
                     setTopCustomers(sort);
-                    // console.log(sort)
+                    // console.log(response.data)
                 })
                 .catch(function (error) {
                     console.log('error saat fetching', error);
@@ -325,7 +325,7 @@ export const LaporanRingkasanPenjualan = () => {
                     </div>
                     <div className='flex flex-col gap-[10px]'>
                         <button
-                            onClick={(e)=>{download(e,data.transaksi,'laporan.xlsx')}}
+                            onClick={(e)=>{download(e,data.laporan,'laporan.xlsx')}}
                             className='flex justify-between items-center text-center border rounded-xl border-[#C2A353] px-[20px] py-[15px] text-[12px]'>
                             <p>Download Laporan</p>
                             <img src={iPan} alt="Panah" />
