@@ -580,7 +580,7 @@ export default function Beranda() {
           <main className="w-[90%] flex flex-col items-center lg:w-[85%]   ">
             <div className="flex w-full justify-between items-center lg:py-6  ">
               <h1 className="font-SFPro font-normal text-base lg:text-xl leading-[25px] tracking-wide">
-                Paket Treatment
+                Layanan
               </h1>
               <button
                 className="font-SFPro text-xs text-secondary font-medium lg:text-base tracking-wide"

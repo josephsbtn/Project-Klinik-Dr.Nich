@@ -205,7 +205,7 @@ function ViewAllTreatment() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 w-[90%] lg:w-[80%] gap-4 mt-[18px]">
+          <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 w-[90%] lg:w-[85%] gap-4 mt-[18px]">
             {loading ? (
               <div className="col-span-full text-center">
                 Loading products...
@@ -216,7 +216,7 @@ function ViewAllTreatment() {
               </div>
             ) : filteredContent.length > 0 ? (
               filteredContent.map((item) => (
-                <div key={item._id}>
+                <div key={item._id} className=" scale-95">
                   <CardLayanan item={item} />
                 </div>
               ))
