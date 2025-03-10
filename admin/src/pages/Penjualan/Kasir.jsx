@@ -23,6 +23,7 @@ export const Kasir = () => {
     const [jenis, setJenis] = useState([])
     const [produk, setProduk] = useState([])
     const [promo, setPromo] = useState([])
+    const [promoOri, setPromoOri] = useState([])
     const [pelanggan, setPelanggan] = useState([])
     const [terapis, seTterapis] = useState([])
     const [marketing, setMarketing] = useState([])
@@ -71,6 +72,7 @@ export const Kasir = () => {
             )
             await axios.get('https://api.drnich.co.id/api/pos/promo/promoaktif').then(response => {
                 setPromo(response.data)
+                setPromoOri(response.data)
             }
             )
             await axios.get('https://api.drnich.co.id/api/pos/kasir/transaksiinvoice').then(response =>
@@ -264,6 +266,18 @@ export const Kasir = () => {
     
         kalkulasi();
     }, [ promoTerpilih]);
+    useEffect(()=>{
+        let promoada = []
+        promoOri.map(item=>{
+            cart.map(itemx=>{
+                
+                item.promoDetail.map(itemy=> {
+                    if( itemy.produk?.namaProduk == itemx?.namaProduk && !promoada.some(itemz=>itemz._id == item._id)){promoada.push(item)}}
+                     )
+            })
+        })
+        setPromo(promoada)
+    },[cart])
     const handleDraft =async()=>{
             
             const data = {

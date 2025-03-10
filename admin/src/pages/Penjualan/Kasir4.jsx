@@ -98,6 +98,7 @@ export const Kasir4 = () => {
         setPromoTerpilih,
         setModalPro,
         promo,
+        cart
       }}
     >
       <div

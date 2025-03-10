@@ -21,6 +21,7 @@ export const DraftTransaksi3 = () => {
     const [pelangganTerpilih, setPelangganTerpilih] = useState([])
     const [modalPro, setModalPro] = useState(false)
     const [promo, setPromo] = useState([])
+    const [promoOri, setPromoOri] = useState([])
     const [promoTerpilih, setPromoTerpilih] = useState([])
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export const DraftTransaksi3 = () => {
             }
             )
             await axios.get('https://api.drnich.co.id/api/pos/promo/promoaktif').then(response => {
-                setPromo(response.data)
+                setPromoOri(response.data)
             }
             )
         }
@@ -79,6 +80,29 @@ export const DraftTransaksi3 = () => {
         }, 1500);
     }
 
+    useEffect(()=>{
+        if (promoOri.length>0 && transaksi.invoice) {
+            let promoada = [];
+        
+            console.log('zz',promoOri);
+            promoOri?.forEach(item => {
+                
+                transaksi.transaksiDetail?.forEach(itemx => {
+                    item.promoDetail?.forEach(itemy => {
+                        if (
+                            itemy.produk?.namaProduk?.trim().toLowerCase() === itemx?.produk?.namaProduk?.trim().toLowerCase() &&
+                            !promoada.some(itemz => itemz._id.toString() === item._id.toString())
+                        ) {
+                            promoada.push(item);
+                        }
+                    });
+                });
+            });
+        
+            setPromo(promoada);
+        }
+        
+    },[promoOri, transaksi])
     return (
         <draftcontext.Provider value={{ modalPel, setModalPel, pelanggan, pelangganTerpilih, setPelangganTerpilih, modalPro, setModalPro, promo, promoTerpilih, setPromoTerpilih }}>
             <div className='flex flex-col px-5 py-8 gap-1 bg-white w-full min-h-full pt-8 text-[#454545] text-[12px] onverflow-y-auto'>

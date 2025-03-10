@@ -299,7 +299,7 @@ export const LaporanRingkasanPenjualan = () => {
                     <div className='flex justify-between gap-[10px] text-[12px] w-full'>
                         <div className='flex flex-col gap-[10px] border rounded-xl border-[#C2A353] px-[20px] py-[15px] mt-[20px] w-full'>
                             <div className='flex items-center text-center gap-[5px]'>
-                                <p>Total Produk</p>
+                                <p>Total Penjualan</p>
                                 <img src={iSeruTrans} alt="iSeru" />
                             </div>
                             <div className='flex items-center text-center'>
