@@ -202,39 +202,17 @@ export const LaporanRingkasanPenjualan = () => {
             e.preventDefault()
             console.log(data)
             const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet("Sheet1");
-
-    // Extract all normal column headers (excluding detailTransaksi)
-    const normalHeaders = Object.keys(jsonData[0]).filter(key => key !== "detailTransaksi");
-
-    // Define worksheet columns
-    worksheet.columns = [
-        ...normalHeaders.map(header => ({ header, key: header })), // Normal columns
-        { header: "Produk", key: "produk" }, // Split columns
-        { header: "Jumlah", key: "jumlah" },
-        { header: "SubTotal", key: "SubTotal" }
-    ];
-
-    // Add data rows
-    jsonData.forEach(item => {
-        if (Array.isArray(item.detailTransaksi) && item.detailTransaksi.length > 0) {
-            item.detailTransaksi.forEach(detail => {
-                worksheet.addRow({
-                    ...Object.fromEntries(normalHeaders.map(header => [header, item[header]])), // Normal data
-                    produk: detail.produk,
-                    jumlah: detail.jumlah,
-                    SubTotal: detail.SubTotal
-                });
-            });
-        } else {
-            // If detailTransaksi is empty, just add a row with normal data
-            worksheet.addRow(Object.fromEntries(normalHeaders.map(header => [header, item[header]])));
-        }
-    });
-
-    // Write to file
-    const buffer = await workbook.xlsx.writeBuffer();
-    saveAs(new Blob([buffer]), fileName);
+            const worksheet = workbook.addWorksheet("Sheet1");
+          
+            // Add header row
+            worksheet.columns = Object.keys(jsonData[0]).map((key) => ({ header: key, key }));
+          
+            // Add data rows
+            jsonData.forEach((row) => worksheet.addRow(row));
+          
+            // Write to file
+            const buffer = await workbook.xlsx.writeBuffer();
+            saveAs(new Blob([buffer]), fileName);
           
     }
 
