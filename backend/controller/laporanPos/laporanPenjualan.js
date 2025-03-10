@@ -15,7 +15,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     let dataPelanggan = []
     let dataPromo = []
     let laporan = []
-    detailProduk = []
+    let detailProduk = []
     const transaksi = await TransaksiModels.find({ createdAt: { $gte: from, $lte: to } }).populate("promo")
       .populate("pelanggan")
       .populate({
