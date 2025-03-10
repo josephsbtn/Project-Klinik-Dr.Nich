@@ -40,6 +40,9 @@ const transaksiPosSchema = mongoose.Schema(
     status : {
       type : String,
       required : true
+    },
+    metode : {
+      type : String
     }
   },
   {

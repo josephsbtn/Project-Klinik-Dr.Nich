@@ -29,7 +29,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     let total = 0;
     for (const item of transaksi) {
       total += item.totalAkhir;
-      let isilaporan = {invoice: item.invoice, total: item.total, potongan: item.potongan, totalAkhir: item.totalAkhir, poin: item.poin }
+      let isilaporan = {invoice: item.invoice, total: item.total, potongan: item.potongan, totalAkhir: item.totalAkhir, poin: item.poin, metodePembayaran: item.metode }
       if (item.pelanggan && item.pelanggan.namaPelanggan) {  // Check if pelanggan exists
         isilaporan.pelanggan = item.pelanggan.namaPelanggan
         if (dataPelanggan.some(data => data.namaPelanggan == item.pelanggan.namaPelanggan)) {
@@ -72,7 +72,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
       }
       
     for(const det of item.transaksiDetail){
-      detailProduk.push({invoice: item.invoice, produk : det.produk.namaProduk, jumlah: det.jumlah, SubTotal: det.produk.hargaJual * det.jumlah})
+      detailProduk.push({invoice: item.invoice, produk : det.produk.namaProduk, harga : det.produk.hargaJual, jumlah: det.jumlah, SubTotal: det.produk.hargaJual * det.jumlah})
      }
      laporan.push(isilaporan)
     }

@@ -164,13 +164,14 @@ const getTransaksiInvoice = asyncHandler(async (req, res) => {
 
 const updateTransaksi = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { status, pembayaran, kembalian, pelanggan, promo } = req.body;
+  const { status, pembayaran, kembalian, pelanggan, promo, metode } = req.body;
 let newData = {}
 if(pelanggan){newData.pelanggan = pelanggan}
 if(promo){newData.promo = promo}
 if(status){newData.status = status}
 if(pembayaran){newData.pembayaran = pembayaran}
 if(kembalian){newData.kembalian = kembalian}
+if(metode){newData.metode = metode}
   try {
     const transaksi = await TransaksiModels.findByIdAndUpdate(
       id,
