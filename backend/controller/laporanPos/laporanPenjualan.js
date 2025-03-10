@@ -71,7 +71,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
       }
       isilaporan.detailProduk = []
     for(const det of item.transaksiDetail){
-      isilaporan.detailProduk.push({produk : det.produk.namaProduk, jumlah: det.jumlah, SubTotal: det.produk.hargaJual * det.jumlah})
+      isilaporan.detailProduk.push(det.produk.namaProduk + ' X ' + det.jumlah+' : '+ det.produk.hargaJual * det.jumlah)
      }
      laporan.push(isilaporan)
     }
