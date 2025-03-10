@@ -15,6 +15,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     let dataPelanggan = []
     let dataPromo = []
     let laporan = []
+    detailProduk = []
     const transaksi = await TransaksiModels.find({ createdAt: { $gte: from, $lte: to } }).populate("promo")
       .populate("pelanggan")
       .populate({
@@ -69,7 +70,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
           });
         }
       }
-      detailProduk = []
+      
     for(const det of item.transaksiDetail){
       detailProduk.push({invoice: item.invoice, produk : det.produk.namaProduk, jumlah: det.jumlah, SubTotal: det.produk.hargaJual * det.jumlah})
      }
