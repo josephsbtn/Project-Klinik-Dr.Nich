@@ -69,16 +69,16 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
           });
         }
       }
-      isilaporan.detailProduk = []
+      detailProduk = []
     for(const det of item.transaksiDetail){
-      isilaporan.detailProduk.push(det.produk.namaProduk + ' X ' + det.jumlah+' : '+ det.produk.hargaJual * det.jumlah)
+      detailProduk.push({invoice: item.invoice, produk : det.produk.namaProduk, jumlah: det.jumlah, SubTotal: det.produk.hargaJual * det.jumlah})
      }
      laporan.push(isilaporan)
     }
     const totalTransaksi = transaksi.length;
 
 
-    res.status(200).json({ transaksi: transaksi, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan, promo: dataPromo, laporan: laporan})
+    res.status(200).json({ transaksi: transaksi, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan, promo: dataPromo, laporan: laporan, detailLaporan: detailProduk})
   }
   catch (error) {
     res.status(400).json({ message: error.message });
