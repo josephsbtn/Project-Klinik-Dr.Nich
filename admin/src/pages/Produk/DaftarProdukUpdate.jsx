@@ -58,6 +58,8 @@ export const DaftarProdukUpdate = () => {
           setBonusT(response.data.bonusTerapis.toLocaleString("id-ID"))
           setKategorix(response.data.kategori);
           setjenisx(response.data.jenis);
+          sethppr(response.data.hpp)
+          sethpp(response.data.hpp.toLocaleString('id-ID'))
         });
 
       await axios
@@ -105,7 +107,7 @@ export const DaftarProdukUpdate = () => {
 
   }
   const chpp =() => {
-    const d = HPPRef.current.value.replace(/\D/g, "")
+    const d = hppRef.current.value.replace(/\D/g, "")
     sethppr(d)
     sethpp(Number(d).toLocaleString('id-ID'))
   }

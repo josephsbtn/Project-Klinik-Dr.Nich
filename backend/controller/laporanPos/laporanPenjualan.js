@@ -27,8 +27,10 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
       });
 
     let total = 0;
+    let hpp = 0;
     for (const item of transaksi) {
       total += item.totalAkhir;
+      hpp += item.hpp
       let isilaporan = {invoice: item.invoice, total: item.total, potongan: item.potongan, totalAkhir: item.totalAkhir, poin: item.poin, metodePembayaran: item.metode || "" }
       if (item.pelanggan && item.pelanggan.namaPelanggan) {  // Check if pelanggan exists
         isilaporan.pelanggan = item.pelanggan.namaPelanggan
@@ -79,7 +81,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     const totalTransaksi = transaksi.length;
 
 
-    res.status(200).json({ transaksi: transaksi, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan, promo: dataPromo, laporan: laporan, detailLaporan: detailProduk})
+    res.status(200).json({ transaksi: transaksi, hpp: hpp, totalPendapatan: total, totalTransaksi: totalTransaksi, pelanggan: dataPelanggan, promo: dataPromo, laporan: laporan, detailLaporan: detailProduk})
   }
   catch (error) {
     res.status(400).json({ message: error.message });

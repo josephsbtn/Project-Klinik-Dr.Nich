@@ -312,7 +312,7 @@ export const LaporanRingkasanPenjualan = () => {
                                 <img src={iSeruTrans} alt="iSeru" />
                             </div>
                             <div className='flex items-center text-center'>
-                                <p className='font-semibold text-[14px]'>Rp.</p>
+                            <p className='font-semibold text-[14px]'>Rp. {data?.hpp?.toLocaleString('id-ID')}</p>
                             </div>
                         </div>
                     </div>
@@ -323,7 +323,7 @@ export const LaporanRingkasanPenjualan = () => {
                                 <img src={iSeruTrans} alt="iSeru" />
                             </div>
                             <div className='flex items-center text-center'>
-                                <p className='font-semibold text-[14px]'>Rp.</p>
+                                <p className='font-semibold text-[14px]'>Rp. {(data?.totalPendapatan - data?.hpp).toLocaleString('id-ID')}</p>
                             </div>
                         </div>
                         <div className='flex flex-col gap-[10px] border rounded-xl border-[#C2A353] px-[20px] py-[15px] w-full'>
