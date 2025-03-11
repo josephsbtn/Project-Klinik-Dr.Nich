@@ -288,7 +288,7 @@ export const Kasir = () => {
                         if( itemy.produk?.namaProduk == itemx?.namaProduk ){reqcheck+=1}}
                          )
                 })
-                reqcheck > item.reqr && promoada2.push(item)
+                reqcheck >= item.reqr && promoada2.push(item)
             }
             else if(item.keterangan == 'Cashback Total Transaksi' ||
                 item.keterangan == 'Diskon Total Transaksi'){
@@ -299,7 +299,7 @@ export const Kasir = () => {
                         if( itemy.produk?.namaProduk == itemx?.namaProduk ){reqcheck+=itemx.hargaJual * itemx.jumlah}}
                          )
                 })
-                reqcheck > item.reqr && promoada2.push(item)
+                reqcheck >= item.reqr && promoada2.push(item)
                 }
             else {
                 promoada2.push(item)
