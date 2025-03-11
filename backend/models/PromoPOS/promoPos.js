@@ -19,8 +19,11 @@ const promoPosSchema = mongoose.Schema(
     cashback: {
       type: Number
   },
+    req : {
+      type: Number
+    },
     keterangan: {
-      type: "String"
+      type: String
     },
     berlakuDari:{
       type: Date

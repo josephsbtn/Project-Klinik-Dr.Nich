@@ -276,7 +276,36 @@ export const Kasir = () => {
                      )
             })
         })
-        setPromo(promoada)
+        let promoada2 = []
+        promoada.map(item=>{
+            if (item.keterangan == 'Cashback Kuantitas' ||
+            
+            item.keterangan == 'Diskon Kuantitas' ){
+                let reqcheck = 0
+                cart.map(itemx=>{
+                
+                    item.promoDetail.map(itemy=> {
+                        if( itemy.produk?.namaProduk == itemx?.namaProduk ){reqcheck+=1}}
+                         )
+                })
+                reqcheck > item.req && promoada2.push(item)
+            }
+            else if(item.keterangan == 'Cashback Total Transaksi' ||
+                item.keterangan == 'Diskon Total Transaksi'){
+                    let reqcheck = 0
+                cart.map(itemx=>{
+                
+                    item.promoDetail.map(itemy=> {
+                        if( itemy.produk?.namaProduk == itemx?.namaProduk ){reqcheck+=itemx.hargaJual * itemx.jumlah}}
+                         )
+                })
+                reqcheck > item.req && promoada2.push(item)
+                }
+            else {
+                promoada2.push(item)
+            }
+        })
+        setPromo(promoada2)
     },[cart])
     const handleDraft =async()=>{
             
