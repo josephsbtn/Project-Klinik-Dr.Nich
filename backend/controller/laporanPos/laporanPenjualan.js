@@ -376,25 +376,31 @@ const laporanGrafikProduk = async (req, res) => {
     let startDate, endDate, groupBy;
 
     const dateObj = new Date(tanggal);
-    dateObj.setHours(23, 59, 59, 999); // Normalize to end of the day
+    dateObj.setUTCHours(23 -7  , 59, 59, 999); // Normalize to end of the day
 
-    if (menu === "mingguan") {
+    if (menu === "harian") {
+      startDate = new Date(dateObj);
+      startDate.setUTCHours(0 - 7, 0, 0, 0); // Start of day in GMT -7
+      endDate = new Date(dateObj);
+      groupBy = "hour";
+    } 
+    else if (menu === "mingguan") {
       startDate = new Date(dateObj);
       startDate.setDate(dateObj.getDate() - 6);
-      startDate.setHours(0, 0, 0, 0);
+      startDate.setUTCHours(0 -7, 0, 0, 0);
       endDate = dateObj;
       groupBy = "day";
     } 
     else if (menu === "bulanan") {
       startDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), 1);
       endDate = new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0);
-      endDate.setHours(23, 59, 59, 999);
+      endDate.setUTCHours(23 -7 , 59, 59, 999);
       groupBy = "date";
     } 
     else if (menu === "tahunan") {
       startDate = new Date(dateObj.getFullYear(), 0, 1);
       endDate = new Date(dateObj.getFullYear(), 11, 31);
-      endDate.setHours(23, 59, 59, 999);
+      endDate.setUTCHours(23 -7 , 59, 59, 999);
       groupBy = "month";
     } 
     else {
@@ -414,8 +420,34 @@ const laporanGrafikProduk = async (req, res) => {
 
     let reportData = [];
     let produklist = [];
+    if (groupBy === "hour") {
+      reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: [] }));
+      
+      transactions.forEach(transaction => {
+        const transactionHour = new Date(transaction.createdAt).getUTCHours() + 7;
+        const hourData = reportData.find(hour => hour.name === `${transactionHour}:00`);
+        if (!hourData) return;
 
-    if (groupBy === "day") {
+        transaction.transaksiDetail.forEach(citem => {
+          const existingProduct = hourData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          if (existingProduct) {
+            existingProduct.jumlah += citem.jumlah;
+            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+          } else {
+            hourData.penjualan.push({
+              namaProduk: citem.produk.namaProduk,
+              jumlah: citem.jumlah,
+              pendapatan: citem.jumlah * citem.produk.hargaJual
+            });
+          }
+
+          if (!produklist.find(item => item.namaProduk === citem.produk.namaProduk)) {
+            produklist.push({ namaProduk: citem.produk.namaProduk });
+          }
+        });
+      });
+    }
+    else if (groupBy === "day") {
       const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
       const startDayIndex = startDate.getDay();
       const orderedWeekDays = [...weekDays.slice(startDayIndex), ...weekDays.slice(0, startDayIndex)];
