@@ -98,7 +98,7 @@ export const Cashback3 = () => {
             berlakuSampai: endDate.toISOString().split('T')[0],
             promoDetail: produkTerpilih,
             jenis: "Cashback",
-            req : reqref.current.value
+            reqr : reqref.current.value
         }
         console.log(data)
         // await axios.post('https://api.drnich.co.id/api/pos/promo/promo', data).then(

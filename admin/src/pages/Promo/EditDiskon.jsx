@@ -74,7 +74,7 @@ export const EditDiskon = () => {
             promoDetail  :   produkTerpilih,
             jenisPotongan : jenisPotongan,
             jenis   : "Diskon",
-            req : reqref.current.value
+            reqr : reqref.current.value
         }
         console.log(data)
         // await axios.post('https://api.drnich.co.id/api/pos/promo/promo',data).then(
@@ -204,7 +204,7 @@ return (
         </div>
         <div className='flex flex-col px-3 h-full'>
             <p>Syarat Limit ( Untuk kategori kuantitas atau total transaksi )</p>
-            <input ref={reqref} type='number' defaultValue={data.req} placeholder='Nama Promo Diskon' className='border border-[#BDBDBD] rounded-xl w-full h-[45px] py-[14px] px-[20px] mb-[20px] mt-[5px]'>
+            <input ref={reqref} type='number' defaultValue={data.reqr} placeholder='Nama Promo Diskon' className='border border-[#BDBDBD] rounded-xl w-full h-[45px] py-[14px] px-[20px] mb-[20px] mt-[5px]'>
             </input>
         </div>
         <div className='gflex flex-col px-3 h-full'>

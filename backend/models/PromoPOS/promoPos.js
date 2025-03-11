@@ -19,7 +19,7 @@ const promoPosSchema = mongoose.Schema(
     cashback: {
       type: Number
   },
-    req : {
+    reqr : {
       type: Number
     },
     keterangan: {

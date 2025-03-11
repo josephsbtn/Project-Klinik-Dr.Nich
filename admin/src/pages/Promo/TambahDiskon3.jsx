@@ -70,7 +70,7 @@ export const TambahDiskon3 = () => {
             promoDetail  :   produkTerpilih,
             jenisPotongan : jenisPotongan,
             jenis   : "Diskon",
-            req : reqref.current.value
+            reqr : reqref.current.value
         }
         console.log(data)
         // await axios.post('https://api.drnich.co.id/api/pos/promo/promo',data).then(

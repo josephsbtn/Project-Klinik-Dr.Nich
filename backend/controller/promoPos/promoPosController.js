@@ -3,7 +3,7 @@ import PromoModels from "../../models/PromoPOS/promoPos.js";
 import PromoDetailModel from "../../models/PromoPOS/promoDetailPos.js";
 
   const newPromo = asyncHandler(async (req, res) => {
-    const { namaPromo, potongan, req, cashback, jenis, keterangan, jenisPotongan, promoDetail, berlakuDari, berlakuSampai } = req.body;
+    const { namaPromo, potongan, reqr, cashback, jenis, keterangan, jenisPotongan, promoDetail, berlakuDari, berlakuSampai } = req.body;
 
     try {
       // Create the main promo
@@ -17,7 +17,7 @@ import PromoDetailModel from "../../models/PromoPOS/promoDetailPos.js";
         berlakuDari,
         berlakuSampai,
         promoDetail,
-        req
+        reqr
       });
       const detailIDS = [];
       // Now, handle the promoDetail which includes products and promoPos.id
@@ -77,7 +77,7 @@ const getPromoAktif = asyncHandler(async (req, res) => {
 });
 
 const updatePromo = asyncHandler(async (req, res) => {
-  const { namaPromo, req, potongan, cashback, jenis, keterangan, jenisPotongan, promoDetail, berlakuDari, berlakuSampai } = req.body;
+  const { namaPromo, reqr, potongan, cashback, jenis, keterangan, jenisPotongan, promoDetail, berlakuDari, berlakuSampai } = req.body;
   const { id } = req.params;
 
   try {
@@ -92,7 +92,7 @@ const updatePromo = asyncHandler(async (req, res) => {
     promo.potongan = potongan;
     promo.cashback = cashback;
     promo.jenis = jenis;
-    promo.req = req;
+    promo.reqr = reqr;
     promo.keterangan = keterangan;
     promo.jenisPotongan = jenisPotongan;
     promo.berlakuDari = berlakuDari;
