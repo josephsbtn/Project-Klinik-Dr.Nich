@@ -33,6 +33,9 @@ const produkPosSchema = mongoose.Schema(
     minStok: {
       type: Number,
     },
+    status: {
+     type: String,
+    },
     hpp: {
       type: Number
     },
