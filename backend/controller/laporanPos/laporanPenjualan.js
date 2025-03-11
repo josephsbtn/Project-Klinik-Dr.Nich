@@ -424,7 +424,7 @@ const laporanGrafikProduk = async (req, res) => {
       reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: [] }));
       
       transactions.forEach(transaction => {
-        const transactionHour = new Date(transaction.createdAt).getUTCHours() - 7;
+        const transactionHour = new Date(transaction.createdAt).getUTCHours() + 7;
         const hourData = reportData.find(hour => hour.name === `${transactionHour}:00`);
         if (!hourData) return;
 
