@@ -40,7 +40,7 @@ export const LaporanPenjualanProduk = () => {
   const pilihProdukRef = useRef([])
   // State untuk visibilitas bar (legend interaktif)
   const [visibleBars, setVisibleBars] = useState([]);
-  const [pilihMinggu, setPilihMinggu] = useState("mingguan")
+  const [pilihMinggu, setPilihMinggu] = useState("harian")
 
   const datePickerRef = useRef(null);
   const datePickerRef2 = useRef(null);
@@ -371,9 +371,8 @@ export const LaporanPenjualanProduk = () => {
             ref={Minggu}
             onChange={MBT}
           >
-            <option value="mingguan">
-              Minggu ini
-            </option>
+            <option value="harian"> Hari ini </option>
+            <option value="mingguan"> Minggu ini </option>
             <option value="bulanan">Bulan Ini</option>
             <option value="tahunan">Tahun Ini</option>
           </select>

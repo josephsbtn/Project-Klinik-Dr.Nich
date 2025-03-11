@@ -366,15 +366,15 @@ const laporanGrafik = async (req, res) => {
 
 
 const laporanGrafikProduk = async (req, res) => {
-  const { menu, tanggal } = req.body;
-
-  if (!tanggal) {
-    return res.status(400).json({ success: false, message: "tanggal is required" });
-  }
-
   try {
+    const { menu, tanggal } = req.body;
+
+    if (!tanggal) {
+      return res.status(400).json({ success: false, message: "tanggal is required" });
+    }
+
     let startDate, endDate, groupBy;
-    
+
     const dateObj = new Date(tanggal);
     dateObj.setUTCHours(23 - 7, 59, 59, 999); // Normalize to end of the day in GMT-7
 
@@ -408,56 +408,44 @@ const laporanGrafikProduk = async (req, res) => {
     // Fetch transactions within the given range
     const transactions = await TransaksiModels.find({
       createdAt: { $gte: startDate, $lte: endDate }
+    }).populate({
+      path: 'transaksiDetail',
+      populate: {
+        path: 'produk',
+        model: 'produkPos'
+      }
     });
 
     let reportData = [];
+    let produklist = [];
 
     if (groupBy === "hour") {
-      reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: 0 }));
+      reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: [] }));
       transactions.forEach(transaction => {
         const transactionHour = new Date(transaction.createdAt).getUTCHours() - 7;
-        reportData[(transactionHour + 24) % 24].penjualan += transaction.totalAkhir;
-      });
-    } 
-    else if (groupBy === "day") {
-      const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
-      const startDayIndex = startDate.getUTCDay();
-      const orderedWeekDays = [...weekDays.slice(startDayIndex), ...weekDays.slice(0, startDayIndex)];
+        const hourData = reportData[(transactionHour + 24) % 24];
+        
+        transaction.transaksiDetail.forEach(citem => {
+          const existingProduct = hourData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          if (existingProduct) {
+            existingProduct.jumlah += citem.jumlah;
+            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+          } else {
+            hourData.penjualan.push({
+              namaProduk: citem.produk.namaProduk,
+              jumlah: citem.jumlah,
+              pendapatan: citem.jumlah * citem.produk.hargaJual
+            });
+          }
 
-      reportData = orderedWeekDays.map(day => ({ name: day, penjualan: 0 }));
-
-      transactions.forEach(transaction => {
-        const transactionDayIndex = (new Date(transaction.createdAt).getUTCDay() - 7 + 7) % 7;
-        const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
-        const dayData = reportData.find(day => day.name === adjustedDayName);
-        if (dayData) dayData.penjualan += transaction.totalAkhir;
-      });
-    } 
-    else if (groupBy === "date") {
-      const totalDays = new Date(startDate.getUTCFullYear(), startDate.getUTCMonth() + 1, 0).getUTCDate();
-      reportData = Array.from({ length: totalDays }, (_, i) => ({ name: (i + 1).toString(), penjualan: 0 }));
-
-      transactions.forEach(transaction => {
-        const transactionDate = new Date(transaction.createdAt).getUTCDate();
-        const dayData = reportData.find(day => day.name === transactionDate.toString());
-        if (dayData) dayData.penjualan += transaction.totalAkhir;
-      });
-    } 
-    else if (groupBy === "month") {
-      const monthNames = [
-        "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-      ];
-
-      reportData = monthNames.map(month => ({ name: month, penjualan: 0 }));
-
-      transactions.forEach(transaction => {
-        const transactionMonth = new Date(transaction.createdAt).getUTCMonth();
-        reportData[transactionMonth].penjualan += transaction.totalAkhir;
+          if (!produklist.find(item => item.namaProduk === citem.produk.namaProduk)) {
+            produklist.push({ namaProduk: citem.produk.namaProduk });
+          }
+        });
       });
     }
 
-    res.json({ success: true, transactions: reportData });
+    res.json({ success: true, penjualan: reportData, produklist: produklist });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
