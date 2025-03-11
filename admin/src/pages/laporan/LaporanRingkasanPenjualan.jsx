@@ -154,6 +154,7 @@ export const LaporanRingkasanPenjualan = () => {
                 .post("https://api.drnich.co.id/api/pos/laporan/laporanpenjualan", tanggal)
                 .then((response) => {
                     setData(response.data);
+                    console.log(response.data)
                     const sortedCustomers = [...response.data.pelanggan].sort((a, b) => b.totalPembelian - a.totalPembelian);
                     const sort = sortedCustomers.slice(0, 4)
                     setTopCustomers(sort);

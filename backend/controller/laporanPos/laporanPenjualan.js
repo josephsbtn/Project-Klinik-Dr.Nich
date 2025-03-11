@@ -30,7 +30,7 @@ const laporanPenjualan = asyncHandler(async (req, res) => {
     let hpp = 0;
     for (const item of transaksi) {
       total += item.totalAkhir;
-      hpp += item.hpp
+      if(item.hpp){hpp += item.hpp}
       let isilaporan = {invoice: item.invoice, total: item.total, potongan: item.potongan, totalAkhir: item.totalAkhir, poin: item.poin, metodePembayaran: item.metode || "" }
       if (item.pelanggan && item.pelanggan.namaPelanggan) {  // Check if pelanggan exists
         isilaporan.pelanggan = item.pelanggan.namaPelanggan
