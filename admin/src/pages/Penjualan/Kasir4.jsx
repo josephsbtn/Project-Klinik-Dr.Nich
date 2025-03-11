@@ -119,7 +119,10 @@ export const Kasir4 = () => {
             ) : (
               <p>Pilih Pelanggan</p>
             )}
-            <img src={iPanah} alt="" />
+            {!pelangganTerpilih.namaPelanggan ? <img src={iPanah} alt="" /> : <button  onClick={(e)=>{
+              e.preventDefault()
+              setPelangganTerpilih([])
+            }} className="text-[16px] text-red-500 z-50">x</button>}
           </button>
           <button
             onClick={(e) => {
@@ -133,7 +136,11 @@ export const Kasir4 = () => {
             ) : (
               <p>Pilih Promo</p>
             )}
-            <img src={iPanah} alt="" />
+            {!promoTerpilih.namaPromo ? <img src={iPanah} alt="" /> : <button  onClick={(e)=>{
+              e.preventDefault()
+              setPromoTerpilih([])
+            }} className="text-[16px] text-red-500 z-50">x</button>}
+            
           </button>
           <div className="text-[12px] bg-[#F6F6F6] text-[#BDBDBD] py-0.5 text-start mt-4 w-full">
             <p>Rincian Pembelian</p>
