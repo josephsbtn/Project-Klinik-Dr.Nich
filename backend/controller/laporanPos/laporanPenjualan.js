@@ -376,29 +376,25 @@ const laporanGrafikProduk = async (req, res) => {
     let startDate, endDate, groupBy;
 
     const dateObj = new Date(tanggal);
-    dateObj.setUTCHours(23 - 7, 59, 59, 999); // Normalize to end of the day in GMT-7
+    dateObj.setHours(23, 59, 59, 999); // Normalize to end of the day
 
-    if (menu === "harian") {
+    if (menu === "mingguan") {
       startDate = new Date(dateObj);
-      startDate.setUTCHours(0 - 7, 0, 0, 0);
-      endDate = new Date(dateObj);
-      groupBy = "hour";
-    } 
-    else if (menu === "mingguan") {
-      startDate = new Date(dateObj);
-      startDate.setUTCDate(dateObj.getUTCDate() - 6);
-      startDate.setUTCHours(0 - 7, 0, 0, 0);
+      startDate.setDate(dateObj.getDate() - 6);
+      startDate.setHours(0, 0, 0, 0);
       endDate = dateObj;
       groupBy = "day";
     } 
     else if (menu === "bulanan") {
-      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), 1, 0 - 7, 0, 0, 0));
-      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth() + 1, 0, 23 - 7, 59, 59, 999));
+      startDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), 1);
+      endDate = new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0);
+      endDate.setHours(23, 59, 59, 999);
       groupBy = "date";
     } 
     else if (menu === "tahunan") {
-      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 0, 1, 0 - 7, 0, 0, 0));
-      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 11, 31, 23 - 7, 59, 59, 999));
+      startDate = new Date(dateObj.getFullYear(), 0, 1);
+      endDate = new Date(dateObj.getFullYear(), 11, 31);
+      endDate.setHours(23, 59, 59, 999);
       groupBy = "month";
     } 
     else {
@@ -419,19 +415,90 @@ const laporanGrafikProduk = async (req, res) => {
     let reportData = [];
     let produklist = [];
 
-    if (groupBy === "hour") {
-      reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: [] }));
+    if (groupBy === "day") {
+      const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+      const startDayIndex = startDate.getDay();
+      const orderedWeekDays = [...weekDays.slice(startDayIndex), ...weekDays.slice(0, startDayIndex)];
+
+      const transactionsByDay = new Map();
+      orderedWeekDays.forEach(day => transactionsByDay.set(day, { name: day, penjualan: [] }));
+
       transactions.forEach(transaction => {
-        const transactionHour = new Date(transaction.createdAt).getUTCHours() - 7;
-        const hourData = reportData[(transactionHour + 24) % 24];
-        
+        const transactionDate = new Date(transaction.createdAt);
+        const transactionDayIndex = transactionDate.getDay();
+        const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
+
+        const dayData = transactionsByDay.get(adjustedDayName);
+        if (!dayData) return;
+
         transaction.transaksiDetail.forEach(citem => {
-          const existingProduct = hourData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          const existingProduct = dayData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
           if (existingProduct) {
             existingProduct.jumlah += citem.jumlah;
             existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
           } else {
-            hourData.penjualan.push({
+            dayData.penjualan.push({
+              namaProduk: citem.produk.namaProduk,
+              jumlah: citem.jumlah,
+              pendapatan: citem.jumlah * citem.produk.hargaJual
+            });
+          }
+
+          if (!produklist.find(item => item.namaProduk === citem.produk.namaProduk)) {
+            produklist.push({ namaProduk: citem.produk.namaProduk });
+          }
+        });
+      });
+
+      reportData = Array.from(transactionsByDay.values());
+    } 
+    else if (groupBy === "date") {
+      const totalDays = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0).getDate();
+      reportData = Array.from({ length: totalDays }, (_, i) => ({ name: (i + 1).toString(), penjualan: [] }));
+
+      transactions.forEach(transaction => {
+        const transactionDate = new Date(transaction.createdAt).getDate();
+        const dayData = reportData.find(day => day.name === transactionDate.toString());
+        if (!dayData) return;
+
+        transaction.transaksiDetail.forEach(citem => {
+          const existingProduct = dayData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          if (existingProduct) {
+            existingProduct.jumlah += citem.jumlah;
+            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+          } else {
+            dayData.penjualan.push({
+              namaProduk: citem.produk.namaProduk,
+              jumlah: citem.jumlah,
+              pendapatan: citem.jumlah * citem.produk.hargaJual
+            });
+          }
+
+          if (!produklist.find(item => item.namaProduk === citem.produk.namaProduk)) {
+            produklist.push({ namaProduk: citem.produk.namaProduk });
+          }
+        });
+      });
+    } 
+    else if (groupBy === "month") {
+      const monthNames = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+
+      reportData = monthNames.map(month => ({ name: month, penjualan: [] }));
+
+      transactions.forEach(transaction => {
+        const transactionMonth = new Date(transaction.createdAt).getMonth();
+        const monthData = reportData[transactionMonth];
+
+        transaction.transaksiDetail.forEach(citem => {
+          const existingProduct = monthData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+          if (existingProduct) {
+            existingProduct.jumlah += citem.jumlah;
+            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+          } else {
+            monthData.penjualan.push({
               namaProduk: citem.produk.namaProduk,
               jumlah: citem.jumlah,
               pendapatan: citem.jumlah * citem.produk.hargaJual
