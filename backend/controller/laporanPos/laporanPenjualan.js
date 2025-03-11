@@ -376,7 +376,7 @@ const laporanGrafikProduk = async (req, res) => {
     let startDate, endDate, groupBy;
 
     const dateObj = new Date(tanggal);
-    dateObj.setUTCHours(23 -7  , 59, 59, 999); // Normalize to end of the day
+    dateObj.setUTCHours(23 - 7 , 59, 59, 999); // Normalize to end of the day
 
     if (menu === "harian") {
       startDate = new Date(dateObj);
@@ -387,20 +387,20 @@ const laporanGrafikProduk = async (req, res) => {
     else if (menu === "mingguan") {
       startDate = new Date(dateObj);
       startDate.setDate(dateObj.getDate() - 6);
-      startDate.setUTCHours(0 -7, 0, 0, 0);
+      startDate.setUTCHours(0 - 7, 0, 0, 0);
       endDate = dateObj;
       groupBy = "day";
     } 
     else if (menu === "bulanan") {
       startDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), 1);
       endDate = new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0);
-      endDate.setUTCHours(23 -7 , 59, 59, 999);
+      endDate.setUTCHours(23 - 7 , 59, 59, 999);
       groupBy = "date";
     } 
     else if (menu === "tahunan") {
       startDate = new Date(dateObj.getFullYear(), 0, 1);
       endDate = new Date(dateObj.getFullYear(), 11, 31);
-      endDate.setUTCHours(23 -7 , 59, 59, 999);
+      endDate.setUTCHours(23 - 7 , 59, 59, 999);
       groupBy = "month";
     } 
     else {
