@@ -22,6 +22,7 @@ const newTransaksi = asyncHandler(async (req, res) => {
       pembayaran,
       kembalian
     });
+    let hpp =0
     const detailIDS = [];
     if (transaksiDetail && transaksiDetail.length > 0) {
           // Iterate over the transaksiDetail items and handle the relationships
@@ -33,6 +34,8 @@ const newTransaksi = asyncHandler(async (req, res) => {
             });
             detailIDS.push(transdet._id);
             //produk
+            const produk = await ProdukModels.findById(detail._id)
+            if(produk.hpp){hpp += detail.jumlah * produk.hpp}
             await ProdukModels.findByIdAndUpdate(
                   detail._id, 
                   {$inc : {stok: - detail.jumlah}},
@@ -46,6 +49,7 @@ const newTransaksi = asyncHandler(async (req, res) => {
             {new : true}
           );
           transaksi.transaksiDetail = detailIDS;
+          transaksi.hpp = hpp
           await transaksi.save();
         }
         

@@ -43,6 +43,9 @@ const transaksiPosSchema = mongoose.Schema(
     },
     metode : {
       type : String
+    },
+    hpp : {
+      type : Number
     }
   },
   {
