@@ -22,7 +22,7 @@ export const Bin = () => {
         });
     };
     fetchData();
-    setNav("Daftar Produk");
+    setNav("Daftar Produk ( Unpublished )");
     setLink('/pos/produks')
     setSort(true)
   }, []);
