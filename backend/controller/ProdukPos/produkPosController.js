@@ -38,6 +38,18 @@ const getproduk = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+const getprodukoff = asyncHandler(async (req, res) => {
+  try {
+    const produk = await produkModels
+      .find({
+        $or: [{ status: "off" }, { status: { $exists: false } }]
+      }).populate("kategori","kategori").populate("jenis", "jenis").populate("supplier").sort({ createdAt: -1 });
+
+    res.send(produk);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 const updateproduk = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -93,4 +105,4 @@ const getprodukbyID = asyncHandler(async (req, res) => {
   }
 });
 
-export { newproduk, getproduk, updateproduk, deleteproduk, getprodukbyID };
+export { newproduk, getproduk, updateproduk, deleteproduk, getprodukbyID, getprodukoff };

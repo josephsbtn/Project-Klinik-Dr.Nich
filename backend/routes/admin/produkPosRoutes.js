@@ -19,6 +19,7 @@ import {
   getprodukbyID,
   updateproduk,
   deleteproduk,
+  getprodukoff
 } from "../../controller/ProdukPos/produkPosController.js";
 import {
   newBelanja,
@@ -58,6 +59,7 @@ router.put("/updatekategoriProdukPos/:id", protect([1,2]), updatekategoriProdukP
 router.delete("/deletekategoriProdukPos/:id", deletekategoriProdukPos);
 
 router.get("/produk", getproduk);
+router.get("/produkoff", getprodukoff);
 router.get("/produk/:id", getprodukbyID);
 router.post("/produk", protect([1,2]), newproduk);
 router.put("/updateproduk/:id", protect([1,2]), updateproduk);

@@ -167,6 +167,7 @@ import { LaporanLogPelanggan } from "./pages/laporan/LaporanLogPelanggan";
 import { DetailProdukSupp } from "./pages/Produk/DetailProdukSupp";
 import { DaftarProdukUpdateSupp } from "./pages/Produk/DaftarProdukUpdateSupp";
 import { PilihPembayaranProduk } from "./pages/Produk/PilihPembayaranProduk";
+import { Bin } from "./pages/Produk/bin";
 
 axios.defaults.withCredentials = true;
 
@@ -322,6 +323,7 @@ function App2() {
                     element={<DaftarProdukAdd />}
                   />
                   <Route path="/Produkdetail/:id" element={<DetailProduk />} />
+                  <Route path="/bin" element={<Bin />} />
                   <Route path="/DaftarBelanja/" element={<DaftarBelanja />} />
                   <Route
                     path="/DetailDaftarBelanja/"
