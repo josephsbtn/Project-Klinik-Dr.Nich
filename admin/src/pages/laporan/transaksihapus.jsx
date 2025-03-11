@@ -5,7 +5,7 @@ export const Transaksihapus = () => {
     const [transaksi,setTransaksi] = useState([])
 useEffect(()=>{
     const fetch = async() =>{
-        await axios.get('https://api.drnich.co.id/api/pos/kasir/transaksi').then(
+        await axios.get('https://api.drnich.co.id/api/pos/produk/produkoff').then(
             response => {
                 setTransaksi(response.data)
                 console.log('abc')
@@ -16,7 +16,7 @@ useEffect(()=>{
 },[])
 const deletee =  (e,id)=>{
     e.preventDefault()
-    axios.delete('https://api.drnich.co.id/api/pos/kasir/deletetransaksi/'+id).then(response =>
+    axios.delete('https://api.drnich.co.id/api/pos/produk/deleteproduk/'+id).then(response =>
         response.status==200 && console.log('sukses')
     )
 }

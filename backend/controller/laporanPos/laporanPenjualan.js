@@ -279,7 +279,13 @@ const laporanGrafik = async (req, res) => {
     const dateObj = new Date(tanggal);
     dateObj.setHours(23, 59, 59, 999); // Normalize to end of the day
 
-    if (menu === "mingguan") {
+    if (menu === "harian") {
+      startDate = new Date(dateObj);
+      startDate.setHours(0, 0, 0, 0);
+      endDate = new Date(dateObj);
+      groupBy = "hour";
+    } 
+    else if (menu === "mingguan") {
       startDate = new Date(dateObj);
       startDate.setDate(dateObj.getDate() - 6);
       startDate.setHours(0, 0, 0, 0);
@@ -309,7 +315,14 @@ const laporanGrafik = async (req, res) => {
 
     let reportData = [];
 
-    if (groupBy === "day") {
+    if (groupBy === "hour") {
+      reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: 0 }));
+      transactions.forEach(transaction => {
+        const transactionHour = new Date(transaction.createdAt).getHours();
+        reportData[transactionHour].penjualan += transaction.totalAkhir;
+      });
+    } 
+    else if (groupBy === "day") {
       const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
       const startDayIndex = startDate.getDay();
       const orderedWeekDays = [...weekDays.slice(startDayIndex), ...weekDays.slice(0, startDayIndex)];
