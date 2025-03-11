@@ -277,29 +277,29 @@ const laporanGrafik = async (req, res) => {
     let startDate, endDate, groupBy;
     
     const dateObj = new Date(tanggal);
-    dateObj.setUTCHours(23 + 7, 59, 59, 999); // Normalize to end of the day in GMT+7
+    dateObj.setUTCHours(23 - 7, 59, 59, 999); // Normalize to end of the day in GMT+7
 
     if (menu === "harian") {
       startDate = new Date(dateObj);
-      startDate.setUTCHours(0 + 7, 0, 0, 0);
+      startDate.setUTCHours(0 - 7, 0, 0, 0);
       endDate = new Date(dateObj);
       groupBy = "hour";
     } 
     else if (menu === "mingguan") {
       startDate = new Date(dateObj);
       startDate.setUTCDate(dateObj.getUTCDate() - 6);
-      startDate.setUTCHours(0 + 7, 0, 0, 0);
+      startDate.setUTCHours(0 - 7, 0, 0, 0);
       endDate = dateObj;
       groupBy = "day";
     } 
     else if (menu === "bulanan") {
-      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), 1, 0 + 7, 0, 0, 0));
-      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth() + 1, 0, 23 + 7, 59, 59, 999));
+      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), 1, 0 - 7, 0, 0, 0));
+      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth() + 1, 0, 23 - 7, 59, 59, 999));
       groupBy = "date";
     } 
     else if (menu === "tahunan") {
-      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 0, 1, 0 + 7, 0, 0, 0));
-      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 11, 31, 23 + 7, 59, 59, 999));
+      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 0, 1, 0 - 7, 0, 0, 0));
+      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 11, 31, 23 - 7, 59, 59, 999));
       groupBy = "month";
     } 
     else {
