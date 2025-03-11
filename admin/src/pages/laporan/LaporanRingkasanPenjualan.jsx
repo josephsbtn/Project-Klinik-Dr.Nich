@@ -33,7 +33,7 @@ export const LaporanRingkasanPenjualan = () => {
     const [topPromo, setTopPromo] = useState([]);
     const [datax, setDatax] = useState([]);
     const [topCustomers, setTopCustomers] = useState([])
-    const [atur, setAtur] = useState("mingguan")
+    const [atur, setAtur] = useState("harian")
     const [aturPromo, setAturPromo] = useState("Diskon")
     const [tampilPromo, setTampilPromo] = useState([])
 
@@ -371,9 +371,8 @@ export const LaporanRingkasanPenjualan = () => {
                             ref={Minggu}
                             onChange={MBT}
                         >
-                            <option value="mingguan">
-                                Minggu ini
-                            </option>
+                            <option value="harian"> Hari ini </option>
+                            <option value="mingguan"> Minggu ini </option>
                             <option value="bulanan">Bulan Ini</option>
                             <option value="tahunan">Tahun Ini</option>
                         </select>

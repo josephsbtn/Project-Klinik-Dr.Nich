@@ -277,31 +277,29 @@ const laporanGrafik = async (req, res) => {
     let startDate, endDate, groupBy;
     
     const dateObj = new Date(tanggal);
-    dateObj.setHours(23, 59, 59, 999); // Normalize to end of the day
+    dateObj.setUTCHours(23 + 7, 59, 59, 999); // Normalize to end of the day in GMT+7
 
     if (menu === "harian") {
       startDate = new Date(dateObj);
-      startDate.setHours(0, 0, 0, 0);
+      startDate.setUTCHours(0 + 7, 0, 0, 0);
       endDate = new Date(dateObj);
       groupBy = "hour";
     } 
     else if (menu === "mingguan") {
       startDate = new Date(dateObj);
-      startDate.setDate(dateObj.getDate() - 6);
-      startDate.setHours(0, 0, 0, 0);
+      startDate.setUTCDate(dateObj.getUTCDate() - 6);
+      startDate.setUTCHours(0 + 7, 0, 0, 0);
       endDate = dateObj;
       groupBy = "day";
     } 
     else if (menu === "bulanan") {
-      startDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), 1);
-      endDate = new Date(dateObj.getFullYear(), dateObj.getMonth() + 1, 0);
-      endDate.setHours(23, 59, 59, 999);
+      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), 1, 0 + 7, 0, 0, 0));
+      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth() + 1, 0, 23 + 7, 59, 59, 999));
       groupBy = "date";
     } 
     else if (menu === "tahunan") {
-      startDate = new Date(dateObj.getFullYear(), 0, 1);
-      endDate = new Date(dateObj.getFullYear(), 11, 31);
-      endDate.setHours(23, 59, 59, 999);
+      startDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 0, 1, 0 + 7, 0, 0, 0));
+      endDate = new Date(Date.UTC(dateObj.getUTCFullYear(), 11, 31, 23 + 7, 59, 59, 999));
       groupBy = "month";
     } 
     else {
@@ -318,30 +316,30 @@ const laporanGrafik = async (req, res) => {
     if (groupBy === "hour") {
       reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: 0 }));
       transactions.forEach(transaction => {
-        const transactionHour = new Date(transaction.createdAt).getHours();
-        reportData[transactionHour].penjualan += transaction.totalAkhir;
+        const transactionHour = new Date(transaction.createdAt).getUTCHours() + 7;
+        reportData[transactionHour % 24].penjualan += transaction.totalAkhir;
       });
     } 
     else if (groupBy === "day") {
       const weekDays = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
-      const startDayIndex = startDate.getDay();
+      const startDayIndex = startDate.getUTCDay();
       const orderedWeekDays = [...weekDays.slice(startDayIndex), ...weekDays.slice(0, startDayIndex)];
 
       reportData = orderedWeekDays.map(day => ({ name: day, penjualan: 0 }));
 
       transactions.forEach(transaction => {
-        const transactionDayIndex = new Date(transaction.createdAt).getDay();
+        const transactionDayIndex = (new Date(transaction.createdAt).getUTCDay() + 7) % 7;
         const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
         const dayData = reportData.find(day => day.name === adjustedDayName);
         if (dayData) dayData.penjualan += transaction.totalAkhir;
       });
     } 
     else if (groupBy === "date") {
-      const totalDays = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0).getDate();
+      const totalDays = new Date(startDate.getUTCFullYear(), startDate.getUTCMonth() + 1, 0).getUTCDate();
       reportData = Array.from({ length: totalDays }, (_, i) => ({ name: (i + 1).toString(), penjualan: 0 }));
 
       transactions.forEach(transaction => {
-        const transactionDate = new Date(transaction.createdAt).getDate();
+        const transactionDate = new Date(transaction.createdAt).getUTCDate();
         const dayData = reportData.find(day => day.name === transactionDate.toString());
         if (dayData) dayData.penjualan += transaction.totalAkhir;
       });
@@ -355,7 +353,7 @@ const laporanGrafik = async (req, res) => {
       reportData = monthNames.map(month => ({ name: month, penjualan: 0 }));
 
       transactions.forEach(transaction => {
-        const transactionMonth = new Date(transaction.createdAt).getMonth();
+        const transactionMonth = new Date(transaction.createdAt).getUTCMonth();
         reportData[transactionMonth].penjualan += transaction.totalAkhir;
       });
     }
