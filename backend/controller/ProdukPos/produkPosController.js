@@ -13,7 +13,8 @@ const newproduk = asyncHandler(async (req, res) => {
     hpp: req.body.hpp,
     sku: req.body.sku,
     minStok: req.body.minStok,
-    supplier: req.body.supplier
+    supplier: req.body.supplier,
+    status: "on"
   };
   try {
     const isExist = await produkModels.findOne({ namaProduk: newproduk.namaProduk });
@@ -30,7 +31,7 @@ const newproduk = asyncHandler(async (req, res) => {
 const getproduk = asyncHandler(async (req, res) => {
   try {
     const produk = await produkModels
-      .find().populate("kategori","kategori").populate("jenis", "jenis").populate("supplier").sort({ createdAt: -1 });
+      .find({status: "on"}).populate("kategori","kategori").populate("jenis", "jenis").populate("supplier").sort({ createdAt: -1 });
 
     res.send(produk);
   } catch (error) {
@@ -51,7 +52,8 @@ const updateproduk = asyncHandler(async (req, res) => {
     sku: req.body.sku,
     bonusTerapis: req.body.bonusTerapis,
     stok: req.body.stok,
-    minStok: req.body.minStok
+    minStok: req.body.minStok,
+    status: req.body.status
   };
   try {
     const produk = await produkModels.findByIdAndUpdate(

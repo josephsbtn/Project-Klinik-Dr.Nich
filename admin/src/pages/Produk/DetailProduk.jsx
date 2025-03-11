@@ -30,9 +30,15 @@ export const DetailProduk = () => {
     product.kategori && setFetched(true);
   }, [product]);
 
-  const deleteData = async () => {
+  const hapusproduk = async () => {
     await axios
-      .delete("https://api.drnich.co.id/api/pos/produk/deleteproduk/" + id)
+      .put("https://api.drnich.co.id/api/pos/produk/updateproduk/" + id, {status: "off"} ,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        withCredentials: true,
+      })
       .then(
         (response) => response.status == 200 && navigate("../daftarproduk")
       );
@@ -108,7 +114,7 @@ export const DetailProduk = () => {
           </span>
         </a>
         <div className="flex gap-5 w-full justify-between text-[14px] mt-auto">
-          <button className="flex justify-center items-center border-[#C2A353] border rounded-lg w-[30%] p-3 text-[14px] bg-white text-[#C2A353] ">
+          <button onClick={hapusproduk} className="flex justify-center items-center border-[#C2A353] border rounded-lg w-[30%] p-3 text-[14px] bg-white text-[#C2A353] ">
             Hapus
           </button>
           <Link

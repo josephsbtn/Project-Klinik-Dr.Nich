@@ -22,6 +22,9 @@ const produkSchema = mongoose.Schema(
     harga: {
       type: Number,
     },
+    status: {
+      type: String,
+    },
     kategori: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "categoryProduct",
