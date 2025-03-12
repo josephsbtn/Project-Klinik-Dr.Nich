@@ -128,6 +128,40 @@ const laporanPenjualanProduk = asyncHandler(async (req, res) => {
   }
 
 });
+const laporanMetode = asyncHandler(async (req, res) => {
+  try {
+    const { dari, sampai } = req.body;
+    const from = new Date(dari)
+    const to = new Date(sampai)
+    const penjualan = await TransaksiModels.find({ createdAt: { $gte: from, $lte: to } })
+    let total = 0;
+    let pendapatan = 0
+    let produklist = [];
+    for (const item of penjualan) {
+      total += 1;
+      pendapatan += item.totalAkhir;
+
+      let cari = produklist.find(itemx => itemx.metode === item.metode);
+
+      if (cari) {
+        cari.jumlah += 1;
+        cari.pendapatan += item.totalAkhir;
+      } else {
+        produklist.push({
+          metode: item.metode,
+          jumlah: 1,
+          pendapatan: item.totalAkhir
+        });
+      }
+    }
+
+    res.status(200).json({ totalProduk: totalProduk, penjualanProduk: produklist })
+  }
+  catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+
+});
 
 const laporanBelanja = asyncHandler(async (req, res) => {
   try {
@@ -845,5 +879,6 @@ export {
   laporanGrafik,
   laporanGrafikProduk,
   laporanLogProduk,
-  laporanGrafikMetode
+  laporanGrafikMetode,
+  laporanMetode
 };
