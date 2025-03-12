@@ -847,23 +847,22 @@ const laporanGrafikMetode = async (req, res) => {
         const transactionMonth = new Date(transaction.createdAt).getMonth();
         const monthData = reportData[transactionMonth];
 
-        transaction.transaksiDetail.forEach(citem => {
+        
           const existingProduct = monthData.penjualan.find(item => item.metode === transaction.metode);
           if (existingProduct) {
-            existingProduct.jumlah += citem.jumlah;
-            existingProduct.pendapatan += citem.jumlah * citem.produk.hargaJual;
+            existingProduct.jumlah += 1;
+            existingProduct.pendapatan += transaction.totalAkhir;
           } else {
             monthData.penjualan.push({
-              namaProduk: citem.produk.namaProduk,
-              jumlah: citem.jumlah,
-              pendapatan: citem.jumlah * citem.produk.hargaJual
+              metode: transaction.metode,
+              jumlah: 1,
+              pendapatan: transaction.totalAkhir
             });
           }
 
           if (!produklist.find(item => item.metode === transaction.metode)) {
             produklist.push({ metode: transaction.metode });
           }
-        });
       }
       });
     }
