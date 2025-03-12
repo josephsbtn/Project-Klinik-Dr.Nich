@@ -662,7 +662,7 @@ const laporanGrafikMetode = async (req, res) => {
 
     const dateObj = new Date(tanggal);
     dateObj.setUTCHours(23 - 7 , 59, 59, 999); // Normalize to end of the day
-
+    let total = 0
     if (menu === "harian") {
       startDate = new Date(dateObj);
       startDate.setUTCHours(0 - 7, 0, 0, 0); // Start of day in GMT -7
@@ -709,6 +709,7 @@ const laporanGrafikMetode = async (req, res) => {
       reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: [] }));
       
       transactions.forEach(transaction => {
+        total += 1
         const transactionHour = new Date(transaction.createdAt).getUTCHours() + 7;
         const hourData = reportData.find(hour => hour.name === `${transactionHour}:00`);
         if (!hourData) return;
@@ -827,7 +828,7 @@ const laporanGrafikMetode = async (req, res) => {
       });
     }
 
-    res.json({ success: true, penjualan: reportData, produklist: produklist });
+    res.json({ success: true, penjualan: reportData, produklist: produklist, total: total });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
