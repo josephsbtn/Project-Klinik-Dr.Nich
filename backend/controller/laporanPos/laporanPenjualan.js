@@ -155,7 +155,7 @@ const laporanMetode = asyncHandler(async (req, res) => {
       }
     }
 
-    res.status(200).json({ totalProduk: totalProduk, penjualanProduk: produklist })
+    res.status(200).json({total: total,  penjualanProduk: produklist })
   }
   catch (error) {
     res.status(400).json({ message: error.message });
