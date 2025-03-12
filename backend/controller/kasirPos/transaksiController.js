@@ -199,6 +199,18 @@ const deleteTransaksi = asyncHandler(async (req, res) => {
   }
 });
 
+const simpanStruk = asyncHandler(async (req, res) => {
+
+  const data = {
+    image : req.file.path
+  }
+  try {
+    res.send(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 const getTransaksiByID = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
@@ -232,5 +244,6 @@ export {
   deleteTransaksi,
   getTransaksiByID,
   getTransaksiInvoice,
-  kalkulasiHarga
+  kalkulasiHarga,
+  simpanStruk
 };
