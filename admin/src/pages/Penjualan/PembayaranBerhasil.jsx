@@ -16,6 +16,7 @@ export const PembayaranBerhasil = () => {
   const { id } = useParams();
   const [fetched, setFetched] = useState(false);
   const invoiceRef = useRef(); // Pindahkan useRef ke luar
+  const formData = new FormData()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,14 +25,14 @@ export const PembayaranBerhasil = () => {
           `https://api.drnich.co.id/api/pos/kasir/transaksi/${id}`,
           { withCredentials: true }
         );
-        console.log(response)
+        // console.log(response)
         setDataDalam(response.data.transaksiDetail);
         setDatax(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+    setFetched(true)
     fetchData();
     setNav("Pembayaran");
     setLink(-2);
@@ -42,7 +43,7 @@ export const PembayaranBerhasil = () => {
   }, [id, setNav, setLink]);
 
   // ✅ Fungsi downloadPDF sekarang ada di sini
-  const downloadPDF = () => {
+  const downloadPDF = async() => {
     const input = invoiceRef.current;
     html2canvas(input, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
@@ -67,6 +68,49 @@ export const PembayaranBerhasil = () => {
       pdf.save("invoice.pdf"); // Simpan file PDF
     });
   };
+
+    
+  
+
+  const downloadPDF2 = () => {
+    const input = invoiceRef.current;
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 210; // 🔹 Kurangi dari 210 agar ada padding kiri-kanan
+    const pageHeight = 297;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const marginLeft = (210 - imgWidth) / 2; // 🔹 Posisi tengah dengan padding kiri-kanan
+    let heightLeft = imgHeight;
+    let position = 20; // 🔹 Padding atas 20mm
+
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      const store = async() =>{
+
+        const blob = await fetch(pdf).then((res) => res.blob());
+        formData.append("image",blob, "a.png")
+        await axios.post('https://api.drnich.co.id/api/pos/kasir/struk', formData).then(
+          response => console.log({"abc" : "api.drnich.co.id/"+response.data.image})
+        )
+      }
+      store()
+      // pdf.save("invoice.pdf"); // Simpan file PDF
+    });
+
+    
+  };
+
+  useEffect(()=>{
+    fetched && downloadPDF2()
+  },[fetched])
 
   const sendWhatsApp = () => {
   const phoneNumber = datax.pelanggan.nomorTelepon; // Ganti dengan nomor pelanggan
