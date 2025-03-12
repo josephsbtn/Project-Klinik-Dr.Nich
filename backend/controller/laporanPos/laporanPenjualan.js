@@ -714,21 +714,21 @@ const laporanGrafikMetode = async (req, res) => {
         if (!hourData) return;
 
         
-          // const existingProduct = hourData.penjualan.find(item => item.metode === transaction.metode);
-          // if (existingProduct) {
-          //   existingProduct.jumlah += 1;
-          //   existingProduct.pendapatan += transaction.totalAkhir;
-          // } else {
+          const existingProduct = hourData.penjualan.find(item => item.metode === transaction.metode);
+          if (existingProduct) {
+            existingProduct.jumlah += 1;
+            existingProduct.pendapatan += transaction.totalAkhir;
+          } else {
             hourData.penjualan.push({
               metode: transaction.metode,
               jumlah: 1,
               pendapatan: transaction.totalAkhir
             });
-          // }
+          }
 
-          // if (!produklist.find(item => item.metode === transaction.metode)) {
-          //   produklist.push({ metode: transaction.metode });
-          // }
+          if (!produklist.find(item => item.metode === transaction.metode)) {
+            produklist.push({ metode: transaction.metode });
+          }
         
       });
     }
