@@ -740,9 +740,11 @@ const laporanGrafikMetode = async (req, res) => {
     let reportData = [];
     let produklist = [];
     if (groupBy === "hour") {
+      
       reportData = Array.from({ length: 24 }, (_, i) => ({ name: `${i}:00`, penjualan: [] }));
       
       transactions.forEach(transaction => {
+        if(transaction.metode){
         total += 1
         const transactionHour = new Date(transaction.createdAt).getUTCHours() + 7;
         const hourData = reportData.find(hour => hour.name === `${transactionHour}:00`);
@@ -764,7 +766,7 @@ const laporanGrafikMetode = async (req, res) => {
           if (!produklist.find(item => item.metode === transaction.metode)) {
             produklist.push({ metode: transaction.metode });
           }
-        
+        }
       });
     }
     else if (groupBy === "day") {
@@ -776,6 +778,7 @@ const laporanGrafikMetode = async (req, res) => {
       orderedWeekDays.forEach(day => transactionsByDay.set(day, { name: day, penjualan: [] }));
 
       transactions.forEach(transaction => {
+        if(transaction.metode){
         const transactionDate = new Date(transaction.createdAt);
         const transactionDayIndex = transactionDate.getDay();
         const adjustedDayName = transactionDayIndex === 0 ? "Minggu" : weekDays[transactionDayIndex - 1];
@@ -798,7 +801,7 @@ const laporanGrafikMetode = async (req, res) => {
           if (!produklist.find(item => item.metode === transaction.metode)) {
             produklist.push({ metode: transaction.metode });
           }
-        
+        }
       });
 
       reportData = Array.from(transactionsByDay.values());
@@ -808,6 +811,7 @@ const laporanGrafikMetode = async (req, res) => {
       reportData = Array.from({ length: totalDays }, (_, i) => ({ name: (i + 1).toString(), penjualan: [] }));
 
       transactions.forEach(transaction => {
+        if(transaction.metode){
         const transactionDate = new Date(transaction.createdAt).getDate();
         const dayData = reportData.find(day => day.name === transactionDate.toString());
         if (!dayData) return;
@@ -827,7 +831,7 @@ const laporanGrafikMetode = async (req, res) => {
           if (!produklist.find(item => item.metode === transaction.metode)) {
             produklist.push({ metode: transaction.metode });
           }
-        
+        }
       });
     } 
     else if (groupBy === "month") {
@@ -839,6 +843,7 @@ const laporanGrafikMetode = async (req, res) => {
       reportData = monthNames.map(month => ({ name: month, penjualan: [] }));
 
       transactions.forEach(transaction => {
+        if(transaction.metode){
         const transactionMonth = new Date(transaction.createdAt).getMonth();
         const monthData = reportData[transactionMonth];
 
@@ -859,6 +864,7 @@ const laporanGrafikMetode = async (req, res) => {
             produklist.push({ metode: transaction.metode });
           }
         });
+      }
       });
     }
 
