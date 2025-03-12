@@ -812,7 +812,7 @@ const laporanGrafikMetode = async (req, res) => {
         const dayData = reportData.find(day => day.name === transactionDate.toString());
         if (!dayData) return;
 
-          const existingProduct = dayData.penjualan.find(item => item.namaProduk === citem.produk.namaProduk);
+        const existingProduct = dayData.penjualan.find(item => item.metode === transaction.metode);
           if (existingProduct) {
             existingProduct.jumlah += 1;
             existingProduct.pendapatan += transaction.totalAkhir;
