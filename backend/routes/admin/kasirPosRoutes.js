@@ -17,7 +17,7 @@ import {
   deleteDetailTransaksi,
 } from "../../controller/kasirPos/detailTransaksiController.js";
 import { protect } from "../../middleware/authMiddleware.js";
-import {upload} from "../../middleware/uploadMiddleware.js";
+import {upload} from "../../middleware/uploadMiddleware2.js";
 const router = express.Router();
 
 router.get("/transaksi", getTransaksi); 
