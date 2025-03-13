@@ -592,8 +592,7 @@ const laporanLogProduk = async (req, res) => {
     const { dari, sampai, idproduk } = req.body;
     const from = new Date(dari)
     const to = new Date(sampai)
-    const id = req.body.idproduk
-    const produk = await ProdukModels.findById(id).populate('supplier')
+    const produk = await ProdukModels.findById(idproduk).populate('supplier')
     const namaPerusahaan = produk.supplier.namaPerusahaan
     let logProduk = []
     const transactions = await TransaksiModels.find({ updatedAt: { $gte: from, $lte: to } }).populate({
@@ -610,7 +609,7 @@ const laporanLogProduk = async (req, res) => {
       const det = transaction.transaksiDetail;
       for (const citem of det) {
 
-        if (citem.produk._id == id) {
+        if (citem.produk._id == idproduk) {
 
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
@@ -639,7 +638,7 @@ const laporanLogProduk = async (req, res) => {
 
       const det = beli.belanjaDetail;
       for (const citem of det) {
-        if (citem.produk._id == id) {
+        if (citem.produk._id == idproduk) {
 
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
@@ -660,7 +659,7 @@ const laporanLogProduk = async (req, res) => {
     kurangStok.length>0 && kurangStok.forEach(beli => {
 
       
-      if (beli.produk._id == id) {
+      if (beli.produk._id == idproduk) {
 
           logProduk.push({
             namaProduk: beli.produk.namaProduk,
