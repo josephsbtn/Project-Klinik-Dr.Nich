@@ -589,10 +589,10 @@ const laporanGrafikProduk = async (req, res) => {
 
 const laporanLogProduk = async (req, res) => {
   try {
-    const { dari, sampai, idproduk } = req.body;
+    const { dari, sampai, id } = req.body;
     const from = new Date(dari)
     const to = new Date(sampai)
-    const produk = await ProdukModels.findById(idproduk).populate('supplier')
+    const produk = await ProdukModels.findById(id).populate('supplier')
     const namaPerusahaan = produk.supplier.namaPerusahaan
     let logProduk = []
     const transactions = await TransaksiModels.find({ updatedAt: { $gte: from, $lte: to } }).populate({

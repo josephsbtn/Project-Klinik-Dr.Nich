@@ -24,7 +24,7 @@ export const LaporanLogProduk = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const tanggal = { dari: startDate?.toISOString().split('.')[0] + 'Z', sampai: endDate, idproduk : id }
+            const tanggal = { dari: startDate?.toISOString().split('.')[0] + 'Z', sampai: endDate, id : id }
             const response = await axios.post(`https://api.drnich.co.id/api/pos/laporan/laporanlogproduk/`, tanggal)
             try {
                 setData(response.data.logProduk)
