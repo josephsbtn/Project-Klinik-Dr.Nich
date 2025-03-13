@@ -654,7 +654,7 @@ const laporanLogProduk = async (req, res) => {
       }
     });
 
-    const kurangStok = await kurangStokModels.find({ updatedAt: { $gte: from, $lte: to } }).populate('produk')
+   /* const kurangStok = await kurangStokModels.find({ updatedAt: { $gte: from, $lte: to } }).populate('produk')
 
     kurangStok.length>0 && kurangStok.forEach(beli => {
 
@@ -673,7 +673,7 @@ const laporanLogProduk = async (req, res) => {
         }
 
       
-    });
+    });*/
     logProduk = logProduk.sort((a, b) => new Date(a.waktu) - new Date(b.waktu));
 
 
