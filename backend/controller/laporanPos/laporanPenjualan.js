@@ -645,7 +645,7 @@ const laporanLogProduk = async (req, res) => {
             jumlah: citem.jumlah,
             waktu: beli.updatedAt,
             jenis : 'belanja',
-            id : belanja._id
+            id : beli._id
           })
 
         } else {
