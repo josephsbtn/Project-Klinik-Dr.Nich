@@ -592,7 +592,8 @@ const laporanLogProduk = async (req, res) => {
     const { dari, sampai, idproduk } = req.body;
     const from = new Date(dari)
     const to = new Date(sampai)
-    const produk = await ProdukModels.findById(idproduk).populate('supplier')
+    const id = req.body.idproduk
+    const produk = await ProdukModels.findById(id).populate('supplier')
     const namaPerusahaan = produk.supplier.namaPerusahaan
     let logProduk = []
     const transactions = await TransaksiModels.find({ updatedAt: { $gte: from, $lte: to } }).populate({
