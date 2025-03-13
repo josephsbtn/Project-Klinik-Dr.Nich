@@ -52,8 +52,8 @@ const updatePromo = asyncHandler(async (req, res) => {
    detail: req.body.detail,
    syarat: req.body.syarat
  };
- if (fotoDesktop){newPromo.fotoDesktop = `${BASE_URL}${fotoDesktop.filename}`}
- if (fotoMobile){newPromo.fotoMobile= `${BASE_URL}${fotoMobile.filename}`}
+ if (fotoDesktop){newData.fotoDesktop = `${BASE_URL}${fotoDesktop.filename}`}
+ if (fotoMobile){newData.fotoMobile= `${BASE_URL}${fotoMobile.filename}`}
   try {
     const promo = await promoModels.findByIdAndUpdate(
       id,
