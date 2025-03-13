@@ -609,7 +609,7 @@ const laporanLogProduk = async (req, res) => {
       const det = transaction.transaksiDetail;
       for (const citem of det) {
 
-        if (citem.produk._id == idproduk) {
+        if (citem.produk._id == id) {
 
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
@@ -638,7 +638,7 @@ const laporanLogProduk = async (req, res) => {
 
       const det = beli.belanjaDetail;
       for (const citem of det) {
-        if (citem.produk._id == idproduk) {
+        if (citem.produk._id == id) {
 
           logProduk.push({
             namaProduk: citem.produk.namaProduk,
@@ -659,7 +659,7 @@ const laporanLogProduk = async (req, res) => {
     kurangStok.length>0 && kurangStok.forEach(beli => {
 
       
-      if (beli.produk._id == idproduk) {
+      if (beli.produk._id == id) {
 
           logProduk.push({
             namaProduk: beli.produk.namaProduk,
