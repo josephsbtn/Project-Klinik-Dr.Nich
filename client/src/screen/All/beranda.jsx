@@ -316,7 +316,7 @@ export default function Beranda() {
     }
     setTimeout(() => {
       setslider(true);
-    }, 5000);
+    }, 15000);
   }, [progress]);
 
   // Remove `fetch` from the dependency array
