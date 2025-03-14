@@ -141,6 +141,7 @@ const laporanMetode = asyncHandler(async (req, res) => {
       total += 1;
       pendapatan += item.totalAkhir;
 
+      if(item.metode){
       let cari = produklist.find(itemx => itemx.metode === item.metode);
 
       if (cari) {
@@ -153,6 +154,7 @@ const laporanMetode = asyncHandler(async (req, res) => {
           pendapatan: item.totalAkhir
         });
       }
+    }
     }
 
     res.status(200).json({total: total,  penjualanProduk: produklist })
