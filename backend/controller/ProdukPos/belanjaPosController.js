@@ -130,7 +130,7 @@ const getBelanjaByID = asyncHandler(async (req, res) => {
           {path: 'supplier'}
         ]
       }
-    );
+    ).populate("supplier");
 
     if (!belanja) {
       return res.status(404).json({ message: "Belanja record not found" });
