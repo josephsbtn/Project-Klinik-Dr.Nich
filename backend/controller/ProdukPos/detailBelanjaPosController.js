@@ -20,9 +20,9 @@ const newDetailBelanja = asyncHandler(async (req, res) => {
 const getDetailBelanja = asyncHandler(async (req, res) => {
   try {
     const detailBelanja = await DetailBelanjaModels.find()
-      .populate("Belanja", "_id")
-      .populate("produk", "namaProduk")
-      .populate("supplier", "namaSupplier");
+      .populate("Belanja")
+      .populate("produk")
+      .populate("supplier");
 
     res.send(detailBelanja);
   } catch (error) {
