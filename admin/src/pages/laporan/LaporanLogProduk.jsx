@@ -148,6 +148,7 @@ return (
                                 : item.jenis
                                 }
                             </p>
+                            <p>{item.jumlah} pcs</p>
                         </div>
                     </div>
                     <div className='text-[#BDBDBD]'>
