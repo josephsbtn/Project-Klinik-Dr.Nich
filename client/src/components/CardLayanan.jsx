@@ -12,7 +12,7 @@ function CardLayanan({ item, path }) {
       <img
         src={item.image}
         alt={item.nama}
-        className=" max-w-[184px] max-h-[174px] lg:w-[355px] lg:h-[174px] object-cover rounded-md"
+        className=" max-w-[180px] max-h-[120px] lg:w-[355px] lg:h-[174px] object-cover rounded-md"
       />
 
       <div className="flex flex-col justify-start items-start lg:mt-2 space-y-1 w-full h-24 px-2">
