@@ -65,7 +65,9 @@ const getDetailTransaksiByID = asyncHandler(async (req, res) => {
 
   try {
     const detailTransaksi = await DetailTransaksiModels.findById(id)
-      .populate("transaksi")
+      .populate({path : "transaksi",
+        populate: "pelanggan"
+      })
       .populate("produk")
 
     if (!detailTransaksi) {
