@@ -62,9 +62,9 @@ const getDetailBelanjaByID = asyncHandler(async (req, res) => {
 
   try {
     const detailBelanja = await DetailBelanjaModels.findById(id)
-      .populate("Belanja", "_id")
-      .populate("produk", ["namaProduk"])
-      .populate("supplier", "namaSupplier");
+      .populate("Belanja")
+      .populate("produk")
+      .populate("supplier");
 
     if (!detailBelanja) {
       return res.status(404).json({ message: "DetailBelanja not found" });
