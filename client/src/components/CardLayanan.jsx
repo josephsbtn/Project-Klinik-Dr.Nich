@@ -6,7 +6,7 @@ function CardLayanan({ item, path }) {
   const navigate = useNavigate();
   return (
     <div
-      className="w-[184px] h-[276px] lg:w-[355px] lg:h-[276px] flex flex-col justify-start cursor-pointer items-center border border-disable-line rounded-lg p-1 shadow-sm bg-white
+      className="max-w-[184px] max-h-[276px] lg:w-[355px] lg:h-[276px] flex flex-col justify-start cursor-pointer items-center border border-disable-line rounded-lg p-1 shadow-sm bg-white
        duration-300 transition-all ease-in-out"
       onClick={() => navigate(`/layanan/detailTreatment/${item._id}`)}>
       <img
