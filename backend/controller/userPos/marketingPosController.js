@@ -13,7 +13,7 @@
       keteranganRek: req.body.keteranganRek,
     };
     let image = req.file ? req.file.path : null;
-    if(image){newData.image = image}
+    if(image){newmarketing.image = image}
     try {
       const isExist = await marketingPosModels.findOne({ nomorTelepon: newmarketing.nomorTelepon });
       if (isExist) {
