@@ -92,7 +92,7 @@ export const PembayaranBerhasil = () => {
 
   return (
     <div className="flex flex-col px-5 py-3 gap-1 bg-white w-full min-h-screen h-fit pt-8">
-    <div ref={invoiceRef} className={''}>
+    <div ref={invoiceRef} className={' flex flex-col w-full h-fit '}>
       <div className="grid place-items-center">
         <img src={iPemSu} alt="Pembayaran Berhasil" className={`${fetched ? 'scale-125' : 'scale-50'} duration-500`} />
         <p className="text-[14px] text-[#27AE60] pt-8">Pembayaran Berhasil</p>
