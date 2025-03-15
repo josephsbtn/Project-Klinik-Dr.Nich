@@ -106,7 +106,7 @@ export default function Footer() {
         </div>
 
         {/* Contact Information and Navigation Links */}
-        <div className="flex mt-10 gap-20 lg:gap-10 lg:flex-row lg:justify-between lg:w-full z-10">
+        <div className="flex flex-col md:flex-row md:gap-10 mt-10 gap-20 lg:gap-10 lg:flex-row lg:justify-between lg:w-full z-10">
           <div className="w-full lg:w-auto lg:mr-4">
             <a
               href="https://maps.app.goo.gl/benokSLZCgXfyL5C9"
@@ -161,9 +161,10 @@ export default function Footer() {
       </div>
 
       {/* Footer Bottom */}
-      <div className="-mt-2 text-right text-xs text-[#e8ebe0]">
+      <div className="mt-8 md:-mt-2 me-16 text-left md:text-right text-xs text-[#e8ebe0]">
         <p>©2024 | Dr. Nich Beauty Aesthetic</p>
       </div>
+
     </footer>
   );
 }
