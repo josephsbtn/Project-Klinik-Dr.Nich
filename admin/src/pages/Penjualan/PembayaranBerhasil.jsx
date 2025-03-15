@@ -45,7 +45,13 @@ export const PembayaranBerhasil = () => {
   // ✅ Fungsi downloadPDF sekarang ada di sini
   const downloadPDF = async() => {
     const input = invoiceRef.current;
-    html2canvas(input, { scale: 2 }).then((canvas) => {
+    html2canvas(input, { scale: 2,
+      useCORS : true,
+      scrollX: 0, 
+      scrollY: 0,
+      windowWidth: document.documentElement.offsetWidth,
+      windowHeight: document.documentElement.offsetHeight,  
+     }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
       const imgWidth = 210; // 🔹 Kurangi dari 210 agar ada padding kiri-kanan
