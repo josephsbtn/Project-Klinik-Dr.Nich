@@ -65,10 +65,8 @@ const getDetailTransaksiByID = asyncHandler(async (req, res) => {
 
   try {
     const detailTransaksi = await DetailTransaksiModels.findById(id)
-      .populate("transaksi", "total poin")
-      .populate("produk", "namaProduk hargaJual")
-      .populate("terapis", "namaTerapis")
-      .populate("marketing", "namaMarketing");
+      .populate("transaksi")
+      .populate("produk")
 
     if (!detailTransaksi) {
       return res.status(404).json({ message: "Detail transaksi not found" });

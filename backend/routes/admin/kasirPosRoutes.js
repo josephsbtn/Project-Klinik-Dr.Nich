@@ -15,6 +15,7 @@ import {
   getDetailTransaksi,
   updateDetailTransaksi,
   deleteDetailTransaksi,
+  getDetailTransaksiByID
 } from "../../controller/kasirPos/detailTransaksiController.js";
 import { protect } from "../../middleware/authMiddleware.js";
 import {upload} from "../../middleware/uploadMiddleware2.js";
@@ -31,6 +32,7 @@ router.put("/updatetransaksi/:id", protect([1,3]), updateTransaksi);
 router.delete("/deletetransaksi/:id", deleteTransaksi);
 
 router.get("/detailTransaksi", getDetailTransaksi);
+router.get("/detailTransaksi/:id", getDetailTransaksiByID);
 router.post("/detailTransaksi", newDetailTransaksi);
 router.put("/updatedetailTransaksi/:id", updateDetailTransaksi);
 router.delete("/deletedetailTransaksi/:id", deleteDetailTransaksi);
