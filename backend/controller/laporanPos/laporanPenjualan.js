@@ -99,16 +99,27 @@ const laporanPenjualanProduk = asyncHandler(async (req, res) => {
         path: "transaksiDetail",
         populate: {
           path: 'produk',
-          model: 'produkPos'
+          model: 'produkPos',
+          populate: 'kategori'
         }
       });
     let totalProduk = 0;
     let produklist = [];
+    let kategorilist = []
     for (const item of penjualan) {
       for (const items of item.transaksiDetail) {
         totalProduk += items.jumlah;
-        if (produklist.some(item => item.namaProduk == items.produk.namaProduk)) {
+        if (produklist.some(itemy => itemy.namaProduk == items.produk.namaProduk)) {
           produklist = produklist.map(item => item.namaProduk == items.produk.namaProduk ? { ...item, jumlah: item.jumlah + items.jumlah, pendapatan: item.pendapatan + (items.jumlah * items.produk.hargaJual) } : item)
+        if(kategorilist.some(itemy=>itemy.namaKategori==items.produk.kategori.kategori)){
+          kategorilist = kategorilist.map(item => item.namaKategori == items.produk.kategori.kategori ? { ...item, jumlah: item.jumlah + 1 } : item)
+        }
+        else{
+          kategorilist.push({
+            namaKategori: items.produk.kategori.kategori,
+            jumlah: 1
+          })
+        }
         }
         else {
           const isi = {
@@ -117,11 +128,22 @@ const laporanPenjualanProduk = asyncHandler(async (req, res) => {
             pendapatan: (items.jumlah * items.produk.hargaJual)
           }
           produklist.push(isi)
+          if(kategorilist.some(itemy=>itemy.namaKategori==items.produk.kategori.kategori)){
+            kategorilist = kategorilist.map(item => item.namaKategori == items.produk.kategori.kategori ? { ...item, jumlah: item.jumlah + 1 } : item)
+          }
+          else{
+            kategorilist.push({
+              namaKategori: items.produk.kategori.kategori,
+              jumlah: 1
+            })
+          }
+
         }
+        
       }
     }
 
-    res.status(200).json({ totalProduk: totalProduk, penjualanProduk: produklist })
+    res.status(200).json({ totalProduk: totalProduk, penjualanProduk: produklist, kategoriList : kategorilist })
   }
   catch (error) {
     res.status(400).json({ message: error.message });
