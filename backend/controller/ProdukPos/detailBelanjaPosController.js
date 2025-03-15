@@ -62,7 +62,9 @@ const getDetailBelanjaByID = asyncHandler(async (req, res) => {
 
   try {
     const detailBelanja = await DetailBelanjaModels.findById(id)
-      .populate("Belanja")
+      .populate({path : "Belanja",
+        populate :{path : "supplier"}
+      })
       .populate("produk")
       .populate("supplier");
 
