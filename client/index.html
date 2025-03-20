@@ -10,40 +10,19 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script type="text/javascript">
-  window.mychat = window.mychat || {};
-  window.mychat.server = "https://live.cekat.ai/widget.js";
-  window.mychat.iframeWidth = "400px";
-  window.mychat.iframeHeight = "700px";
-  window.mychat.accessKey = "Dr.-o5oSL1Dh";
-
-  (function () {
-    var chatContainer = document.createElement("div");
-    chatContainer.id = "mychat-container";
-    document.body.appendChild(chatContainer);
-
-    var mychat = document.createElement("script");
-    mychat.type = "text/javascript";
-    mychat.async = true;
-    mychat.src = window.mychat.server;
-
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(mychat, s);
-
-    // Add styles to position the chat widget
-    var style = document.createElement("style");
-    style.innerHTML = `
-      #mychat-container {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: ${window.mychat.iframeWidth};
-        height: ${window.mychat.iframeHeight};
-        z-index: 9999;
-      }
-    `;
-    document.head.appendChild(style);
-  })();
-</script>
+      window.mychat = window.mychat || {};
+      window.mychat.server = 'https://live.cekat.ai/widget.js';
+      window.mychat.iframeWidth = '400px';
+      window.mychat.iframeHeight = '700px';
+      window.mychat.accessKey = 'Dr.-o5oSL1Dh';
+      (function() {
+          var mychat = document.createElement('script');
+          mychat.type = 'text/javascript';
+          mychat.async = true;
+          mychat.src = window.mychat.server;
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(mychat, s);
+      })();
+  </script>
   </body>
 </html>

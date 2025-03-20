@@ -7,9 +7,15 @@ import { useNavigate } from "react-router-dom";
 function CardJenisLayanan({ item }) {
   const navigate = useNavigate();
   return (
-    <div
+    <button
       className="group hover:bg-primary flex flex-col w-[154px] lg:w-[230px] max-w-[230px] h-auto bg-white p-2 rounded-lg justify-center items-center duration-300 cursor-pointer ease-in-out transition-all border border-disable-line"
-      onClick={() => navigate(`/layanan/detail/${item._id}`)}>
+      onClick={(e) => {
+        e.preventDefault()
+        navigate(`/layanan/detail/${item._id}`)}}
+        onTouchStart={(e)=>{
+          e.preventDefault()
+        navigate(`/layanan/detail/${item._id}`)
+        }}>
       <img
         src={item.foto}
         alt={item.nama}
@@ -21,7 +27,7 @@ function CardJenisLayanan({ item }) {
         </h1>
         <ArrowRight />
       </div>
-    </div>
+    </button>
   );
 }
 

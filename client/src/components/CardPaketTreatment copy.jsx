@@ -4,10 +4,16 @@ import { useNavigate } from "react-router-dom";
 function CardPaketLayananBeranda({ item, path }) {
   const navigate = useNavigate();
   return (
-    <div
+    <button
       className="max-w-[184px] max-h-[276px] lg:w-[355px] lg:h-[276px] flex flex-col justify-start cursor-pointer items-center border border-disable-line rounded-lg p-1 shadow-sm bg-white
        duration-300 transition-all ease-in-out"
-      onClick={() => navigate(`/layanan/detailPaketTreatment/${item._id}`)}>
+      onClick={(e) => {
+        e.preventDefault
+        navigate(`/layanan/detailPaketTreatment/${item._id}`)}}
+        onTouchStart={(e) => {
+          e.preventDefault
+          navigate(`/layanan/detailPaketTreatment/${item._id}`)}}
+        >
       <img
         src={item.image}
         alt={item.nama}
@@ -30,7 +36,7 @@ function CardPaketLayananBeranda({ item, path }) {
           Rp {item.harga?.toLocaleString("id-ID")}
         </h1>
       </div>
-    </div>
+    </button>
   );
 }
 
