@@ -10,9 +10,7 @@ function CardPaketLayananBeranda({ item, path }) {
       onClick={(e) => {
         e.preventDefault
         navigate(`/layanan/detailPaketTreatment/${item._id}`)}}
-        onTouchStart={(e) => {
-          e.preventDefault
-          navigate(`/layanan/detailPaketTreatment/${item._id}`)}}
+        
         >
       <img
         src={item.image}

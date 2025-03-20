@@ -11,9 +11,6 @@ function CardLayanan({ item, path }) {
       onClick={(e) =>{ 
         e.preventDefault()
         navigate(`/layanan/detailTreatment/${item._id}`)}}
-        onTouchStart={(e) =>{ 
-          e.preventDefault()
-          navigate(`/layanan/detailTreatment/${item._id}`)}}
         >
       <img
         src={item.image}
