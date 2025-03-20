@@ -168,6 +168,7 @@ import { DetailProdukSupp } from "./pages/Produk/DetailProdukSupp";
 import { DaftarProdukUpdateSupp } from "./pages/Produk/DaftarProdukUpdateSupp";
 import { PilihPembayaranProduk } from "./pages/Produk/PilihPembayaranProduk";
 import { PromoEdit } from "./pages/display/promo/PromoEdit";
+import { Bin } from "./pages/Produk/bin";
 
 axios.defaults.withCredentials = true;
 
@@ -231,6 +232,7 @@ function App2() {
                   />
                 </Route>
                 <Route element={<ProtectedLevel level={[1, 2]} />}>
+                  <Route path="/bin" element={<Bin />} />
                   <Route path="/users" element={<USer />} />
                   <Route path="/supplier" element={<Supplier />} />
                   <Route path="/produks" element={<Products />} />
