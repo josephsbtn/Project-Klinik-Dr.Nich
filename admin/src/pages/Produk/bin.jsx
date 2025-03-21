@@ -69,22 +69,22 @@ export const Bin = () => {
             {filterDatax.map((pro, i) => (
               <Link
                 to={{
-                  pathname: `/pos/productdetail/${pro._id}`,
+                  pathname: `/pos/productdetail/${pro?._id}`,
                 }}
                 className="w-full border flex justify-between items-center rounded-xl border-[#BDBDBD] px-3 py-3"
                 key={i}
               >
                 <ul className="w-full flex flex-col place-items-start font-semibold">
                   <li className="text-[#BDBDBD]">
-                    {pro.jenis.jenis}
+                    {pro?.jenis?.jenis}
                     {` > `}
-                    {pro.kategori.kategori}
+                    {pro?.kategori?.kategori}
                   </li>
                   <li className="w-full flex justify-between">
-                    <span>{pro.namaProduk}</span>
+                    <span>{pro?.namaProduk}</span>
                   </li>
                 </ul>
-                <span className="text-[#C2A353]">Rp.{pro.hargaJual.toLocaleString('id-ID')}</span>
+                <span className="text-[#C2A353]">Rp.{pro?.hargaJual.toLocaleString('id-ID')}</span>
               </Link>
             ))}
           </div>
